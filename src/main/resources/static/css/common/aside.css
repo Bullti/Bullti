@@ -18,3 +18,6 @@ main {
 	padding-left: 5px;
 	gap: 5px;
 }
+.aside-menu-container > .aside-menu img {
+	width: 23px;
+}
