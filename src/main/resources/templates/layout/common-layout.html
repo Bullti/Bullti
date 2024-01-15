@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="commonLayout(head, main)">
+	<head>
+		<meta charset="UTF-8">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<script src="/webjars/jquery/jquery.min.js"></script>
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Roboto&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="/css/common/common.css" />
+		<th:block th:replace="~{layout/header::head}">페이지마다 적용될 헤더</th:block>
+		<th:block th:replace="~{layout/footer::head}">페이지마다 적용될 헤더</th:block>
+		<th:block th:replace="~{layout/aside::head}">페이지마다 적용될 헤더</th:block>
+		<th:block th:replace="${head}">페이지마다 적용될 css,js resource</th:block>
+	</head>
+	<body>
+		<th:block th:replace="~{layout/header::header}" >header적용</th:block>
+		<th:block th:replace="~{layout/aside::aside}" >aside섹션 적용</th:block>
+		<th:block th:replace="${main}">main섹션 적용</th:block>
+		<th:block th:replace="~{layout/footer::footer}" >footer섹션 적용</th:block>
+	</body>
+</html>
