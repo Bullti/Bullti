@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<main>
+		<h1>Dashboard</h1>
+		
+		<div class="list">
+			<ul class="stock_list">
+				<a href="/"><li>상품</li></a>
+				<a href="/"><li>재고</li></a>
+				<a href="/"><li>발주</li></a>
+				<a href="/"><li>입고</li></a>
+				<a href="/"><li>출고</li></a>
+		
+			</ul>
+		
+		
+		</div>
+		
+		<p>재고 현황</p>
+		
+		<p>발주 현황</p>
+		
+		<p>입고 현황</p>
+		
+		<p>출고 현황</p>
+		
+		<p>최근 등록된 상품</p>
+		
+	</main>
+</body>
+</html>
