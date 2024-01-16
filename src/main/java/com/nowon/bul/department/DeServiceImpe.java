@@ -17,10 +17,9 @@ public class DeServiceImpe implements DeService {
 	
 	/* 부서 조회 */
 	
-	public String deList(DeEntity deEntity) {
-		deRepository.findAll();
-		return null;
-	}
+	/*
+	 * public String deList(DeEntity deEntity) { deRepository.findAll(); }
+	 */
 	
 	/* 부서 수정 */
 	
