@@ -2,6 +2,8 @@ package com.nowon.bul.controller;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping ("/atte")
+@RequestMapping ("/emp/atte")
 public class AttendanceController {
 	
 	private final AttendanceService attendanceService;
@@ -22,6 +24,12 @@ public class AttendanceController {
 	@PostMapping
 	@ResponseBody
 	public void checkInAtWork(Authentication auth) {
-		attendanceService.checkIn(auth);
+		attendanceService.workIn(auth);
+	}
+	
+	@GetMapping
+	public String attendanceList(Authentication auth, Model model) {
+		attendanceService.find(auth, model);
+		return "views/emp/atten/list";
 	}
 }
