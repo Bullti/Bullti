@@ -54,9 +54,10 @@ public class FranController {
 	}
 	
 	@PostMapping("/fr/register")
-	public String franciseclose(Model model) {
-		franService.franchiseclose(model);
-		return "redirect:/fr";
+	public String franciseclose(@RequestParam(name = "id") String id) {
+	    System.out.println(id);
+	    long parsedId = Long.parseLong(id);
+	    franService.franchiseclose(parsedId);
+	    return "redirect:/fr";
 	}
-		
 }

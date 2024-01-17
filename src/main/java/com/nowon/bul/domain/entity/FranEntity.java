@@ -29,6 +29,7 @@ public class FranEntity {
 
     private String name;
     private String address;
+    private String address2;
     private String ph;
 
     @CreationTimestamp
@@ -38,7 +39,12 @@ public class FranEntity {
 
     public FranListDTO toFranListDTO() {
         return FranListDTO.builder()
-                .id(id).name(name).address(address).ph(ph).createdAt(createdAt)
+                .id(id).name(name).address(address).address2(address2).ph(ph).createdAt(createdAt).closedAt(closedAt)
                 .build();
     }
+    
+    public void closeFran() {
+    	this.closedAt = LocalDate.now();
+    }
+    
 }

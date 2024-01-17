@@ -50,9 +50,6 @@
 		    console.error('Fetch error:', error);
 		  });
 		
-		
-		
-		
 		function getAddressCoords(address) {
 			var geocoder = new kakao.maps.services.Geocoder();
 		    return new Promise(function(resolve, reject) {
@@ -66,7 +63,6 @@
 		        });
 		    });
 		}
-		
 		
 		var positions = [];
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
