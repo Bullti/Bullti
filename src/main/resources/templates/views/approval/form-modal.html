@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
+<head>
+<link rel="stylesheet" href="/css/approval/modal.css">
+<script>
+	function btn_approval() {
+		var modal = $('.approval-modal');
+		modal.css('display', modal.css('display') === 'none' ? 'flex' : 'none');
+	}
+</script>
+</head>
+<body>
+
+	<main class="approval_main">
+		<button class="btn-open-modal" onclick="btn_approval()">결재하기</button>
+		<div class="approval-modal">
+			<div class="modal-bady flex col">
+				<h3>결재양식 선택</h3>
+				<div class="flex content">
+					<div class="select-form">
+						<ul>
+							<li>휴가신청</li>
+							<li>근태신청</li>
+							<li>출장신청</li>
+						</ul>
+					</div>
+					<div class="temp"></div>
+				</div>
+				<div class="btn-area flex hcenter">
+					<button>확인</button>
+					<a href="/approval/write">작성페이지로 이동(임시)</a>
+					<button onclick="btn_approval()">취소</button>
+				</div>
+			</div>
+		</div>
+	</main>
+</body>
+</html>
