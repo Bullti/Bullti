@@ -1,0 +1,24 @@
+<!-- ProductMapper.xml -->
+<mapper namespace="com.nowon.bul.service.ProductMapper">
+
+    <resultMap id="productResultMap" type="com.nowon.bul.stock.entity.Product">
+
+        <id property="productNum" column="product_num"/>
+        <result property="productName" column="product_name"/>
+        <result property="productPrice" column="product_price"/>
+        <result property="productWeight" column="product_weight"/>
+        <result property="memberId" column="member_id"/>
+        <result property="name" column="name"/>
+        <result property="productDate" column="product_date"/>
+        <result property="productGroup" column="product_group"/>
+        <result property="productSupply" column="product_supply"/>
+
+    </resultMap>
+
+    <select id="getProductById" resultMap="productResultMap">
+        SELECT * FROM PRODUCTS WHERE product_num = #{productNum}
+    </select>
+
+    <!-- 다른 SQL 쿼리들 -->
+
+</mapper>
