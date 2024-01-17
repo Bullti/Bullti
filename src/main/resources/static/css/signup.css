@@ -15,7 +15,7 @@
 .join_area > div > label {
 	display: block;
 }
-.join_area > div > input {
+.join_area > div > input, select {
 	width: 100%;
 	padding: 9px 0 8px;
 	border: none;
@@ -40,9 +40,10 @@
 	align-items: center;
 }
 .join_button {
-	height: 60px;
-	width: 300px;
-	border-radius: 20px;
+	height: 50px;
+    width: 220px;
+    border-radius: 10px;
+    border: 1px solid #a9a9a9;
 }
 .join_button > span {
 	font-size: 20px;

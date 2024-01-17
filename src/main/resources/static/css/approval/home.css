@@ -2,8 +2,8 @@
 
 .warp-main {
     height: calc(100vh - 50px);
-    background-color: white; 
-    display: flex;
+    background-color: white;
+    display: flex; 
 }
  #add {
  	height: 30px;
@@ -23,7 +23,7 @@
 
 .side{
 	height: 100%;
-	width: 120px;
+	width: 150px;
 	background-color: #d2d2d2;
 }
 
@@ -51,7 +51,7 @@
 
         
 .content > button {
-	width: 120px;
+	width: 100%;
 	height: 50px;
 	text-align: left;
 	padding: 18px;
@@ -78,5 +78,9 @@
 	width: 500px;
 	height: 500px;
 	opacity: 0.5; 
+}
+
+.write {
+	height: 50px;
 }
 
