@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/Franchise/fr.css" />
+</head>
+<body>
+	<main>
+		<div class="title">
+			<ul class="ttl">
+				<li>매장등록</li>
+			</ul>
+		</div>
+		<form action="/fradd/register" method="post">
+			<!-- 폼태그 시작 -->
+			<div class="add">
+				<div class="name">
+					<div class="name_1">매장명</div>
+					<div class="name-2">
+						<input type="text" maxlength="30" name="name" id="titl">
+						<!-- name 속성 추가 -->
+					</div>
+				</div>
+				<div class="address">
+					<div class="address_1">주소</div>
+					<div class="address-2">
+						<input type="text" maxlength="255" name="address" id="titl">
+						<!-- name 속성 추가 -->
+					</div>
+				</div>
+				<div class="ph">
+					<div class="ph_1">전화번호</div>
+					<div class="ph-2">
+						<input type="text" maxlength="15" name="ph" id="titl">
+						<!-- name 속성 추가 -->
+					</div>
+				</div>
+			</div>
+			<div class="addbtn">
+				<button type="submit" class="add">등록 완료</button>
+			</div>
+		</form>
+	</main>
+</body>
+</html>
