@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/Franchise/fr.css" />
+</head>
+<body>
+	<main>
+		<div class="title">
+			<ul class="ttl">
+				<li>매장관리</li>
+			</ul>
+		</div>
+		<div class="list">
+			<div class="ist">
+				<ul class="st">
+					<li>번호</li>
+					<li>매장이름</li>
+					<li>주소</li>
+					<li>전화번호</li>
+					<li>개업일</li>
+				</ul>
+			</div>
+		</div>
+		<div class="posttext" th:each="post : ${list}">
+			<div class="num" th:text="${post.id}"></div>
+			<div class="title">
+				<div th:href="'/fr/' + ${post.id}" th:text="${post.name}"></div>
+			</div>
+			<div>
+				<div class="adress" th:text="${post.address}"></div>
+			</div>
+			<div>
+				<div class="ph" th:text="${post.ph}"></div>
+			</div>
+			<div class="date" th:text="${#temporals.format(post.createdAt)}">
+			</div>
+			<form action="/fr/register" method="post">
+				<div>
+					<button type="submit">폐업</button>
+				</div>
+			</form>
+		</div>
+		<div class="addbtn">
+			<button class="add" type="button" onclick="redirectToFrAdd()">매장
+				등록</button>
+		</div>
+		<script th:inline="javascript">
+			function redirectToFrAdd() {
+				// "/fradd"로 페이지 이동
+				window.location.href = '/fradd';
+			}
+		</script>
+	</main>
+</body>
+</html>
