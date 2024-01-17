@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
+
+<div class="side" th:fragment="side">
+	<button type="button" class="collapsible" onclick="collapse(this);">부서관리</button>
+	<div class="content">
+		<button>부서추가</button>
+		<button>조회/삭제</button>
+	</div>
+	<button type="button" class="collapsible" onclick="collapse(this);">사원관리</button>
+	<div class="content">
+		<button>사원추가</button>
+		<button>조회/삭제</button>
+	</div>
+	<button type="button" class="collapsible" onclick="collapse(this);">가맹점관리</button>
+	<div class="content">
+		<button>가맹점추가</button>
+		<button>조회/삭제</button>
+	</div>
+</div>
+</html>
