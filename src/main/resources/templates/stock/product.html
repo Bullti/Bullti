@@ -2,14 +2,96 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
 <head>
+
+<link rel="stylesheet" href="/css/stock/product.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
 </head>
 <body>
 <main>
-
-	<div>상품 관리</div>
 	
+<div class="main_page">
+	<div class="main_container">
+	
+		<div class="main_name">
+			<h1>상품 현황</h1>
+		</div>
+		
+		<div class="container_point">
+			<ul class="list_group">
+				<a href="/" class="list_group_item">
+					<span class="text_list">상품 현황</span>
+				</a>
+				<a href="/" class="list_group_item">
+					<span class="text_list">상품 등록</span>
+				</a>
+			</ul>
+		</div>
+		
+		<div class="mark_name">
+			<h2 class="pastel_red">불티치킨 엔터프라이즈</h2>
+		</div>
+		
+		<div class="table_container">
+		
+			<div class="table_head">
+			
+				<div class="page_entries">페이지 스크롤</div>
+				
+				<div class="name_search">상품명 검색:<input type="text" id="name_search" size="10" maxlength="5"></div>
+				
+			</div>
+			
+			<div class="table" id="dynamic_table">
+			</div>
+			
+			<div class="table_bottom">
+				
+				<div class="the_number_of_pages">총 22페이지</div>
+				
+				<div class="paging">1</div>
+				
+			</div>
+		
+		</div>
+		
+		
+	</div>
+		
+</div>
+
+ <script>
+        // Sample data for demonstration
+        var products = [
+            { productName: 'Product 1', price: '100', quantity: '50' },
+            { productName: 'Product 2', price: '200', quantity: '30' },
+            // Add more data as needed
+        ];
+
+        // Function to generate dynamic table
+        function generateDynamicTable(data) {
+            var tableContainer = document.getElementById('dynamic_table');
+            var tableHTML = '<table border="1"><thead><tr><th>상품명</th><th>가격</th><th>수량</th></tr></thead><tbody>';
+
+            for (var i = 0; i < data.length; i++) {
+                tableHTML += '<tr>';
+                tableHTML += '<td>' + data[i].productName + '</td>';
+                tableHTML += '<td>' + data[i].price + '</td>';
+                tableHTML += '<td>' + data[i].quantity + '</td>';
+                tableHTML += '</tr>';
+            }
+
+            tableHTML += '</tbody></table>';
+            tableContainer.innerHTML = tableHTML;
+        }
+
+        // Initial table generation
+        generateDynamicTable(products);
+    </script>
+
 </main>
 </body>
 </html>

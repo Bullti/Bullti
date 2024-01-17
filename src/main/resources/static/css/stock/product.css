@@ -1,0 +1,115 @@
+@charset "UTF-8";
+
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fc;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Main Page Styles */
+.main_page {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.main_container {
+	
+	width:1000px;
+	height: auto;
+    padding: 20px;
+}
+
+.main_name h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.container_point {
+	
+    margin-top: 20px;
+}
+
+.list_group {
+	display: flex;
+    list-style: none;
+    padding: 0;
+    justify-content: space-evenly;
+}
+
+.list_group_item {
+	
+	width:460px;
+	box-shadow: 1px 1px 3px 1px #dadce0;
+    display: block;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+    padding: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.list_group_item:hover {
+    background-color: #f0f0f0;
+}
+
+.mark_name {
+    margin-top: 20px;
+}
+
+.pastel_red {
+    color: #e74c3c;
+}
+
+/* Table Styles */
+.table_container {
+    margin-top: 20px;
+}
+
+.table_head,
+.table,
+.table_bottom {
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 1px 1px 3px 1px #dadce0;
+    
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.table {
+    background-color: #fff;
+  
+    padding: 20px;
+}
+
+/* Additional Styles */
+@media (max-width: 768px) {
+    .main_container {
+        padding: 10px;
+    }
+
+    .table,
+    .table_head,
+    .table_bottom {
+        flex-direction: column;
+    }
+}
