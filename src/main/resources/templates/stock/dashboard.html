@@ -2,36 +2,86 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+
+	<link rel="stylesheet" href="/css/stock/dashboard.css">
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+
+
 </head>
 <body>
-	<main>
-		<h1>Dashboard</h1>
+<main>
 		
-		<div class="list">
-			<ul class="stock_list">
-				<a href="/"><li>상품</li></a>
-				<a href="/"><li>재고</li></a>
-				<a href="/"><li>발주</li></a>
-				<a href="/"><li>입고</li></a>
-				<a href="/"><li>출고</li></a>
+	<div class="dash_contents">
+	
+		<div class="signboard">
 		
-			</ul>
+			<h1 class="head_dash" id="head_dash">재고 관리 대쉬보드</h1>
+			
+		</div>
 		
+			
+		<div class="container_list">
+		
+			<div class="list">
+				<ul class="stock_list">
+					
+					<li class="depth_list">
+						<a href="/members/stock" class="depth_list_button">재고</a>
+					</li>
+					
+					<li class="depth_list">
+						<a href="/members/purchase" class="depth_list_button">발주</a>
+					</li>
+					
+					<li class="depth_list">
+						<a href="/members/stocked" class="depth_list_button">입고</a>
+					</li>
+					
+					<li class="depth_list">
+						<a href="/members/release" class="depth_list_button">출고</a>
+					</li>
+					
+					<li class="depth_list">
+						<a href="/members/product" class="depth_list_button">상품</a>
+					</li>
+					
+				</ul>
+			
+			</div>
 		
 		</div>
 		
-		<p>재고 현황</p>
+		<div class="line"></div>
 		
-		<p>발주 현황</p>
+			<div class="container">
+			
+				<div>재고 현황</div>
+				
+				<div>발주 현황</div>
+				
+			</div>
 		
-		<p>입고 현황</p>
+		<div class="line"></div>
+			
+			<div class="container">
+				
+				<div>입고 현황</div>
+				
+				<div>출고 현황</div>
+				
+			</div>
 		
-		<p>출고 현황</p>
+		<div class="line"></div>
 		
-		<p>최근 등록된 상품</p>
+			<div class="container">
+				
+				<div>최근 등록된 상품 목록</div>
+			
+		</div>
 		
-	</main>
+	</div>
+	
+</main>
 </body>
 </html>
