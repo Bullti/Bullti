@@ -3,9 +3,13 @@
 	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
 <head>
 <link rel="stylesheet" href="/css/approval/write.css">
+<script src="/js/department.js"></script>
+<link rel="stylesheet" href="/css/approval/home.css">
 </head>
 <body>
-	<main class="main">
+	<main class="warp-main">
+		<div th:replace="~{views/approval/side :: side}"></div>
+		<div class="main flex col">
 		<ul class="flex list">
 			<li>결재요청</li>
 			<li>임시저장</li>
@@ -66,6 +70,7 @@
 				<div class="left">휴가 사유*</div>
 				<div></div>
 			</div>
+		</div>
 		</div>
 	</main>
 </body>
