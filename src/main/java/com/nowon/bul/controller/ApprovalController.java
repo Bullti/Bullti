@@ -10,7 +10,7 @@ public class ApprovalController {
 
 	@GetMapping("")
 	public String approvalModal() {
-		return "/views/approval/form-modal";
+		return "/views/approval/home";
 	}
 	
 	@GetMapping("/write")
