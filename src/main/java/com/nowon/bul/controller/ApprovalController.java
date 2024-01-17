@@ -2,13 +2,20 @@ package com.nowon.bul.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+@RequestMapping("/approval")
 @Controller
 public class ApprovalController {
 
-	@GetMapping("/approval")
-	public String approvalPage() {
-		return "/views/approval";
+	@GetMapping("")
+	public String approvalModal() {
+		return "/views/approval/home";
 	}
 	
+	@GetMapping("/write")
+	public String writePage() {
+		
+		return "/views/approval/write";
+	}
 }
