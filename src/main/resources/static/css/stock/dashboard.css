@@ -19,6 +19,8 @@ body {
 
 .dash_contents{
 	
+	width:1280px;
+	display:inline-block;
 	
 }
 
@@ -43,9 +45,11 @@ main {
 
 .container {
 	
-    display:block;
-    justify-content: space-between;
-    margin-top: 20px;
+	width:1280px;
+	height:400px;
+    display:flex;
+    justify-content: space-around;
+    margin: auto;
     
 }
 
@@ -71,6 +75,19 @@ main {
     justify-content: space-around;
 }
 
+
+
+.graph{
+	
+	width:500px;
+	
+}
+
+.newly_product{
+	
+	width: 1150px;
+	
+}
 
 
 .depth_list {
@@ -109,11 +126,27 @@ main {
 }
 
 .container > div {
-    flex-basis: 50%;
+   
     padding: 20px;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;
 }
+
+.container_newly > div{
+	
+	width:1280px;
+	height:400px;
+	align-items:center;
+	margin: 50px;
+    flex-basis: 50%;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+	
+}
+
+
 
 /* Additional styling based on the specific content in each container can be added */
