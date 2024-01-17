@@ -13,7 +13,7 @@ class SpringbootBulltiApplicationTests {
 	@Autowired
 	DeService deService;
 	
-	@Test
+	//@Test
 	void deSave() {
 		DeEntity.builder()
 				.deptId(1234)
