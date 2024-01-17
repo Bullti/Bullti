@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.nowon.bul.domain.entity.Member;
+import com.nowon.bul.domain.entity.Rank;
 import com.nowon.bul.domain.entity.Role;
 
 import lombok.Getter;
@@ -29,6 +30,7 @@ public class MemberDTO {
 				.password(passEncoder.encode(id))
 				.name(name)
 				.phone(tel)
+				.rank(Rank.Assistant)
 				.birthDate(birthDate)
 				.joinCompanyDate(joinCompanyDate)
 				.build().addRole(Role.USER);
