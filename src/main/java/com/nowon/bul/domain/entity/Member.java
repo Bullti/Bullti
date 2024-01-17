@@ -51,15 +51,12 @@ public class Member {
 	private String phone;
 	
 	//생년월일
-	@Column(columnDefinition = "timestamp(6) null")
 	private LocalDate birthDate;
 	
 	//입사일자
-	@Column(columnDefinition = "timestamp(6) null")
 	private LocalDate joinCompanyDate;
 	
 	//퇴사일자
-	@Column(columnDefinition = "timestamp(6) null")
 	private LocalDate resignationDate;
 
 	//직급

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
+<body>
+	<div class="approval-modal" th:fragment="modal">
+		<div class="modal-bady">
+			<h3>결재선 설정</h3>
+			<div class="flex modal-content">
+				<div class="de-form">
+				</div>
+				<div class="em-form">
+					<p>최부장 (개발부)</p>
+				</div>
+				<div class="btn-form">
+				</div>
+				<div class="re-form">
+					<div class="title">
+						<h3>결재</h3>
+					</div>
+					<div class="wrap">
+						
+					</div>
+				</div>
+			</div>
+			<div class="btn-area flex center">
+				<button>확인</button>
+				<button onclick="btn_approval()">취소</button>
+			</div>
+		</div>
+		<script>
+			function btn_approval() {
+				var modal = $('.approval-modal');
+				modal.css('display', modal.css('display') === 'none' ? 'flex'
+						: 'none');
+			}
+		</script>
+	</div>
+</body>
+</html>
