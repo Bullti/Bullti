@@ -12,6 +12,6 @@ public class ScheduleController {
 
 	@GetMapping
 	public String attendanceList(Authentication auth, Model model) {
-		return "views/emp/atten/list";
+		return "views/emp/atten/calendar";
 	}
 }
