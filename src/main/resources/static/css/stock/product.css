@@ -1,0 +1,226 @@
+@charset "UTF-8";
+
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fc;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Main Page Styles */
+.main_page {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.main_name{
+	
+	display: flex;
+	justify-content: space-between;
+	object-fit:contain;
+	
+}
+
+.main_name h2{
+	
+	width:200px;
+	height: 40px;
+}
+
+.main_container {
+	
+	width:1000px;
+	/* height: auto; */
+    padding: 20px;
+}
+
+.main_name h1 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    
+}
+
+.container_point {
+	
+    margin-top: 20px;
+}
+
+.list_group{
+	
+	margin: 10px 0;
+}
+
+.list_group li{
+	display: flex;
+    list-style: none;
+    padding: 0;
+    justify-content: space-evenly;
+}
+
+.list_group_item {
+	
+	width:460px;
+	box-shadow: 1px 1px 3px 1px #dadce0;
+    display: block;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+    padding: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.list_group_item:hover {
+    background-color: #f0f0f0;
+}
+
+.mark_name {
+    margin-top: 20px;
+}
+
+.pastel_red {
+	
+	display:flex;
+	justify-content:center;
+    color: #e74c3c;
+}
+
+/* Table Styles */
+.table_container {
+    margin-top: 20px;
+}
+
+.table_head,
+.table,
+.table_bottom {
+    box-shadow: 1px 1px 3px 1px #dadce0;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.table {
+    background-color: #fff;
+    padding: 20px;
+   
+    font-size: 14px;
+}
+
+.table tr{
+	margin: 0 5px;
+	display:block;
+	padding: 1em 0 !important;
+	border-bottom : 1px solid #dadce0;
+}
+.table tbody tr{
+	border-bottom : 1px dotted #dadce0;
+}
+
+/* Additional Styles */
+@media (max-width: 768px) {
+    .main_container {
+        padding: 10px;
+    }
+
+    .table,
+    .table_head,
+    .table_bottom {
+        flex-direction: column;
+    }
+}
+
+.tableup{
+	padding:10px;
+	display: flex;
+	justify-content: space-between;
+	
+}
+
+#table_bottom{
+	
+	display: flex;
+	justify-content: space-between;
+	
+}
+
+#table_bottom div{
+	
+	margin: 0 20px;
+	
+}
+
+
+/* product-post.css */
+
+/* Additional Styles */
+@media (max-width: 768px) {
+    .main_container {
+        padding: 10px;
+    }
+
+    .table,
+    .table_head,
+    .table_bottom {
+        flex-direction: column;
+    }
+}
+
+/* Style for the table */
+.table {
+    
+    background-color: #fff;
+    padding: 20px;
+    font-size: 14px;
+}
+
+/* Style for the table head (thead) */
+.table_head {
+    box-shadow: 1px 1px 3px 1px #dadce0;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+/* Style for the table body (tbody) */
+.table tbody {
+    display: block;
+    border-bottom: 1px solid #dadce0;
+}
+
+/* Style for table rows in tbody */
+.table tbody tr {
+    border-bottom: 1px dotted #dadce0;
+    display: flex;
+    margin: 0 5px;
+    padding: 1em 0 !important;
+}
+/* Style for the table cells in tbody */
+.table tbody td {
+   
+    padding: 0.5em;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Style for the table cells in the last column of tbody */
+.table tbody td:last-child {
+    text-align: center;
+}

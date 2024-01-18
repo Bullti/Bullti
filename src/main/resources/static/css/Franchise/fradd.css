@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+.title .ttl li {
+	font-size: 25px;
+	padding: 40px;
+	margin-left: 20px;
+}
+
+.list {
+	padding-left: 50px;
+}
+
+.list .ist {
+	display: flex;
+}
+
+.list .ist .st {
+	display: flex;
+	width: 400px;
+	justify-content: space-between;
+	margin-right: 60px;
+}
+
+.addbtn {
+	padding-top: 40px;
+	padding-left: 482px;
+}
+
+.posttext {
+	display: flex;
+	padding: 20px 0 0 20px;
+	
+}
+
+.container {
+}

@@ -5,22 +5,26 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 import com.nowon.bul.security.service.CustomUserDetailsService;
 
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @EnableWebSecurity
 @EnableMethodSecurity
 @Configuration
 public class SecurityConfig {
 	
-
-
+	private final AuthenticationFailureHandler customFailureHandler;
+	
 	//패스워드저장시 암호화 메서드
     @Bean
     PasswordEncoder passwordEncoder() {
@@ -34,14 +38,16 @@ public class SecurityConfig {
 	@Bean 
 	UserDetailsService userDetailsService() { return new CustomUserDetailsService(); }
     
+	
+	
+	
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             // token을 사용하는 방식이기 때문에 csrf를 disable합니다.
             .csrf(AbstractHttpConfigurer::disable)
-
             .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-                .requestMatchers("/css/**","/img/**","/js/**","/**").permitAll()
+                .requestMatchers("/static/**","/**").permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin(formLogin -> formLogin
@@ -50,10 +56,12 @@ public class SecurityConfig {
 					.usernameParameter("id")    //default=username--form
 					.passwordParameter("pass") //default=password--form
 					.permitAll()
+					.failureHandler(customFailureHandler) //로그인실패 핸들러
 					)
         	.logout(logout -> logout.logoutSuccessUrl("/login"));
             
         
         return http.build();
     }
+    
 }
