@@ -5,3 +5,6 @@
 	padding: 20px;
 }
 
+.search .option {
+	display: flex;
+}
