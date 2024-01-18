@@ -1,8 +1,10 @@
 package com.nowon.bul.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.nowon.bul.domain.dto.MemberDTO;
 import com.nowon.bul.service.MemberService;
@@ -21,13 +23,24 @@ public class UserController {
 	}
 	
 	@GetMapping("/login")
-	public String loginPage() {
+	public String loginPage(@RequestParam(value = "error", required = false) String error,
+			@RequestParam(value = "exception", required = false) String exception,
+			Model model) {
+		//System.out.println(error);
+		//System.out.println(exception);
+		//model.addAttribute("error", error);
+		//model.addAttribute("exception", exception);
 		return "/views/login";
 	}
 	
 	@GetMapping("/members")
 	public String joinPage() {
-		return "/views/signup";
+		return "/views/members/signup";
+	}
+	
+	@GetMapping("/members/list")
+	public String listPage() {
+		return "/views/members/list";
 	}
 	
 	@PostMapping("/members")

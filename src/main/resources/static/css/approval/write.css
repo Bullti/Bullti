@@ -14,7 +14,12 @@
 	font-size: 30px;
 	font-weight: bold;
 }
-
+.title > a {
+	margin-left: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #3a54e5;
+}
 .main > .form {
 	margin-top: 50px;
 }
@@ -57,3 +62,16 @@ tbody > .wrap > th {
 	vertical-align: middle;
 	text-align: center;
 }
+.doc-title {
+	font-size: 16px;
+    font-weight: 500;
+    margin-right: 40px;
+}
+
+.title-content {
+	padding: 10px;
+}
+
+.form > .flex > .wrap {
+	flex: 1;
+}  
