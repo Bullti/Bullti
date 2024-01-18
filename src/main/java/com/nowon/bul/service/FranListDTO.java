@@ -14,6 +14,7 @@ public class FranListDTO {
 	
 	private String name;
 	private String address;
+	private String address2;
 	private String ph;
 	
 	private LocalDate createdAt;

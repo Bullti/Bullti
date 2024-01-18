@@ -18,32 +18,48 @@
 	border-radius : 10px;
 	box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
 	height: 800px;
-    width: 1000px;
+    width: 1100px;
     padding: 30px 30px 30px 30px;
     box-sizing: border-box;
 }
 
-.approval-modal>.modal-bady > .content {
+.approval-modal>.modal-bady > .modal-content {
 	margin: 60px 0 40px 0;
 	width: 100%;
-    height: 100%;
+    height: 540px;
     justify-content: space-between;
 }
 
-.approval-modal>.modal-bady > .content > .select-form {
+.approval-modal>.modal-bady > .modal-content > .de-form {
 	border: 1px solid #222;
-	width: 450px;
-	height: 100%;
-}
-.approval-modal>.modal-bady > .content > .temp {
-	border: 1px solid #222;
-	width: 450px;
+	width: 280px;
 	height: 100%;
 }
 
+.approval-modal>.modal-bady > .modal-content > .em-form {
+	border: 1px solid #222;
+	width: 280px;
+	height: 100%;
+}
+.approval-modal>.modal-bady > .modal-content > .btn-form {
+	border: 1px solid #222;
+	width: 50px;
+	height: 100%;
+}
+.approval-modal>.modal-bady > .modal-content > .re-form {
+	width: 280px;
+	height: 100%;
+}
 
+.approval-modal>.modal-bady > .modal-content > .re-form > .title {
+	margin-bottom: 10px;
+}
+.approval-modal>.modal-bady > .modal-content > .re-form > .wrap {
+	border: 1px solid #222;
+	width: 100%;
+	height: 100px;
+}
 .approval-modal>.modal-bady > .btn-area {
-	justify-content: flex-end;
 	margin-right: 20px;
 }
 .approval-modal>.modal-bady > .btn-area > button {
