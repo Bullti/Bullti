@@ -1,0 +1,6 @@
+@charset "EUC-KR";
+
+.table tbody tr {
+
+    padding:0.5em 0 !important;
+}
