@@ -12,12 +12,13 @@
 }
 
 .custom-node-class {
-  background-color: #ffcc00;  /* 배경색을 노란색으로 지정 */
-  border: 2px solid #e68a00;  /* 테두리를 주황색으로 지정 */
+  background-color: #0b5394;  /* 배경색을 노란색으로 지정 */
+  border: 1px solid #ffcc00;  /* 테두리를 주황색으로 지정 */
   color: #fff;  /* 글자색을 흰색으로 지정 */
-  width: 120px;
-  height: 50px;
+  width: 100px;
+  height: 40px;
   font-size: 30px;
   font-weight: bold;
   vertical-align: middle;
+
 }
