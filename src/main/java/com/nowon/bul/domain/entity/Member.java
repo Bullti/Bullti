@@ -2,6 +2,11 @@ package com.nowon.bul.domain.entity;
 
 
 import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.nowon.bul.department.DeEntity;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -16,6 +21,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,7 +36,10 @@ import lombok.NoArgsConstructor;
 @Table(name = "member")
 @Entity
 public class Member {
-
+	/*
+	 * @Autowired private DeEntity deEntity;
+	 */
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "member_no")
@@ -63,6 +73,9 @@ public class Member {
 	@Enumerated(EnumType.STRING)
 	private Rank rank;
 	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "dept_id")
+	private DeEntity dept;
 	
 	/*
 	 * UserEntity에 대응하는 권한을 나타내는 테이블을 만듬 *UserEntity내부 테이블에 생성되지 않음!!!
