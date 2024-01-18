@@ -4,7 +4,6 @@
 <head>
 
 <link rel="stylesheet" href="/css/stock/product.css">
-<link rel="stylesheet" href="/css/stock/purchase.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -18,7 +17,7 @@
 	<div class="main_container">
 	
 		<div class="main_name">
-			<h1>입고 현황</h1>
+			<h1>상품 목록</h1>
 			<h2 class="pastel_red"><img src="/img/stock/text-logo.gif" alt="Bullti chicken" /></h2>
 		</div>
 		
@@ -45,11 +44,12 @@
 				
 				<tr style="font-size: 14px;">
 					<th style="width: 200px">상품명</th>
-					<th style="width: 150px">상품분류</th>
-					<th style="width: 150px">상품중량</th>
-					<th style="width: 150px">공급가액</th>
-					<th style="width: 150px">상품단가</th>
-					<th style="width: 150px">입고</th>
+					<th style="width: 130px">상품분류</th>
+					<th style="width: 100px">상품중량</th>
+					<th style="width: 130px">공급가액</th>
+					<th style="width: 130px">상품단가</th>
+					<th style="width: 130px">작성자</th>
+					<th style="width: 130px">입고일자</th>
 				</tr>
 				
 			</thead>
@@ -58,12 +58,12 @@
 				
 				<tr th:each="prod:${products}">
 					<td style="width: 200px" th:text="${prod.productName}">productName</td>
-					<td style="width: 150px" th:text="${prod.productGroup}">productGroup</td>
-					<td style="width: 150px" th:text="${prod.productWeight}">productWeight</td>
-					<td style="width: 150px" th:text="${prod.productSupply}">productSupply</td>
-					<td style="width: 150px" th:text="${prod.productPrice}">productPrice</td>
-					<td style="width: 150px"><button style="font-size: 12px; padding: 4px 12px; background-color: var(--bullti1); color: white; border: none; cursor: pointer;" onclick="placeOrder('${prod.productPrice}')">입고완료</button></td>
-					
+					<td style="width: 130px" th:text="${prod.productGroup}">productGroup</td>
+					<td style="width: 100px" th:text="${prod.productWeight}">productWeight</td>
+					<td style="width: 130px" th:text="${prod.productSupply}">productSupply</td>
+					<td style="width: 130px" th:text="${prod.productPrice}">productPrice</td>
+					<td style="width: 130px" th:text="${prod.authorName}">authorName</td>
+					<td style="width: 130px" th:text="${#temporals.format(prod.productDate, prod.productDate.year != #dates.createNow().year ? 'MM-dd HH:mm:ss' : 'yyyy-MM-dd HH:mm:ss')}">productDate</td>
 				</tr>
 				<tr th:if="${#lists.isEmpty(products)}">
 					<td colspan="7" style="width:100%;display:block; text-align: center;padding: 2em 0">
