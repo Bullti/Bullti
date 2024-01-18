@@ -42,7 +42,6 @@
 	height: 100%;
 }
 .approval-modal>.modal-bady > .modal-content > .btn-form {
-	border: 1px solid #222;
 	width: 50px;
 	height: 100%;
 }
@@ -68,4 +67,47 @@
     margin-left: 30px;
     border-radius: 5px;
     border: 1px solid #a9a9a9;
+}
+
+/************************************/
+.de-form {
+    width: 300px;
+}
+
+.depart {
+    list-style: none;
+    padding-left: 0;
+}
+
+.depart li {
+    margin-bottom: 10px;
+}
+
+.depart span {
+    cursor: pointer;
+}
+
+/* 트리 구조 스타일 */
+.depart ul {
+    padding-left: 20px;
+    border-left: 1px solid #ccc;
+    margin-left: 10px;
+}
+
+.depart ul ul {
+    border-left: none;
+    margin-left: 0;
+}
+
+/***********************************/
+.em-form > p:hover{
+	background-color: #a9a9a9;
+}
+/**********************************/
+.btn-form > img {
+	width: 100%;
+	cursor: pointer;
+}
+.btn-form > img:first-of-type {
+	margin-bottom: 20px;
 }
