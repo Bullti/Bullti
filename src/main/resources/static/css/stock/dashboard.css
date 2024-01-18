@@ -33,13 +33,15 @@ main {
 }
 
 .signboard {
-    background-color: #002B5B;
+	box-shadow: 1px 1px 3px 1px var(--bullti2);
+     background-color: var(--bullti2);
     color: #fff;
     text-align: center;
     padding: 10px;
 }
 
 .head_dash {
+	
     font-size: 36px;
 }
 
@@ -79,12 +81,14 @@ main {
 
 .graph{
 	
+	box-shadow: 1px 1px 3px 1px #dadce0;
 	width:500px;
 	
 }
 
 .newly_product{
 	
+	box-shadow: 1px 1px 3px 1px #dadce0;
 	width: 1150px;
 	
 }
@@ -102,7 +106,7 @@ main {
 }
 
 .depth_list_button {
-	
+	box-shadow: 1px 1px 3px 1px #dadce0;
 	font-size:28px;
 	font-weight: bold;
     display: block;
