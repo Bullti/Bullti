@@ -7,4 +7,8 @@ import com.nowon.bul.stock.dto.ProductDTO;
 public interface ProductService {
 	
 	List<ProductDTO> getAllProducts();
+	
+	/*
+	void registerProduct(ProductDTO productDTO);
+	*/
 }

@@ -1,10 +1,50 @@
-@charset "UTF-8";
+/* product-post.css */
 
-.table{
+/* Additional Styles */
+@media (max-width: 768px) {
+    .main_container {
+        padding: 10px;
+    }
+
+    .table,
+    .table_head,
+    .table_bottom {
+        flex-direction: column;
+    }
+}
+
+
+.post_form{
 	
-	margin-top: 20px;
+	margin:20px 10px;
 	
-	
-	
-	
+}
+
+/* Style for the form */
+.form_group {
+    margin-bottom: 20px;
+}
+
+.form_group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form_group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+
+.product_post {
+    background-color: var(--bullti1);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
