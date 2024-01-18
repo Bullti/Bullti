@@ -1,11 +1,16 @@
 package com.nowon.bul.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.nowon.bul.department.DeController;
+import com.nowon.bul.department.DeService;
 import com.nowon.bul.domain.dto.MemberDTO;
 import com.nowon.bul.service.MemberService;
 
@@ -15,7 +20,11 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class UserController {
 
+	@Autowired
+	DeService deService;
+	
 	private final MemberService memberSerivce; 
+	private final DeController deController;
 	
 	@GetMapping("/temp")
 	public String tempPage() {
@@ -39,7 +48,11 @@ public class UserController {
 	}
 	
 	@GetMapping("/members/list")
-	public String listPage() {
+	public String listPage(Model model) {
+		
+		 List<String> departmentNames = deService.getDepartmentNames(); // 상위부서 목록을 가져옴
+	     model.addAttribute("names", departmentNames); // 뷰로 전달
+		
 		return "/views/members/list";
 	}
 	

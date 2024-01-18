@@ -10,25 +10,45 @@
 	<main class="warp-main">
 		<div th:replace="~{department/side :: side}"></div>
 		<div class="main">
+			<div class="title">
+				<h1>사원조회/삭제/수정</h1>
+			</div>
+			<div class="search">
+				<label for="name">부서명</label>
+					<select name="parentName" id="up-depart">
+						<option th:each="name : ${names}" th:text="${name}"></option>
+				</select>
+				<label for="name">재직상태</label>
+					<select>
+							<option>재직</option>
+							<option>퇴사</option>
+					</select>
+				<input class="search-input">
+				<button>조회</button>	
+			</div>
+			
 			<table>
 				<thead>
 					<tr>
-						<td>아이디</td>
+						<td>사번</td>
 						<td>이름</td>
 						<td>직급</td>
+						<td>부서</td>
+						<td>전화번호</td>
 						<td>입사일</td>
-						<td>입사일</td>
-						<td>프로필</td>
+						<td>퇴사일</td>
+				
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td>아이디</td>
+						<td>사번</td>
 						<td>이름</td>
 						<td>직급</td>
+						<td>부서</td>
+						<td>전화번호</td>
 						<td>입사일</td>
-						<td>입사일</td>
-						<td>프로필</td>
+						<td>퇴사일</td>
 					</tr>
 				</tbody>
 			</table>

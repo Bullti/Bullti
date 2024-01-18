@@ -11,4 +11,13 @@ import org.springframework.stereotype.Service;
 public interface DeService {
 
 	List<Map<String, String>> getOrgChartData();
+	
+	List<String> getDepartmentNames(); 
+
+	void delete(String name);
+
+	void save(DeSaveDTO dto);
+
+	
+
 }

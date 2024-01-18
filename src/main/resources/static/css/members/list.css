@@ -1,24 +1,45 @@
 @charset "UTF-8";
 .main {
-	min-height: calc(100vh - 50px);
-	min-width: calc(100vw - 150px);
+	height: calc(100vh - 52px);
+	width: calc(100vw - 300px);
+	border: 1px solid red;
+	justify-content: center;
+	padding-left: 50px;
+	padding-right: 50px;
+  
 }
 table {
-	width: 1000px;
+	width: calc(100vw - 380px);
+	justify-content: space-between;
+	
 }
-table th td{
-	border: 1px solid;
-}
+
 thead {
 	font-weight: bold;
 }
 
 td {
-	border: 1px solid;
+	border-bottom: 1px solid #0b5394;
 	height: 40px;
 	text-align: center;
 	vertical-align: middle;
 }
+
+.title > h1{
+	font-size: 30px;
+	font-weight: bold;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin-top: 20px;
+	margin-bottom: 50px;
+	border-top: 1px solid #0b5394;
+}
+
+.search{
+	margin-bottom: 20px;
+}
+
+
 .goodscheck > .goodscheck_box > tbody > tr > .img_area{
 	width: 100px;
 	height: 100px;
