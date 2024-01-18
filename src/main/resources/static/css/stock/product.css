@@ -27,17 +27,32 @@ main {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.main_name{
+	
+	display: flex;
+	justify-content: space-between;
+	object-fit:contain;
+	
+}
+
+.main_name h2{
+	
+	width:200px;
+	height: 40px;
+}
+
 .main_container {
 	
 	width:1000px;
-	height: auto;
+	/* height: auto; */
     padding: 20px;
 }
 
 .main_name h1 {
-    font-size: 24px;
+    font-size: 32px;
     font-weight: bold;
     color: #333;
+    
 }
 
 .container_point {
@@ -45,7 +60,12 @@ main {
     margin-top: 20px;
 }
 
-.list_group {
+.list_group{
+	
+	margin: 10px 0;
+}
+
+.list_group li{
 	display: flex;
     list-style: none;
     padding: 0;
@@ -75,6 +95,9 @@ main {
 }
 
 .pastel_red {
+	
+	display:flex;
+	justify-content:center;
     color: #e74c3c;
 }
 
@@ -86,10 +109,7 @@ main {
 .table_head,
 .table,
 .table_bottom {
-    display: flex;
-    justify-content: space-between;
     box-shadow: 1px 1px 3px 1px #dadce0;
-    
     padding: 10px;
     border-radius: 4px;
     margin-bottom: 10px;
@@ -97,8 +117,19 @@ main {
 
 .table {
     background-color: #fff;
-  
     padding: 20px;
+   
+    font-size: 14px;
+}
+
+.table tr{
+	margin: 0 5px;
+	display:block;
+	padding: 1em 0 !important;
+	border-bottom : 1px solid #dadce0;
+}
+.table tbody tr{
+	border-bottom : 1px dotted #dadce0;
 }
 
 /* Additional Styles */
@@ -112,4 +143,84 @@ main {
     .table_bottom {
         flex-direction: column;
     }
+}
+
+.tableup{
+	padding:10px;
+	display: flex;
+	justify-content: space-between;
+	
+}
+
+#table_bottom{
+	
+	display: flex;
+	justify-content: space-between;
+	
+}
+
+#table_bottom div{
+	
+	margin: 0 20px;
+	
+}
+
+
+/* product-post.css */
+
+/* Additional Styles */
+@media (max-width: 768px) {
+    .main_container {
+        padding: 10px;
+    }
+
+    .table,
+    .table_head,
+    .table_bottom {
+        flex-direction: column;
+    }
+}
+
+/* Style for the table */
+.table {
+    
+    background-color: #fff;
+    padding: 20px;
+    font-size: 14px;
+}
+
+/* Style for the table head (thead) */
+.table_head {
+    box-shadow: 1px 1px 3px 1px #dadce0;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+/* Style for the table body (tbody) */
+.table tbody {
+    display: block;
+    border-bottom: 1px solid #dadce0;
+}
+
+/* Style for table rows in tbody */
+.table tbody tr {
+    border-bottom: 1px dotted #dadce0;
+    display: flex;
+    margin: 0 5px;
+    padding: 1em 0 !important;
+}
+/* Style for the table cells in tbody */
+.table tbody td {
+   
+    padding: 0.5em;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Style for the table cells in the last column of tbody */
+.table tbody td:last-child {
+    text-align: center;
 }
