@@ -19,6 +19,7 @@
     font-size: 13px;
     font-weight: 500;
     color: #3a54e5;
+    cursor: pointer;
 }
 .main > .form {
 	margin-top: 50px;
@@ -69,9 +70,10 @@ tbody > .wrap > th {
 }
 
 .title-content {
-	padding: 10px;
+	padding: 5px;
+    flex: 1;
+    outline: none;
 }
-
-.form > .flex > .wrap {
-	flex: 1;
-}  
+.bn {
+	margin-bottom: 10px;
+}

@@ -18,4 +18,11 @@ public class ApprovalController {
 		
 		return "/views/approval/write";
 	}
+	
+	//임시저장함
+	@GetMapping("/temp/list")
+	public String tempLlist() {
+		
+		return "/views/approval/tempList";
+	}
 }
