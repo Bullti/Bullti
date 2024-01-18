@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script defer src="/js/annual/annual.js"></script>
+<link rel="stylesheet" href="/css/view/annual.css"/>
+</head>
+<body>
+	<main>
+		<h1>휴가신청페이지</h1>
+		<div>
+	    	<form action="/emp/annu" method="post">
+		        <select id="type" name="type">
+		            <option value="annual">연차</option>
+		            <option value="halfDay">반차</option>
+		            <option value="maternity">출산</option>
+		            <option value="spouseMaternity">배우자출산</option>
+		            <option value="menstrual">생리</option>
+		            <option value="familyCare">가족돌봄</option>
+		            <option value="medicalLeave">약정</option>
+		            <!-- 다른 카테고리 옵션 추가 가능 -->
+		        </select>
+		
+		        <label for="start">휴가 시작일:</label>
+		        <input type="date" id="start" name="start" min="<?= date('Y-m-d', strtotime('-1 day')) ?>" required>
+				
+				
+			    <div class="selectView" id="fullDay">
+			        <label for="end">휴가 마지막일:</label>
+			        <input type="date" id="end" name="end" min="">
+		        </div>
+			    <div class="selectView" id="halfDay">
+					<!-- 반차 시간 선택 -->
+			        <label for="halfDayTime">반차 시간:</label>
+			        <select id="halfDayTime" name="halfDayTime">
+			            <option value="morning">오전</option>
+			            <option value="afternoon">오후</option>
+			        </select>
+				</div>
+		        <textarea name="content" placeholder="사유"></textarea>
+		        <button type="submit">휴가신청</button>
+		    </form>
+		
+		    <div class="selectView" id="annual">연차</div>
+		    <div class="selectView" id="halfDay">반차</div>
+		    <div class="selectView" id="maternity">출산</div>
+		    <div class="selectView" id="spouseMaternity">배우자출산</div>
+		    <div class="selectView" id="menstrual">생리</div>
+		    <div class="selectView" id="familyCare">가족돌봄</div>
+		    <div class="selectView" id="medicalLeave">약정</div>
+		</div>
+	</main>
+</body>
+</html>
