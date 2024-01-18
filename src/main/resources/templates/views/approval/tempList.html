@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
+<head>
+<script src="/js/department.js"></script>
+<link rel="stylesheet" href="/css/approval/home.css">
+<link rel="stylesheet" href="/css/approval/tempList.css">
+</head>
+<body>
+	<main class="warp-main">
+		<div th:replace="~{views/approval/side :: side}"></div>
+		<div class="main flex col">
+			<h1 class="title">임시저장함</h1>
+			<div class="list-sub flex hcenter">
+				<div>
+					전체 <span>186</span>
+				</div>
+				<div>
+					<!-- 검색어 -->
+				</div>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>분류</th>
+						<th>제목</th>
+						<th>저장날짜</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>공통</td>
+						<td>테스트 저장 입니다.</td>
+						<td>2022.12.07 16:46</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</main>
+</body>
+</html>
