@@ -18,79 +18,77 @@
 	
 		<div class="main_name">
 			<h1>상품 현황</h1>
+			<h2 class="pastel_red"><img src="/img/stock/text-logo.gif" alt="Bullti chicken" /></h2>
 		</div>
 		
 		<div class="container_point">
 			<ul class="list_group">
-				<a href="/" class="list_group_item">
-					<span class="text_list">상품 현황</span>
-				</a>
-				<a href="/" class="list_group_item">
-					<span class="text_list">상품 등록</span>
-				</a>
+				<li>
+					<a href="/members/product" class="list_group_item">
+						<span class="text_list">상품 현황</span>
+					</a>
+					<a href="/members/product-post" class="list_group_item">
+						<span class="text_list">상품 등록</span>
+					</a>
+				</li>
 			</ul>
 		</div>
 		
-		<div class="mark_name">
-			<h2 class="pastel_red">불티치킨 엔터프라이즈</h2>
+		<div class="tableup">
+			<div class="page_entries">페이지 스크롤</div>
+			<div class="name_search">상품명 검색:<input type="text" id="name_search" size="10" maxlength="5"></div>
 		</div>
+		<table class="table" style="width: 100%">
 		
-		<div class="table_container">
+			<thead class="table_h">
+				
+				<tr style="font-size: 14px;">
+					<th style="width: 200px">상품명</th>
+					<th style="width: 130px">상품분류</th>
+					<th style="width: 100px">상품중량</th>
+					<th style="width: 130px">공급가액</th>
+					<th style="width: 130px">상품단가</th>
+					<th style="width: 130px">작성자</th>
+					<th style="width: 130px">작성일자</th>
+				</tr>
+				
+			</thead>
+			
+			<tbody id="dynamic_table">
+				
+				<tr th:each="prod:${products}">
+					<td style="width: 200px" th:text="${prod.productName}">productName</td>
+					<td style="width: 130px" th:text="${prod.productGroup}">productGroup</td>
+					<td style="width: 100px" th:text="${prod.productWeight}">productWeight</td>
+					<td style="width: 130px" th:text="${prod.productSupply}">productSupply</td>
+					<td style="width: 130px" th:text="${prod.productPrice}">productPrice</td>
+					<td style="width: 130px" th:text="${prod.authorName}">authorName</td>
+					<td style="width: 130px" th:text="${#temporals.format(prod.productDate, prod.productDate.year != #dates.createNow().year ? 'MM-dd HH:mm:ss' : 'yyyy-MM-dd HH:mm:ss')}">productDate</td>
+				</tr>
+				<tr th:if="${#lists.isEmpty(products)}">
+					<td colspan="7" style="width:100%;display:block; text-align: center;padding: 2em 0">
+						등록된 상품이 존재하지 않습니다.
+					</td>
+				</tr>
+				
+			</tbody>
+			
+			<tfoot>
+				<tr>
+					<td colspan="7" class="flex center" id="table_bottom">
+						<div class="the_number_of_pages">총 22페이지&nbsp;&nbsp;</div>
+						<div class="paging">1</div>
+					</td>
+				</tr>
+				
+			</tfoot>
 		
-			<div class="table_head">
-			
-				<div class="page_entries">페이지 스크롤</div>
-				
-				<div class="name_search">상품명 검색:<input type="text" id="name_search" size="10" maxlength="5"></div>
-				
-			</div>
-			
-			<div class="table" id="dynamic_table">
-			</div>
-			
-			<div class="table_bottom">
-				
-				<div class="the_number_of_pages">총 22페이지</div>
-				
-				<div class="paging">1</div>
-				
-			</div>
-		
-		</div>
+		</table>
 		
 		
 	</div>
 		
 </div>
-
- <script>
-        // Sample data for demonstration
-        var products = [
-            { productName: 'Product 1', price: '100', quantity: '50' },
-            { productName: 'Product 2', price: '200', quantity: '30' },
-            // Add more data as needed
-        ];
-
-        // Function to generate dynamic table
-        function generateDynamicTable(data) {
-            var tableContainer = document.getElementById('dynamic_table');
-            var tableHTML = '<table border="1"><thead><tr><th>상품명</th><th>가격</th><th>수량</th></tr></thead><tbody>';
-
-            for (var i = 0; i < data.length; i++) {
-                tableHTML += '<tr>';
-                tableHTML += '<td>' + data[i].productName + '</td>';
-                tableHTML += '<td>' + data[i].price + '</td>';
-                tableHTML += '<td>' + data[i].quantity + '</td>';
-                tableHTML += '</tr>';
-            }
-
-            tableHTML += '</tbody></table>';
-            tableContainer.innerHTML = tableHTML;
-        }
-
-        // Initial table generation
-        generateDynamicTable(products);
-    </script>
 
 </main>
 </body>
