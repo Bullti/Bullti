@@ -2,9 +2,13 @@ package com.nowon.bul.domain.entity;
 
 
 import java.util.Set;
+
+import com.nowon.bul.domain.entity.approval.ApprovalDoc;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
@@ -16,6 +20,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -63,6 +68,8 @@ public class Member {
 	@Enumerated(EnumType.STRING)
 	private Rank rank;
 	
+	@OneToMany(mappedBy = "member")
+	private List<ApprovalDoc> approvalDoc;
 	
 	/*
 	 * UserEntity에 대응하는 권한을 나타내는 테이블을 만듬 *UserEntity내부 테이블에 생성되지 않음!!!

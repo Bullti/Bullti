@@ -11,26 +11,59 @@
 
 <link rel="stylesheet" href="/summerNote/summernote-lite.css">
 <script>
-		$(document).ready(function () {
-			$('#summernote').summernote({
-				toolbar: [
-					['fontname', ['fontname']],
-					['fontsize', ['fontsize']],
-					['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
-					['color', ['forecolor', 'color']],
-					['table', ['table']],
-					['para', ['ul', 'ol', 'paragraph']],
-					['height', ['height']],
-					['insert', ['picture', 'link', 'video']],
-					['view', ['fullscreen', 'help']]
-				],
-				height: "500",
-				lang: "ko-KR",
-				fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체', '바탕체'],
-				fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
-			});
-		});
-	</script>
+	$(document)
+			.ready(
+					function() {
+						$('#summernote')
+								.summernote(
+										{
+											toolbar : [
+													[ 'fontname',
+															[ 'fontname' ] ],
+													[ 'fontsize',
+															[ 'fontsize' ] ],
+													[
+															'style',
+															[
+																	'bold',
+																	'italic',
+																	'underline',
+																	'strikethrough',
+																	'clear' ] ],
+													[
+															'color',
+															[ 'forecolor',
+																	'color' ] ],
+													[ 'table', [ 'table' ] ],
+													[
+															'para',
+															[ 'ul', 'ol',
+																	'paragraph' ] ],
+													[ 'height', [ 'height' ] ],
+													[
+															'insert',
+															[ 'picture',
+																	'link',
+																	'video' ] ],
+													[
+															'view',
+															[ 'fullscreen',
+																	'help' ] ] ],
+											height : "500",
+											lang : "ko-KR",
+											fontNames : [ 'Arial',
+													'Arial Black',
+													'Comic Sans MS',
+													'Courier New', '맑은 고딕',
+													'궁서', '굴림체', '굴림', '돋움체',
+													'바탕체' ],
+											fontSizes : [ '8', '9', '10', '11',
+													'12', '14', '16', '18',
+													'20', '22', '24', '28',
+													'30', '36', '50', '72' ],
+										});
+					});
+</script>
 </head>
 <body>
 	<main class="warp-main">
@@ -48,14 +81,12 @@
 						<tr>
 							<th>문서 종류</th>
 							<td style="width: 470px;"><select>
-									<option>공용</option>
-							</select> <select>
-									<option>휴가신청서</option>
+									<option>품의서</option>
 							</select></td>
 							<th>작성자</th>
 							<td>개발부 ceo 최영진</td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<th>보존 연한</th>
 							<td><select>
 									<option>공용</option>
@@ -64,7 +95,7 @@
 							<td><select class="rank">
 									<option>A등급</option>
 							</select></td>
-						</tr>
+						</tr> -->
 					</tbody>
 				</table>
 			</div>
@@ -99,13 +130,11 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="form">
+			<div class="form bn">
 				<h1 class="title">상세입력</h1>
 				<div class="flex">
 					<h1 class="doc-title flex center">제목</h1>
-					<div class="wrap">
-						<input class="title-content">
-					</div>
+					<input class="title-content">
 				</div>
 			</div>
 			<form method="post">
