@@ -15,14 +15,15 @@ import lombok.ToString;
 @ToString
 @Setter
 @Getter
-public class MemberDTO {
+public class MembersaveDTO {
 
 	private String id;
 	private String name;
 	private String tel;
 	private LocalDate birthDate;
 	private LocalDate joinCompanyDate;
-	private LocalDate resignationDate;
+	private String street;
+	private String detail;
 	
 	
 	public Member toEntity(PasswordEncoder passEncoder) {
@@ -34,6 +35,7 @@ public class MemberDTO {
 				.rank(Rank.Assistant)
 				.birthDate(birthDate)
 				.joinCompanyDate(joinCompanyDate)
+				.adress(street + " " + detail)
 				.build().addRole(Role.USER);
 	}
 	
@@ -42,10 +44,8 @@ public class MemberDTO {
 				.id(id)
 				.name(name)
 				.rank(Rank.Assistant)
-				
 				.phone(tel)
 				.joinCompanyDate(joinCompanyDate)
-				.resignationDate(resignationDate) //퇴사일받을거
 				.build();
  }
 }
