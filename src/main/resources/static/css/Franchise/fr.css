@@ -1,36 +1,83 @@
 @charset "UTF-8";
 
-.title .ttl li {
-	font-size: 25px;
-	padding: 40px;
-	margin-left: 20px;
+/* Reset CSS */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
-.list {
-	padding-left: 50px;
+.bbody {
+	font-family: 'Arial', sans-serif;
+	background-color: #f8f9fc;
+	width: 100%;
 }
 
-.list .ist {
+.main_page {
+	margin-top: 50px;
+	margin-left: 80px;
+	margin-right: 80px;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	height: 80%;
+}
+
+.main_name {
 	display: flex;
-}
-
-.list .ist .st {
-	display: flex;
-	width: 400px;
 	justify-content: space-between;
-	margin-right: 60px;
+	object-fit: contain;
 }
 
-.addbtn {
-	padding-top: 40px;
-	padding-left: 482px;
+.main_name h1 {
+    margin-left: 50px;
+    margin-top: 35px;
+	font-size: 32px;
+	font-weight: bold;
+	color: #333;
 }
 
-.posttext {
+.main_container {
+	width:100%;
+	/* height: auto; */
+    padding: 20px;
+    text-align: center;
+    
+}
+
+.tableup {
+	margin-top: 35px;
+	padding: 10px 84px 10px;
 	display: flex;
-	padding: 20px 0 0 20px;
-	
+	justify-content: space-between;
+	width:100%;
 }
 
-.container {
+.table {
+	margin-top: 20px;
+	background-color: #fff;
+	padding: 20px;
+	font-size: 14px;
+}
+
+.table tr {
+	width: 100%;
+	display: block;
+	padding: 1em 0 !important;
+	border-bottom: 1px solid #dadce0;
+	text-align: center;
+}
+
+.table tbody tr {
+	border-bottom: 1px dotted #dadce0;
+}
+
+.table_h {
+	text-align: center;
+	width: 100%
+}
+
+.dynamic_table {
+	text-align: center;
+	width: 100%
 }
