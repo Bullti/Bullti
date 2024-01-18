@@ -8,6 +8,7 @@ public interface ProductService {
 	
 	List<ProductDTO> getAllProducts();
 	
+	/*
 	void registerProduct(ProductDTO productDTO);
-	
+	*/
 }

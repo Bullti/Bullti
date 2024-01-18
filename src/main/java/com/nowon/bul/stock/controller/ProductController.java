@@ -29,11 +29,13 @@ public class ProductController {
 		return "stock/product-post";
 	}
 	
+	/*
 	@PostMapping("/members/product-registration")
 	public String productRegister(ProductDTO productDTO) {
 		productService.registerProduct(productDTO);
 		return "redirect:/members/product-post";
 	}
+	*/
 	
 
 }
