@@ -22,6 +22,7 @@ public class MemberDTO {
 	private String tel;
 	private LocalDate birthDate;
 	private LocalDate joinCompanyDate;
+	private LocalDate resignationDate;
 	
 	
 	public Member toEntity(PasswordEncoder passEncoder) {
@@ -35,4 +36,16 @@ public class MemberDTO {
 				.joinCompanyDate(joinCompanyDate)
 				.build().addRole(Role.USER);
 	}
+	
+	public Member toList() {
+		return Member.builder()
+				.id(id)
+				.name(name)
+				.rank(Rank.Assistant)
+				
+				.phone(tel)
+				.joinCompanyDate(joinCompanyDate)
+				.resignationDate(resignationDate) //퇴사일받을거
+				.build();
+ }
 }

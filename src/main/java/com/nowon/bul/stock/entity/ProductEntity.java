@@ -16,7 +16,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,7 +23,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
-@SequenceGenerator(name = "gen_seq_prod", sequenceName =  "seq_prod", initialValue = 1, allocationSize = 1)
+
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,7 +33,7 @@ import lombok.NoArgsConstructor;
 public class ProductEntity extends BaseEntity{
 	
 	 @Id
-	 @GeneratedValue(generator = "gen_seq_prod", strategy = GenerationType.SEQUENCE)
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
 	 private int productNum;
 	 
 	 @Column(nullable = false)
