@@ -2,12 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>캘린더</title>
+
+    <!-- FullCalendar 라이브러리 CDN 경로 -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js'></script>
+    <script defer src="/js/calendar/fullcalendar.js"></script>
+    
 </head>
 <body>
-	<main>
-		<h1>캘린더</h1>
-	</main>
+    <main>
+        <h1>캘린더</h1>
+        <div id='calendar'></div>
+    </main>
 </body>
 </html>
