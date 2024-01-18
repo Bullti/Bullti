@@ -9,52 +9,56 @@
 <body>
 	<main class="warp-main">
 		<div th:replace="~{department/side :: side}"></div>
-		<div class="container">
-			<div class="title">
-				<ul class="ttl">
-					<li>매장관리</li>
-				</ul>
-			</div>
-			<div class="list">
-				<div class="ist">
-					<ul class="st">
-						<li>매장이름</li>
-						<li>주소</li>
-						<li>상세주소</li>
-						<li>전화번호</li>
-						<li>개업일</li>
-					</ul>
-				</div>
-			</div>
-			<div th:each="post : ${list}">
-				<div class="posttext" th:if="${post.closedAt == null}">
-					<div class="title">
-						<div th:href="'/fr/' + ${post.id}" th:text="${post.name}"></div>
+		<div class="bbody">
+			<div class="main_page">
+				<div class="main_container">
+					<div class="main_name">
+						<h1>매장관리</h1>
 					</div>
-					<div>
-						<div class="address" th:text="${post.address}"></div>
-					</div>
-					<div>
-						<div class="address" th:text="${post.address2}"></div>
-					</div>
-					<div>
-						<div class="ph" th:text="${post.ph}"></div>
-					</div>
-					<div class="date" th:text="${#temporals.format(post.createdAt)}"></div>
-					<form action="/fr/register" method="post">
-						<div>
-							<button type="submit">폐업</button>
-							<input type="hidden" name="id" th:value="${post.id}">
+					<div class="tableup">
+						<div class="page_entries">페이지 스크롤</div>
+						<div class="name_search">
+							상품명 검색:<input type="text" id="name_search" size="10"
+								maxlength="5">
 						</div>
-					</form>
+					</div>
+					<table class="table">
+						<thead class="table_h">
+							<tr style="font-size: 14px; margin-left: 84px;">
+								<th style="width: 160px">매장명</th>
+								<th style="width: 370px">주소</th>
+								<th style="width: 130px">상세주소</th>
+								<th style="width: 130px">전화번호</th>
+								<th style="width: 127px">개업일</th>
+						</thead>
+						<tbody id="dynamic_table">
+							<tr th:each="post : ${list}" th:if="${post.closedAt == null}" style="margin-left: 84px;">
+								<td style="width: 160px" th:text="${post.name}"></td>
+								<td style="width: 370px" th:text="${post.address}"></td>
+								<td style="width: 130px" th:text="${post.address2}"></td>
+								<td style="width: 130px" th:text="${post.ph}"></td>
+								<td style="width: 127px"
+									th:text="${#temporals.format(post.createdAt)}"></td>
+								<td>
+									<form action="/fr/register" method="post">
+										<div>
+											<button type="submit">폐업</button>
+											<input type="hidden" name="id" th:value="${post.id}">
+										</div>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
-			<script th:inline="javascript">
-				function redirectToFrAdd() {
-					// "/fradd"로 페이지 이동
-					window.location.href = '/fradd';
-				}
-			</script>
+		</div>
+		<script th:inline="javascript">
+			function redirectToFrAdd() {
+				// "/fradd"로 페이지 이동
+				window.location.href = '/fradd';
+			}
+		</script>
 	</main>
 </body>
 </html>

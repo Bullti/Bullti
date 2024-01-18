@@ -9,11 +9,12 @@ public class FranSaveDTO {
 
 	private String name;
 	private String address;
+	private String address2;
 	private String ph;
 
 	public FranEntity toEntity() {
 		return FranEntity.builder()
-				.name(name).address(address).ph(ph)
+				.name(name).address(address).address2(address2).ph(ph)
 				.build();
 		
 	}
