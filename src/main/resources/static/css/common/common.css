@@ -68,6 +68,12 @@ a:active {
 *{
 	font-family: 'Noto Sans KR', sans-serif;
 }
+:root {
+	--bullti1 : #EA5455;
+	--bullti2 : #002B5B;
+	--bullti3 : #F9F5EB;
+	--bullti4 : #E4DCCF;
+}
 .flex {
 	display: flex;
 }

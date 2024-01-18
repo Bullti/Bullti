@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<main>
+		<h1>근태리스트페이지</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>출근시간</th>
+					<th>퇴근시간</th>
+					<th>체크타입</th>
+					<th>회원넘버</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="alist:${atteList}">
+					<td th:text="${alist.goWorkTime}"></td>
+					<td th:text="${alist.leaveWorkTime}"></td>
+					<td th:text="${alist.regiType}"></td>
+					<td th:text="${alist.memberNo}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</main>
+</body>
+</html>

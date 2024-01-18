@@ -54,10 +54,11 @@ public class FranProcess implements FranService{
 	}
 
 	@Override
-	public void franchiseclose(Model model) {
-		// TODO Auto-generated method stub
-		model.addAttribute("close", franEntityRepository.findAll().stream()
-				.map(FranEntity::toFranListDTO)
-				.collect(Collectors.toList()));
-	}
+    public void franchiseclose(Long id) {
+        FranEntity entity = franEntityRepository.findById(id).orElse(null);
+        if (entity != null) {
+            entity.closeFran();
+            franEntityRepository.save(entity);
+        }
+    }
 }

@@ -13,6 +13,5 @@ public interface FranService {
 
 	void franchiseList(Model model);
 
-	void franchiseclose(Model model);
-
+	void franchiseclose(Long id);
 }
