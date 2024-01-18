@@ -63,7 +63,7 @@
 					<td style="width: 130px" th:text="${prod.productSupply}">productSupply</td>
 					<td style="width: 130px" th:text="${prod.productPrice}">productPrice</td>
 					<td style="width: 130px" th:text="${prod.authorName}">authorName</td>
-					<td style="width: 130px" th:text="${prod.productDate}">productDate</td>
+					<td style="width: 130px" th:text="${#temporals.format(prod.productDate, prod.productDate.year != #dates.createNow().year ? 'MM-dd HH:mm:ss' : 'yyyy-MM-dd HH:mm:ss')}">productDate</td>
 				</tr>
 				<tr th:if="${#lists.isEmpty(products)}">
 					<td colspan="7" style="width:100%;display:block; text-align: center;padding: 2em 0">
