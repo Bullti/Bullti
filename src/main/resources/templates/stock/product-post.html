@@ -2,13 +2,43 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
 <head>
-
+	
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/css/stock/product.css">
 <link rel="stylesheet" href="/css/stock/product-post.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+ 
+ <style>
+        /* 모달 스타일링 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
 
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+    </style>
 
 </head>
 <body>
@@ -32,58 +62,66 @@
 						<span class="text_list">상품 등록</span>
 					</a>
 				</li>
-			</ul>
-		</div>
-		
-		<table class="table" style="width: 100%">
-		
-			<thead class="table_h">
+				</ul>
+				</div>
 				
-				<tr style="font-size: 14px;">
-					<th style="width: 200px">상품명</th>
-					<th style="width: 130px">상품분류</th>
-					<th style="width: 100px">상품중량</th>
-					<th style="width: 130px">공급가액</th>
-					<th style="width: 130px">상품단가</th>
-					<th style="width: 130px">작성자</th>
-					<th style="width: 130px">작성일자</th>
-				</tr>
+				  <!-- 상품 등록 폼 시작 -->
+                <form class="post_form" action="/members/product-post" th:object"${productDTO}" method="post">
+                    <div class="form_group">
+                        <label for="productName">상품명:</label>
+                        <input type="text" id="productName" name="productName"  th:field="*{productName}" required>
+                    </div>
+
+                    <div class="form_group">
+                        <label for="productGroup">상품분류:</label>
+                        <input type="text" id="productGroup" name="productGroup"  th:field="*{productGroup}" required>
+                    </div>
+
+                    <div class="form_group">
+                        <label for="productWeight">상품중량:</label>
+                        <input type="text" id="productWeight" name="productWeight"  th:field="*{productWeight}" required>
+                    </div>
+
+                    <div class="form_group">
+                        <label for="productSupply">공급가액:</label>
+                        <input type="text" id="productSupply" name="productSupply"  th:field="*{productSupply}" required>
+                    </div>
+
+                    <div class="form_group">
+                        <label for="productPrice">상품단가:</label>
+                        <input type="text" id="productPrice" name="productPrice"  th:field="*{productPrice}" required>
+                    </div>
+
+                    <div class="form_group">
+                        <button class="product_post" type="submit" onclick="showModal()">등록</button>
+                    </div>
+                </form>
+                <!-- 상품 등록 폼 종료 -->
 				
-			</thead>
-			
-			<tbody id="dynamic_table">
 				
-				<tr th:each="prod:${products}">
-					<td th:text="${prod.productName}">productName</td>
-					<td th:text="${prod.productGroup}">productGroup</td>
-					<td th:text="${prod.productWeight}">productWeight</td>
-					<td th:text="${prod.productSupply}">productSupply</td>
-					<td th:text="${prod.productPrice}">productPrice</td>
-					<td th:text="${prod.authorName}">authorName</td>
-					<td th:text="${prod.productDate}">productDate</td>
-				</tr>
-				<tr th:if="${#lists.isEmpty(products)}">
-					<td colspan="7" style="width:100%;display:block; text-align: center;padding: 2em 0">
-						등록된 상품이 존재하지 않습니다.
-					</td>
-				</tr>
 				
-			</tbody>
-			
-			<tfoot>
-				<tr>
-					<td colspan="7" class="flex center">
-						<div class="the_number_of_pages">총 22페이지&nbsp;&nbsp;</div>
-						<div class="paging">1</div>
-					</td>
-				</tr>
+				<!-- Modal -->
+				<div id="myModal" class="modal">
+					<div class="modal-content">
+						<span class="close-btn" onclick="closeModal()">&times;</span>
+						<p>등록이 완료되었습니다.</p>
+					</div>
+				</div>
 				
-			</tfoot>
-		
-		</table>
-		
-		
-	</div>
+				
+				<!-- Script for showing and hiding the modal -->
+				<script>
+					function showModal() {
+						document.getElementById('myModal').style.display = 'block';
+					}
+
+					function closeModal() {
+						document.getElementById('myModal').style.display = 'none';
+					}
+				</script>
+				
+				
+				</div>
 		
 </div>
 
