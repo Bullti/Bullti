@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
+<head>
+<link rel="stylesheet" href="/css/members/list.css">
+<script src="/js/department.js"></script>
+<link rel="stylesheet" href="/css/department/side.css" />
+</head>
+<body>
+	<main class="warp-main">
+		<div th:replace="~{department/side :: side}"></div>
+		<div class="main">
+			<table>
+				<thead>
+					<tr>
+						<td>아이디</td>
+						<td>이름</td>
+						<td>직급</td>
+						<td>입사일</td>
+						<td>입사일</td>
+						<td>프로필</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>아이디</td>
+						<td>이름</td>
+						<td>직급</td>
+						<td>입사일</td>
+						<td>입사일</td>
+						<td>프로필</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</main>
+</body>
+</html>

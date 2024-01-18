@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
+<head>
+<link rel="stylesheet" href="/css/approval/write.css">
+<script src="/js/department.js"></script>
+<link rel="stylesheet" href="/css/approval/home.css">
+<link rel="stylesheet" href="/css/approval/modal.css">
+<script src="/summerNote/summernote-lite.js"></script>
+<script src="/summerNote/summernote-ko-KR.js"></script>
+
+<link rel="stylesheet" href="/summerNote/summernote-lite.css">
+<script>
+		$(document).ready(function () {
+			$('#summernote').summernote({
+				toolbar: [
+					['fontname', ['fontname']],
+					['fontsize', ['fontsize']],
+					['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+					['color', ['forecolor', 'color']],
+					['table', ['table']],
+					['para', ['ul', 'ol', 'paragraph']],
+					['height', ['height']],
+					['insert', ['picture', 'link', 'video']],
+					['view', ['fullscreen', 'help']]
+				],
+				height: "500",
+				lang: "ko-KR",
+				fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체', '바탕체'],
+				fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
+			});
+		});
+	</script>
+</head>
+<body>
+	<main class="warp-main">
+		<div th:replace="~{views/approval/side :: side}"></div>
+		<div class="main flex col">
+			<ul class="flex list">
+				<li>결재요청</li>
+				<li>임시저장</li>
+			</ul>
+
+			<div class="form">
+				<h1 class="title">기본 설정</h1>
+				<table>
+					<tbody>
+						<tr>
+							<th>문서 종류</th>
+							<td style="width: 470px;"><select>
+									<option>공용</option>
+							</select> <select>
+									<option>휴가신청서</option>
+							</select></td>
+							<th>작성자</th>
+							<td>개발부 ceo 최영진</td>
+						</tr>
+						<tr>
+							<th>보존 연한</th>
+							<td><select>
+									<option>공용</option>
+							</select></td>
+							<th>보안등급</th>
+							<td><select class="rank">
+									<option>A등급</option>
+							</select></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="form">
+				<h1 class="title">
+					결재선<a onclick="btn_approval()">결재선설정</a>
+				</h1>
+				<table>
+					<tbody>
+						<tr class="wrap">
+							<th rowspan="3">결재</th>
+							<th>과장</th>
+							<th>부장</th>
+							<th>이사</th>
+							<th></th>
+							<th></th>
+						</tr>
+						<tr class="sign">
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="name">
+							<td>김과장</td>
+							<td>최부장</td>
+							<td>박이사</td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="form">
+				<h1 class="title">상세입력</h1>
+				<div class="flex">
+					<h1 class="doc-title flex center">제목</h1>
+					<div class="wrap">
+						<input class="title-content">
+					</div>
+				</div>
+			</div>
+			<form method="post">
+				<textarea id="summernote" name="editordata"></textarea>
+			</form>
+
+		</div>
+		<th:block th:replace="~{views/approval/modal :: modal}"></th:block>
+	</main>
+</body>
+</html>

@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+.main {
+	width: 1000px;
+	display: flex;
+	padding: 20px;
+}
+.main > .list > li{
+	margin-right: 10px; 
+}
+
+.main > .title {
+	margin: 50px 50px;
+	font-size: 30px;
+	font-weight: bold;
+}
+.title > a {
+	margin-left: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #3a54e5;
+}
+.main > .form {
+	margin-top: 50px;
+}
+.main > .form > .title {
+	margin-bottom: 10px;
+}
+th, td {
+	border: 1px solid;
+}
+
+table {
+	width: 100%
+}
+
+th {
+	width: 120px;
+	background-color: #f9f9f9;
+	vertical-align: middle;
+}
+
+td {
+	padding: 5px;
+}
+td > select {
+	padding: 2px;
+	width: 150px;
+}
+td > .rank {
+	width: 80px;
+    padding: 2px;
+}
+
+tbody > .wrap > th {
+	padding: 5px;
+}
+.sign > td {
+	height: 80px;
+}
+.name > td {
+	vertical-align: middle;
+	text-align: center;
+}
+.doc-title {
+	font-size: 16px;
+    font-weight: 500;
+    margin-right: 40px;
+}
+
+.title-content {
+	padding: 10px;
+}
+
+.form > .flex > .wrap {
+	flex: 1;
+}  

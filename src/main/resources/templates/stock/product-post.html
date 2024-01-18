@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
+<head>
+
+<link rel="stylesheet" href="/css/stock/product.css">
+<link rel="stylesheet" href="/css/stock/product-post.css">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+</head>
+<body>
+<main>
+	
+<div class="main_page">
+	<div class="main_container">
+	
+		<div class="main_name">
+			<h1>상품 등록</h1>
+			<h2 class="pastel_red"><img src="/img/stock/text-logo.gif" alt="Bullti chicken"/></h2>
+		</div>
+		
+		<div class="container_point">
+			<ul class="list_group">
+				<li>
+					<a href="/members/product" class="list_group_item">
+						<span class="text_list">상품 현황</span>
+					</a>
+					<a href="/members/product-post" class="list_group_item">
+						<span class="text_list">상품 등록</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		
+		<table class="table" style="width: 100%">
+		
+			<thead class="table_h">
+				
+				<tr style="font-size: 14px;">
+					<th style="width: 200px">상품명</th>
+					<th style="width: 130px">상품분류</th>
+					<th style="width: 100px">상품중량</th>
+					<th style="width: 130px">공급가액</th>
+					<th style="width: 130px">상품단가</th>
+					<th style="width: 130px">작성자</th>
+					<th style="width: 130px">작성일자</th>
+				</tr>
+				
+			</thead>
+			
+			<tbody id="dynamic_table">
+				
+				<tr th:each="prod:${products}">
+					<td th:text="${prod.productName}">productName</td>
+					<td th:text="${prod.productGroup}">productGroup</td>
+					<td th:text="${prod.productWeight}">productWeight</td>
+					<td th:text="${prod.productSupply}">productSupply</td>
+					<td th:text="${prod.productPrice}">productPrice</td>
+					<td th:text="${prod.authorName}">authorName</td>
+					<td th:text="${prod.productDate}">productDate</td>
+				</tr>
+				<tr th:if="${#lists.isEmpty(products)}">
+					<td colspan="7" style="width:100%;display:block; text-align: center;padding: 2em 0">
+						등록된 상품이 존재하지 않습니다.
+					</td>
+				</tr>
+				
+			</tbody>
+			
+			<tfoot>
+				<tr>
+					<td colspan="7" class="flex center">
+						<div class="the_number_of_pages">총 22페이지&nbsp;&nbsp;</div>
+						<div class="paging">1</div>
+					</td>
+				</tr>
+				
+			</tfoot>
+		
+		</table>
+		
+		
+	</div>
+		
+</div>
+
+</main>
+</body>
+</html>

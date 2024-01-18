@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
+<head>
+<script src="/js/department.js"></script>
+<link rel="stylesheet" href="css/approval/home.css">
+</head>
+<body>
+	<main class="warp-main">
+		<div th:replace="~{views/approval/side :: side}"></div>
+		<div class="logo-area">
+			<img src="/img/bullti-logo.png">
+		</div>
+	</main>
+</body>
+</html>

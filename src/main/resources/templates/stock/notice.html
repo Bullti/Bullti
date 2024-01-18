@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
+<head>
+
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Gothic&family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<title>Insert title here</title>
+
+</head>
+
+<body>
+<main>
+	<div class="contents_box">
+		<span class="layout">
+
+		<div class="list_array">
+			<div class="left_array">
+				<ul class="classify_menu">
+					
+					<button>전체</button>
+					<button>인사</button>
+					<button>물류</button>
+					<button>가맹</button>
+					
+				</ul>
+			
+			
+			</div>
+			
+			<div class="right_box">
+					<div class="right_array" >
+						<div class="select_box_notice"></div>
+						
+						<div class="write_notice">
+							<a class="btn_write txt" href="/">글쓰기</a>
+						</div>
+						
+					</div>
+			</div>
+			
+		</div>
+		
+			<div>
+				<table>
+				<thead style="line-height: 30px;">
+					<tr>
+						<th>글번호</th>
+						<th>직급</th>
+						<th>작성자</th>
+						<th>제목</th>
+						<th>조회수</th>
+						<th>작성일</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="board : ${list}">
+					
+						<td th:text="${board.board_no}">1</td>
+						<td th:text="${board.rank}">과장</td>
+						<td th:text="${board.name}">작성자</td>
+						<td th:text="&{board.board_idx}">제목</td>
+						<td th:text="&{board.board_hitcnt}">0</td>
+						<td th:text="${#temporals.format(url.getCreated_datetime(), 'yyyy-MM-dd HH:mm')}">작성일</td>
+					
+					</tr>
+					
+					<tr th:if="${#lists.isEmpty(list)}">
+						<td colspan="6">게시글이 존재하지 않습니다.</td>
+					</tr>
+					
+				</tbody>
+				</table>
+			</div>
+			
+			<div class="page_and_search">
+				<div th:unless="${#lists.isEmpty(list)}" class="paging_all">
+					<th:block th:each="page : ${#numbers.sequence(pd.from, pd.to)}">
+						<div>
+							<a th:if="${page != pd.page}" th:href="@{/members/notice(page= ${page}, searchKeyword=${param.searchKeyword})}" th:text="${page}"></a>
+									
+							<strong th:if="${page == pd.page}" th:text="${page}" style="color : red"></strong>
+						</div>
+					</th:block>
+				</div>
+			
+				<div class="search_list" id="search_list">
+					<form th:action="@{/members/notice}" method="get">
+						<input type="text" name="searchKeyword" placeholder="내용을 입력하세요.">
+						<button type="submit">검색</button>
+									
+					</form>
+								
+				</div>
+			
+			</div>
+			
+		</span>	
+	</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    
+    var message = /*[[${param.write}]]*/null;
+    if(message!=null)alert("글 작성이 완료되었습니다.");
+    
+    /*]]>*/
+</script>
+</main>
+</body>
+
+</html>
