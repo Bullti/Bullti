@@ -13,12 +13,17 @@
 			</ul>
 		</div>
 		<div id="map" style="width: 100%; height: 600px;"></div>
-		<div id="menu_wrap" class="bg_white">
+		<div id="menu_wrap" class="search">
 			<div class="option">
 				<div style="padding-top: 20px">
 					<form onsubmit="searchPlaces(); return false;">
 						매장검색 : <input type="text" id="keyword" size="15">
-						<button type="submit">검색하기</button>
+						<button type="submit">
+							<img src="/img/location/search.png" width="15px" height="15px">
+						</button>
+						<button onClick="window.location.reload()">
+							<img src="/img/location/refresh.png" width="15px" height="15px">
+						</button>
 					</form>
 				</div>
 			</div>
@@ -29,6 +34,10 @@
 		<script type="text/javascript"
 			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0b4d10c092ae135f954caef18aff79de&libraries=services"></script>
 		<script>
+		var data; // 전역 변수로 데이터 저장
+		var markers = []; // 전역 변수로 마커 배열 저장
+		var infowindows = []; // 전역 변수로 인포윈도우 배열 저장
+
 		// GET 요청 예제
 		fetch('/sl/fran')
 		  .then(response => {
@@ -37,19 +46,18 @@
 		    }
 		    return response.json();
 		  })
-		  .then(data => {
+		  .then(jsonData => {
+		    data = jsonData; // 데이터 저장
 		    // 성공적으로 응답을 받았을 때의 처리
-		    //console.log(data);
 		    for (var item of data) {
-	    	  //console.log(item.name, item.address, item.ph);
-	    	  createMarker(item);
-	    	}
+		      createMarker(item);
+		    }
 		  })
 		  .catch(error => {
 		    // 오류 발생 시의 처리
 		    console.error('Fetch error:', error);
 		  });
-		
+
 		function getAddressCoords(address) {
 			var geocoder = new kakao.maps.services.Geocoder();
 		    return new Promise(function(resolve, reject) {
@@ -64,94 +72,88 @@
 		    });
 		}
 		
-		var positions = [];
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
-		mapOption = {
-			center : new kakao.maps.LatLng(37.657176635618704,
-					127.06227917525834), // 지도의 중심좌표
-			level : 10
-		// 지도의 확대 레벨
-		};
+		var mapContainer = document.getElementById('map'),
+		    mapOption = {
+		        center: new kakao.maps.LatLng(35.80, 127.77),
+		        level: 13
+		    };
 
-		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-		
-		function createMarker(item){
-			// 주소-좌표 변환 객체를 생성합니다
-			// 주소로 좌표를 검색합니다
-			getAddressCoords(item.address)
-			    .then(function(coords) {
-			        console.log("좌표: " + coords);
-			        // 여기에서 coords를 사용하여 추가 작업을 수행할 수 있습니다.
+		var map = new kakao.maps.Map(mapContainer, mapOption);
+
+		function createMarker(item) {
+			  // closedat이 null이 아니라면 마커를 생성하지 않습니다.
+			  if (item.closedAt !== null) {
+			    return;
+			  }
+		  getAddressCoords(item.address)
+		    .then(function(coords) {
+		      var imageSrc = "/img/location/image.webp";
+		      var imageSize = new kakao.maps.Size(80, 90);
+		      var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+		      var marker = new kakao.maps.Marker({
+		        map: map,
+		        position: coords,
+		        image: markerImage
+		      });
+
+		      markers.push(marker); // 생성된 마커를 배열에 저장
+
+		      var infowindow = new kakao.maps.InfoWindow({
+		        content: `<div style="margin-left:33px; width:80px;text-align:center;display: center;padding:6px 0;">${item.name}</div>`
+		      });
+
+		      infowindows.push(infowindow); // 생성된 인포윈도우를 배열에 저장
+
+		      kakao.maps.event.addListener(marker, 'click', function() {
+			        // 현재 마커에 연결된 인포윈도우 상태 확인
+			        var currentInfowindow = infowindow.getMap();
 			        
-			        var imageSrc = "/img/location/image.webp";
-
-					// 마커 이미지의 이미지 크기 입니다
-					var imageSize = new kakao.maps.Size(80, 90);
-
-					// 마커 이미지를 생성합니다    
-					var markerImage = new kakao.maps.MarkerImage(imageSrc,
-							imageSize);
-
-					// 마커를 생성합니다
-					var marker = new kakao.maps.Marker({
-						map : map, // 마커를 표시할 지도
-						position : coords, // 마커를 표시할 위치
-						//title : item.name, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-						image : markerImage
-					// 마커 이미지 
-					});
-					
-					// 인포윈도우로 장소에 대한 설명을 표시합니다
-			        var infowindow = new kakao.maps.InfoWindow({
-			            content: `<div style="margin-left:33px; width:80px;text-align:center;display: center;padding:6px 0;">${item.name}</div>`
-			        });
-			        infowindow.open(map, marker);
+			        // 열려있는 경우 닫고, 닫혀있는 경우 열기
+			        if (currentInfowindow) {
+			          infowindow.close();
+			        } else {
+			          infowindow.open(map, marker);
+			        }
+			        
+			        // 클릭한 마커로 지도의 중심좌표 이동
+			        map.setCenter(coords);
+			        map.setLevel(4); // 지도 레벨 조절 (옵션)
+			      });
 			    })
 			    .catch(function(error) {
-			        console.error(error);
+			      console.error(error);
 			    });
-			
-			
-			// 마커를 표시할 위치와 title 객체 배열입니다 
-			/*
-			var positions = [ {
-				title : '노원 본점',
-				latlng : new kakao.maps.LatLng(37.657176, 127.062279)
-			}, {
-				title : '시청점',
-				latlng : new kakao.maps.LatLng(37.563598, 126.977543)
-			}, {
-				title : '동대문점',
-				latlng : new kakao.maps.LatLng(37.570064, 127.014418)
-			}, {
-				title : '망원점',
-				latlng : new kakao.maps.LatLng(37.555737, 126.910691)
-			} ];
-			*/
-			/* 
-			// 마커 이미지의 이미지 주소입니다
-			var imageSrc = "/img/location/image.webp";
-
-			for (var i = 0; i < positions.length; i++) {
-
-				// 마커 이미지의 이미지 크기 입니다
-				var imageSize = new kakao.maps.Size(110, 120);
-
-				// 마커 이미지를 생성합니다    
-				var markerImage = new kakao.maps.MarkerImage(imageSrc,
-						imageSize);
-
-				// 마커를 생성합니다
-				var marker = new kakao.maps.Marker({
-					map : map, // 마커를 표시할 지도
-					position : positions[i].latlng, // 마커를 표시할 위치
-					title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-					image : markerImage
-				// 마커 이미지 
-				});
-				
 			}
-			 */
+
+		function removeMarkers() {
+		  for (var i = 0; i < markers.length; i++) {
+		    markers[i].setMap(null);
+		    infowindows[i].close();
+		  }
+		  markers = []; // 배열 초기화
+		  infowindows = []; // 배열 초기화
+		}
+
+		function searchPlaces() {
+		  var keyword = document.getElementById('keyword').value;
+
+		  // 검색어가 비어있으면 모든 매장 표시
+		  if (!keyword) {
+		    removeMarkers(); // 모든 마커 제거
+		    for (var item of data) {
+		      createMarker(item);
+		    }
+		    return;
+		  }
+
+		  // 검색어가 있는 경우, 특정 매장만 표시
+		  removeMarkers(); // 모든 마커 제거
+		  for (var item of data) {
+		    if (item.name.includes(keyword)) {
+		      createMarker(item);
+		    }
+		  }
 		}
 		</script>
 	</main>
