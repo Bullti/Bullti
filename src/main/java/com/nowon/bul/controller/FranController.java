@@ -60,4 +60,11 @@ public class FranController {
 	    franService.franchiseclose(parsedId);
 	    return "redirect:/fr";
 	}
+	
+	@GetMapping("/index2")
+    public String index2() {
+        // 해당 경로에 대한 로직 처리
+        return "/views/index2";
+    }
+	
 }
