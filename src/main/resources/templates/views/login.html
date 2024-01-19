@@ -9,23 +9,16 @@
 <body>
 	<main class="container">
 		<div class="login_area">
-			<h2 class="login_title"></h2>
-			<div th:if="${param.error}" style="background-color: red; color: white;padding: 1em; text-align: center;">
-				<span th:if="${param.code1}">아이디 또는 비밀번호가 맞지 않습니다. 다시 확인해주세요.</span>
-				<span th:if="${param.code2}">내부 시스템 문제로 로그인 요청을 처리할 수 없습니다. 관리자에게 문의하세요.</span>
-				<span th:if="${param.code3}">존재하지 않는 계정입니다. 회원가입 후 로그인해주세요.</span>
-				<span th:if="${param.code4}">인증 요청이 거부되었습니다. 관리자에게 문의하세요.</span>
-				<span th:if="${param.code5}">알 수 없는 오류로 로그인 요청을 처리할 수 없습니다. 관리자에게 문의하세요.</span>
-			</div>
+			<h2 class="login_title">Bullti</h2>
 			<form action="/login" method="post">
 				<div>
-					<input placeholder="아이디" type="text" id="id" name="id" required>
+					<input placeholder="Id" type="text" id="id" name="id" required>
 				</div>
 				<div>
-					<input placeholder="비밀번호" type="password" id="pass" name="pass" required>
+					<input placeholder="Pass" type="password" id="pass" name="pass" required>
 				</div>
 				<div class="button_area">
-					<button class="login_button"><span>로그인</span></button>
+					<button class="login_button"><span>Login</span></button>
 				</div>
 			</form>
 		</div>

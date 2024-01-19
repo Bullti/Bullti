@@ -48,10 +48,23 @@ public class DeEntity {
     
     
     public DeListDTO toListDTO() {
-		return DeListDTO.builder()
-				.deptId(deptId)
-				.deptName(deptName)
-				.build();
+    	
+    	DeListDTO deListdto = null;
+    	
+    	if(this.parent==null) {
+    		deListdto = DeListDTO.builder()
+    				.deptId(deptId)
+    				.deptName(deptName)
+    				.build();
+    	}else {
+    		deListdto = DeListDTO.builder()
+    				.deptId(deptId)
+    				.deptName(deptName)
+    				.parentId(parent.getDeptId())
+    				.build();
+    	}
+    	System.out.println(deListdto.toString());
+		return deListdto;
     }
 
 
