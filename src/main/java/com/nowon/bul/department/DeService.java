@@ -18,6 +18,9 @@ public interface DeService {
 
 	void save(DeSaveDTO dto);
 
+	//결재선 부서 목록
+	List<DeListDTO> getList();
+
 	
 
 }
