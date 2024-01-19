@@ -5,50 +5,70 @@
 <aside>
 	<div>
 		<div class="aside-menu-container flex col">
-			<a class="aside-menu flex wrap hcenter" href="/"> <img
-				src="/img/common/aside/home.svg"> <span>홈</span>
-			</a> <a class="aside-menu flex wrap hcenter" href="/"> <img
-				src="/img/common/aside/schedule.svg"> <span>캘린더</span>
-			</a> <a class="aside-menu flex wrap hcenter" href="/"> <img
-				src="/img/common/aside/worktime.svg"> <span>근태관리</span>
-			</a> <a class="aside-menu flex wrap hcenter" href="/members/dashboard">
-				<img src="/img/common/aside/stock.svg"> <span>재고관리</span>
-			</a> <a class="aside-menu flex wrap hcenter" href="/members/notice">
-				<img src="/img/common/aside/notice.svg"> <span>공지사항</span>
-			<a class="aside-menu flex wrap hcenter" href="/approval">
-				<span>전자결재</span>
-			</a>
-			<a class="aside-menu flex wrap hcenter" href="/emp/schedule">
-				<img src="/img/common/aside/schedule.svg">
-				<span>캘린더</span>
-			</a>
-			<a class="aside-menu flex wrap hcenter" href="/">
-				<img src="/img/common/aside/worktime.svg">
-				<span>근태관리</span>
-			</a>
-			<a class="aside-menu flex wrap hcenter" href="/emp/annu">
-				<img src="/img/common/aside/worktime.svg">
-				<span>휴가신청</span>
-			</a>
-			<a class="aside-menu flex wrap hcenter" href="/members/dashboard">
-				<img src="/img/common/aside/stock.svg">
-				<span>재고관리</span>
-			</a>
-			<a class="aside-menu flex wrap hcenter" href="/members/notice">
-				<img src="/img/common/aside/notice.svg">
-				<span>공지사항</span>
-			</a>
-			<a class="aside-menu flex wrap hcenter" href="/store">
-				<img src="/img/common/aside/chicken.svg">
-				<span>매장안내</span>
-			</a>
-			<a class="aside-menu flex wrap hcenter" href="/store">
-				<span>지도</span>
-			</a>
-			<a class="aside-menu flex wrap hcenter" href="/store">
-				<span>관리</span>
-			</a>
-			<a class="aside-menu flex wrap hcenter" href="/approval">결재</a>
+			<div class="aside-box flex">
+				<a class="aside-menu flex wrap hcenter" href="/"> 
+					<img class="aside-icon" src="/img/common/aside/home.svg">
+				</a>
+				<div class="tooltip flex center">홈</div>
+			</div>
+			<div class="aside-box flex">
+				<a class="aside-menu flex wrap hcenter" href="/emp/schedule">
+					<img class="aside-icon" src="/img/common/aside/schedule.svg">
+				</a>
+				<div class="tooltip flex center">캘린더</div>
+			</div>
+			<div class="aside-box flex">
+				<a class="aside-menu flex wrap hcenter" href="/">
+					<img class="aside-icon" src="/img/common/aside/worktime.svg">
+				</a>
+				<div class="tooltip flex center">근태관리</div>
+			</div>
+			<div class="aside-box flex">
+				<a class="aside-menu flex wrap hcenter" href="/emp/annu">
+					<img class="aside-icon" src="/img/common/aside/worktime.svg">
+				</a>
+				<div class="tooltip flex center">일정</div>
+			</div>
+			<div class="aside-box flex">
+				<a class="aside-menu flex wrap hcenter" href="/members/dashboard">
+					<img class="aside-icon" src="/img/common/aside/stock.svg">
+				</a>
+				<div class="tooltip flex center">재고관리</div>
+			</div>
+			<div class="aside-box flex">
+				<a class="aside-menu flex wrap hcenter" href="/members/notice">
+					<img class="aside-icon" src="/img/common/aside/notice.svg">
+				</a>
+				<div class="tooltip flex center">공지사항</div>
+			</div>
+			<div class="aside-box flex">
+				<a class="aside-menu flex wrap hcenter" href="/sl">
+					<img class="aside-icon" src="/img/common/aside/chicken.svg">
+				</a>
+				<div class="tooltip flex center">매장위치</div>
+			</div>
+			<div class="aside-box flex">
+				<a class="aside-menu flex wrap hcenter" href="/index2">
+					<img class="aside-icon" src="/img/common/aside/storemanagement.svg">
+				</a>
+				<div class="tooltip flex center">매장관리</div>
+			</div>
+			<div class="aside-box flex">
+				<a class="aside-menu flex wrap hcenter" href="/approval">
+					<img class="aside-icon" src="/img/common/aside/approval.svg">
+				</a>
+				<div class="tooltip flex center">결재신청</div>
+			</div>
 		</div>
 	</div>
+	<script>
+	  $('.aside-box').hover(
+		  function asideHover() {
+		  	$(this).find('.tooltip').css('display','flex');
+		  },
+		  function asideNonHover() {
+			  $(this).find('.tooltip').css('display','none');
+		  }
+	  )
+	</script>
 </aside>
