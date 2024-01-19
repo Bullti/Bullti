@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.nowon.bul.department.DeController;
 import com.nowon.bul.department.DeService;
-import com.nowon.bul.domain.dto.MembersaveDTO;
+import com.nowon.bul.domain.dto.MemberDTO;
 import com.nowon.bul.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
@@ -20,10 +20,11 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class UserController {
 
-	private final DeService deService;
+	@Autowired
+	DeService deService;
 	
 	private final MemberService memberSerivce; 
-	
+	private final DeController deController;
 	
 	@GetMapping("/temp")
 	public String tempPage() {
@@ -42,8 +43,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/members")
-	public String joinPage(Model model) {
-		deService.getList(model);
+	public String joinPage() {
 		return "/views/members/signup";
 	}
 	
@@ -57,8 +57,8 @@ public class UserController {
 	}
 	
 	@PostMapping("/members")
-	public String join(MembersaveDTO member) {
-		memberSerivce.save(member);
+	public String join(MemberDTO dto) {
+		memberSerivce.save(dto);
 		return "redirect:/members";
 	}
 	
