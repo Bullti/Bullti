@@ -13,6 +13,8 @@ import com.nowon.bul.stock.entity.ProductEntity;
 import com.nowon.bul.stock.repository.ProductRepository;
 import com.nowon.bul.stock.service.ProductService;
 
+import lombok.RequiredArgsConstructor;
+
 
 
 @Service
