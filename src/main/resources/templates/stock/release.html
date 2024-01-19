@@ -2,14 +2,98 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
 <head>
+
+<link rel="stylesheet" href="/css/stock/product.css">
+<link rel="stylesheet" href="/css/stock/purchase.css">
+<link rel="stylesheet" href="/css/stock/release.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
 </head>
 <body>
 <main>
-
-	<div>출고 관리</div>
 	
+<div class="main_page">
+	<div class="main_container">
+	
+		<div class="main_name">
+			<h1>출고 관리</h1>
+			<h2></h2>
+		</div>
+		
+		<div class="container_point">
+			<ul class="list_group">
+				<li>
+					<a href="/members/release" class="list_group_item">
+						<span class="text_list">재고 목록</span>
+					</a>
+					<a href="/members/release-post" class="list_group_item">
+						<span class="text_list">출고 신청</span>
+					</a>
+					<a href="/members/release-complete" class="list_group_item">
+						<span class="text_list">출고 목록</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="tableup">
+			<div class="page_entries">페이지 스크롤</div>
+			<div class="name_search">상품명 검색:<input type="text" id="name_search" size="10" maxlength="5"></div>
+		</div>
+		<table class="table" style="width: 100%">
+		
+			<thead class="table_h">
+				
+				<tr style="font-size: 14px;">
+					<th style="width: 200px">상품명</th>
+					<th style="width: 150px">상품분류</th>
+					<th style="width: 150px">상품중량</th>
+					<th style="width: 150px">공급가액</th>
+					<th style="width: 150px">상품단가</th>
+					<th style="width: 150px">발주</th>
+				</tr>
+				
+			</thead>
+			
+			<tbody id="dynamic_table">
+				
+				<tr th:each="prod:${products}">
+					<td style="width: 200px" th:text="${prod.productName}">productName</td>
+					<td style="width: 150px" th:text="${prod.productGroup}">productGroup</td>
+					<td style="width: 150px" th:text="${prod.productWeight}">productWeight</td>
+					<td style="width: 150px" th:text="${prod.productSupply}">productSupply</td>
+					<td style="width: 150px" th:text="${prod.productPrice}">productPrice</td>
+					<td style="width: 150px"><button style="font-size: 12px; padding: 4px 12px; background-color: var(--bullti1); color: white; border: none; cursor: pointer;" onclick="placeOrder('${prod.productPrice}')">발주</button></td>
+					
+				</tr>
+				<tr th:if="${#lists.isEmpty(products)}">
+					<td colspan="7" style="width:100%;display:block; text-align: center;padding: 2em 0">
+						등록된 상품이 존재하지 않습니다.
+					</td>
+				</tr>
+				
+			</tbody>
+			
+			<tfoot>
+				<tr>
+					<td colspan="7" class="flex center" id="table_bottom">
+						<div class="the_number_of_pages">총 22페이지&nbsp;&nbsp;</div>
+						<div class="paging">1</div>
+					</td>
+				</tr>
+				
+			</tfoot>
+		
+		</table>
+		
+		
+	</div>
+		
+</div>
+
 </main>
 </body>
 </html>
