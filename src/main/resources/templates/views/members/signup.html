@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="/css/department/side.css" />
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-//주소
 window.onload = function(){
     document.getElementById("adress").addEventListener("click", function(){ //주소입력칸을 클릭하면
         //카카오 지도 발생
@@ -20,24 +19,11 @@ window.onload = function(){
     });
 }
 </script>
-<script th:inline="javascript">
-    function toggleDivVisibility() {
-        var selectedDept = document.getElementById('dept').value;
-        alert(selectedDept);
-        var rankDiv = document.getElementsByClassName('rankDiv');
-        
-        if (selectedDept === '가맹점') {
-            rankDiv.style.display = 'none';
-        } else {
-            rankDiv.style.display = 'block';
-        }
-    }
-</script>
 </head>
 <body>
 	<main class="warp-main">
 		<div th:replace="~{department/side :: side}"></div>
-		<div class="main">
+		<div class="main flex center">
 			<form action="/members" method="post">
 				<div class="join_area">
 					<h1 class="join_tilte">사원등록</h1>
@@ -66,47 +52,15 @@ window.onload = function(){
 					<div>
 						<label for="tel">주소</label> <input type="tel" id="adress"
 							name="street" placeholder="기본주소" required>
-							<input type="text" placeholder="상세주소" name="detail">
+							<input type="text" placeholder="상세주소" name="address_detail">
 					</div>
 					<div>
-						<label for="birth_date">생년월일</label> <input type="date" id="birth_Date"
+						<label for="birth_date">생년월일</label> <input type="date" id="birth_date"
 							name="birthDate" required>
 					</div>
 					<div>
 						<label for="joinCompanyDate">입사일</label> <input type="date" id="joinCompanyDate"
 							name="joinCompanyDate" required>
-					</div>
-					<div>
-						<label for="joinCompanyDate">입사일</label> <input type="date" id="joinCompanyDate"
-							name="joinCompanyDate" required>
-					</div>
-					<div>
-						<label for="dept">부서</label>
-							<select id="dept"
-							name="deptId" required>
-								<option th:each="dept: ${deptList}" th:value="${dept.deptId}">[[${dept.deptName}]]</option>
-								<option>
-								가맹점			
-								</option>
-							</select>
-					</div>
-					<div class="rank">
-						<label for="rank">직급</label>
-							<select id="rank"
-							name="rank" required>
-								<option>
-								사원
-								</option>
-								<option>
-								대리
-								</option>
-								<option>
-								과장
-								</option>
-								<option>
-								부장
-								</option>
-							</select>
 					</div>
 					<div class="button_area">
 						<button class="join_button">
