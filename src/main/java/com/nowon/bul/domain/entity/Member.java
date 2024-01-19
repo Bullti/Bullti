@@ -7,6 +7,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.nowon.bul.department.DeEntity;
+import com.nowon.bul.domain.entity.approval.ApprovalDoc;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -25,6 +26,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -39,9 +42,6 @@ import lombok.NoArgsConstructor;
 @Table(name = "member")
 @Entity
 public class Member {
-	/*
-	 * @Autowired private DeEntity deEntity;
-	 */
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,12 +56,12 @@ public class Member {
 	
 	private String email;
 	
-	private String adress;
-	
 	@Column(nullable = false)
 	private String name;
 	
 	private String phone;
+	
+	private String adress;
 	
 	//생년월일
 	private LocalDate birthDate;
@@ -76,11 +76,11 @@ public class Member {
 	@Enumerated(EnumType.STRING)
 	private Rank rank;
 	
-
+	
 	@OneToMany(mappedBy = "member")
 	private List<ApprovalDoc> approvalDoc;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "dept_id")
 	private DeEntity dept;
 

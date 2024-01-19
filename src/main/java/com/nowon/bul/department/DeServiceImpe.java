@@ -10,8 +10,9 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
-import com.nowon.bul.domain.dto.MemberDTO;
+import com.nowon.bul.domain.dto.MembersaveDTO;
 
 @Service
 public class DeServiceImpe implements DeService {
@@ -80,6 +81,16 @@ public class DeServiceImpe implements DeService {
 		        }
 		        return departmentNames;
 		    }
+
+		@Override
+		public void getList(Model model) {
+			List<DeListDTO> list = deRepository.findAll().stream()
+					.filter(i -> i.getParent() != null)
+					.map(DeEntity::toListDTO)
+					.collect(Collectors.toList());
+			
+			model.addAttribute("deptList", list);
+		}
 
 
 
