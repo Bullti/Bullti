@@ -1,7 +1,6 @@
 package com.nowon.bul.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nowon.bul.department.DeListDTO;
 import com.nowon.bul.department.DeService;
+
+import com.nowon.bul.service.ApprovalService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,6 +21,10 @@ public class ApprovalController {
 
 	private final DeService deptService;
 	
+	private final ApprovalService approvalService;
+	
+	private final DeService deService;
+	
 	@GetMapping("")
 	public String approvalModal() {
 		return "/views/approval/home";
@@ -28,7 +33,6 @@ public class ApprovalController {
 	@GetMapping("/write")
 	public String writePage(Model model) {
 		List<DeListDTO> deptList = deptService.getList();
-		
 		
 		model.addAttribute("deptList", deptList);
 		
