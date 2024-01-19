@@ -23,11 +23,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
-
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 @Entity
 @Table(name = "Product")
 public class ProductEntity extends BaseEntity{
