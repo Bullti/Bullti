@@ -1,9 +1,9 @@
 package com.nowon.bul.service;
 
-import com.nowon.bul.domain.dto.MembersaveDTO;
+import com.nowon.bul.domain.dto.MemberDTO;
 
 public interface MemberService {
 
-	void save(MembersaveDTO dto);
+	void save(MemberDTO dto);
 
 }

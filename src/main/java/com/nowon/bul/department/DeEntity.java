@@ -43,8 +43,8 @@ public class DeEntity {
     @OneToMany(mappedBy = "parent")
     private List<DeEntity> 	child;
     
-    @OneToMany(mappedBy = "dept")
-    private List<Member> member;
+    @OneToOne(mappedBy = "dept")
+    private Member member;
     
     
     public DeListDTO toListDTO() {
