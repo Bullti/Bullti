@@ -5,13 +5,13 @@
 <div class="side" th:fragment="side">
 	<button type="button" class="collapsible" onclick="collapse(this);">부서관리</button>
 	<div class="content">
-		<button>부서추가</button>
-		<button><a href="/depart/list">조회/삭제</a></button>
+		<button onclick="location.href='/depart/save'">부서추가</button>
+		<button onclick="location.href='/depart/list'">조회/삭제</button>
 	</div>
 	<button type="button" class="collapsible" onclick="collapse(this);">사원관리</button>
 	<div class="content">
-		<button><a href="/members">사원등록</a></button>
-		<button><a href="/members/list">조회/삭제/수정</a></button>
+		<button onclick="location.href='/members'">사원등록</button>
+		<button onclick="location.href='/members/list'">조회/삭제/수정</button>
 	</div>
 	<button type="button" class="collapsible" onclick="collapse(this);">가맹점관리</button>
 	<div class="content">
