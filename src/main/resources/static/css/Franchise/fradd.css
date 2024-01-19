@@ -1,36 +1,78 @@
 @charset "UTF-8";
-
-.title .ttl li {
-	font-size: 25px;
-	padding: 40px;
-	margin-left: 20px;
+.main {
+	min-height: calc(100vh - 50px);
+	min-width: calc(100vw - 150px);
 }
 
-.list {
-	padding-left: 50px;
-}
-
-.list .ist {
-	display: flex;
-}
-
-.list .ist .st {
-	display: flex;
+.join_area {
 	width: 400px;
-	justify-content: space-between;
-	margin-right: 60px;
+    margin: 0 auto;
+    padding: 30px 0 30px 0;
+}
+.join_area > div {
+	padding-bottom: 30px;
+}
+.join_area > div > label {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+.join_area > div > input, select {
+	width: 100%;
+	padding: 9px 0 8px;
+	border: none;
+	border-bottom: 1px solid #ebebeb;
+	outline-style: none;
+}
+.join_area > div > input:focus {
+	border-bottom: 1px solid #000;
 }
 
-.addbtn {
-	padding-top: 40px;
-	padding-left: 482px;
+.join_tilte {
+	text-align: center;
+	color: #000;
+	font-size: 32px;
+	letter-spacing: -.48px;
+	padding-bottom: 46px;
+	font-weight: 600;
 }
-
-.posttext {
+.button_area {
 	display: flex;
-	padding: 20px 0 0 20px;
-	
+	justify-content: center;
+	align-items: center;
+}
+.join_button {
+	height: 50px;
+    width: 220px;
+    border-radius: 10px;
+    border: 1px solid #a9a9a9;
+}
+.join_button > span {
+	font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 8px;
 }
 
-.container {
+.btn-file {
+	display: flex !important;
+	width: 100px;
+	height: 100px;
+	border: 1px dashed #222;
+	justify-content: center;
+	align-items: center;
+	font-size: 32px;
+	background-color:#fff;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+.btn-file img {
+	cursor: pointer;
+	width: 30%;
+    height: 30%;
+    opacity: 15%;
+}
+
+input[type=file] {
+	display: none;
 }
