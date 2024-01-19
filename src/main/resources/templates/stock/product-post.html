@@ -66,7 +66,7 @@
 				</div>
 				
 				  <!-- 상품 등록 폼 시작 -->
-                <form class="post_form" action="/members/product-post" th:object"${productDTO}" method="post">
+                <form class="post_form" action="/members/product-registration" th:object="${productDTO}" method="post">
                     <div class="form_group">
                         <label for="productName">상품명:</label>
                         <input type="text" id="productName" name="productName"  th:field="*{productName}" required>

@@ -4,15 +4,17 @@ import java.time.LocalDateTime;
 
 import com.nowon.bul.stock.entity.ProductEntity;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Setter
-@Getter
-@ToString
+
 @Builder
+@Getter
+@Setter
+@ToString
 public class ProductDTO {
 	
 	private int productNum;
@@ -32,6 +34,7 @@ public class ProductDTO {
 	private int productSupply;
 	
 	private boolean deleteProdYn;
+	
 
 	public ProductEntity toEntity() {
 		
@@ -43,5 +46,7 @@ public class ProductDTO {
 				.productPrice(productPrice)
 				.build();
 	}
+	
+	
 	
 }
