@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
+<head>
+<script src="/js/department.js"></script>
+<link rel="stylesheet" href="/css/department/side.css" />
+<link rel="stylesheet" href="/css/view/index2.css">
+</head>
+<body>
+	<main class="warp-main">
+		<div th:replace="~{department/side :: side}"></div>
+		<div class="logo-area">
+			<img src="/img/bullti-logo.png"
+				style="width: 500px; height: 500px; opacity: 0.5;">
+		</div>
+	</main>
+</body>
+</html>
