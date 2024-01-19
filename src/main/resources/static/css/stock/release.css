@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+.list_group_item {
+    width: 300px;
+    
+}
+
+.list_group li {
+  
+    justify-content: space-between;
+}
