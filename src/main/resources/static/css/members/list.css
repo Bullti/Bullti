@@ -31,6 +31,15 @@ td {
 	vertical-align: middle;
 }
 
+label{
+	padding-right: 5px;
+	font-weight: bold;
+}
+
+.label2{
+	margin-left: 5px;
+}
+
 .title > h1{
 	font-size: 30px;
 	font-weight: bold;
@@ -62,3 +71,51 @@ td {
 .goodscheck > .page-list > li {
 	margin: 0 10px;
 }
+
+.custom-select{
+	border: none;
+	border-bottom: 2px solid #0b5394;
+	font-size: 15px;
+	width: 80px;
+	text-align: center;
+}
+
+#center{
+	text-align: center;
+}
+
+
+.option{
+	text-align: left;
+	border: none;
+	background-color: #0b539422;
+}
+
+.search-input{
+	border: none;
+	border-bottom: 2px solid #0b5394;
+	font-size: 15px;
+	width: 180px;
+	margin-left: 15px;
+	outline: none;
+}
+
+.search-button{
+	background-image: url("/img/search/search_FILL0_wght400_GRAD0_opsz24.svg");
+	background-repeat: no-repeat;
+	width: 25px;
+	height: 25px;
+	border: none;
+	background-color: transparent;
+	position: absolute;
+	cursor: pointer;
+}
+
+.a{width: 150px;}
+.b{width: 150px;}
+.c{width: 150px;}
+.d{width: 171px;}
+.e{width: 171px;}
+.f{width: 171px;}
+.g{width: 171px;}
+

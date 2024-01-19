@@ -61,6 +61,11 @@
 	color: white;
 }
 
+.content > button > a{
+	padding: 5px;
+}
+
+
 .content > button:hover {
 	cursor: pointer;
 	background-color: #8a8a8a;
