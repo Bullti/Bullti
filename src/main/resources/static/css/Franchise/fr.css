@@ -1,83 +1,116 @@
 @charset "UTF-8";
-
-/* Reset CSS */
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+.main {
+	height:800px;
+    width: 1200px;
+    /*border: 1px solid gray;*/
+    border-radius: 2%;
+    justify-content: center;
+    padding-left: 50px;
+    padding-right: 50px;
+	margin: auto;
+    box-shadow: 2px 2px 2px 2px #d2d2d2;
 }
-
-.bbody {
-	font-family: 'Arial', sans-serif;
-	background-color: #f8f9fc;
-	width: 100%;
-}
-
-.main_page {
-	margin-top: 50px;
-	margin-left: 80px;
-	margin-right: 80px;
-	background-color: #fff;
-	border-radius: 8px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	height: 80%;
-}
-
-.main_name {
-	display: flex;
+table {
+	width: 1200px;
 	justify-content: space-between;
-	object-fit: contain;
+	
 }
 
-.main_name h1 {
-    margin-left: 50px;
-    margin-top: 35px;
-	font-size: 32px;
+thead {
 	font-weight: bold;
-	color: #333;
 }
 
-.main_container {
-	width:100%;
-	/* height: auto; */
-    padding: 20px;
-    text-align: center;
-    
+td {
+	border-bottom: 1px solid #0b5394;
+	height: 40px;
+	text-align: center;
+	vertical-align: middle;
 }
 
-.tableup {
-	margin-top: 35px;
-	padding: 10px 84px 10px;
-	display: flex;
-	justify-content: space-between;
-	width:100%;
+label{
+	padding-right: 5px;
+	font-weight: bold;
 }
 
-.table {
+.label2{
+	margin-left: 5px;
+}
+
+.title > h1{
+	font-size: 30px;
+	font-weight: bold;
+	padding-top: 20px;
+	padding-bottom: 20px;
 	margin-top: 20px;
-	background-color: #fff;
-	padding: 20px;
-	font-size: 14px;
+	margin-bottom: 50px;
+	border-top: 1px solid #0b5394;
 }
 
-.table tr {
+.search{
+	margin-bottom: 20px;
+	display: flex;
+}
+
+.goodscheck > .goodscheck_box > tbody > tr > .img_area{
+	width: 100px;
+	height: 100px;
+}
+
+
+.goodscheck > .page-list {
 	width: 100%;
-	display: block;
-	padding: 1em 0 !important;
-	border-bottom: 1px solid #dadce0;
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: end;
+}
+.goodscheck > .page-list > li {
+	margin: 0 10px;
+}
+
+.custom-select{
+	border: none;
+	border-bottom: 2px solid #0b5394;
+	font-size: 15px;
+	width: 80px;
 	text-align: center;
 }
 
-.table tbody tr {
-	border-bottom: 1px dotted #dadce0;
+#center{
+	text-align: center;
 }
 
-.table_h {
-	text-align: center;
-	width: 100%
+
+.option{
+	text-align: left;
+	border: none;
+	background-color: #0b539422;
 }
 
-.dynamic_table {
-	text-align: center;
-	width: 100%
+.search-input{
+	border: none;
+	border-bottom: 2px solid #0b5394;
+	font-size: 15px;
+	width: 180px;
+	margin-left: 15px;
+	outline: none;
 }
+
+.search-button{
+	background-image: url("/img/search/search_FILL0_wght400_GRAD0_opsz24.svg");
+	background-repeat: no-repeat;
+	width: 25px;
+	height: 25px;
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+.a{width: 150px;}
+.b{width: 150px;}
+.c{width: 150px;}
+.d{width: 171px;}
+.e{width: 171px;}
+.f{width: 171px;}
+.g{width: 171px;}
+
