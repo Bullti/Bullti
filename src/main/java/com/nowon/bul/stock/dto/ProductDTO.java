@@ -7,14 +7,15 @@ import com.nowon.bul.stock.entity.ProductEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class ProductDTO {
 	
 	private int productNum;
@@ -26,7 +27,7 @@ public class ProductDTO {
 	private int productWeight;
 	
 	private String authorName;
-	
+		
 	private LocalDateTime productDate;
 	
 	private String productGroup;
