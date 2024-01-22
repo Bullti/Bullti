@@ -4,3 +4,13 @@
 
     padding:0.5em 0 !important;
 }
+main{
+	
+	justify-content: space-between;
+}
+
+td{
+	
+	border-bottom: none;
+	
+}

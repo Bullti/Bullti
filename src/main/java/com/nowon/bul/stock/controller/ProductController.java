@@ -19,6 +19,10 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
+	@GetMapping("/members/dashboard")
+	public String stockdashboard() {
+		return "stock/dashboard";
+	}
 	
 	@GetMapping("/members/product")
     public String product(Model model) {

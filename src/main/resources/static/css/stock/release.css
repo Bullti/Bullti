@@ -9,3 +9,13 @@
   
     justify-content: space-between;
 }
+
+main{
+	justify-content: space-between;
+}
+
+td{
+	
+	border-bottom: none;
+	
+}
