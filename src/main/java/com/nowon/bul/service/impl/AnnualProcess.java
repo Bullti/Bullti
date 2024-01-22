@@ -18,7 +18,7 @@ public class AnnualProcess implements AnnualService {
 	@Override
 	public void save(AnnualSaveDTO dto, Authentication auth) {
 		dto.setHead("병욱");
-		System.out.println(dto);
-		mapper.annuSave(dto, 4L);
+		dto.setMemberNo(1L);
+		mapper.annuSave(dto);
 	}
 }
