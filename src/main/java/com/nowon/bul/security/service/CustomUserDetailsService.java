@@ -5,10 +5,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
 
-import com.nowon.bul.domain.entity.Member;
-import com.nowon.bul.domain.entity.MemberRepository;
+import com.nowon.bul.domain.entity.member.Member;
+import com.nowon.bul.domain.entity.member.MemberRepository;
 
 import java.util.Set;
 import java.util.stream.Collectors;

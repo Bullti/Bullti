@@ -1,4 +1,4 @@
-package com.nowon.bul.domain.entity;
+package com.nowon.bul.domain.entity.member;
 
 import lombok.RequiredArgsConstructor;
 
