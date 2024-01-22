@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.nowon.bul.domain.entity.Member;
+import com.nowon.bul.domain.entity.member.Member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
