@@ -13,7 +13,11 @@
     }
 }
 
-
+td{
+	
+	border-bottom: none;
+	
+}
 .post_form{
 	
 	margin:20px 10px;
@@ -47,4 +51,7 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+}
+main{
+	justify-content: space-between;
 }
