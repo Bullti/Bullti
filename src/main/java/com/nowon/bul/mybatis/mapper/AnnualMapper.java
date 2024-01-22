@@ -7,7 +7,7 @@ import com.nowon.bul.domain.dto.AnnualSaveDTO;
 @Mapper
 public interface AnnualMapper {
 
-	void annuSave(AnnualSaveDTO dto,long memberNo);
+	void annuSave(AnnualSaveDTO dto);
 
 	
 }
