@@ -2,118 +2,62 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
 <head>
+<link rel="stylesheet" href="/css/members/list.css">
+<script src="/js/department.js"></script>
+<link rel="stylesheet" href="/css/department/side.css" />
+<link rel="stylesheet" href="/css/stock/notice.css">
 
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Gothic&family=Noto+Sans+KR&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-<meta charset="UTF-8">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<title>Insert title here</title>
 
 </head>
-
 <body>
-<main>
-	<div class="contents_box">
-		<span class="layout">
-
-		<div class="list_array">
-			<div class="left_array">
-				<ul class="classify_menu">
-					
-					<button>전체</button>
-					<button>인사</button>
-					<button>물류</button>
-					<button>가맹</button>
-					
-				</ul>
+	<main class="warp-main">
+		<div th:replace="~{stock/nnaside :: nnaside}"></div>
+		<div class="main">
+			<div class="title">
+				<h1>공지사항</h1>
+			</div>
+			<div class="search">
+				<label for="name">부서명</label>
+					<select name="parentName" id="up-depart" class="custom-select">
+						<option class="option" th:each="name : ${names}" th:text="${name}"></option>
+				</select>
 			
-			
+				<input class="search-input">
+				<button class="search-button"></button>	
 			</div>
 			
-			<div class="right_box">
-					<div class="right_array" >
-						<div class="select_box_notice"></div>
-						
-						<div class="write_notice">
-							<a class="btn_write txt" href="/">글쓰기</a>
-						</div>
-						
-					</div>
-			</div>
-			
-		</div>
-		
-			<div>
-				<table>
-				<thead style="line-height: 30px;">
+			<table>
+				<thead>
 					<tr>
-						<th>글번호</th>
-						<th>직급</th>
-						<th>작성자</th>
-						<th>제목</th>
-						<th>조회수</th>
-						<th>작성일</th>
+						<td class="a">글번호</td>
+						<td class="b">작성자</td>
+						<td class="c">부서</td>
+						<td class="d">제목</td>
+						<td class="e">조회수</td>
+						
+						<td class="f">작성일</td>
+				
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="board : ${list}">
 					
-						<td th:text="${board.board_no}">1</td>
-						<td th:text="${board.rank}">과장</td>
-						<td th:text="${board.name}">작성자</td>
-						<td th:text="&{board.board_idx}">제목</td>
-						<td th:text="&{board.board_hitcnt}">0</td>
-						<td th:text="${#temporals.format(url.getCreated_datetime(), 'yyyy-MM-dd HH:mm')}">작성일</td>
-					
+					<tr th:each="dto:${list}">
+						<td th:text="${dto.boardNo}" class="a">글번호</td>
+						<td th:text="${dto.writer}" class="b">이름</td>
+						<td th:text="${dto.rank}" class="c">부서</td>
+						<td class="d">
+							<a th:href="|/members/notice/${dto.boardNo}|" th:text="${dto.boardTitle}">제목</a>
+						</td>
+						<td th:text="${dto.boardHitcnt}" class="e">조회수</td>
+						<td th:text="${#temporals.format(dto.createdDatetime, 'yyyy년 MM월 dd일')}" class="g">작성일</td>
 					</tr>
 					
-					<tr th:if="${#lists.isEmpty(list)}">
-						<td colspan="6">게시글이 존재하지 않습니다.</td>
-					</tr>
-					
-				</tbody>
-				</table>
-			</div>
-			
-			<div class="page_and_search">
-				<div th:unless="${#lists.isEmpty(list)}" class="paging_all">
-					<th:block th:each="page : ${#numbers.sequence(pd.from, pd.to)}">
-						<div>
-							<a th:if="${page != pd.page}" th:href="@{/members/notice(page= ${page}, searchKeyword=${param.searchKeyword})}" th:text="${page}"></a>
-									
-							<strong th:if="${page == pd.page}" th:text="${page}" style="color : red"></strong>
-						</div>
-					</th:block>
-				</div>
-			
-				<div class="search_list" id="search_list">
-					<form th:action="@{/members/notice}" method="get">
-						<input type="text" name="searchKeyword" placeholder="내용을 입력하세요.">
-						<button type="submit">검색</button>
-									
-					</form>
-								
-				</div>
-			
-			</div>
-			
-		</span>	
-	</div>
 
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    
-    var message = /*[[${param.write}]]*/null;
-    if(message!=null)alert("글 작성이 완료되었습니다.");
-    
-    /*]]>*/
-</script>
-</main>
+				</tbody>
+			</table>
+		</div>
+	</main>
+	
 </body>
 
 </html>

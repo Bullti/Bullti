@@ -1,0 +1,63 @@
+@charset "EUC-KR";
+
+.main{
+	
+	width: 1200px;
+}
+
+.active, .collapsible:hover {
+    background-color: #b2bfcd;
+}
+.collapsible {
+    color: #063158;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    background-color: #f0f0f0;
+}
+* {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #b2bfcd;
+}
+.side {
+    height: 100%;
+    width: 135px;
+    background-color: rgb(255, 255, 255);
+}
+
+.content > button {
+    width: 135px;
+    height: 50px;
+    text-align: left;
+    padding: 18px;
+    background-color: #ccd4de;
+    border: none;
+    font-size: 15px;
+    color: black;
+   
+}
+.warp-main {
+    height: calc(100vh - 50px);
+    background-color: white;
+    display: flex;
+}
+
+.content > button:hover {
+	cursor: pointer;
+	background-color: #99aabd;
+}
+body > main > div.main.flex.col{
+	
+	margin-left: 100px;
+	box-shadow: 2px 2px 2px 2px #d2d2d2;
+	border-radius: 2%;
+}
