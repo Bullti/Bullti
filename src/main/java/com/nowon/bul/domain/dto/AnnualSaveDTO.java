@@ -6,11 +6,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@ToString
 @Setter
 @Getter
 public class AnnualSaveDTO {
 
+	private long memberNo;
 	private String type;
 	private LocalDate start;
 	private LocalDate end;
