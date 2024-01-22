@@ -81,6 +81,14 @@ public class DeServiceImpe implements DeService {
 		        return departmentNames;
 		    }
 
+		//결재선 지정 부서 목록
+		@Override
+		public List<DeListDTO> getList() {
+			return deRepository.findAll().stream()
+					.map(DeEntity::toListDTO)
+					.collect(Collectors.toList());
+		}
+
 
 
 
