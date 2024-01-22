@@ -2,7 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
 <head>
-
+<link rel="stylesheet" href="/css/department/side.css" />
+<link rel="stylesheet" href="/css/Franchise/fr.css" />
+<script src="/js/department.js"></script>
 <link rel="stylesheet" href="/css/stock/product.css">
 <link rel="stylesheet" href="/css/stock/purchase.css">
 <meta charset="UTF-8">
@@ -13,7 +15,7 @@
 </head>
 <body>
 <main>
-	
+<div th:replace="~{stock/aaside :: aaside}"></div>
 <div class="main_page">
 	<div class="main_container">
 	
@@ -89,7 +91,7 @@
 	</div>
 		
 </div>
-
+<div></div>
 </main>
 </body>
 </html>
