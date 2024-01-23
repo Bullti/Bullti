@@ -12,7 +12,7 @@
  	
  	<select id="findAllLimit" resultType="com.nowon.bul.domain.dto.NoticeDTO">
  		select * from notice
- 		where no>0
+ 		where board_no>0
  		order by board_no desc
  		LIMIT #{offset}, #{limit}
  	</select>
@@ -32,5 +32,11 @@
  		set title=#{boardTitle}, content=#{boardContent}
  		where no=#{boardNo}
  	</update>
+ 	
+ 	<select id="countAll" resultType="int">
+ 		select count(*) from notice
+ 		where board_no>0
+ 	</select>
+ 	
  	
 </mapper>
