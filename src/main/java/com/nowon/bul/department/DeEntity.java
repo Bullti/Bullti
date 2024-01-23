@@ -2,8 +2,12 @@ package com.nowon.bul.department;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
-import com.nowon.bul.domain.entity.Member;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.nowon.bul.domain.dto.ApprovalDeptList;
+import com.nowon.bul.domain.entity.member.Member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -48,10 +52,50 @@ public class DeEntity {
     
     
     public DeListDTO toListDTO() {
-		return DeListDTO.builder()
-				.deptId(deptId)
-				.deptName(deptName)
-				.build();
+    	
+    	DeListDTO deListdto = null;
+    	
+    	if(this.parent==null) {
+    		deListdto = DeListDTO.builder()
+    				.deptId(deptId)
+    				.deptName(deptName)
+    				.build();
+    	}else {
+    		deListdto = DeListDTO.builder()
+    				.deptId(deptId)
+    				.deptName(deptName)
+    				.parentId(parent.getDeptId())
+    				.build();
+    	}
+		return deListdto;
+    }
+    
+    
+    
+    @Transactional
+    public ApprovalDeptList toApprovalList() {
+    	
+    	ApprovalDeptList dto = null;
+    	
+    	if(this.parent==null) {
+    		dto = ApprovalDeptList.builder()
+    				.deptId(deptId)
+    				.deptName(deptName)
+    				.child(child.stream()
+    						.map(DeEntity::toApprovalList)
+    						.collect(Collectors.toList()))
+    				.build();
+    	}else {
+    		dto = ApprovalDeptList.builder()
+    				.deptId(deptId)
+    				.deptName(deptName)
+    				.child(child.stream()
+    						.map(DeEntity::toApprovalList)
+    						.collect(Collectors.toList()))
+    				.parentId(parent.getDeptId())
+    				.build();
+    	}
+		return dto;
     }
 
 

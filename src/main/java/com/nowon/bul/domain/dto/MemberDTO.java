@@ -4,9 +4,9 @@ import java.time.LocalDate;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.nowon.bul.domain.entity.Member;
-import com.nowon.bul.domain.entity.Rank;
-import com.nowon.bul.domain.entity.Role;
+import com.nowon.bul.domain.entity.member.Member;
+import com.nowon.bul.domain.entity.member.Rank;
+import com.nowon.bul.domain.entity.member.Role;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -42,7 +42,6 @@ public class MemberDTO {
 				.id(id)
 				.name(name)
 				.rank(Rank.Assistant)
-				
 				.phone(tel)
 				.joinCompanyDate(joinCompanyDate)
 				.resignationDate(resignationDate) //퇴사일받을거

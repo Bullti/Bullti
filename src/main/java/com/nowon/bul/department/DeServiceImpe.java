@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.nowon.bul.domain.dto.ApprovalDeptList;
 import com.nowon.bul.domain.dto.MemberDTO;
 
 @Service
@@ -81,7 +82,14 @@ public class DeServiceImpe implements DeService {
 		        return departmentNames;
 		    }
 
-
+		//결재선 지정 부서 목록
+		@Transactional
+		@Override
+		public List<ApprovalDeptList> getApprovalList() {
+			return deRepository.findAll().stream()
+					.map(DeEntity::toApprovalList)
+					.collect(Collectors.toList());
+		}
 
 
 
