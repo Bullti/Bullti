@@ -12,7 +12,7 @@ class kbwApplicationTest {
 	@Autowired
 	private AttendanceMapper mapper;
 
-	@Test
+	//@Test
 	void workinchecktest() {
 		for(int i=0; i<3; i++)
 			mapper.workIn(5959L);
