@@ -1,7 +1,7 @@
 @charset "UTF-8";
 .main {
 	min-height: calc(100vh - 50px);
-	min-width: calc(100vw - 150px);
+	min-width: calc(100vw - 235px);
 }
 
 .join_area {
@@ -81,4 +81,8 @@ input[type=file] {
 	color: #3a54e5;
 	margin-left: 10px;
 	cursor: pointer;
+}
+
+.hidden {
+	display: none;
 }
