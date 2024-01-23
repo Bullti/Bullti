@@ -2,6 +2,7 @@ package com.nowon.bul.controller;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,5 +30,11 @@ public class AnnualController {
 	public String annualsave(AnnualSaveDTO dto,Authentication auth) {
 		servie.save(dto, auth);
 		return "views/emp/annual/annual";
+	}
+	
+	@GetMapping("/list")
+	public String annualList(Authentication auth,Model model) {
+		servie.list(auth,model);
+		return "views/emp/annual/list";
 	}
 }
