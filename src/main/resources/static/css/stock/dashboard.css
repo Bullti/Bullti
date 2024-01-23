@@ -10,6 +10,12 @@
 
 }
 
+.main-wrap{
+	
+	background-color: white;
+	
+}
+
 .main {
 	height: auto;
     /* border: 1px solid gray; */
@@ -26,7 +32,7 @@
 body {
 	
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    background-color: white;
 }
 
 .dash_contents{
@@ -56,8 +62,7 @@ main {
 }
 
 .signboard {
-	
-	margin-left: 50px;
+
 	box-shadow: 1px 1px 3px 1px var(--bullti2);
      background-color: var(--bullti2);
     color: #fff;

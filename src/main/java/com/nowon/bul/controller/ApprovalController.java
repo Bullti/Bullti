@@ -62,7 +62,7 @@ public class ApprovalController {
 	
 	@ResponseBody
 	@GetMapping("/members")
-	public List<ApprovalMemberListDTO> approvalMemberList(String deptName) {
+	public List<ApprovalMemberListDTO> approvalMemberList(@RequestParam(name = "deptName") String deptName) {
 		System.out.println(">>>>>>>>>>>>>부서이름 : " + deptName);
 		List<ApprovalMemberListDTO> list = null;
 		list = memberService.getApprovalList(deptName);
