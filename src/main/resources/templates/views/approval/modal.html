@@ -1,30 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
+<html xmlns:th="http://www.thymeleaf.org">
 <body>
 	<div class="approval-modal" th:fragment="modal">
 		<div class="modal-bady">
 			<h3>결재선 설정</h3>
 			<div class="flex modal-content">
+			
 				<div class="de-form">
 					<ul class="depart">
-						<li><span>CEO</span><li>
-						<li>
-							<span>개발부</span>
+						<li th:each="dept : ${deptList}">
+							<span class="clickable" onclick="getEmployee(this)" th:if="${dept.parentId == 0}" >[[${dept.deptName}]]</span>
 							<ul>
-								<li><span>개발1팀</span></li>
-								<li><span>개발2팀</span></li>
-							</ul>
-						</li>
-						<li>
-							<span>지원부</span>
-							<ul>
-								<li><span>지원1팀</span></li>
-								<li>
-									<span>지원2팀</span>
-									<ul>
-										<li><span>지원4팀</span></li>
-									</ul>	
+								<li th:each="child : ${dept.child}">
+									<span onclick="getEmployee(this)" >[[${child.deptName}]]</span>
 								</li>
 							</ul>
 						</li>
@@ -34,16 +22,14 @@
 					<p>최부장 (개발부)</p>
 				</div>
 				<div class="btn-form flex col center">
-					<img src="/img/right-arrow.png">
-					<img src="/img/left-arrow.png">
+					<img src="/img/right-arrow.png"> <img
+						src="/img/left-arrow.png">
 				</div>
 				<div class="re-form">
 					<div class="title">
 						<h3>결재</h3>
 					</div>
-					<div class="wrap">
-						
-					</div>
+					<div class="wrap"></div>
 				</div>
 			</div>
 			<div class="btn-area flex center">

@@ -5,8 +5,7 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-
-import com.nowon.bul.domain.entity.Member;
+import com.nowon.bul.domain.entity.member.Member;
 import com.nowon.bul.stock.dto.ProductDTO;
 
 import jakarta.persistence.Column;
