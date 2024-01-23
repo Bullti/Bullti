@@ -22,6 +22,12 @@ public class NoticeProcess implements NoticeService{
 		model.addAttribute("list", noticeMapper.findAll());
 		noticeMapper.findAll();
 	}
+
+	@Override
+	public void listProcess(int page, Model model) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }
