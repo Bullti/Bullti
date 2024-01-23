@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.nowon.bul.domain.dto.NoticeDTO;
+import com.nowon.bul.domain.dto.NoticeSaveDTO;
 import com.nowon.bul.mybatis.mapper.NoticeMapper;
 import com.nowon.bul.service.NoticeService;
 import com.nowon.bul.utils.PageData;
@@ -46,6 +47,13 @@ public class NoticeProcess implements NoticeService{
 		
 		model.addAttribute("pu",PageData.create(page, limit, rowCount, 5));
 
+		
+	}
+
+	@Override
+	public void saveProcess(NoticeSaveDTO dto) {
+		
+		noticeMapper.noticeSave(dto);
 		
 	}
 	
