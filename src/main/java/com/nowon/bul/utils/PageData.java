@@ -15,6 +15,8 @@ public class PageData {
 	private boolean hasNext;
 	private int page;
 	
+	private int pageLimit;
+	
 	/**
 	 * @param page : 페이지번호
 	 * @param limit : 페이지당 게시글 수
@@ -39,7 +41,7 @@ public class PageData {
 	
 	private PageData(int page,  int limit, int rowCount, int RANGE){
 		//int LIMIT=limit;// 한 페이지에 표현되는 게시글 개수
-		//int RANGE=range;// 한 페이지에 표현되는 페이지번호 개수
+		this.pageLimit=RANGE;// 한 페이지에 표현되는 페이지번호 개수
 		this.hasNext=rowCount > limit*page?true:false;
 		this.page=page;
 		

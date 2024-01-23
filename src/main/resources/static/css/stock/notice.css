@@ -61,3 +61,9 @@ body > main > div.main.flex.col{
 	box-shadow: 2px 2px 2px 2px #d2d2d2;
 	border-radius: 2%;
 }
+
+
+.btn-page.target > button{
+		
+		background-color: aqua;
+	}
