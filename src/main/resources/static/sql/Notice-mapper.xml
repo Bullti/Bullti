@@ -10,9 +10,11 @@
  		values(#{boardTitle},#{boardContent})
  	</insert>
  	
- 	<select id="findAll" resultType="com.nowon.bul.domain.dto.NoticeDTO">
+ 	<select id="findAllLimit" resultType="com.nowon.bul.domain.dto.NoticeDTO">
  		select * from notice
+ 		where no>0
  		order by board_no desc
+ 		LIMIT #{offset}, #{limit}
  	</select>
  	
  	<select id="findById" resultType="com.nowon.bul.domain.dto.NoticeDTO">

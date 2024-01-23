@@ -7,4 +7,6 @@ public interface NoticeService {
 
 	void listProcess(Model model);
 
+	void listProcess(int page, Model model);
+
 }
