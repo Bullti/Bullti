@@ -3,8 +3,10 @@ package com.nowon.bul.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.nowon.bul.domain.dto.NoticeSaveDTO;
 import com.nowon.bul.service.NoticeService;
 
 import lombok.RequiredArgsConstructor;
@@ -20,7 +22,9 @@ public class NoticeController {
 	
 	//공지사항 작성 페이지 이동
 	@GetMapping("/members/notice-post")
-	public String notice() {
+	public String notice(Model model) {
+		model.addAttribute("boardTitle","");
+		model.addAttribute("boardContent", "");
 		return "stock/notice-post";
 	}
 	
@@ -35,8 +39,12 @@ public class NoticeController {
 		return "stock/notice";
 	}
 	
+	//게시글 저장
+	@PostMapping("/members/notice-post")	
+	public String save(NoticeSaveDTO dto) {
+		service.saveProcess(dto);
+		return "redirect:/members/notice";
+		
+	}
 	
-
-	
-
 }
