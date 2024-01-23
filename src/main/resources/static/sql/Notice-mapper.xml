@@ -5,7 +5,7 @@
 <mapper namespace="com.nowon.bul.mybatis.mapper.NoticeMapper">
  	
  	
- 	<insert id="noticeSave">
+ 	<insert id="save">
  		insert into notice(board_title, board_content)
  		values(#{boardTitle},#{boardContent})
  	</insert>
