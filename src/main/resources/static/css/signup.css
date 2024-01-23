@@ -14,6 +14,7 @@
 }
 .join_area > div > label {
 	display: block;
+	font-weight: bold;
 }
 .join_area > div > input, select {
 	width: 100%;
@@ -73,4 +74,11 @@
 
 input[type=file] {
 	display: none;
+}
+
+.find-adress {
+	font-size: 14px;
+	color: #3a54e5;
+	margin-left: 10px;
+	cursor: pointer;
 }

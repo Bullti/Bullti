@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.nowon.bul.domain.dto.ApprovalDeptList;
+import com.nowon.bul.domain.dto.DeptListDTO;
 
 
 
@@ -19,6 +20,10 @@ public interface DeService {
 	void save(DeSaveDTO dto);
 
 	List<ApprovalDeptList> getApprovalList();
+	
+	
+	//사원등록시 부서리스트
+	List<DeptListDTO> getDeptList();
 
 
 	

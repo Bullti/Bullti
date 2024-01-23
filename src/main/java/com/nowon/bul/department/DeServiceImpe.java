@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.nowon.bul.domain.dto.ApprovalDeptList;
+import com.nowon.bul.domain.dto.DeptListDTO;
 import com.nowon.bul.domain.dto.MemberDTO;
 
 @Service
@@ -90,19 +91,13 @@ public class DeServiceImpe implements DeService {
 					.map(DeEntity::toApprovalList)
 					.collect(Collectors.toList());
 		}
-
-
+		
+		//사원등록페이지 부서 리스트
+		@Override
+		public List<DeptListDTO> getDeptList() {
+			return deRepository.findAll().stream().map(i -> 
+			DeptListDTO.builder().deptName(i.getDeptName()).deptId(i.getDeptId()).build())
+					.collect(Collectors.toList());
+		}
 
  }
-
-	
-	
-	
-	/* 부서 수정 */
-	
-
-
-
-
-		
-

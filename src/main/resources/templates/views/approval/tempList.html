@@ -9,30 +9,47 @@
 <body>
 	<main class="warp-main">
 		<div th:replace="~{views/approval/side :: side}"></div>
-		<div class="main flex col">
-			<h1 class="title">임시저장함</h1>
-			<div class="list-sub flex hcenter">
-				<div>
-					전체 <span>186</span>
-				</div>
-				<div>
-					<!-- 검색어 -->
-				</div>
+		<div class="main">
+			<div class="title">
+				<h1>임시보관함</h1>
 			</div>
+			<div class="search">
+				<label for="name">부서명</label>
+					<select name="parentName" id="up-depart" class="custom-select">
+						<option class="option" th:each="name : ${names}" th:text="${name}"></option>
+				</select>
+				<label for="name" class="label2" id="center">재직상태</label>
+					<select class="custom-select">
+							<option class="option" >재직</option>
+							<option class="option" >퇴사</option>
+					</select>
+				<input class="search-input">
+				<button class="search-button"></button>	
+			</div>
+			
 			<table>
 				<thead>
 					<tr>
-						<th>분류</th>
-						<th>제목</th>
-						<th>저장날짜</th>
+						<td class="a">문서종류</td>
+						<td class="b">제목</td>
+						<td class="c">저장일자</td>
+				
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td>공통</td>
-						<td>테스트 저장 입니다.</td>
-						<td>2022.12.07 16:46</td>
+						<td class="a">사번</td>
+						<td class="b">이름</td>
+						<td class="c">직급</td>
 					</tr>
+
+					<tr>
+						<td class="a">240119</td>
+						<td class="b">이예슬</td>
+						<td class="c">대리</td>
+					</tr>
+					
+
 				</tbody>
 			</table>
 		</div>
