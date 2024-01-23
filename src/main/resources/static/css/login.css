@@ -27,32 +27,18 @@
 	background-color: #E4DCCF;
 	box-shadow: 2px 2px 5px -2px;
 	z-index: 5;
-	
-
 }
 
-.logo-area{
-	width: 500px;
-	height: 500px;
-	position: fixed;
-	background-image: url("/img/bullti-logo.png");
-}
 
-/*.login_title {
+.login_title {
 	text-align: center;
     height: 50px;
     margin-bottom: 30px;
-    background-size: cover;
-<<<<<<< HEAD
     color: #ea5455;
     font-size: 40px;
 }
-=======
-}*/
->>>>>>> refs/remotes/origin/ChoiYJ
-
 .login_area>form>div {
-	padding-bottom: 30px;
+	margin-bottom: 10px;
 }
 
 .login_area>form>div>input {

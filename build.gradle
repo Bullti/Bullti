@@ -24,9 +24,6 @@ repositories {
 	mavenCentral()
 }
 
-compileJava {
-    options.compilerArgs << "-parameters"
-}
 ext {
 	set('springCloudVersion', "2023.0.0")
 }
