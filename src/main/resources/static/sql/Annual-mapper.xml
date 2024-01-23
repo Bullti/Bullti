@@ -4,8 +4,11 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nowon.bul.mybatis.mapper.AnnualMapper">
 <insert id="annuSave">
-    INSERT INTO Annual (member_no, content, start, end, half_day_time, head, create_date)
-    VALUES (#{memberNo}, #{content}, #{start}, #{end}, #{halfDayTime}, #{head}, CURRENT_TIMESTAMP)
+    INSERT INTO Annual (type, member_no, content, start, end, half_day_time, head, create_date)
+    VALUES (#{type}, #{memberNo}, #{content}, #{start}, #{end}, #{halfDayTime}, #{head}, CURRENT_TIMESTAMP)
 </insert>
+<select id="findByMemberNo" resultType="com.nowon.bul.domain.dto.annual.AnnualListDTO">
+	select * from Annual where member_no = 1;
+</select>
 
 </mapper>
