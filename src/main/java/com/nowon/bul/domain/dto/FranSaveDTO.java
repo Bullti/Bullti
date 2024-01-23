@@ -1,4 +1,4 @@
-package com.nowon.bul.service;
+package com.nowon.bul.domain.dto;
 
 import com.nowon.bul.domain.entity.FranEntity;
 
