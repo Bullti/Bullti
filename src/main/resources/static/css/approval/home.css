@@ -2,8 +2,8 @@
 
 .warp-main {
     height: calc(100vh - 50px);
-    background-color: white;
-    display: flex; 
+    background-color: white; 
+    display: flex;
 }
  #add {
  	height: 30px;
@@ -23,13 +23,13 @@
 
 .side{
 	height: 100%;
-	width: 150px;
-	background-color: #d2d2d2;
+	width: 135px;
+ 	background-color: #f0f0f0;
 }
 
 .collapsible {
-  	background-color: #777;
-	color: white;
+  
+	color: #063158;
  	cursor: pointer;
 	padding: 18px;
 	width: 100%;
@@ -40,47 +40,33 @@
 }
 .active,
 .collapsible:hover {
-            background-color: #555;
+            background-color: #b2bfcd;
         }
 .content {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.2s ease-out;
-            background-color: #f1f1f1;
+            background-color: #6c97be;
         }
 
         
 .content > button {
-	width: 100%;
+	width: 135px;
 	height: 50px;
 	text-align: left;
 	padding: 18px;
-	background-color: #adadad;
+	background-color: #ccd4de;
 	border: none;
 	font-size: 15px;
 	color: white;
 }
 
+.content > button > a{
+	padding: 5px;
+}
+
+
 .content > button:hover {
 	cursor: pointer;
-	background-color: #8a8a8a;
+	background-color: #99aabd;
 }
-
-.logo-area {
-    height: 100%;
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.logo-area > img {
-	width: 500px;
-	height: 500px;
-	opacity: 0.5; 
-}
-
-.write {
-	height: 50px;
-}
-
