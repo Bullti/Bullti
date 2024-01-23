@@ -49,7 +49,7 @@ public class Member {
 	@Column(name = "member_no")
 	private long no;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String id;
 	
 	@Column(nullable = false)
@@ -63,6 +63,8 @@ public class Member {
 	private String phone;
 	
 	private String adress;
+	
+	private String profile;
 	
 	//생년월일
 	private LocalDate birthDate;
