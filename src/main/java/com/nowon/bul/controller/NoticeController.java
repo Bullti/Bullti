@@ -3,6 +3,7 @@ package com.nowon.bul.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.nowon.bul.service.NoticeService;
 
@@ -25,9 +26,11 @@ public class NoticeController {
 	
 	//게시글 리스트
 	@GetMapping("/members/notice")
-	public String notice_post(Model model) {
+	public String notice_post(
+			@RequestParam(name="page",defaultValue = "1") int page,
+			Model model) {
 		
-		service.listProcess(model);
+		service.listProcess(page,model);
 		
 		return "stock/notice";
 	}

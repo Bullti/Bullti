@@ -3,7 +3,7 @@
 	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
 
 <div class="side" th:fragment="side">
-	<div class="write center flex">
+	<div class="write center flex" style="height: 57px">
 		<a href="/approval/write">작성하기</a>
 	</div>
 	<button type="button" class="collapsible" onclick="collapse(this);">진행 중인 문서</button>
