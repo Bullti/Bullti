@@ -1,6 +1,7 @@
 package com.nowon.bul.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,10 +9,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.nowon.bul.department.DeController;
 import com.nowon.bul.department.DeService;
+import com.nowon.bul.domain.dto.DeptListDTO;
 import com.nowon.bul.domain.dto.MemberDTO;
+import com.nowon.bul.service.AwsService;
 import com.nowon.bul.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
@@ -20,11 +25,9 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class UserController {
 
-	@Autowired
-	DeService deService;
-	
 	private final MemberService memberSerivce; 
-	private final DeController deController;
+	private final DeService deptService;
+	//private final AwsService awsService;
 	
 	@GetMapping("/temp")
 	public String tempPage() {
@@ -43,14 +46,16 @@ public class UserController {
 	}
 	
 	@GetMapping("/members")
-	public String joinPage() {
+	public String joinPage(Model model) {
+		List<DeptListDTO> deptList = deptService.getDeptList();
+		model.addAttribute("deptList", deptList);
 		return "/views/members/signup";
 	}
 	
 	@GetMapping("/members/list")
 	public String listPage(Model model) {
 		
-		 List<String> departmentNames = deService.getDepartmentNames(); // 상위부서 목록을 가져옴
+		 List<String> departmentNames = deptService.getDepartmentNames(); // 상위부서 목록을 가져옴
 	     model.addAttribute("names", departmentNames); // 뷰로 전달
 		
 		return "/views/members/list";
@@ -61,5 +66,13 @@ public class UserController {
 		memberSerivce.save(dto);
 		return "redirect:/members";
 	}
+	
+	/*
+	 * @ResponseBody
+	 * 
+	 * @PostMapping("/members/temp-upload") public Map<String, String>
+	 * s3fileUpload(MultipartFile img) { return awsService.s3fileUploadPrecess(img);
+	 * }
+	 */
 	
 }
