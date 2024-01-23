@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.nowon.bul.service.FranListDTO;
+import com.nowon.bul.domain.dto.FranListDTO;
+import com.nowon.bul.domain.dto.FranSaveDTO;
 import com.nowon.bul.service.FranProcess;
-import com.nowon.bul.service.FranSaveDTO;
 import com.nowon.bul.service.FranService;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -67,4 +67,9 @@ public class FranController {
         return "/views/index2";
     }
 	
+	@GetMapping("/frdetail")
+	public String franchisedetail(Model model) {
+		franService.franchiseList(model);
+		return "/Franchise/frdetail";
+	}
 }
