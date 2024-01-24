@@ -3,32 +3,12 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nowon.bul.mybatis.mapper.AttendanceMapper">
-	<insert id="workIn" parameterType="com.nowon.bul.domain.dto.AttendanceDTO">
-	    INSERT INTO Attendance (go_work_time, leave_work_time, regi_type, member_no)
-	    SELECT 
-	        CURRENT_TIMESTAMP AS go_work_time, 
-	        IFNULL(
-	            (SELECT leave_work_time 
-	             FROM Attendance 
-	             WHERE member_no = #{memberNo} 
-	             ORDER BY go_work_time DESC 
-	             LIMIT 1
-	            ), 
-	            CURRENT_TIMESTAMP
-	        ) AS leave_work_time,
-	        1 AS regi_type,
-	        #{memberNo} AS member_no
-	    ON DUPLICATE KEY UPDATE 
-	        leave_work_time = IFNULL(VALUES(leave_work_time), leave_work_time),
-	        regi_type = VALUES(regi_type),
-	        member_no = VALUES(member_no);
+	<insert id="workIn" statementType="CALLABLE">
+	    {call attendance_procedure(#{memberNo, mode=IN, jdbcType=BIGINT}, #{regiType, mode=IN, jdbcType=INTEGER})}
 	</insert>
 
-
-
-
 	<select id="find" resultType="com.nowon.bul.domain.dto.AttendanceDTO">
-		select * from Attendance where member_no=#{memberNo}
+		select * from attendance where member_no=#{memberNo}
 	</select>
 
 </mapper>
