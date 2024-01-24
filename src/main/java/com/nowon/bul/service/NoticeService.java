@@ -13,4 +13,8 @@ public interface NoticeService {
 
 	void saveProcess(NoticeSaveDTO dto);
 
+	void detailProcess(long boardNo, Model model);
+
+	void deleteProcess(long boardNo);
+
 }

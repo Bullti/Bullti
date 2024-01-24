@@ -34,14 +34,13 @@
 						<td class="c">부서</td>
 						<td class="d">제목</td>
 						<td class="e">조회수</td>
-						
 						<td class="f">작성일</td>
-				
+					
 					</tr>
 				</thead>
 				<tbody>
 					<th:block th:each="dto:${list}">
-					<tr >
+					<tr>
 						<td th:text="${dto.boardNo}" class="a">글번호</td>
 						<td th:text="${dto.writer}" class="b">이름</td>
 						<td th:text="${dto.rank}" class="c">부서</td>
@@ -50,15 +49,19 @@
 						</td>
 						<td th:text="${dto.boardHitcnt}" class="e">조회수</td>
 						<td th:text="${#temporals.format(dto.createdDatetime, 'yyyy년 MM월 dd일')}" class="g">작성일</td>
+						
 					</tr>
 					
+					
+					<!--
 					<tr>
 						<td colspan="6" th:utext="${dto.boardContent}">
 						</td>
 					</tr>
 					
 					</th:block>
-					
+					-->
+
 
 				</tbody>
 				</table>
@@ -79,7 +82,7 @@
 					<a th:if="${pu.to < pu.tot}" th:href="|/members/notice?page=${pu.to+1}|">
 						<button>&gt;</button>
 					</a>
-					<a th:href="|/members/notice?page=${pu.tot}|">
+					<a class="lastPage" th:href="|/members/notice?page=${pu.tot}|">
 						<button>&gt;&gt;</button>
 					</a>
 				</div>
