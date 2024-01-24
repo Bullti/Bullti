@@ -12,7 +12,7 @@ public interface AnnualMapper {
 
 	void annuSave(AnnualSaveDTO dto);
 
-	List<AnnualListDTO> findByMemberNo(long nameToLong);
+	List<AnnualListDTO> findByMemberNo(long memberNo);
 
 	
 }
