@@ -13,10 +13,16 @@
 			<div class="title">
 				<h1>매장관리</h1>
 			</div>
+			<div class="search">
+				<div class="name_search">
+					매장 검색:
+				</div>
+				<input class="search-input">
+				<button class="search-button"></button>
 			</div>
 			<table>
 				<thead>
-					<tr th:each="post : ${list}">
+					<tr>
 						<th style="width: 160px">매장명</th>
 						<th style="width: 370px">주소</th>
 						<th style="width: 130px">상세주소</th>
@@ -25,6 +31,8 @@
 					</tr>
 				</thead>
 				<tbody id="dynamic_table">
+					<tr th:each="post : ${list}" th:if="${post.closedAt == null}"
+						style="margin-left: 84px;">
 						<td style="width: 160px" th:text="${post.name}"></td>
 						<td style="width: 370px" th:text="${post.address}"></td>
 						<td style="width: 130px" th:text="${post.address2}"></td>
@@ -32,13 +40,12 @@
 						<td style="width: 127px"
 							th:text="${#temporals.format(post.createdAt)}"></td>
 						<td>
-							<form action="/fr/register" method="post">
-								<div>
-									<button type="submit">폐업</button>
-									<input type="hidden" name="id" th:value="${post.id}">
-								</div>
-							</form>
+						<td>
+							<a th:href="|/fredit/${post.id}|">
+							수정
+							</a>
 						</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>

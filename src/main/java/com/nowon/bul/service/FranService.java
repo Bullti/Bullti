@@ -15,6 +15,8 @@ public interface FranService {
 	List<FranListDTO> franList();
 
 	void franchiseList(Model model);
-
+	
+	void franchiseedit(Long id, Model model);
+	
 	void franchiseclose(Long id);
 }
