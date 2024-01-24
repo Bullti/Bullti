@@ -41,11 +41,9 @@
 							<td style="width: 127px"
 								th:text="${#temporals.format(post.createdAt)}"></td>
 							<td>
-								<form action="/fr/register" method="post">
-									<div>
-										<button type="submit">폐업</button>
-										<input type="hidden" name="id" th:value="${post.id}">
-									</div>
+							<a th:href="|/fredit/${post.id}|">
+							수정
+							</a>
 								</form>
 							</td>
 						</tr>
