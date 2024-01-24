@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 
 import com.nowon.bul.domain.dto.FranListDTO;
 import com.nowon.bul.domain.dto.FranSaveDTO;
+import com.nowon.bul.domain.dto.FranUpdateDTO;
 
 public interface FranService {
 
@@ -19,4 +20,6 @@ public interface FranService {
 	void franchiseedit(Long id, Model model);
 	
 	void franchiseclose(Long id);
+
+	void updateProcess(Long id, FranUpdateDTO dto);
 }
