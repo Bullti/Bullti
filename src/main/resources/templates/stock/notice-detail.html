@@ -2,20 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
 <head>
-<link rel="stylesheet" href="/css/members/list.css">
+<link rel="stylesheet" href="/css/stock/list.css">
 <script src="/js/department.js"></script>
 <link rel="stylesheet" href="/css/department/side.css" />
 <link rel="stylesheet" href="/css/stock/notice.css">
+
 <link rel="stylesheet" href="/css/stock/notice-detail.css">
 
 
-<link rel="stylesheet" href="/css/approval/write.css">
+<link rel="stylesheet" href="/css/stock/write.css">
 <script src="/js/department.js"></script>
-<link rel="stylesheet" href="/css/approval/home.css">
-<link rel="stylesheet" href="/css/approval/modal.css">
+<link rel="stylesheet" href="/css/stock/home.css">
+<link rel="stylesheet" href="/css/stock/modal.css">
 <script src="/summerNote/summernote-lite.js"></script>
 <script src="/summerNote/summernote-ko-KR.js"></script>
 <link rel="stylesheet" href="/css/stock/notice.css">
+<!--아래 사이드 css-->
+<link rel="stylesheet" href="/css/stock/homeTemp.css">
+<link rel="stylesheet" href="/css/stock/noticechj.css">
 
 <link rel="stylesheet" href="/summerNote/summernote-lite.css">
 <script>
@@ -77,7 +81,9 @@
 </head>
 <body>
 	<main class="warp-main">
-		<div th:replace="~{stock/nnaside :: nnaside}"></div>
+		<div th:replace="~{/stock/notice-side :: side}"></div>
+		<div style="flex: 1">
+			<th:block th:replace="~{layout/header :: header}"></th:block>
 		<div class="main">
 			<div class="title">
 				<h1 class="noticeTitle" th:text="${detail.boardTitle}"></h1>
@@ -99,13 +105,6 @@
 			<table id="detail-view" class="notice_detail">
 				
 				
-				<thead>
-					<tr>
-						
-						
-					</tr>
-				</thead>
-				
 				<tbody>
 					<th:block>
 				
@@ -123,7 +122,7 @@
 					
 					<tr>
 						<td>
-							<div>
+							<div class="selectPost">
 								<a href="/members/notice"><button>목록</button></a>
 								<button type="button" onclick="btnUpdateClicked()">수정</button>
 								
@@ -190,6 +189,7 @@
 			
 			</form>
 			
+			</div>
 			</div>
 			
 			</main>
