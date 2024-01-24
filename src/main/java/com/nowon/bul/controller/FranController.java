@@ -9,11 +9,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nowon.bul.domain.dto.FranListDTO;
 import com.nowon.bul.domain.dto.FranSaveDTO;
+import com.nowon.bul.domain.dto.FranUpdateDTO;
 import com.nowon.bul.service.FranProcess;
 import com.nowon.bul.service.FranService;
 
@@ -72,5 +74,12 @@ public class FranController {
 	public String franchiseedit(@PathVariable(name = "id") long id, Model model) {
 	    franService.franchiseedit(id, model);
 	    return "/franchise/fredit";
+	}
+	
+	@PutMapping("/fredit/{id}")
+	public String update(@PathVariable(name = "id") long id, FranUpdateDTO dto) {
+		franService.updateProcess(id, dto);
+		
+		return "redirect:/fredit/"+id;
 	}
 }
