@@ -7,6 +7,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 import com.nowon.bul.domain.dto.FranEditDTO;
 import com.nowon.bul.domain.dto.FranListDTO;
+import com.nowon.bul.domain.dto.FranUpdateDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -57,4 +58,11 @@ public class FranEntity {
 	            .build();
 	}
     
+	public void updateFran(FranUpdateDTO dto) {
+        // 필요한 업데이트 로직을 구현
+        this.address = dto.getAddress();
+        this.address2 = dto.getAddress2();
+        this.ph = dto.getPh();
+        // 필요한 필드들을 업데이트
+    }
 }

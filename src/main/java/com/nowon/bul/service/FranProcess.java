@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import com.nowon.bul.domain.dto.FranEditDTO;
 import com.nowon.bul.domain.dto.FranListDTO;
 import com.nowon.bul.domain.dto.FranSaveDTO;
+import com.nowon.bul.domain.dto.FranUpdateDTO;
 import com.nowon.bul.domain.entity.FranEntity;
 import com.nowon.bul.domain.entity.FranEntityRepository;
 
@@ -77,4 +78,14 @@ public class FranProcess implements FranService{
 	    }
 	    // 원하는 뷰로 포워딩 또는 리다이렉트
 	}
+
+	@Override
+    public void updateProcess(Long id, FranUpdateDTO dto) {
+        FranEntity entity = franEntityRepository.findById(id).orElse(null);
+
+        if (entity != null) {
+            entity.updateFran(dto); // 예시: FranEntity에서 데이터 업데이트하는 메서드 필요
+            franEntityRepository.save(entity);
+        }
+    }
 }
