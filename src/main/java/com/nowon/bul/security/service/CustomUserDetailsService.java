@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.nowon.bul.domain.entity.member.Member;
 import com.nowon.bul.domain.entity.member.MemberRepository;
+import com.nowon.bul.domain.entity.member.MyUser;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -40,6 +41,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 		Set<SimpleGrantedAuthority> grnatedAuthority = member.getMemberRoles().stream()
 				.map((myRole) -> new SimpleGrantedAuthority("ROLE_" + myRole.name())).collect(Collectors.toSet());
 
-		return new org.springframework.security.core.userdetails.User(memberId, member.getPassword(), grnatedAuthority);
+		return new MyUser(member, grnatedAuthority);
 	}
 }

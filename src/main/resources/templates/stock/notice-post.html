@@ -72,8 +72,7 @@
 		<div th:replace="~{stock/nnaside :: nnaside}"></div>
 		<div class="main flex col">
 			<ul class="flex list">
-				<li>등록</li>
-				<li>임시저장</li>
+				
 			</ul>
 
 			<div class="form">
@@ -101,16 +100,22 @@
 					</tbody>
 				</table>
 			</div>
+			
+			
+			<form method="post" action="/members/notice-post">
+				
 			<div class="form bn">
-				<h1 class="title">상세입력</h1>
+				<h1 class="title"></h1>
 				<div class="flex">
 					<h1 class="doc-title flex center">제목</h1>
-					<input class="title-content">
+					<input type="text" class="title-content" name="boardTitle" th:value="${boardTitle}">
 				</div>
 			</div>
 			
-			<form method="post">
-				<textarea id="summernote" name="editordata"></textarea>
+			   
+		
+			    <textarea id="summernote"  type="hidden" name="boardContent" th:value="${boardContent}"></textarea>
+			    <button type="submit">게시글 등록</button>
 			</form>
 
 		</div>
