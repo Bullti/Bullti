@@ -9,6 +9,7 @@ aside {
 }
 main {
 	margin-left: 80px;
+	height: 100vh;
 }
 .aside-menu-container{
 	margin-top: 16px;
