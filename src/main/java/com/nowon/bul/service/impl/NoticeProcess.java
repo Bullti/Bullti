@@ -36,7 +36,7 @@ public class NoticeProcess implements NoticeService{
 
 	@Override
 	public void listProcess(int page, Model model) {
-		int limit = 5;
+		int limit = 10;
 		int offset=(page-1)*limit;
 		
 		
@@ -54,6 +54,22 @@ public class NoticeProcess implements NoticeService{
 	public void saveProcess(NoticeSaveDTO dto) {
 		
 		noticeMapper.save(dto);
+		
+	}
+
+	@Override
+	public void detailProcess(long boardNo, Model model) {
+		
+		NoticeDTO result = noticeMapper.findById(boardNo).orElseThrow();
+		
+		model.addAttribute("detail",result);
+		
+	}
+
+	@Override
+	public void deleteProcess(long boardNo) {
+		
+		int result = noticeMapper.deleteById(boardNo);
 		
 	}
 	
