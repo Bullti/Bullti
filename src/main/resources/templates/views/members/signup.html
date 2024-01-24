@@ -87,6 +87,13 @@
 						<label for="name">이름</label> <input type="text" id="name"
 							name="name" placeholder="예) 김대리" required="required">
 					</div>
+					<div>
+						<label>부서</label> <select name="deptId" onchange="updateRank()"
+							id="dept">
+							<option th:each="dept : ${deptList}" th:value="${dept.deptId}"
+								th:text="${dept.deptName}"></option>
+						</select>
+					</div>
 					<div id="rank">
 						<label>직급</label> <select name="rank" id="rankSelect">
 							<option value="Assistant">사원</option>
@@ -94,13 +101,6 @@
 							<option value="Manager">과장</option>
 							<option value="SeniorManager">부장</option>
 							<option value="StoreManager">점장</option>
-						</select>
-					</div>
-					<div>
-						<label>부서</label> <select name="deptId" onchange="updateRank()"
-							id="dept">
-							<option th:each="dept : ${deptList}" th:value="${dept.deptId}"
-								th:text="${dept.deptName}"></option>
 						</select>
 					</div>
 					<div>
@@ -141,9 +141,8 @@
 				if (selectedDept == 8000) { // 예시 부서에 따라 변경 필요
 					rankDiv.style.display = "none";
 				
-					//document.getElementById("rankSelect").value = "StoreManager";
-					//temp = document.getElementById("rankSelect").value;
-					//alert(temp)
+					document.getElementById("rankSelect").value = "StoreManager";
+					alert("직급이 점장으로 자동 선택됩니다.")
 				} else {
 					rankDiv.style.display = "block";
 				}
