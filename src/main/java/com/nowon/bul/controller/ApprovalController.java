@@ -9,14 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.nowon.bul.department.DeListDTO;
 import com.nowon.bul.department.DeService;
 import com.nowon.bul.domain.dto.ApprovalDeptList;
 import com.nowon.bul.domain.dto.ApprovalMemberDTO;
 import com.nowon.bul.domain.dto.ApprovalMemberListDTO;
-import com.nowon.bul.domain.dto.MemberDTO;
 import com.nowon.bul.service.ApprovalService;
 import com.nowon.bul.service.MemberService;
 

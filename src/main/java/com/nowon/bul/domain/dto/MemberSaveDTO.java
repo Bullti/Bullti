@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.nowon.bul.department.DeEntity;
 import com.nowon.bul.domain.entity.member.Member;
 import com.nowon.bul.domain.entity.member.Rank;
 import com.nowon.bul.domain.entity.member.Role;
@@ -15,23 +16,30 @@ import lombok.ToString;
 @ToString
 @Setter
 @Getter
-public class MemberDTO {
+public class MemberSaveDTO {
 
 	private String id;
 	private String name;
+	private Rank rank;
 	private String tel;
+	private int deptId; 
 	private LocalDate birthDate;
+	private String adress;
+	private String addressDetail;
 	private LocalDate joinCompanyDate;
-	private LocalDate resignationDate;
+	private String newName;
 	
 	
-	public Member toEntity(PasswordEncoder passEncoder) {
+	public Member toEntity(PasswordEncoder passEncoder, String profileUrl, DeEntity dept) {
 		return Member.builder()
 				.id(id)
 				.password(passEncoder.encode(id))
 				.name(name)
+				.profile(profileUrl)
 				.phone(tel)
-				.rank(Rank.Assistant)
+				.rank(rank)
+				.dept(dept)
+				.adress(adress+addressDetail)
 				.birthDate(birthDate)
 				.joinCompanyDate(joinCompanyDate)
 				.build().addRole(Role.USER);
@@ -44,7 +52,7 @@ public class MemberDTO {
 				.rank(Rank.Assistant)
 				.phone(tel)
 				.joinCompanyDate(joinCompanyDate)
-				.resignationDate(resignationDate) //퇴사일받을거
+				//.resignationDate(resignationDate) //퇴사일받을거
 				.build();
  }
 }
