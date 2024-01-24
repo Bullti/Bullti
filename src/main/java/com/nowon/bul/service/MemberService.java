@@ -2,6 +2,8 @@ package com.nowon.bul.service;
 
 import java.util.List;
 
+import org.springframework.ui.Model;
+
 import com.nowon.bul.domain.dto.ApprovalMemberDTO;
 import com.nowon.bul.domain.dto.ApprovalMemberListDTO;
 import com.nowon.bul.domain.dto.MemberSaveDTO;
