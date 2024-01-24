@@ -1,11 +1,11 @@
 package com.nowon.bul.mybatis.mapper;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.session.RowBounds;
-import org.springframework.ui.Model;
+
 
 import com.nowon.bul.domain.dto.NoticeDTO;
 import com.nowon.bul.domain.dto.NoticeSaveDTO;
@@ -22,6 +22,10 @@ public interface NoticeMapper {
 	int countAll();
 
 	void save(NoticeSaveDTO dto);
+
+	Optional<NoticeDTO> findById(long boardNo);
+
+	int deleteById(long boardNo);
 	
 	
 	

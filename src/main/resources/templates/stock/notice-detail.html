@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
+<head>
+<link rel="stylesheet" href="/css/members/list.css">
+<script src="/js/department.js"></script>
+<link rel="stylesheet" href="/css/department/side.css" />
+<link rel="stylesheet" href="/css/stock/notice.css">
+<link rel="stylesheet" href="/css/stock/notice-detail.css">
+
+
+</head>
+<body>
+	<main class="warp-main">
+		<div th:replace="~{stock/nnaside :: nnaside}"></div>
+		<div class="main">
+			<div class="title">
+				<h1 class="noticeTitle" th:text="${detail.boardTitle}"></h1>
+			</div>
+			
+				<div class="notice-submenu">
+					<div>
+						<td>작성자</td>
+						<td>작성일</td>
+					</div>
+							
+					<div>
+						<td>조회수</td>
+						<td>댓글</td>
+					</div>
+				</div>
+				
+			
+			<table class="notice_detail">
+				
+				
+				<thead>
+					<tr>
+						
+						
+					</tr>
+				</thead>
+				
+				<tbody>
+					<th:block>
+				
+					
+						<tr>
+							<td class="noticeContent" th:utext="${detail.boardContent}"></td>
+						</tr>
+					
+					</th:block>
+					
+
+				</tbody>
+				
+				<tfoot>
+					
+					<tr>
+						<td>
+							<div>
+								<a href="/members/notice"><button>목록</button></a>
+								<a><button>수정</button></a>
+								
+								<form action="|/members/detail/${detail.boardNo}|" method="post">
+									<input type="hidden" name="_method" value="delete">
+									<button type="submit">삭제</button>
+								</form>
+								
+							</div>
+						</td>
+						
+					</tr>
+					
+				</tfoot>
+				
+				
+			</table>
+			
+				
+			
+		</div>
+		
+	</main>
+	
+</body>
+
+</html>
