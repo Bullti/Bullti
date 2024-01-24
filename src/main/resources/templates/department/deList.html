@@ -41,13 +41,27 @@
 		var chart = new google.visualization.OrgChart(document
 				.getElementById('chart_div'));
 
-		google.visualization.events
-				.addListener(
-						chart,
-						'select',
-						function() {
-							function findSubordinates(managerValue) {
-								console.log(">>>>>>>>>>>>>>>>>" + managerValue)
+
+			google.visualization.events.addListener(chart, 'select', function () {
+				function findSubordinates(managerValue) {
+				    console.log(">>>>>>>>>>>>>>>>>" + managerValue)
+				    
+				    return managerValue && managerValue.subordinates ? managerValue.subordinates : [];
+				}
+				    
+				var selectedItem = chart.getSelection()[0];
+				if (selectedItem) {
+				    var nodeValue = data.getValue(selectedItem.row, 0);
+				    var managerValue = data.getValue(selectedItem.row, 1); // 매니저 값 가져오기
+				    var result = confirm("삭제 하시겠습니까?");
+				    if (result === false) {
+					    alert("취소하셨습니다");
+					    // 사용자가 취소를 클릭한 경우, 여기에서 함수를 종료하거나 반환할 수 있습니다.
+					    return;
+					}
+				    
+				    var subordinates = findSubordinates(managerValue);
+
 
 								return managerValue
 										&& managerValue.subordinates ? managerValue.subordinates
