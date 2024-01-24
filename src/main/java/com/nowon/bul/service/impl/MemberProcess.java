@@ -1,8 +1,12 @@
 package com.nowon.bul.service.impl;
 
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +14,15 @@ import com.nowon.bul.department.DeEntity;
 import com.nowon.bul.department.DeRepository;
 import com.nowon.bul.domain.dto.ApprovalMemberDTO;
 import com.nowon.bul.domain.dto.ApprovalMemberListDTO;
+import com.nowon.bul.domain.dto.MemberListDTO;
 import com.nowon.bul.domain.dto.MemberSaveDTO;
 import com.nowon.bul.domain.entity.member.Member;
 import com.nowon.bul.domain.entity.member.MemberRepository;
 import com.nowon.bul.service.MemberService;
+import com.nowon.bul.utils.jpaPage.PageRequestDTO;
+import com.nowon.bul.utils.jpaPage.PageResultDTO;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -50,6 +58,26 @@ public class MemberProcess implements MemberService{
 		ApprovalMemberDTO member = memberRepo.findById(memberName).orElseThrow().toApprovalMemberDTO();
 		System.out.println(">>>>>>>>>>>멤버DTO>>>>>>>>>>>>> " + member.toString());
 		return member;
+	}
+
+	//사원조회 리스트
+	@Transactional
+	@Override
+	public PageResultDTO<MemberListDTO, Member> getFindAllList(PageRequestDTO requestDTO) {
+		
+		Pageable pageable = requestDTO.getPageable(10, Sort.by("no").ascending());
+		
+		Page<Member> result = memberRepo.findAll(pageable);
+		
+		Function<Member, MemberListDTO> fn = entity -> entity.toListDTO();
+		
+		return new PageResultDTO<>(result, fn);
+	}
+	
+	//사원번호 중복 검사
+	@Override
+	public boolean checkId(String id) {
+		return memberRepo.existsById(id);
 	}
 
 
