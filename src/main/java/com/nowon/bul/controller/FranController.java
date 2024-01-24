@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties.Authenticati
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,18 +34,18 @@ public class FranController {
 	@GetMapping("/sl")
     public String storeLocation() {
         // 해당 경로에 대한 로직 처리
-        return "/Franchise/sl";
+        return "/franchise/sl";
     }
 	
 	@GetMapping("/fr")
 	public String franchiseList(Model model) {
 		franService.franchiseList(model);
-		return "/Franchise/fr";
+		return "/franchise/fr";
 	}
 	
 	@GetMapping("/fradd")
 	public String FranchiseAdd() {
-		return "/Franchise/fradd";
+		return "/franchise/fradd";
 	}
 	
 	@PostMapping("/fradd/register")
@@ -67,9 +68,9 @@ public class FranController {
         return "/views/index2";
     }
 	
-	@GetMapping("/frdetail")
-	public String franchisedetail(Model model) {
-		franService.franchiseList(model);
-		return "/Franchise/frdetail";
+	@GetMapping("/fredit/{id}")
+	public String franchiseedit(@PathVariable(name = "id") long id, Model model) {
+	    franService.franchiseedit(id, model);
+	    return "/franchise/fredit";
 	}
 }

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
+<head>
+<script src="/js/department.js"></script>
+<link rel="stylesheet" href="/css/department/side.css" />
+<link rel="stylesheet" href="/css/Franchise/fr.css" />
+</head>
+<body>
+	<main class="warp-main">
+		<div th:replace="~{department/side :: side}"></div>
+		<div class="main">
+			<div class="title">
+				<h1>수정</h1>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>매장명</th>
+						<th>주소</th>
+						<th>상세주소</th>
+						<th>전화번호</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="detail : ${franchiseEditDTO}">
+						<td th:text="${detail.name}"></td>
+						<td th:text="${detail.address}"></td>
+						<td th:text="${detail.address2}"></td>
+						<td th:text="${detail.ph}"></td>
+						<td>
+							<form action="/fr/register" method="post">
+								<div>
+									<button type="submit">폐업</button>
+									<input type="hidden" name="id" th:value="${detail.id}">
+								</div>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</main>
+</body>
+</html>

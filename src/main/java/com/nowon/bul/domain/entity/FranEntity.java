@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
+import com.nowon.bul.domain.dto.FranEditDTO;
 import com.nowon.bul.domain.dto.FranListDTO;
 
 import jakarta.persistence.Column;
@@ -49,5 +50,11 @@ public class FranEntity {
     public void closeFran() {
     	this.closedAt = LocalDate.now();
     }
+
+	public FranEditDTO toFranEditDTO() {
+		return FranEditDTO.builder()
+	            .id(id).name(name).address(address).address2(address2).ph(ph)
+	            .build();
+	}
     
 }
