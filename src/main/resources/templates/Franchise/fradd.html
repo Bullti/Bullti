@@ -3,13 +3,15 @@
 	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
 <head>
 <script src="/js/department.js"></script>
-<link rel="stylesheet" href="/css/department/side.css" />
+<!-- <link rel="stylesheet" href="/css/department/side.css" /> -->
 <link rel="stylesheet" href="/css/Franchise/fradd.css" />
+<link rel="stylesheet" href="/css/approval/homeTemp.css">
 </head>
 <body>
 	<main class="warp-main">
-		<div th:replace="~{department/side :: side}"></div>
-		<div class="container">
+		<div th:replace="~{department/sideTemp :: side}"></div>
+		<div class="container" style="flex: 1">
+			<th:block th:replace="~{layout/header :: header}"></th:block>
 			<div class="main flex center">
 				<form action="/fradd/register" method="post">
 					<!-- 폼태그 시작 -->
@@ -24,8 +26,7 @@
 							<label for="address1">주소</label> <input type="text"
 								maxlength="255" name="address" id="sample4_roadAddress">
 							<span id="guide" style="color: #999; display: none"></span> <input
-								type="button" onclick="sample4_execDaumPostcode()"
-								value="주소 검색">
+								type="button" onclick="sample4_execDaumPostcode()" value="주소 검색">
 						</div>
 						<div>
 							<label for="address2">상세주소</label> <input type="text"
