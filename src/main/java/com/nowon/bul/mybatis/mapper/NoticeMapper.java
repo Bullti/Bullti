@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.nowon.bul.domain.dto.NoticeDTO;
 import com.nowon.bul.domain.dto.NoticeSaveDTO;
+import com.nowon.bul.domain.dto.NoticeUpdateDTO;
 
 @Mapper
 public interface NoticeMapper {
@@ -26,6 +27,8 @@ public interface NoticeMapper {
 	Optional<NoticeDTO> findById(long boardNo);
 
 	int deleteById(long boardNo);
+
+	void updateTitleOrContent(NoticeUpdateDTO dto);
 	
 	
 	
