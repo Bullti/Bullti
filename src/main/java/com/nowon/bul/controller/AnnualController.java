@@ -3,13 +3,13 @@ package com.nowon.bul.controller;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nowon.bul.domain.dto.AnnualSaveDTO;
 import com.nowon.bul.service.AnnualService;
-import com.nowon.bul.service.impl.AnnualProcess;
 
 import lombok.RequiredArgsConstructor;
 
@@ -36,5 +36,11 @@ public class AnnualController {
 	public String annualList(Authentication auth,Model model) {
 		servie.list(auth,model);
 		return "views/emp/annual/list";
+	}
+	
+	@DeleteMapping
+	public String annualList() {
+		System.out.println("델리트매핑테스트");
+		return "redirect:/emp/annu";
 	}
 }
