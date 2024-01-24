@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div class="side" th:fragment="side">
+	<h1 class="title">재고 관리</h1>
+	<!-- <div class="btn center flex">
+		<a class="flex center" href="/approval/write">새 결재 진행</a>
+	</div> -->
+	<div class="tap">
+		<ul>
+			<h2 class="tap-title">재고 현황</h2>
+			<li><a href="/members/stock">재고 목록</a></li>
+			
+		</ul>		
+	</div>
+	<div class="tap">
+		<ul>
+			<h2 class="tap-title">발주 관리</h2>
+			<li><a href="/members/purchase">발주 물품 선택</a></li>
+			<li><a href="/members/purchase-post">발주 등록</a></li>
+		</ul>		
+	</div>
+	<div class="tap">
+		<ul>
+			<h2 class="tap-title">입고 관리</h2>
+			<li><a href="/members/stocked">입고 대기</a></li>
+			<li><a href="/members/stocked-complete">입고 완료</a></li>
+		</ul>		
+	</div>
+	<div class="tap">
+		<ul>
+			<h2 class="tap-title">출고 관리</h2>
+			<li><a href="/members/release">출고 물품 선택</a></li>
+			<li><a href="/members/release-post">출고 신청</a></li>
+			<li><a href="/members/release-complete">출고 목록</a></li>
+		</ul>		
+	</div>
+	<div class="tap">
+		<ul>
+			<h2 class="tap-title">상품 관리</h2>
+			<li><a href="/members/product">상품 목록</a></li>
+			<li><a href="/members/product-post">상품 등록</a></li>
+		</ul>		
+	</div>
+</div>
+
+</html>

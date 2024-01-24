@@ -1,0 +1,16 @@
+@charset "EUC-KR";
+
+.main_page{
+	
+	width: 1000px;
+	margin-right: 100px;
+	
+}
+
+.mainContent{
+	
+	display: flex;
+	justify-content: space-between;
+	
+}
+
