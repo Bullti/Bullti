@@ -6,9 +6,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.nowon.bul.domain.dto.NoticeSaveDTO;
+import com.nowon.bul.domain.dto.NoticeUpdateDTO;
 import com.nowon.bul.service.NoticeService;
 
 import lombok.RequiredArgsConstructor;
@@ -66,6 +69,15 @@ public class NoticeController {
 		
 		return "redirect:/members/notice";
 		
+	}
+	
+	//수정 처리
+	@PutMapping("/members/notice/{boardNo}")
+	public String update(NoticeUpdateDTO dto) {
+		
+		service.updateProcess(dto);
+		
+		return "redirect:/members/notice/{boardNo}";
 	}
 	
 }
