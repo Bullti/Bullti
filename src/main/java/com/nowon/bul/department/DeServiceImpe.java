@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.nowon.bul.domain.dto.ApprovalDeptList;
 import com.nowon.bul.domain.dto.DeptListDTO;
-import com.nowon.bul.domain.dto.MemberDTO;
 
 @Service
 public class DeServiceImpe implements DeService {

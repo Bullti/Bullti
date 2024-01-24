@@ -5,6 +5,9 @@ import java.util.Set;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.nowon.bul.department.DeEntity;
 import com.nowon.bul.domain.dto.ApprovalMemberDTO;
@@ -12,6 +15,7 @@ import com.nowon.bul.domain.entity.approval.ApprovalDoc;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
@@ -49,7 +53,7 @@ public class Member {
 	@Column(name = "member_no")
 	private long no;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String id;
 	
 	@Column(nullable = false)
@@ -63,6 +67,8 @@ public class Member {
 	private String phone;
 	
 	private String adress;
+	
+	private String profile;
 	
 	//생년월일
 	private LocalDate birthDate;
@@ -109,4 +115,5 @@ public class Member {
 	public ApprovalMemberDTO toApprovalMemberDTO() {
 		return ApprovalMemberDTO.builder().name(name).build();
 	}
+	
 }

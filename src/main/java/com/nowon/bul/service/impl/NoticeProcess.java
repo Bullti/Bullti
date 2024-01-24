@@ -25,20 +25,20 @@ public class NoticeProcess implements NoticeService{
 	@Override
 	public void listProcess(Model model) {
 		
-		int limit=10;
-		int offset=0;
+		//int limit=10;
+		//int offset=0;
 		
-		RowBounds rowBounds = new RowBounds(offset, limit);
-		List<NoticeDTO> result = noticeMapper.findAll(rowBounds);
-		model.addAttribute("list", result);
+		//RowBounds rowBounds = new RowBounds(offset, limit);
+		//List<NoticeDTO> result = noticeMapper.findAll(rowBounds);
+		//model.addAttribute("list", result);
 		
 	}
 
 	@Override
 	public void listProcess(int page, Model model) {
+		int limit = 5;
+		int offset=(page-1)*limit;
 		
-		int offset=(page-1)*10;
-		int limit = 10;
 		
 		List<NoticeDTO> result = noticeMapper.findAllLimit(offset,limit);
 		model.addAttribute("list",result);
@@ -53,7 +53,7 @@ public class NoticeProcess implements NoticeService{
 	@Override
 	public void saveProcess(NoticeSaveDTO dto) {
 		
-		noticeMapper.noticeSave(dto);
+		noticeMapper.save(dto);
 		
 	}
 	

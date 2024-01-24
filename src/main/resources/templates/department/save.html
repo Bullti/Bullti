@@ -5,16 +5,15 @@
 <head>
 	<script src="/js/department.js"></script>
 	<link rel="stylesheet" href="/css/department/save.css" />
-	<link rel="stylesheet" href="/css/department/side.css" />
+	<!-- <link rel="stylesheet" href="/css/department/side.css" /> -->
 	<link rel="stylesheet" href="/css/signup.css">
+	<link rel="stylesheet" href="/css/approval/homeTemp.css">
 	<meta charset="UTF-8">
-
-
-
 </head>
 <main class="warp-main">
-	<div th:replace="~{department/side :: side}"></div>
-	<div>
+	<div th:replace="~{department/sideTemp :: side}"></div>
+	<div style="flex: 1">
+		<th:block th:replace="~{layout/header :: header}"></th:block>
 		<div class="main flex center">
 			<form action="/depart" method="post">
 				<div class="join_area">

@@ -13,15 +13,15 @@ import com.nowon.bul.domain.dto.NoticeSaveDTO;
 @Mapper
 public interface NoticeMapper {
 	
-	List<NoticeDTO> findAll();
+	//List<NoticeDTO> findAll();
 
-	List<NoticeDTO> findAll(RowBounds rowBounds);
+	//List<NoticeDTO> findAll(RowBounds rowBounds);
 
 	List<NoticeDTO> findAllLimit(@Param("offset") int offset,@Param("limit") int limit);
 
 	int countAll();
 
-	void noticeSave(NoticeSaveDTO dto);
+	void save(NoticeSaveDTO dto);
 	
 	
 	
