@@ -14,11 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.nowon.bul.domain.dto.ApprovalDeptList;
 import com.nowon.bul.domain.dto.DeptListDTO;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Service
 public class DeServiceImpe implements DeService {
 	
-	@Autowired
-	DeRepository deRepository;
+	private final DeRepository deRepository;
 	
 		/* 부서 저장 */
 		/*
@@ -94,6 +96,7 @@ public class DeServiceImpe implements DeService {
 		//사원등록페이지 부서 리스트
 		@Override
 		public List<DeptListDTO> getDeptList() {
+			System.out.println("여기서 에러잖아ㅡㅡ>>>>>>>>>>>>");
 			return deRepository.findAll().stream().map(i -> 
 			DeptListDTO.builder().deptName(i.getDeptName()).deptId(i.getDeptId()).build())
 					.collect(Collectors.toList());
