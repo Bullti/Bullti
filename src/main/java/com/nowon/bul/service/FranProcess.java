@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties.Authenticati
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.nowon.bul.domain.dto.FranEditDTO;
 import com.nowon.bul.domain.dto.FranListDTO;
 import com.nowon.bul.domain.dto.FranSaveDTO;
 import com.nowon.bul.domain.entity.FranEntity;
@@ -63,4 +64,17 @@ public class FranProcess implements FranService{
             franEntityRepository.save(entity);
         }
     }
+
+	@Override
+	public void franchiseedit(Long id, Model model) {
+	    // 특정 id에 해당하는 FranEntity 조회
+	    FranEntity entity = franEntityRepository.findById(id).orElse(null);
+
+	    if (entity != null) {
+	        // FranEntity를 이용하여 필요한 데이터를 가져와서 Model에 추가
+	        FranEditDTO dto = entity.toFranEditDTO(); // 예시: FranEntity에서 FranEditDTO로 변환하는 메소드 필요
+	        model.addAttribute("franchiseEditDTO", dto);
+	    }
+	    // 원하는 뷰로 포워딩 또는 리다이렉트
+	}
 }
