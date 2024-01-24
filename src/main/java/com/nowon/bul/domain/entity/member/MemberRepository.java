@@ -13,5 +13,7 @@ public interface MemberRepository extends JpaRepository<Member, Long>{
 
 	List<Member> findByDept_deptName(String deptName);
 
+	boolean existsById(String id);
+
 
 }

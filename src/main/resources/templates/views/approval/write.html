@@ -3,123 +3,96 @@
 	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
 
 <head>
-	<link rel="stylesheet" href="/css/approval/write.css">
-	<script src="/js/department.js"></script>
-	<link rel="stylesheet" href="/css/approval/home.css">
-	<link rel="stylesheet" href="/css/approval/modal.css">
-	<script src="/summerNote/summernote-lite.js"></script>
-	<script src="/summerNote/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="/css/approval/write.css">
+<script src="/js/department.js"></script>
+<!-- <link rel="stylesheet" href="/css/approval/home.css"> -->
+<link rel="stylesheet" href="/css/approval/modal.css">
+<link rel="stylesheet" href="/css/approval/homeTemp.css">
+<script src="/summerNote/summernote-lite.js"></script>
+<script src="/summerNote/summernote-ko-KR.js"></script>
 
-	<link rel="stylesheet" href="/summerNote/summernote-lite.css">
-	<script>
-		$(document)
-			.ready(
-				function () {
-					$('#summernote')
-						.summernote(
-							{
-								toolbar: [
-									['fontname',
-										['fontname']],
-									['fontsize',
-										['fontsize']],
-									[
-										'style',
-										[
-											'bold',
-											'italic',
-											'underline',
-											'strikethrough',
-											'clear']],
-									[
-										'color',
-										['forecolor',
-											'color']],
-									['table', ['table']],
-									[
-										'para',
-										['ul', 'ol',
-											'paragraph']],
-									['height', ['height']],
-									[
-										'insert',
-										['picture',
-											'link',
-											'video']],
-									[
-										'view',
-										['fullscreen',
-											'help']]],
-								height: "500",
-								lang: "ko-KR",
-								fontNames: ['Arial',
-									'Arial Black',
-									'Comic Sans MS',
-									'Courier New', '맑은 고딕',
-									'궁서', '굴림체', '굴림', '돋움체',
-									'바탕체'],
-								fontSizes: ['8', '9', '10', '11',
-									'12', '14', '16', '18',
-									'20', '22', '24', '28',
-									'30', '36', '50', '72'],
-							});
-				});
-	</script>
-	<script th:inline="javascript">
-		function getEmployee(elemental) {
-			let deptName = elemental.textContent;
-			alert(deptName);
-			$.ajax({
-				type: "GET",
-				url: "/approval/members",  // 실제 API 엔드포인트로 변경해야 합니다.
-				data: {deptName: deptName},
-				dataType: "json",
-				success: function (data) {
-					alert(data)
-					displayEmployeeList(data);
-				},
-				error: function (error) {
-					console.error("Ajax 요청 중 에러 발생:", error);
-				}
-			});
-		}
-
-		function displayEmployeeList(employeeList) {
-			// em-form 요소 초기화
-			$(".em-form").empty();
-
-			// 받아온 employeeList를 이용하여 목록 생성 및 추가
-			for (var i = 0; i < employeeList.length; i++) {
-				var employee = employeeList[i];
-				var employeeInfo = "<p>" + employee.name + " (" + employee.department + ")</p>";
-				$(".em-form").append(employeeInfo);
+<link rel="stylesheet" href="/summerNote/summernote-lite.css">
+<script>
+$(document).ready(function() {
+    $('#summernote').summernote({
+        toolbar: [
+            ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']],
+            ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+            ['color', ['forecolor', 'color']],
+            ['table', ['table']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']],
+            ['view', ['fullscreen', 'help']]
+        ],
+        height: "500",
+        lang: "ko-KR",
+        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체', '바탕체'],
+        fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
+        disableDragAndDrop: true // 드래그 앤 드롭 비활성화
+    });
+});
+</script>
+<script th:inline="javascript">
+	function getEmployee(elemental) {
+		let deptName = elemental.textContent;
+		alert(deptName);
+		$.ajax({
+			type : "GET",
+			url : "/approval/members", // 실제 API 엔드포인트로 변경해야 합니다.
+			data : {
+				deptName : deptName
+			},
+			dataType : "json",
+			success : function(data) {
+				alert(data)
+				displayEmployeeList(data);
+			},
+			error : function(error) {
+				console.error("Ajax 요청 중 에러 발생:", error);
 			}
+		});
+	}
+
+	function displayEmployeeList(employeeList) {
+		// em-form 요소 초기화
+		$(".em-form").empty();
+
+		// 받아온 employeeList를 이용하여 목록 생성 및 추가
+		for (var i = 0; i < employeeList.length; i++) {
+			var employee = employeeList[i];
+			var employeeInfo = "<p>" + employee.name + " ("
+					+ employee.department + ")</p>";
+			$(".em-form").append(employeeInfo);
 		}
-	</script>
+	}
+</script>
 </head>
 
 <body>
 	<main class="warp-main">
-		<div th:replace="~{views/approval/side :: side}"></div>
-		<div class="main flex col">
-			<ul class="flex list">
-				<li>결재요청</li>
-				<li>임시저장</li>
-			</ul>
+		<div th:replace="~{views/approval/sideTemp :: side}"></div>
+		<div class="content" style="flex: 1">
+			<th:block th:replace="~{layout/header :: header}"></th:block>
+			<div class="main flex col">
+				<ul class="flex list">
+					<li>결재요청</li>
+					<li>임시저장</li>
+				</ul>
 
-			<div class="form">
-				<h1 class="title">기본 설정</h1>
-				<table>
-					<tbody>
-						<tr>
-							<th>문서 종류</th>
-							<td style="width: 470px;"><select>
-									<option>일반문서</option>
+				<div class="form">
+					<h1 class="title">기본 설정</h1>
+					<table>
+						<tbody>
+							<tr>
+								<th>문서 종류</th>
+								<td style="width: 470px;"><select>
+										<option>일반문서</option>
 								</select></td>
-							<th>작성자</th>
-							<td>[[${member.name}]]</td>
-						</tr>
-						<!-- <tr>
+								<th>작성자</th>
+								<td>[[${member.name}]]</td>
+							</tr>
+							<!-- <tr>
 							<th>보존 연한</th>
 							<td><select>
 									<option>공용</option>
@@ -129,53 +102,56 @@
 									<option>A등급</option>
 							</select></td>
 						</tr> -->
-					</tbody>
-				</table>
-			</div>
-			<div class="form">
-				<h1 class="title">
-					결재선<a onclick="btn_approval()">결재선설정</a>
-				</h1>
-				<table>
-					<tbody>
-						<tr class="wrap">
-							<th rowspan="3">결재</th>
-							<th>과장</th>
-							<th>부장</th>
-							<th>이사</th>
-							<th></th>
-							<th></th>
-						</tr>
-						<tr class="sign">
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr class="name">
-							<td>김과장</td>
-							<td>최부장</td>
-							<td>박이사</td>
-							<td></td>
-							<td></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="form bn">
-				<h1 class="title">상세입력</h1>
-				<div class="flex">
-					<h1 class="doc-title flex center">제목</h1>
-					<input class="title-content">
+						</tbody>
+					</table>
+				</div>
+				<div class="form">
+					<h1 class="title">
+						결재선<a onclick="btn_approval()">결재선설정</a>
+					</h1>
+					<table>
+						<tbody>
+							<tr class="wrap">
+								<th rowspan="3">결재</th>
+								<th>과장</th>
+								<th>부장</th>
+								<th>이사</th>
+								<th></th>
+								<th></th>
+							</tr>
+							<tr class="sign">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr class="name">
+								<td>김과장</td>
+								<td>최부장</td>
+								<td>박이사</td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="form bn">
+					<h1 class="title">상세입력</h1>
+					<div class="flex">
+						<h1 class="doc-title flex center">제목</h1>
+						<input class="title-content">
+					</div>
+				</div>
+				<form method="post">
+					<textarea id="summernote" name="editordata"></textarea>
+				</form>
+				<div class="file-aera flex hcenter">
+					<input type="file">
 				</div>
 			</div>
-			<form method="post">
-				<textarea id="summernote" name="editordata"></textarea>
-			</form>
-
+			<th:block th:replace="~{views/approval/modal :: modal}"></th:block>
 		</div>
-		<th:block th:replace="~{views/approval/modal :: modal}"></th:block>
 	</main>
 </body>
 
