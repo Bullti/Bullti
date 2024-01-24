@@ -6,9 +6,11 @@ import java.util.stream.Collectors;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.nowon.bul.department.DeEntity;
+import com.nowon.bul.department.DeRepository;
 import com.nowon.bul.domain.dto.ApprovalMemberDTO;
 import com.nowon.bul.domain.dto.ApprovalMemberListDTO;
-import com.nowon.bul.domain.dto.MemberDTO;
+import com.nowon.bul.domain.dto.MemberSaveDTO;
 import com.nowon.bul.domain.entity.member.Member;
 import com.nowon.bul.domain.entity.member.MemberRepository;
 import com.nowon.bul.service.MemberService;
@@ -23,11 +25,14 @@ public class MemberProcess implements MemberService{
 	
 	private final PasswordEncoder passEncoder;
 	
+	private final DeRepository deptRepo;
+	
 	@Override
-	public void save(MemberDTO dto) {
-		memberRepo.save(dto.toEntity(passEncoder));
+	public void save(MemberSaveDTO dto, String profileUrl) {
+		DeEntity dept = deptRepo.findById(dto.getDeptId()).orElseThrow();
+		
+		memberRepo.save(dto.toEntity(passEncoder, profileUrl, dept));
 	}
-
 	
 	//결재선 멤버 리스트
 	@Override
@@ -46,5 +51,8 @@ public class MemberProcess implements MemberService{
 		System.out.println(">>>>>>>>>>>멤버DTO>>>>>>>>>>>>> " + member.toString());
 		return member;
 	}
+
+
+
 
 }

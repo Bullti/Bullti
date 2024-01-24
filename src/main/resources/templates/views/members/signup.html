@@ -47,21 +47,20 @@
 			contentType : false,
 			processData : false,
 			success : function(result) {
-				var tempkey = $("<input type='hidden' name='tempKey'>").val(
-						result.bucketKey);
-				var orgname = $("<input type='hidden' name='orgName'>").val(
-						result.orgName);
+				var orgname = $("<input type='hidden' name='newName'>").val(
+						result.newName);
 
 				//$(element).parents(".btn-file")
 				$(element).parent().css("background-image",
 						`url(${result.url})`);
 				//tempkey.val(result.orgName);
-				$(element).after(tempkey, orgname);
+				$(element).after(orgname);
 				//$(element).siblings(".orgName").val(result.orgName);
 			}
 		});
 	}
 </script>
+
 </head>
 <body>
 	<main class="warp-main">
@@ -78,7 +77,7 @@
 					</div>
 					<div>
 						<label for="id">아이디</label> <input type="text" id="id" name="id"
-							placeholder="예) bullti" required="required">
+							placeholder="사원번호를 입력해주세요" required="required">
 					</div>
 					<div>
 						<label for="pass">비밀번호</label> <input type="password" id="pass"
@@ -89,17 +88,19 @@
 							name="name" placeholder="예) 김대리" required="required">
 					</div>
 					<div>
-						<label>직급</label> <select name="rank">
+						<label>부서</label> <select name="deptId" onchange="updateRank()"
+							id="dept">
+							<option th:each="dept : ${deptList}" th:value="${dept.deptId}"
+								th:text="${dept.deptName}"></option>
+						</select>
+					</div>
+					<div id="rank">
+						<label>직급</label> <select name="rank" id="rankSelect">
 							<option value="Assistant">사원</option>
 							<option value="SeniorAssistant">대리</option>
 							<option value="Manager">과장</option>
 							<option value="SeniorManager">부장</option>
-						</select>
-					</div>
-					<div>
-						<label>부서</label> <select name="dept">
-							<option th:each="dept : ${deptList}" th:value="${dept.deptId}"
-								th:text="${dept.deptName}"></option>
+							<option value="StoreManager">점장</option>
 						</select>
 					</div>
 					<div>
@@ -110,9 +111,9 @@
 					<div>
 						<label for="tel">주소<a onclick="findAdress()"
 							class="find-adress">주소찾기</a></label> <input type="tel" id="adress"
-							name="street" placeholder="기본주소" required="required"> <input
+							name="adress" placeholder="기본주소" required="required"> <input
 							id="detail_adress" type="text" placeholder="상세주소"
-							name="address_detail" required="required">
+							name="addressDetail" required="required">
 					</div>
 					<div>
 						<label for="birth_date">생년월일</label> <input type="date"
@@ -130,7 +131,23 @@
 				</div>
 			</form>
 		</div>
-
+		<script type="text/javascript">
+			function updateRank() {
+				// 부서 선택 값 가져오기
+				var deptSelect = document.getElementById("dept");
+				var selectedDept = deptSelect.value;
+				// 직급을 감추기 위한 조건 설정
+				var rankDiv = document.getElementById("rank");
+				if (selectedDept == 8000) { // 예시 부서에 따라 변경 필요
+					rankDiv.style.display = "none";
+				
+					document.getElementById("rankSelect").value = "StoreManager";
+					alert("직급이 점장으로 자동 선택됩니다.")
+				} else {
+					rankDiv.style.display = "block";
+				}
+			}
+		</script>
 	</main>
 </body>
 </html>

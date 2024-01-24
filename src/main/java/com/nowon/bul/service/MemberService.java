@@ -4,16 +4,16 @@ import java.util.List;
 
 import com.nowon.bul.domain.dto.ApprovalMemberDTO;
 import com.nowon.bul.domain.dto.ApprovalMemberListDTO;
-import com.nowon.bul.domain.dto.MemberDTO;
+import com.nowon.bul.domain.dto.MemberSaveDTO;
 
 public interface MemberService {
 
-	void save(MemberDTO dto);
+	void save(MemberSaveDTO dto, String profileUrl);
 
 	//결재선 멤버 리스트
 	List<ApprovalMemberListDTO> getApprovalList(String deptName);
 
 	ApprovalMemberDTO getMemberByName(String memberName);
 
-
+	
 }
