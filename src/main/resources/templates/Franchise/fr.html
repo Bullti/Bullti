@@ -3,53 +3,45 @@
 	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
 <head>
 <script src="/js/department.js"></script>
-<!-- <link rel="stylesheet" href="/css/department/side.css" /> -->
+<link rel="stylesheet" href="/css/department/side.css" />
 <link rel="stylesheet" href="/css/Franchise/fr.css" />
-<link rel="stylesheet" href="/css/approval/homeTemp.css">
 </head>
 <body>
 	<main class="warp-main">
-		<div th:replace="~{department/sideTemp :: side}"></div>
-		<div style="flex: 1">
-			<th:block th:replace="~{layout/header :: header}"></th:block>
-			<div class="main">
-				<div class="title">
-					<h1>매장관리</h1>
-				</div>
-				<div class="search">
-					<div class="name_search">매장 검색:</div>
-					<input class="search-input">
-					<button class="search-button"></button>
-				</div>
-				<table>
-					<thead>
-						<tr>
-							<th style="width: 160px">매장명</th>
-							<th style="width: 370px">주소</th>
-							<th style="width: 130px">상세주소</th>
-							<th style="width: 130px">전화번호</th>
-							<th style="width: 127px">개업일</th>
-						</tr>
-					</thead>
-					<tbody id="dynamic_table">
-						<tr th:each="post : ${list}" th:if="${post.closedAt == null}"
-							style="margin-left: 84px;">
-							<td style="width: 160px" th:text="${post.name}"></td>
-							<td style="width: 370px" th:text="${post.address}"></td>
-							<td style="width: 130px" th:text="${post.address2}"></td>
-							<td style="width: 130px" th:text="${post.ph}"></td>
-							<td style="width: 127px"
-								th:text="${#temporals.format(post.createdAt)}"></td>
-							<td>
-							<a th:href="|/fredit/${post.id}|">
-							수정
-							</a>
-								</form>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+		<div th:replace="~{department/side :: side}"></div>
+		<div class="main">
+			<div class="title">
+				<h1>매장관리</h1>
 			</div>
+			<div class="search">
+				<div class="name_search">매장 검색:</div>
+				<input class="search-input">
+				<button class="search-button"></button>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th style="width: 160px">매장명</th>
+						<th style="width: 370px">주소</th>
+						<th style="width: 130px">상세주소</th>
+						<th style="width: 130px">전화번호</th>
+						<th style="width: 127px">개업일</th>
+					</tr>
+				</thead>
+				<tbody id="dynamic_table">
+					<tr th:each="post : ${list}" th:if="${post.closedAt == null}"
+						style="margin-left: 84px;">
+						<td style="width: 160px" th:text="${post.name}"></td>
+						<td style="width: 370px" th:text="${post.address}"></td>
+						<td style="width: 130px" th:text="${post.address2}"></td>
+						<td style="width: 130px" th:text="${post.ph}"></td>
+						<td style="width: 127px"
+							th:text="${#temporals.format(post.createdAt)}"></td>
+						<td>
+						<td><a th:href="|/fredit/${post.id}|"> 수정 </a></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</main>
 </body>
