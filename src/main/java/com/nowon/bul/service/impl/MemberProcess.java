@@ -30,8 +30,8 @@ public class MemberProcess implements MemberService{
 	@Override
 	public void save(MemberSaveDTO dto, String profileUrl) {
 		DeEntity dept = deptRepo.findById(dto.getDeptId()).orElseThrow();
-		
 		memberRepo.save(dto.toEntity(passEncoder, profileUrl, dept));
+		System.out.println(">>>에러를 찾아보가 다같이>>>");
 	}
 	
 	//결재선 멤버 리스트

@@ -47,7 +47,9 @@ public class UserController {
 	
 	@GetMapping("/members")
 	public String joinPage(Model model) {
+		System.out.println(">>>>>>>>여기가 에러일껄!!>>>>>>");
 		List<DeptListDTO> deptList = deptService.getDeptList();
+		System.out.println(">>>>>>>>그럼 여기는 안나올껄!!>>>>>>");
 		model.addAttribute("deptList", deptList);
 		return "/views/members/signup";
 	}
@@ -67,7 +69,9 @@ public class UserController {
 		
 		if(dto.getNewName() == null) {
 			memberSerivce.save(dto, null);
+			System.out.println(">>>>>>>>>>>>>에러를 찾자3");
 		}else {
+			System.out.println(">>>>>>>>>>>>>에러를 찾자4");
 			String profileUrl = awsService.s3fileTemptoSrc(dto.getNewName());
 			memberSerivce.save(dto, profileUrl);
 		}
