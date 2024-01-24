@@ -9,6 +9,8 @@
 	<link rel="stylesheet" href="/css/Franchise/fr.css" />
 	<link rel="stylesheet" href="/css/stock/dashboard.css">
 	<script src="/js/department.js"></script>
+		<!--아래 사이드 css-->
+	<link rel="stylesheet" href="/css/stock/homeTemp.css">
 
 </head>
 
@@ -19,7 +21,9 @@
 	<main>
 
 		<div class="main-wrap">
-			<div th:replace="~{stock/aaside :: aaside}"></div>
+			<div th:replace="~{/stock/stock-side :: side}"></div>
+		<div style="flex: 1">
+			<th:block th:replace="~{layout/header :: header}"></th:block>
 			<div class="main">
 				<div class="dash-wrap">
 
@@ -78,9 +82,10 @@
 
 					</div>
 				</div>
+				</div>
 			</div>
-
 		</div>
+		
 	</main>
 </body>
 
