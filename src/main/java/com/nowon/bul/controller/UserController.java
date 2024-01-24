@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.nowon.bul.department.DeController;
 import com.nowon.bul.department.DeService;
 import com.nowon.bul.domain.dto.DeptListDTO;
-import com.nowon.bul.domain.dto.MemberDTO;
+import com.nowon.bul.domain.dto.MemberSaveDTO;
 import com.nowon.bul.service.AwsService;
 import com.nowon.bul.service.MemberService;
 
@@ -27,7 +27,7 @@ public class UserController {
 
 	private final MemberService memberSerivce; 
 	private final DeService deptService;
-	//private final AwsService awsService;
+	private final AwsService awsService;
 	
 	@GetMapping("/temp")
 	public String tempPage() {
@@ -62,17 +62,24 @@ public class UserController {
 	}
 	
 	@PostMapping("/members")
-	public String join(MemberDTO dto) {
-		memberSerivce.save(dto);
+	public String join(MemberSaveDTO dto) {
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>" + dto);
+		
+		if(dto.getNewName() == null) {
+			memberSerivce.save(dto, null);
+		}else {
+			String profileUrl = awsService.s3fileTemptoSrc(dto.getNewName());
+			memberSerivce.save(dto, profileUrl);
+		}
 		return "redirect:/members";
 	}
 	
-	/*
-	 * @ResponseBody
-	 * 
-	 * @PostMapping("/members/temp-upload") public Map<String, String>
-	 * s3fileUpload(MultipartFile img) { return awsService.s3fileUploadPrecess(img);
-	 * }
-	 */
+	
+	@ResponseBody
+	@PostMapping("/members/temp-upload") 
+	public Map<String, String> s3fileUpload(@RequestParam(name = "img") MultipartFile img)  { 
+		return awsService.s3fileTempUpload(img);
+	}
+	 
 	
 }
