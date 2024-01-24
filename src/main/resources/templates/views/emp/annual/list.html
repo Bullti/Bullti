@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/css/department/side.css" />
+</head>
+<body>
+	<main class="flex">
+		<div th:replace="~{views/emp/annual/side::side}"></div>
+		<div>
+			<h2>휴가신청현황</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>휴가번호</th>
+						<th>사원번호</th>
+						<th>휴가시작일</th>
+						<th>휴가마지막일</th>
+						<th>휴가신청시간</th>
+						<th>오전오후</th>
+						<th>결재자</th>
+						<th>승인여부</th>
+						<th>취소신청</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="dto:${list}">
+						<td th:text="${dto.annualNo}"></td>
+						<td th:text="${dto.memberNo}"></td>
+						<td th:text="${dto.start}"></td>
+						<td th:text="${dto.end}"></td>
+						<td th:text="${dto.createDate}"></td>
+						<td th:text="${dto.halfDayTime}"></td>
+						<td th:text="${dto.head}"></td>
+						<td th:text="${dto.approve}"></td>
+						<td>
+							<button>취소</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<h2>휴가이력</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>휴가번호</th>
+						<th>사원번호</th>
+						<th>휴가시작일</th>
+						<th>휴가마지막일</th>
+						<th>휴가신청시간</th>
+						<th>오전오후</th>
+						<th>결재자</th>
+						<th>승인여부</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="dto:${list}">
+						<td th:text="${dto.annualNo}"></td>
+						<td th:text="${dto.memberNo}"></td>
+						<td th:text="${dto.start}"></td>
+						<td th:text="${dto.end}"></td>
+						<td th:text="${dto.createDate}"></td>
+						<td th:text="${dto.halfDayTime}"></td>
+						<td th:text="${dto.head}"></td>
+						<td th:text="${dto.approve}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</main>
+</body>
+</html>
