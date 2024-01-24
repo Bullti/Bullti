@@ -60,6 +60,7 @@ body > main > div.main.flex.col{
 	margin-left: 100px;
 	box-shadow: 2px 2px 2px 2px #d2d2d2;
 	border-radius: 2%;
+
 }
 
 
@@ -67,3 +68,8 @@ body > main > div.main.flex.col{
 		
 		background-color: aqua;
 	}
+	
+body > main > div.main.flex.col > form > div.form.bn > div{
+	
+	margin-top: 10px;
+}
