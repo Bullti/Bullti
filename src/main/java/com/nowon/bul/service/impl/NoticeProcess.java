@@ -8,14 +8,16 @@ import org.springframework.ui.Model;
 
 import com.nowon.bul.domain.dto.NoticeDTO;
 import com.nowon.bul.domain.dto.NoticeSaveDTO;
+import com.nowon.bul.domain.dto.NoticeUpdateDTO;
 import com.nowon.bul.mybatis.mapper.NoticeMapper;
 import com.nowon.bul.service.NoticeService;
 import com.nowon.bul.utils.PageData;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 
-
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class NoticeProcess implements NoticeService{
@@ -70,6 +72,15 @@ public class NoticeProcess implements NoticeService{
 	public void deleteProcess(long boardNo) {
 		
 		int result = noticeMapper.deleteById(boardNo);
+		
+		log.debug(result+"개의 게시글이 삭제 됨 : "+boardNo);
+		
+	}
+
+	@Override
+	public void updateProcess(NoticeUpdateDTO dto) {
+		
+		noticeMapper.updateTitleOrContent(dto);
 		
 	}
 	

@@ -3,6 +3,7 @@ package com.nowon.bul.service;
 import org.springframework.ui.Model;
 
 import com.nowon.bul.domain.dto.NoticeSaveDTO;
+import com.nowon.bul.domain.dto.NoticeUpdateDTO;
 
 
 public interface NoticeService {
@@ -16,5 +17,7 @@ public interface NoticeService {
 	void detailProcess(long boardNo, Model model);
 
 	void deleteProcess(long boardNo);
+
+	void updateProcess(NoticeUpdateDTO dto);
 
 }
