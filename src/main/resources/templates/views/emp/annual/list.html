@@ -36,7 +36,10 @@
 						<td th:text="${dto.head}"></td>
 						<td th:text="${dto.approve}"></td>
 						<td>
-							<button>취소</button>
+							<form action="/emp/annu" method="post">
+								<input type="hidden" name="_method" value="delete">
+								<button>취소</button>
+							</form>
 						</td>
 					</tr>
 				</tbody>
@@ -47,6 +50,7 @@
 					<tr>
 						<th>휴가번호</th>
 						<th>사원번호</th>
+						<th>휴가유형</th>
 						<th>휴가시작일</th>
 						<th>휴가마지막일</th>
 						<th>휴가신청시간</th>
@@ -59,6 +63,7 @@
 					<tr th:each="dto:${list}">
 						<td th:text="${dto.annualNo}"></td>
 						<td th:text="${dto.memberNo}"></td>
+						<td th:text="${dto.type}"></td>
 						<td th:text="${dto.start}"></td>
 						<td th:text="${dto.end}"></td>
 						<td th:text="${dto.createDate}"></td>
