@@ -1,10 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mail Reader</title>
 </head>
 <body>
-	<h1>리스트</h1>
+    <h1>Mail Reader</h1>
+
+    <form id="mailForm">
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" name="startDate" required>
+
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate" name="endDate" required>
+
+    <!-- 버튼 클릭 시 getMailData 함수 실행 -->
+    <button type="button" onclick="getMailData()">Get Mail Data</button>
+	</form>
+
+    <div id="mailResults"></div>
+
+    <script>
+        function getMailData() {
+            var startDate = document.getElementById("startDate").value;
+            var endDate = document.getElementById("endDate").value;
+
+            // 서버로 데이터 요청
+            fetch('/mail/list?startDate=' + startDate + '&endDate=' + endDate)
+                .then(response => response.json())
+                .then(data => {
+                    // 서버에서 받은 데이터를 처리하고 결과를 표시
+                    displayMailData(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    var mailResultsDiv = document.getElementById("mailResults");
+                    mailResultsDiv.innerHTML = "<p>Error occurred. Please try again.</p>";
+                });
+        }
+
+        function displayMailData(data) {
+            var mailResultsDiv = document.getElementById("mailResults");
+
+            if (data.status === 'success') {
+                var mailList = data.data;
+                var html = "<h2>Mail Data</h2><ul>";
+
+                mailList.forEach(mail => {
+                    html += "<li>";
+                    html += "<strong>From:</strong> " + mail.from + "<br>";
+                    html += "<strong>Subject:</strong> " + mail.subject + "<br>";
+                    html += "<strong>Sent Date:</strong> " + mail.sentDate + "<br>";
+                    html += "<strong>Message:</strong> " + mail.message + "<br>";
+                    html += "<strong>Attachments:</strong> " + mail.attachments + "<br>";
+                    html += "</li>";
+                });
+
+                html += "</ul>";
+                mailResultsDiv.innerHTML = html;
+            } else {
+                mailResultsDiv.innerHTML = "<p>Error occurred. Please try again.</p>";
+            }
+        }
+    </script>
 </body>
 </html>

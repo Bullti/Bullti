@@ -47,8 +47,4 @@ public class MailSender {
             System.out.println("메일 전송 중 오류 발생: " + e.getMessage());
         }
     }
-
-    public static void main(String[] args) {
-        sendMail();
-    }
 }

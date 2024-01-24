@@ -32,11 +32,13 @@ public class MailController {
 	public String mailRead() {
 		// 메일을 읽어오는 로직을 직접 호출
 		try {
+			String userName = "dptmf921008@gmail.com";
+			String password = "nabuzgdoguboxeph";
 			Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse("2024-01-24");
 			Date endDate = new SimpleDateFormat("yyyy-MM-dd").parse("2024-01-24");
 			String saveDirectory = "E:\\kdt2023";
 			mailReader.setSaveDirectory(saveDirectory);
-			mailReader.receiveMailAttachedFile("dptmf921008@gmail.com", "nabuzgdoguboxeph", startDate, endDate);
+			mailReader.receiveMailAttachedFile(userName, password, startDate, endDate);
 		} catch (ParseException | MessagingException e) {
 			e.printStackTrace();
 			// 오류 처리 로직 추가
@@ -44,6 +46,8 @@ public class MailController {
 		
 		return "mail/mailList";
 	}
+	
+	
 	
 	
 }
