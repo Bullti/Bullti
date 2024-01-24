@@ -1,59 +1,67 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
+
 <head>
-<link rel="stylesheet" href="/css/members/list.css">
-<script src="/js/department.js"></script>
-<link rel="stylesheet" href="/css/department/side.css" />
-<link rel="stylesheet" href="/css/stock/notice.css">
+	<link rel="stylesheet" href="/css/stock/list.css">
+	<script src="/js/department.js"></script>
+	<!--<link rel="stylesheet" href="/css/department/side.css" />-->
+	<link rel="stylesheet" href="/css/stock/notice.css">
+	<!--아래 사이드 css-->
+	<link rel="stylesheet" href="/css/stock/homeTemp.css">
+	<link rel="stylesheet" href="/css/stock/noticechj.css">
 
 
 </head>
+
 <body>
 	<main class="warp-main">
-		<div th:replace="~{stock/nnaside :: nnaside}"></div>
-		<div class="main">
-			<div class="title">
-				<h1>공지사항</h1>
-			</div>
-			<div class="search">
-				<label for="name">부서명</label>
+		<div th:replace="~{/stock/notice-side :: side}"></div>
+		<div style="flex: 1">
+			<th:block th:replace="~{layout/header :: header}"></th:block>
+			<div class="main">
+				<div class="title">
+					<h1>공지사항</h1>
+				</div>
+				<div class="search">
+					<label for="name">부서명</label>
 					<select name="parentName" id="up-depart" class="custom-select">
 						<option class="option" th:each="name : ${names}" th:text="${name}"></option>
-				</select>
-			
-				<input class="search-input">
-				<button class="search-button"></button>	
-			</div>
-			
-			<table>
-				<thead>
-					<tr>
-						<td class="a">글번호</td>
-						<td class="b">작성자</td>
-						<td class="c">부서</td>
-						<td class="d">제목</td>
-						<td class="e">조회수</td>
-						<td class="f">작성일</td>
-					
-					</tr>
-				</thead>
-				<tbody>
-					<th:block th:each="dto:${list}">
-					<tr>
-						<td th:text="${dto.boardNo}" class="a">글번호</td>
-						<td th:text="${dto.writer}" class="b">이름</td>
-						<td th:text="${dto.rank}" class="c">부서</td>
-						<td class="d">
-							<a th:href="|/members/notice/${dto.boardNo}|" th:text="${dto.boardTitle}">제목</a>
-						</td>
-						<td th:text="${dto.boardHitcnt}" class="e">조회수</td>
-						<td th:text="${#temporals.format(dto.createdDatetime, 'yyyy년 MM월 dd일')}" class="g">작성일</td>
-						
-					</tr>
-					
-					
-					<!--
+					</select>
+
+					<input class="search-input">
+					<button class="search-button"></button>
+				</div>
+
+				<table>
+					<thead>
+						<tr>
+							<td class="a">글번호</td>
+							<td class="b">작성자</td>
+							<td class="c">부서</td>
+							<td class="d">제목</td>
+							<td class="e">조회수</td>
+							<td class="f">작성일</td>
+
+						</tr>
+					</thead>
+					<tbody>
+						<th:block th:each="dto:${list}">
+							<tr>
+								<td th:text="${dto.boardNo}" class="a">글번호</td>
+								<td th:text="${dto.writer}" class="b">이름</td>
+								<td th:text="${dto.rank}" class="c">부서</td>
+								<td class="d">
+									<a th:href="|/members/notice/${dto.boardNo}|" th:text="${dto.boardTitle}">제목</a>
+								</td>
+								<td th:text="${dto.boardHitcnt}" class="e">조회수</td>
+								<td th:text="${#temporals.format(dto.createdDatetime, 'MM월 dd일 a:hh:mm')}" class="g">작성일
+								</td>
+
+							</tr>
+
+
+							<!--
 					<tr>
 						<td colspan="6" th:utext="${dto.boardContent}">
 						</td>
@@ -63,7 +71,7 @@
 					-->
 
 
-				</tbody>
+					</tbody>
 				</table>
 				<div class="pagging-wrap">
 					<a th:if="${pu.from > 1}" th:href="|/members/notice?page=${1}|">
@@ -72,13 +80,14 @@
 					<a th:if="${pu.from > 1}" th:href="|/members/notice?page=${pu.from-1}|">
 						<button>&lt;</button>
 					</a>
-				
+
 					<span id="pagging">
-						<a class="btn-page" th:each="pno:${#numbers.sequence(pu.from,pu.to)}" th:href="|/members/notice?page=${pno}|">
+						<a class="btn-page" th:each="pno:${#numbers.sequence(pu.from,pu.to)}"
+							th:href="|/members/notice?page=${pno}|">
 							<button th:text="${pno}"></button>
 						</a>
 					</span>
-				
+
 					<a th:if="${pu.to < pu.tot}" th:href="|/members/notice?page=${pu.to+1}|">
 						<button>&gt;</button>
 					</a>
@@ -101,11 +110,12 @@
 					//eq가 idx와 같다
 
 				</script>
-				
-			
+
+
+			</div>
 		</div>
 	</main>
-	
+
 </body>
 
 </html>

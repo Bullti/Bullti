@@ -35,7 +35,7 @@
  	<update id="updateTitleOrContent">
  		update notice
  		set board_title=#{boardTitle}, board_content=#{boardContent}
- 		where board_no=#{board_no}
+ 		where board_no=#{boardNo}
  	</update>
  	
 </mapper>
