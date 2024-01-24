@@ -1,7 +1,5 @@
 @charset "UTF-8";
 .main {
-	min-height: calc(100vh - 50px);
-	min-width: calc(100vw - 235px);
 }
 
 .join_area {

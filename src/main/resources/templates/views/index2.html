@@ -3,15 +3,19 @@
 	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
 <head>
 <script src="/js/department.js"></script>
-<link rel="stylesheet" href="/css/department/side.css" />
+<!-- <link rel="stylesheet" href="/css/department/side.css" /> -->
 <link rel="stylesheet" href="/css/view/index2.css">
+<link rel="stylesheet" href="/css/approval/homeTemp.css">
 </head>
 <body>
 	<main class="warp-main">
-		<div th:replace="~{department/side :: side}"></div>
+		<div th:replace="~{department/sideTemp :: side}"></div>
 		<div class="logo-area">
-			<img src="/img/bullti-logo.png"
-				style="width: 500px; height: 500px; opacity: 0.5;">
+			<th:block th:replace="~{layout/header :: header}"></th:block>
+			<div class="flex center content">
+				<img src="/img/bullti-logo.png"
+					style="width: 500px; height: 500px; opacity: 0.5;">
+			</div>
 		</div>
 	</main>
 </body>

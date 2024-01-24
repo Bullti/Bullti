@@ -1,13 +1,12 @@
 @charset "UTF-8";
 
 .warp-main {
-    height: calc(100vh - 50px);
     background-color: white; 
     display: flex;
 }
 .side{
 	height: 100%;
-	width: 200px;
+	min-width: 200px;
 	border-right: 1px solid #efefef;
 	padding-left: 20px;
     padding-right: 20px;

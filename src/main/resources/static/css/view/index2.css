@@ -1,12 +1,13 @@
 @charset "UTF-8";
 .logo-area {
     height: 100%;
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    flex: 1;
 }
 .write {
 	height: 50px;
+}
+
+.content {
+	height: calc(100vh - 50px);
 }
 
