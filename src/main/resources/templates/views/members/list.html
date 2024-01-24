@@ -4,70 +4,73 @@
 <head>
 <link rel="stylesheet" href="/css/members/list.css">
 <script src="/js/department.js"></script>
-<link rel="stylesheet" href="/css/department/side.css" />
+<link rel="stylesheet" href="/css/approval/homeTemp.css">
+<!-- <link rel="stylesheet" href="/css/department/side.css" /> -->
 
 
 </head>
 <body>
 	<main class="warp-main">
-		<div th:replace="~{department/side :: side}"></div>
-		<div class="main">
-			<div class="title">
-				<h1>사원조회/삭제/수정</h1>
-			</div>
-			<div class="search">
-				<label for="name">부서명</label>
-					<select name="parentName" id="up-depart" class="custom-select">
+		<div th:replace="~{department/sideTemp :: side}"></div>
+		<div style="flex: 1">
+			<th:block th:replace="~{layout/header :: header}"></th:block>
+			<div class="main">
+				<div class="title">
+					<h1>사원조회/삭제/수정</h1>
+				</div>
+				<div class="search">
+					<label for="name">부서명</label> <select name="parentName"
+						id="up-depart" class="custom-select">
 						<option class="option" th:each="name : ${names}" th:text="${name}"></option>
-				</select>
-				<label for="name" class="label2" id="center">재직상태</label>
-					<select class="custom-select">
-							<option class="option" >재직</option>
-							<option class="option" >퇴사</option>
+					</select> <label for="name" class="label2" id="center">재직상태</label> <select
+						class="custom-select">
+						<option class="option">재직</option>
+						<option class="option">퇴사</option>
 					</select>
-				<button class="search-button"></button>	
+					<button class="search-button"></button>
+				</div>
+
+				<table>
+					<thead>
+						<tr>
+							<td class="a">사번</td>
+							<td class="b">이름</td>
+							<td class="c">직급</td>
+							<td class="d">부서</td>
+							<td class="e">전화번호</td>
+							<td class="d">입사일</td>
+							<td class="f">퇴사일</td>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="a">사번</td>
+							<td class="b">이름</td>
+							<td class="c">직급</td>
+							<td class="d">부서</td>
+							<td class="e">전화번호</td>
+							<td class="f">입사일</td>
+							<td class="g">퇴사일</td>
+						</tr>
+
+						<tr>
+							<td class="a">240119</td>
+							<td class="b">이예슬</td>
+							<td class="c">대리</td>
+							<td class="d">관리부</td>
+							<td class="e">010-2561-4981</td>
+							<td class="f">2024.01.19</td>
+							<td class="g">2024.01.19</td>
+						</tr>
+
+
+					</tbody>
+				</table>
 			</div>
-			
-			<table>
-				<thead>
-					<tr>
-						<td class="a">사번</td>
-						<td class="b">이름</td>
-						<td class="c">직급</td>
-						<td class="d">부서</td>
-						<td class="e">전화번호</td>
-						<td class="d">입사일</td>
-						<td class="f">퇴사일</td>
-				
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td class="a">사번</td>
-						<td class="b">이름</td>
-						<td class="c">직급</td>
-						<td class="d">부서</td>
-						<td class="e">전화번호</td>
-						<td class="f">입사일</td>
-						<td class="g">퇴사일</td>
-					</tr>
-
-					<tr>
-						<td class="a">240119</td>
-						<td class="b">이예슬</td>
-						<td class="c">대리</td>
-						<td class="d">관리부</td>
-						<td class="e">010-2561-4981</td>
-						<td class="f">2024.01.19</td>
-						<td class="g">2024.01.19</td>
-					</tr>
-					
-
-				</tbody>
-			</table>
 		</div>
 	</main>
-	
+
 </body>
 
 </html>

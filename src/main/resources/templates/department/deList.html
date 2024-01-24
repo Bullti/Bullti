@@ -3,87 +3,109 @@
 	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
 
 <head>
-	<title>Insert title here</title>
-	<script src="/js/department.js"></script>
-	<link rel="stylesheet" href="/css/department/side.css" />
-	<link rel="stylesheet" href="/css/department/DeList.css" />
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<title>Insert title here</title>
+<script src="/js/department.js"></script>
+<link rel="stylesheet" href="/css/approval/homeTemp.css">
+<!-- <link rel="stylesheet" href="/css/department/side.css" /> -->
+<link rel="stylesheet" href="/css/department/DeList.css" />
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
 
-	<script type="text/javascript" th:inline="javascript">
-		google.charts.load('current', {packages: ["orgchart"]});
-		google.charts.setOnLoadCallback(drawChart);
+<script type="text/javascript" th:inline="javascript">
+	google.charts.load('current', {
+		packages : [ "orgchart" ]
+	});
+	google.charts.setOnLoadCallback(drawChart);
 
-		function drawChart() {
-			var orgChartData = /*[[${orgChartData}]]*/ null;
-			var data = new google.visualization.DataTable();
-			data.addColumn('string', 'Name');
-			data.addColumn('string', 'Manager');
+	function drawChart() {
+		var orgChartData = /*[[${orgChartData}]]*/null;
+		var data = new google.visualization.DataTable();
+		data.addColumn('string', 'Name');
+		data.addColumn('string', 'Manager');
 
-			for (var i = 0; i < orgChartData.length; i++) {
-				data.addRow([
-					{'v': orgChartData[i].name, 'f': '<div style="font-size: 16px; font-weight: bold;">' + orgChartData[i].name + '</div>'},
-					orgChartData[i].manager
-				]);
-			}
-
-			var options = {
-				'allowHtml': true,
-				'nodeClass': 'custom-node-class'
-			};
-
-			var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
-
-			google.visualization.events.addListener(chart, 'select', function () {
-				function findSubordinates(managerValue) {
-				    console.log(">>>>>>>>>>>>>>>>>" + managerValue)
-				    
-				    return managerValue && managerValue.subordinates ? managerValue.subordinates : [];
-				}
-				    
-				var selectedItem = chart.getSelection()[0];
-				if (selectedItem) {
-				    var nodeValue = data.getValue(selectedItem.row, 0);
-				    var managerValue = data.getValue(selectedItem.row, 1); // 매니저 값 가져오기
-				    alert("삭제 하시겠습니까?");
-				    
-				    var subordinates = findSubordinates(managerValue);
-
-				    // 매니저 값이 null 또는 하위 객체가 있다면 삭제 불가능 메시지 표시
-				    if (subordinates == true) {
-				        alert(" 하위객체가 있어 삭제가 불가능합니다.");
-				    } else {
-				        console.log("삭제가능");
-				        // 삭제 가능한 경우, 서버로 nodeKey 값을 전송하면 됩니다.
-				        // AJAX 등을 사용하여 서버로 데이터를 전송할 수 있습니다.
-				        $.ajax({
-					    url: '/department/deList',
-					    method: 'POST',
-					    type: 'json',
-					    dataType: 'HTML',
-					    data: {name: nodeValue},
-					    success: function (result) {
-					        alert("삭제를 완료하였습니다");
-					        location.reload(); //페이지 새로고침
-					    },
-					    error: function (xhr, status, error) {
-					        alert(" 하위객체가 있어 삭제가 불가능합니다.");
-					        location.reload(); //페이지 새로고침
-					    }
-					});
-				    }
-				}
-			});
-
-			chart.draw(data, options);
+		for (var i = 0; i < orgChartData.length; i++) {
+			data
+					.addRow([
+							{
+								'v' : orgChartData[i].name,
+								'f' : '<div style="font-size: 16px; font-weight: bold;">'
+										+ orgChartData[i].name + '</div>'
+							}, orgChartData[i].manager ]);
 		}
-	</script>
+
+		var options = {
+			'allowHtml' : true,
+			'nodeClass' : 'custom-node-class'
+		};
+
+		var chart = new google.visualization.OrgChart(document
+				.getElementById('chart_div'));
+
+		google.visualization.events
+				.addListener(
+						chart,
+						'select',
+						function() {
+							function findSubordinates(managerValue) {
+								console.log(">>>>>>>>>>>>>>>>>" + managerValue)
+
+								return managerValue
+										&& managerValue.subordinates ? managerValue.subordinates
+										: [];
+							}
+
+							var selectedItem = chart.getSelection()[0];
+							if (selectedItem) {
+								var nodeValue = data.getValue(selectedItem.row,
+										0);
+								var managerValue = data.getValue(
+										selectedItem.row, 1); // 매니저 값 가져오기
+								alert("삭제 하시겠습니까?");
+
+								var subordinates = findSubordinates(managerValue);
+
+								// 매니저 값이 null 또는 하위 객체가 있다면 삭제 불가능 메시지 표시
+								if (subordinates == true) {
+									alert(" 하위객체가 있어 삭제가 불가능합니다.");
+								} else {
+									console.log("삭제가능");
+									// 삭제 가능한 경우, 서버로 nodeKey 값을 전송하면 됩니다.
+									// AJAX 등을 사용하여 서버로 데이터를 전송할 수 있습니다.
+									$.ajax({
+										url : '/department/deList',
+										method : 'POST',
+										type : 'json',
+										dataType : 'HTML',
+										data : {
+											name : nodeValue
+										},
+										success : function(result) {
+											alert("삭제를 완료하였습니다");
+											location.reload(); //페이지 새로고침
+										},
+										error : function(xhr, status, error) {
+											alert(" 하위객체가 있어 삭제가 불가능합니다.");
+											location.reload(); //페이지 새로고침
+										}
+									});
+								}
+							}
+						});
+
+		chart.draw(data, options);
+	}
+</script>
 </head>
 
 <body>
 	<main class="warp-main">
-		<div th:replace="~{department/side :: side}"></div>
-		<div class="main-area">
-			<div id="chart_div" th:attr="data-org-chart=${orgChartData}"></div>
+		<div th:replace="~{department/sideTemp :: side}"></div>
+		<div style="flex: 1">
+			<th:block th:replace="~{layout/header :: header}"></th:block>
+			<div class="main-area">
+				<div id="chart_div" th:attr="data-org-chart=${orgChartData}"></div>
+
+			</div>
 		</div>
 	</main>
 </body>

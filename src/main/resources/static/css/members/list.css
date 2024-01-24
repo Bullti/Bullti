@@ -1,17 +1,18 @@
 @charset "UTF-8";
 .main {
-	height:800px;
+	height: 800px;
     width: 1200px;
-    /*border: 1px solid gray;*/
+    /* border: 1px solid gray; */
     border-radius: 2%;
     justify-content: center;
     padding-left: 50px;
     padding-right: 50px;
-	margin: auto;
+    margin: 100px auto;
     box-shadow: 2px 2px 2px 2px #d2d2d2;
 }
 table {
-	width: 1200px;
+	/*width: 1200px;*/
+	width: 100%;
 	justify-content: space-between;
 	
 }
