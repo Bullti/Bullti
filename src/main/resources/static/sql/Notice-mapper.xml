@@ -17,22 +17,6 @@
  		LIMIT #{offset}, #{limit}
  	</select>
  	
- 	<select id="findById" resultType="com.nowon.bul.domain.dto.NoticeDTO">
- 		select * from notice
- 		where no=#{boardNo}
- 	</select>
- 	
- 	<delete id="deleteById">
- 		delete from notice
- 		where no=#{boardNo}
- 	</delete>
- 	
- 	<update id="updateTitleOrContent">
- 		update notice
- 		set title=#{boardTitle}, content=#{boardContent}
- 		where no=#{boardNo}
- 	</update>
- 	
  	<select id="countAll" resultType="int">
  		select count(*) from notice
  		where board_no>0
