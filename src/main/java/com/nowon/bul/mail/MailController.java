@@ -1,14 +1,11 @@
 package com.nowon.bul.mail;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
 import javax.mail.MessagingException;
 
-import org.jboss.jandex.Main;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
