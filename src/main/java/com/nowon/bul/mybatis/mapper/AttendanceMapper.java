@@ -1,17 +1,25 @@
 package com.nowon.bul.mybatis.mapper;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
-import com.nowon.bul.domain.dto.AttendanceDTO;
 import com.nowon.bul.domain.dto.attendance.AttendanceCheckDTO;
+import com.nowon.bul.domain.dto.attendance.AttendanceDTO;
 
 @Mapper
 public interface AttendanceMapper {
 
 	void workIn(AttendanceCheckDTO dto);
 
-	List<AttendanceDTO> find(Long memberNo);
-	
+	List<AttendanceDTO> find(@Param("memberNo") long memberNo
+			,@Param("limit") int limit,@Param("offset") int offset);
+
+	int countAllById(long memberNo);
+
+	AttendanceDTO findStatus(long MemberNo);
+
 }
