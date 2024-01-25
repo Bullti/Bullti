@@ -28,7 +28,7 @@
 	<div class="main_container">
 	
 		<div class="main_name">
-			<h1>발주 등록</h1>
+			<h1>발주 신청</h1>
 			<h2></h2>
 		</div>
 		
@@ -39,7 +39,10 @@
 						<span class="text_list">상품 목록</span>
 					</a>
 					<a href="/members/purchase-post" class="list_group_item">
-						<span class="text_list">발주 등록</span>
+						<span class="text_list">발주 신청</span>
+					</a>
+					<a href="/members/purchase-complete" class="list_group_item">
+						<span class="text_list">발주 신청 현황</span>
 					</a>
 				</li>
 			</ul>
@@ -52,27 +55,26 @@
 				
 				<tr style="font-size: 14px;">
 					<th style="width: 200px">발주상품명</th>
-					<th style="width: 150px">발주거래처</th>
+					<th style="width: 150px">발주가맹점</th>
 					<th style="width: 150px">발주수량</th>
 					<th style="width: 150px">발주총액</th>
-					<th style="width: 150px">발주자</th>
-					<th style="width: 150px">발주일자</th>
+					<th style="width: 250px">발주일자</th>
+				
 				</tr>
 				
 			</thead>
 			
 			<tbody id="dynamic_table">
 				
-				<tr th:each="prod:${products}">
-					<td style="width: 200px" th:text="${prod.productName}">productName</td>
-					<td style="width: 150px" th:text="${prod.productPrice}">productPric	e</td>
-					<td style="width: 150px" th:text="${prod.productWeight}">productWeight</td>
-					<td style="width: 150px" th:text="${prod.productSupply}">productSupply</td>
-					<td style="width: 130px" th:text="${prod.authorName}">authorName</td>
-					<td style="width: 130px" th:text="${#temporals.format(prod.productDate, prod.productDate.year != #dates.createNow().year ? 'MM-dd HH:mm:ss' : 'yyyy-MM-dd HH:mm:ss')}">productDate</td>
+				<tr th:each="pur:${purchases}">
+					<td style="width: 200px" th:text="${pur.productName}">productName</td>
+					<td style="width: 150px" th:text="${pur.franchiseName}">franchiseId</td>
+					<td style="width: 150px" th:text="${pur.ea}">productWeight</td>
+					<td style="width: 150px" th:text="${pur.totalPrice}">productPrice</td>
+					<td style="width: 300px" th:text="${#temporals.format(pur.purchaseDate, pur.purchaseDate.year != #dates.createNow().year ? 'MM-dd HH:mm:ss' : 'yyyy-MM-dd HH:mm:ss')}">productDate</td>
 				</tr>
 				<tr th:if="${#lists.isEmpty(products)}">
-					<td colspan="7" style="width:100%;display:block; text-align: center;padding: 2em 0">
+					<td colspan="5" style="width:100%;display:block; text-align: center;padding: 2em 0">
 						등록된 발주가 존재하지 않습니다.
 					</td>
 				</tr>

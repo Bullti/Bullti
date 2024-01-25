@@ -22,7 +22,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
-@Getter
+
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -66,11 +66,15 @@ public class ProductEntity extends BaseEntity{
 	 public ProductDTO toProductDTO() {
 		 
 		 return ProductDTO.builder()
-				.productNum(productNum).productName(productName)
-				.productPrice(productPrice).productWeight(productWeight)
+				.productNum(productNum)
+				.productName(productName)
+				.productPrice(productPrice)
+				.productWeight(productWeight)
 				.authorName(member!=null?member.getName():"테스트")
-				.productDate(productDate).productGroup(productGroup)
-				.productSupply(productSupply).deleteProdYn(deleteProdYn)
+				.productDate(productDate)
+				.productGroup(productGroup)
+				.productSupply(productSupply)
+				.deleteProdYn(deleteProdYn)
 				.build();
 				
 				 
