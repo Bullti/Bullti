@@ -4,30 +4,29 @@
 <head>
 <script src="/js/department.js"></script>
 <link rel="stylesheet" href="/css/department/side.css" />
-<link rel="stylesheet" href="/css/Franchise/fr.css" />
+<link rel="stylesheet" href="/css/Franchise/fredit.css" />
 </head>
 <body>
 	<main class="warp-main">
 		<div th:replace="~{department/side :: side}"></div>
 		<div class="main">
 			<div class="title">
-				<h1>수정합니다.</h1>
+				<h1>가맹점 상세</h1>
 			</div>
-			<table>
-				<thead>
-					<tr>
-						<th>매장명</th>
-						<th>주소</th>
-						<th>상세주소</th>
-						<th>전화번호</th>
-					</tr>
-				</thead>
+			<table id="detail-view">
 				<tbody>
 					<tr th:each="detail : ${franchiseEditDTO}">
+						<th>매장명</th>
 						<td th:text="${detail.name}"></td>
+						<th>주소</th>
 						<td th:text="${detail.address}"></td>
+						<th>상세주소</th>
 						<td th:text="${detail.address2}"></td>
+						<th>전화번호</th>
 						<td th:text="${detail.ph}"></td>
+						<td>
+							<button type="button" onclick="btnUpdateClicked()">수정</button>
+						</td>
 						<td>
 							<form action="/fr/register" method="post">
 								<div>
@@ -39,7 +38,72 @@
 					</tr>
 				</tbody>
 			</table>
+			<script type="text/javascript">
+				function btnUpdateClicked() {
+					//const element = document.getElementById("intro");
+					const detailView = document.querySelector("#detail-view");
+					detailView.style.display = "none";
+
+					const updateView = document.querySelector("#update-view");
+					updateView.style.display = "block";
+				}
+			</script>
+			<form th:action="|/fredit/${franchiseEditDTO.id}|" method="post"
+				id="update-view" style="display: none;">
+				<table>
+					<tr>
+						<th>주소</th>
+						<td colspan="3"><input type="text" maxlength="255"
+							name="address" id="sample4_roadAddress" 
+							th:value="${franchiseEditDTO.address}"> <span id="guide"
+							style="color: #999; display: none"></span> <input type="button"
+							onclick="sample4_execDaumPostcode()" value="주소 검색"></td>
+					</tr>
+					<tr>
+						<th>상세주소</th>
+						<td colspan="3"><input type="text" name="address2"
+							th:value="${franchiseEditDTO.address2}"></td>
+					</tr>
+					<tr>
+						<th>전화번호</th>
+						<td colspan="3"><input type="text" name="ph"
+							th:value="${franchiseEditDTO.ph}"></td>
+					</tr>
+					<tr>
+						<td colspan="4"><input type="hidden" name="id"
+							th:value="${franchiseEditDTO.id}"> <input type="hidden"
+							name="_method" value="put">
+							<button type="submit">수정완료</button>
+							<button type="button" onclick="history.go(-1)">취소</button></td>
+					</tr>
+				</table>
+			</form>
+			<script
+				src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+			<script>
+				//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+				function sample4_execDaumPostcode() {
+					new daum.Postcode(
+							{
+								oncomplete : function(data) {
+									// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+									// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+									// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+									var roadAddr = data.roadAddress; // 도로명 주소 변수
+									var extraRoadAddr = ''; // 참고 항목 변수
+									// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+									// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+									if (data.bname !== ''
+											&& /[동|로|가]$/g.test(data.bname)) {
+										extraRoadAddr += data.bname;
+									}
+									// 우편번호와 주소 정보를 해당 필드에 넣는다.
+									document
+											.getElementById("sample4_roadAddress").value = roadAddr;
+								}
+							}).open();
+				}
+			</script>
 		</div>
 	</main>
 </body>
-</html>

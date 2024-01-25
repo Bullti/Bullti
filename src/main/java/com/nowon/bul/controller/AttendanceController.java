@@ -22,9 +22,9 @@ public class AttendanceController {
 	
 	//출근
 	@PostMapping
-	@ResponseBody
-	public void checkInAtWork(Authentication auth) {
+	public String checkInAtWork(Authentication auth) {
 		attendanceService.workIn(auth);
+		return "redirect:/emp/atte";
 	}
 	
 	@GetMapping

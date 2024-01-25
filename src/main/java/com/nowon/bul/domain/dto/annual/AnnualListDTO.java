@@ -8,7 +8,7 @@ import lombok.Getter;
 public class AnnualListDTO {
 
 	private long annualNo;
-//	private int type;
+	private String type;
 	private long memberNo;
 	private String content;
 	private LocalDateTime start;

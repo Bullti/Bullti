@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+.warp-main {
+    background-color: white; 
+    display: flex;
+}
+.side{
+	height: 100%;
+	min-width: 200px;
+	border-right: 1px solid #efefef;
+	padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
+}
+.side > .title {
+	height: 65px;
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 550;
+}
+.side > .btn {
+	height: 40px;
+    border: 1px solid #a9a9a9;
+    margin-bottom: 25px;
+}
+.side > .btn > a {
+	height: 100%;
+	width: 100%;
+	font-size: 15px;
+}
+.side > .btn > a:hover {
+	background: linear-gradient(to bottom, var(--bullti1), var(--bullti2));
+	color: #fff;
+}
+.side > .tap {
+	margin-bottom: 30px;	
+}
+.side > .tap > ul > .tap-title {
+	font-size: 16px;
+    margin-bottom: 16px;
+}
+
+.side > .tap > ul > li {
+	margin-left: 15px;
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+
+body > main > div:nth-child(2) > div{
+	box-shadow: 2px 2px 2px 2px rgb(255, 255, 255);
+	    border-radius: 2%;
+	    margin-left: 100px;
+	
+}
+
+#middlePost{
+	
+	margin-top: 15px;
+	
+	
+}
+
+.title{
+	
+	font-size: 32px;
+	margin-bottom: 15px;
+	
+	
+}
+
+.noticeContent{
+	
+	
+	justify-content: flex-start;
+}
+
+.selectPost{
+	
+	width: 200px;
+	display: flex;
+	justify-content: space-evenly;
+	
+}
+
+.selectPost a,button,form{
+	
+	width: 70px;
+	font-size: 16px;
+}
+
+#detail-view {
+	display: flex;
+	height: 600px;
+	justify-content: space-between;
+}
+
+tbody{
+	
+	font-size: 18px;
+}
+
+tfoot{
+	
+	display: flex;
+	justify-content: flex-end;
+}
