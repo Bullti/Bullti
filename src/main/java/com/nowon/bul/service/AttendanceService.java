@@ -7,6 +7,8 @@ public interface AttendanceService {
 
 	void workIn(Authentication auth);
 
-	void find(Authentication auth, Model model);
+	void find(int page, Authentication auth, Model model);
+
+	String workingStatus(Authentication auth);
 
 }

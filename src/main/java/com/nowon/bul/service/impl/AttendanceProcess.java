@@ -1,15 +1,20 @@
 package com.nowon.bul.service.impl;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.nowon.bul.domain.dto.attendance.AttendanceCheckDTO;
+import com.nowon.bul.domain.dto.attendance.AttendanceDTO;
 import com.nowon.bul.domain.entity.member.MyUser;
 import com.nowon.bul.mybatis.mapper.AttendanceMapper;
 import com.nowon.bul.service.AttendanceService;
 import com.nowon.bul.utils.AuthenUtils;
+import com.nowon.bul.utils.PageData;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,8 +33,25 @@ public class AttendanceProcess implements AttendanceService {
 	}
 
 	@Override
-	public void find(Authentication auth, Model model) {
-		model.addAttribute("atteList", mapper.find(AuthenUtils.extractMemberNo(auth)));
-		
+	public void find(int page, Authentication auth, Model model) {
+	    int limit=3; // 한페이지 표현할 rows수
+	    int offset=(page-1)*limit; // 건너뛰는 개수 1page={offset=0}
+	    
+		model.addAttribute( "pu", PageData.create(page, limit, 
+				mapper.countAllById(AuthenUtils.extractMemberNo(auth)),5) );
+		model.addAttribute("atteList", mapper.find(AuthenUtils.extractMemberNo(auth),limit, offset));
+	}
+
+	@Override
+	public String workingStatus(Authentication auth) {
+		String result = "";
+		//가장 최근 출근기록을 불러옵니다
+		AttendanceDTO Resultdto = mapper.findStatus(AuthenUtils.extractMemberNo(auth));
+		if(Resultdto.getLeaveWorkTime()==null) {
+			result = Resultdto.getGoWorkTime().toString();
+		} else {
+			result = "근무 중 아님";
+		};
+		return result;
 	}
 }

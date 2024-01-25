@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nowon.bul.service.AttendanceService;
@@ -28,8 +29,14 @@ public class AttendanceController {
 	}
 	
 	@GetMapping
-	public String attendanceList(Authentication auth, Model model) {
-		attendanceService.find(auth, model);
+	public String attendanceList(@RequestParam(name = "page",defaultValue = "1") int page
+			,Authentication auth, Model model) {
+		attendanceService.find(page, auth, model);
 		return "views/emp/atten/list";
+	}
+	
+	@GetMapping("/status")
+	public @ResponseBody String attendanceList(Authentication auth) {
+		return attendanceService.workingStatus(auth);
 	}
 }
