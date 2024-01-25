@@ -7,8 +7,21 @@
 	    {call attendance_procedure(#{memberNo, mode=IN, jdbcType=BIGINT}, #{regiType, mode=IN, jdbcType=INTEGER})}
 	</insert>
 
-	<select id="find" resultType="com.nowon.bul.domain.dto.AttendanceDTO">
+	<select id="find" resultType="com.nowon.bul.domain.dto.attendance.AttendanceDTO">
 		select * from attendance where member_no=#{memberNo}
+		order by att_no desc
+		LIMIT #{offset}, #{limit}
+	</select>
+	
+	<select id="countAllById" resultType="int">
+		select count(*) from attendance where member_no=#{memberNo}
+	</select>
+	
+	<select id="findStatus" resultType="com.nowon.bul.domain.dto.attendance.AttendanceDTO">
+		select * from attendance
+		where member_no=#{memberNo}
+		order by go_work_time desc
+		limit 1
 	</select>
 
 </mapper>
