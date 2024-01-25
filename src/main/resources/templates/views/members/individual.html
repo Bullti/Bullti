@@ -4,8 +4,6 @@
 <head>
 <link rel="stylesheet" href="/css/signup.css">
 <script src="/js/department.js"></script>
-<link rel="stylesheet" href="/css/approval/homeTemp.css">
-<!-- <link rel="stylesheet" href="/css/department/side.css" /> -->
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
@@ -61,48 +59,15 @@
 		});
 	}
 </script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('#id').keyup(function() {
-			let member_id = $('#id').val();
 
-			$.ajax({
-				url : "/memberIdCheck",
-				type : "get",
-				data : {
-					member_id : member_id
-				},
-				dataType : 'json',
-				success : function(result) {
-					if (result) {
-						$(".danger").html('이미 존재하는 사원번호입니다.');
-						$(".danger").css('color', '#f15746');
-						$(".join_button").prop("disabled", true);
-					} else {
-						$(".danger").html('사용할 수 있는 사원번호입니다..');
-						$(".danger").css('color', '#2fb380');
-						$(".join_button").prop("disabled", false);
-					}
-				},
-				error : function() {
-					alert("서버요청실패");
-				}
-			})
-
-		})
-
-	});
-</script>
 </head>
 <body>
 	<main class="warp-main">
-		<div th:replace="~{department/sideTemp :: side}"></div>
-		<div style="flex: 1">
 			<th:block th:replace="~{layout/header :: header}"></th:block>
 			<div class="main flex center">
 				<form action="/members" method="post">
 					<div class="join_area">
-						<h1 class="join_tilte">사원등록</h1>
+						<h1 class="join_tilte">수정예정</h1>
 						<div class="add_img flex center">
 							<label class="btn-file"> <input type="file"
 								accept="image/*" onchange="changedImg(this)"> <img
@@ -110,9 +75,8 @@
 							</label>
 						</div>
 						<div>
-							<label for="id">아이디</label> <input type="text" id="id" name="id"
+							<label for="id">사원번호</label> <input type="text" id="id" name="id"
 								placeholder="사원번호를 입력해주세요" required="required">
-							<p class="danger">이미 존재하는 사원번호 입니다.</p>
 						</div>
 						<div>
 							<label for="pass">비밀번호</label> <input type="password" id="pass"

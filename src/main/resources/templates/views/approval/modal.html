@@ -9,10 +9,17 @@
 				<div class="de-form">
 					<ul class="depart">
 						<li th:each="dept : ${deptList}">
-							<span class="clickable" onclick="getEmployee(this)" th:if="${dept.parentId == 0}" >[[${dept.deptName}]]</span>
+							<span class="clickable" onclick="getEmployee(this)" th:if="${dept.parentId == 0}" >
+								[[${dept.deptName}]]
+							</span>
 							<ul>
-								<li th:each="child : ${dept.child}">
-									<span onclick="getEmployee(this)" >[[${child.deptName}]]</span>
+								<li th:each="subDept : ${dept.child}">
+									<span onclick="getEmployee(this)">[[${subDept.deptName}]]</span>
+									<ul>
+										<li  th:each="subsubDept : ${subDept.child}">>
+											<span onclick="getEmployee(this)">[[${subsubDept.deptName}]]</span>
+										</li>
+									</ul>
 								</li>
 							</ul>
 						</li>
