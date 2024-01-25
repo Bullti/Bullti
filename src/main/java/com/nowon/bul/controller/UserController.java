@@ -36,11 +36,13 @@ public class UserController {
 	private final DeService deptService;
 	private final AwsService awsService;
 	
+	//개인정보 조회
 	@GetMapping("/individual")
 	public String individualPage() {
 		return "/views/members/individual";
 	}
 	
+	//로그인 페이지
 	@GetMapping("/login")
 	public String loginPage(@RequestParam(value = "error", required = false) String error,
 			@RequestParam(value = "exception", required = false) String exception,
@@ -52,6 +54,7 @@ public class UserController {
 		return "/views/login";
 	}
 	
+	//회원가입 페이지
 	@GetMapping("/members")
 	public String joinPage(Model model) {
 		List<DeptListDTO> deptList = deptService.getDeptList();
@@ -59,6 +62,7 @@ public class UserController {
 		return "/views/members/signup";
 	}
 	
+	//사원 조회 페이지
 	@GetMapping("/members/list")
 	public String listPage(PageRequestDTO pageRequestDTO, Model model) {
 		
@@ -70,6 +74,7 @@ public class UserController {
 		return "/views/members/list";
 	}
 	
+	//회원가입
 	@PostMapping("/members")
 	public String join(MemberSaveDTO dto) {
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>>" + dto);
@@ -93,16 +98,14 @@ public class UserController {
 	@ResponseBody
 	@GetMapping("/memberIdCheck")
 	public boolean checkId(@RequestParam(name = "member_id") String id) {
-		System.out.println(">>>>>>>>>>>" + id);
-		boolean flag = memberSerivce.checkId(id);
-		if(flag) {
-			System.out.println(">>>>>>>>>>>>>>>>참");
-		}else {
-			System.out.println(">>>>>>>>>>>>거짓");
-		}
 		return memberSerivce.checkId(id);
 	}
 	
+	@ResponseBody
+	@GetMapping("/memberIdPattern")
+	public boolean patternId(@RequestParam(name = "member_id") String id) {
+		return memberSerivce.patternId(id);
+	}
 	 
 	
 }

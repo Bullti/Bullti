@@ -2,6 +2,7 @@ package com.nowon.bul.service.impl;
 
 import java.util.List;
 import java.util.function.Function;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
@@ -78,6 +79,12 @@ public class MemberProcess implements MemberService{
 	@Override
 	public boolean checkId(String id) {
 		return memberRepo.existsById(id);
+	}
+
+	//사원번호 유효성 검사
+	@Override
+	public boolean patternId(String id) {
+		return Pattern.matches("^[0-9]*$", id);
 	}
 
 

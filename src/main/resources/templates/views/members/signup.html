@@ -62,36 +62,58 @@
 	}
 </script>
 <script type="text/javascript">
+
 	$(document).ready(function() {
 		$('#id').keyup(function() {
 			let member_id = $('#id').val();
-
-			$.ajax({
-				url : "/memberIdCheck",
-				type : "get",
-				data : {
-					member_id : member_id
-				},
-				dataType : 'json',
-				success : function(result) {
-					if (result) {
-						$(".danger").html('이미 존재하는 사원번호입니다.');
-						$(".danger").css('color', '#f15746');
-						$(".join_button").prop("disabled", true);
-					} else {
-						$(".danger").html('사용할 수 있는 사원번호입니다..');
-						$(".danger").css('color', '#2fb380');
-						$(".join_button").prop("disabled", false);
-					}
-				},
-				error : function() {
-					alert("서버요청실패");
-				}
-			})
-
+			if(checkPatternId(member_id)){
+				checkExistId();
+			}else {
+				$(".danger").html('사원번호를 정확히 입력해주세요');
+				$(".danger").css('color', '#f15746');
+				$(".join_button").prop("disabled", true);
+			}
 		})
-
+		$('#id').blur(function() {
+			let member_id = $('#id').val();
+			if(checkPatternId()){
+				checkExistId();
+			}
+		})
 	});
+	
+	//아이디 패턴 검사 코드
+	function checkPatternId(member_id) {
+		return /^\d{8}$/.test(member_id);
+	}
+	
+	//아이디 중복 검사 코드
+	function checkExistId() {
+		let member_id = $('#id').val();
+		$.ajax({
+			url : "/memberIdCheck",
+			type : "get",
+			data : {
+				member_id : member_id
+			},
+			dataType : 'json',
+			success : function(result) {
+				if (result) {
+					$(".danger").html('이미 존재하는 사원번호입니다.');
+					$(".danger").css('color', '#f15746');
+					$(".join_button").prop("disabled", true);
+				} else {
+					$(".danger").html('사용할 수 있는 사원번호입니다..');
+					$(".danger").css('color', '#2fb380');
+					$(".join_button").prop("disabled", false);
+				}
+			},
+			error : function() {
+				alert("서버요청실패");
+			}
+		})
+	};
+	
 </script>
 </head>
 <body>
@@ -111,8 +133,8 @@
 						</div>
 						<div>
 							<label for="id">아이디</label> <input type="text" id="id" name="id"
-								placeholder="사원번호를 입력해주세요" required="required">
-							<p class="danger">이미 존재하는 사원번호 입니다.</p>
+								placeholder="사원번호를 입력해주세요 ex) 숫자 8자리" required="required">
+							<p class="danger"></p>
 						</div>
 						<div>
 							<label for="pass">비밀번호</label> <input type="password" id="pass"
@@ -159,7 +181,7 @@
 								id="joinCompanyDate" name="joinCompanyDate" required="required">
 						</div>
 						<div class="button_area">
-							<button class="join_button">
+							<button class="join_button" disabled="disabled">
 								<span>등록하기</span>
 							</button>
 						</div>
