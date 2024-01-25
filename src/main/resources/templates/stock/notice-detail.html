@@ -2,17 +2,88 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
 <head>
-<link rel="stylesheet" href="/css/members/list.css">
+<link rel="stylesheet" href="/css/stock/list.css">
 <script src="/js/department.js"></script>
 <link rel="stylesheet" href="/css/department/side.css" />
 <link rel="stylesheet" href="/css/stock/notice.css">
+
 <link rel="stylesheet" href="/css/stock/notice-detail.css">
+
+
+<link rel="stylesheet" href="/css/stock/write.css">
+<script src="/js/department.js"></script>
+<link rel="stylesheet" href="/css/stock/home.css">
+<link rel="stylesheet" href="/css/stock/modal.css">
+<script src="/summerNote/summernote-lite.js"></script>
+<script src="/summerNote/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="/css/stock/notice.css">
+<!--아래 사이드 css-->
+<link rel="stylesheet" href="/css/stock/homeTemp.css">
+<link rel="stylesheet" href="/css/stock/noticechj.css">
+
+<link rel="stylesheet" href="/summerNote/summernote-lite.css">
+<script>
+	$(document)
+			.ready(
+					function() {
+						$('#summernote')
+								.summernote(
+										{
+											toolbar : [
+													[ 'fontname',
+															[ 'fontname' ] ],
+													[ 'fontsize',
+															[ 'fontsize' ] ],
+													[
+															'style',
+															[
+																	'bold',
+																	'italic',
+																	'underline',
+																	'strikethrough',
+																	'clear' ] ],
+													[
+															'color',
+															[ 'forecolor',
+																	'color' ] ],
+													[ 'table', [ 'table' ] ],
+													[
+															'para',
+															[ 'ul', 'ol',
+																	'paragraph' ] ],
+													[ 'height', [ 'height' ] ],
+													[
+															'insert',
+															[ 'picture',
+																	'link',
+																	'video' ] ],
+													[
+															'view',
+															[ 'fullscreen',
+																	'help' ] ] ],
+											height : "500",
+											lang : "ko-KR",
+											fontNames : [ 'Arial',
+													'Arial Black',
+													'Comic Sans MS',
+													'Courier New', '맑은 고딕',
+													'궁서', '굴림체', '굴림', '돋움체',
+													'바탕체' ],
+											fontSizes : [ '8', '9', '10', '11',
+													'12', '14', '16', '18',
+													'20', '22', '24', '28',
+													'30', '36', '50', '72' ],
+										});
+					});
+</script>
 
 
 </head>
 <body>
 	<main class="warp-main">
-		<div th:replace="~{stock/nnaside :: nnaside}"></div>
+		<div th:replace="~{/stock/notice-side :: side}"></div>
+		<div style="flex: 1">
+			<th:block th:replace="~{layout/header :: header}"></th:block>
 		<div class="main">
 			<div class="title">
 				<h1 class="noticeTitle" th:text="${detail.boardTitle}"></h1>
@@ -31,15 +102,8 @@
 				</div>
 				
 			
-			<table class="notice_detail">
+			<table id="detail-view" class="notice_detail">
 				
-				
-				<thead>
-					<tr>
-						
-						
-					</tr>
-				</thead>
 				
 				<tbody>
 					<th:block>
@@ -58,12 +122,12 @@
 					
 					<tr>
 						<td>
-							<div>
+							<div class="selectPost">
 								<a href="/members/notice"><button>목록</button></a>
-								<a><button>수정</button></a>
+								<button type="button" onclick="btnUpdateClicked()">수정</button>
 								
-								<form action="|/members/detail/${detail.boardNo}|" method="post">
-									<input type="hidden" name="_method" value="delete">
+								<form th:action="|/members/notice/${detail.boardNo}|" method="post">
+									<input type="hidden" name="_method" value="delete" />
 									<button type="submit">삭제</button>
 								</form>
 								
@@ -76,13 +140,60 @@
 				
 				
 			</table>
-			
-				
-			
-		</div>
-		
-	</main>
-	
-</body>
+			<script type="text/javascript">
+				function btnUpdateClicked() {
 
-</html>
+					//const element = document.getElementById("intro");
+					const element = document.querySelector("#detail-view");
+					element.style.display = "none";
+
+
+					const updateView = document.querySelector("#update-view");
+					updateView.style.display = "block";
+				}
+
+				function btnCancelClicked() {
+
+					//const element = document.getElementById("intro");
+					const element = document.querySelector("#detail-view");
+					element.style.display = "block";
+
+
+					const updateView = document.querySelector("#update-view");
+					updateView.style.display = "none";
+				}
+
+			</script>
+			
+			<form method="post" th:action="|/members/notice/${detail.boardNo}|" id="update-view" style="display: none;">
+				
+			<div class="form bn">
+				<h1 class="title"></h1>
+					<div class="flex">
+						<h1 class="doc-title flex center">제목</h1>
+						<input type="text" class="title-content" name="boardTitle" th:value="${boardTitle}">
+					</div>
+			</div>
+			
+			   
+		
+			    <textarea id="summernote"  type="hidden" name="boardContent" th:value="${boardContent}"></textarea>
+			    
+				<div class="postBtn">  
+					
+					<input type="hidden" name="no" th:value="${detail.boardNo}">
+					<input type="hidden" name="_method" value="put">
+			  	    <button type="submit">수정완료</button>
+					<button type="button" onclick="btnCancelClicked()">취소</button>
+				</div>  
+			
+			</form>
+			
+			</div>
+			</div>
+			
+			</main>
+			
+			</body>
+			
+			</html>

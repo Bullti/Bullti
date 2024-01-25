@@ -22,23 +22,23 @@
 				<thead>
 					<tr>
 						<th style="width: 160px">매장명</th>
-						<th style="width: 370px">주소</th>
+						<th style="width: 380px">주소</th>
 						<th style="width: 130px">상세주소</th>
-						<th style="width: 130px">전화번호</th>
-						<th style="width: 127px">개업일</th>
+						<th style="width: 160px">전화번호</th>
+						<th style="width: 180px">개업일</th>
 					</tr>
 				</thead>
 				<tbody id="dynamic_table">
 					<tr th:each="post : ${list}" th:if="${post.closedAt == null}"
 						style="margin-left: 84px;">
 						<td style="width: 160px" th:text="${post.name}"></td>
-						<td style="width: 370px" th:text="${post.address}"></td>
+						<td style="width: 380px" th:text="${post.address}"></td>
 						<td style="width: 130px" th:text="${post.address2}"></td>
-						<td style="width: 130px" th:text="${post.ph}"></td>
-						<td style="width: 127px"
+						<td style="width: 160px" th:text="${post.ph}"></td>
+						<td style="width: 180px"
 							th:text="${#temporals.format(post.createdAt)}"></td>
 						<td>
-						<td><a th:href="|/fredit/${post.id}|"> 수정 </a></td>
+						<td><a th:href="|/fredit/${post.id}|"><button>상세</button></a></td>
 					</tr>
 				</tbody>
 			</table>
