@@ -3,7 +3,7 @@ package com.nowon.bul.domain.entity.member;
 
 import java.util.Set;
 
-
+import org.springframework.aop.support.DelegatePerTargetObjectIntroductionInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.nowon.bul.department.DeEntity;
 import com.nowon.bul.domain.dto.ApprovalMemberDTO;
+import com.nowon.bul.domain.dto.MemberListDTO;
 import com.nowon.bul.domain.entity.approval.ApprovalDoc;
 
 import java.time.LocalDate;
@@ -114,6 +115,17 @@ public class Member {
 	
 	public ApprovalMemberDTO toApprovalMemberDTO() {
 		return ApprovalMemberDTO.builder().name(name).build();
+	}
+	
+	public MemberListDTO toListDTO() {
+		return MemberListDTO.builder()
+				.deptName(dept.getDeptName())
+				.name(name)
+				.id(id)
+				.rank(rank)
+				.tel(phone)
+				.joinCompanyDate(joinCompanyDate)
+				.build();
 	}
 	
 }
