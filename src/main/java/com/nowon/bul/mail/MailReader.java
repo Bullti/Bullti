@@ -5,7 +5,8 @@
 	import java.text.ParseException;
 	import java.text.SimpleDateFormat;
 	import java.util.Date;
-	import java.util.Properties;
+import java.util.List;
+import java.util.Properties;
 	
 	import javax.mail.Address;
 	import javax.mail.Folder;
@@ -45,10 +46,10 @@
 	     * @param password
 	     * @param startDate
 	     * @param endDate
+	     * @return 
 	     * @throws MessagingException
 	     */
-	    public void receiveMailAttachedFile(String userName, String password, Date startDate, Date endDate)
-	            throws MessagingException {
+	    public List<MailDTO> receiveMailAttachedFile(String userName, String password, Date startDate, Date endDate) {
 	    	
 	    	System.out.println("receiveMailAttachedFile 시작");
 	    	
@@ -145,5 +146,6 @@
 	        }
 	        
 	        System.out.println("receiveMailAttachedFile 종료");
+			return null;
 	    }
 	}
