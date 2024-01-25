@@ -1,7 +1,9 @@
 package com.nowon.bul.domain.entity.member;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+@Getter
 @RequiredArgsConstructor
 public enum Rank {
 	
@@ -12,4 +14,5 @@ public enum Rank {
 	StoreManager("점장");
 	
 	private final String rankName;
+	
 }

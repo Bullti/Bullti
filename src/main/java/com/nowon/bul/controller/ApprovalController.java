@@ -39,9 +39,7 @@ public class ApprovalController {
 	@GetMapping("/write")
 	public String writePage(Model model, Authentication authentication) {
 		String MemberName = authentication.getName();
-		System.out.println(">>>>>>>>>>>>>"+MemberName);
 		ApprovalMemberDTO member = memberService.getMemberByName(MemberName);
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>"+member.toString());
 		List<ApprovalDeptList> deptList = deptService.getApprovalList();
 		
 		model.addAttribute("member", member);
@@ -53,19 +51,15 @@ public class ApprovalController {
 	//임시저장함
 	@GetMapping("/temp/list")
 	public String tempLlist() {
-		
 		return "/views/approval/tempList";
 	}
 	
+	
+	//결재선 지정 -> 부서 선택시 멤버 리스트 반환
 	@ResponseBody
 	@GetMapping("/members")
 	public List<ApprovalMemberListDTO> approvalMemberList(@RequestParam(name = "deptName") String deptName) {
-		System.out.println(">>>>>>>>>>>>>부서이름 : " + deptName);
-		List<ApprovalMemberListDTO> list = null;
-		list = memberService.getApprovalList(deptName);
-		for(ApprovalMemberListDTO dto : list) {
-			System.out.println(">>>>>>>>>>dto : "+ dto);
-		}
+		List<ApprovalMemberListDTO> list = memberService.getApprovalList(deptName);
 		return list;
 	}
 }

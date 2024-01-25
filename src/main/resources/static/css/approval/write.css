@@ -3,7 +3,7 @@
 .main {
 	width: 1000px;
 	display: flex;
-	padding: 20px;
+	padding: 0 40px;
 }
 .main > .list > li{
 	margin-right: 10px; 
@@ -76,4 +76,7 @@ tbody > .wrap > th {
 }
 .bn {
 	margin-bottom: 10px;
+}
+.file-aera {
+	height: 50px;
 }
