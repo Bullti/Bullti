@@ -24,7 +24,11 @@ public interface MemberService {
 	//사원 조회 리스트
 	PageResultDTO<MemberListDTO, Member> getFindAllList(PageRequestDTO pageRequestDTO);
 
+	//사원번호 중복 검사
 	boolean checkId(String id);
+
+	//사원번호 유효성 검사
+	boolean patternId(String id);
 
 	
 }

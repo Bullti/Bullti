@@ -35,11 +35,17 @@
 	width: 280px;
 	height: 100%;
 }
-
+.approval-modal>.modal-bady > .modal-content > .de-form > .depart {
+	padding: 5px;
+}
 .approval-modal>.modal-bady > .modal-content > .em-form {
 	border: 1px solid #222;
 	width: 280px;
 	height: 100%;
+}
+.approval-modal>.modal-bady > .modal-content > .em-form > .row {
+	padding: 5px;
+	cursor: pointer;
 }
 .approval-modal>.modal-bady > .modal-content > .btn-form {
 	width: 50px;
@@ -89,14 +95,16 @@
 
 /* 트리 구조 스타일 */
 .depart ul {
-    padding-left: 20px;
-    border-left: 1px solid #ccc;
+   padding-left: 20px;
+    /* border-left: 1px solid #ccc; */
     margin-left: 10px;
+    margin-top: 10px;
 }
 
 .depart ul ul {
-    border-left: none;
+   border-left: none;
     margin-left: 0;
+    margin-left: 10px;
 }
 
 /***********************************/
