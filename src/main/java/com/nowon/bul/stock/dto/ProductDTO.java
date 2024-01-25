@@ -12,8 +12,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Builder
-
-
 @Getter
 @Setter
 public class ProductDTO {
