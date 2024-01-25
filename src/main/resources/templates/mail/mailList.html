@@ -7,20 +7,42 @@
     <title>Mail Reader</title>
 </head>
 <body>
-    <h1>바보들의Mail</h1>
+    <h1>메일 목록</h1>
 
     <form id="mailForm">
-    <label for="startDate">Start Date:</label>
-    <input type="date" id="startDate" name="startDate" required>
+        <label for="startDate">시작 날짜:</label>
+        <input type="date" id="startDate" name="startDate" required>
 
-    <label for="endDate">End Date:</label>
-    <input type="date" id="endDate" name="endDate" required>
+        <label for="endDate">종료 날짜:</label>
+        <input type="date" id="endDate" name="endDate" required>
 
-    <!-- 버튼 클릭 시 getMailData 함수 실행 -->
-    <button type="button" onclick="getMailData()">Get Mail Data</button>
-	</form>
+        <!-- 버튼 클릭 시 getMailData 함수 실행 -->
+        <button type="button" onclick="getMailData()">메일 데이터 가져오기</button>
+    </form>
 
-    <div id="mailResults"></div>
+    <div id="mailResults">
+        <table>
+            <thead>
+                <tr>
+                    <th>보낸 사람</th>
+                    <th>제목</th>
+                    <th>보낸 날짜</th>
+                    <th>내용</th>
+                    <th>첨부 파일</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Thymeleaf의 th:each를 사용하여 메일 목록을 반복 -->
+                <tr th:each="mail : ${mailList}">
+                    <td th:text="${mail.from}"></td>
+                    <td th:text="${mail.subject}"></td>
+                    <td th:text="${mail.sentDate}"></td>
+                    <td th:text="${mail.message}"></td>
+                    <td th:text="${mail.attachments}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
     <script>
         function getMailData() {
@@ -35,35 +57,12 @@
                     displayMailData(data);
                 })
                 .catch(error => {
-                    console.error('Error:', error);
+                    console.error('에러:', error);
                     var mailResultsDiv = document.getElementById("mailResults");
-                    mailResultsDiv.innerHTML = "<p>Error occurred. Please try again.</p>";
+                    mailResultsDiv.innerHTML = "<p>오류가 발생했습니다. 다시 시도해주세요.</p>";
                 });
         }
-
-        function displayMailData(data) {
-            var mailResultsDiv = document.getElementById("mailResults");
-
-            if (data.status === 'success') {
-                var mailList = data.data;
-                var html = "<h2>Mail Data</h2><ul>";
-
-                mailList.forEach(mail => {
-                    html += "<li>";
-                    html += "<strong>From:</strong> " + mail.from + "<br>";
-                    html += "<strong>Subject:</strong> " + mail.subject + "<br>";
-                    html += "<strong>Sent Date:</strong> " + mail.sentDate + "<br>";
-                    html += "<strong>Message:</strong> " + mail.message + "<br>";
-                    html += "<strong>Attachments:</strong> " + mail.attachments + "<br>";
-                    html += "</li>";
-                });
-
-                html += "</ul>";
-                mailResultsDiv.innerHTML = html;
-            } else {
-                mailResultsDiv.innerHTML = "<p>Error occurred. Please try again.</p>";
-            }
-        }
+        
     </script>
 </body>
 </html>

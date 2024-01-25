@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
+
+<div class="side" th:fragment="side">
+	<h1 class="title">메일</h1>
+	<div class="btn center flex">
+		<a class="flex center" href="/">새 메일 작성</a>
+	</div>
+	<div class="tap">
+		<ul>
+			<h2 class="tap-title">메일함</h2>
+			<li><a href="/mail/list">받은메일함</a></li>
+		</ul>		
+	</div>
+</div>
+
+</html>
