@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.nowon.bul.stock.dto.PurchaseDTO;
+import com.nowon.bul.stock.entity.ProductEntity;
 import com.nowon.bul.stock.entity.PurchaseEntity;
 import com.nowon.bul.stock.repository.ProductRepository;
 import com.nowon.bul.stock.repository.PurchaseRepository;
@@ -41,7 +42,7 @@ public class PurchaseServiceImpl implements PurchaseService{
 	@Override
 	public List<PurchaseDTO> getAllPurchases() {
 		
-		return purchaseRepository.findAll().stream()
+		return purchaseRepository.getAllPurchases().stream()
 				.map(PurchaseEntity::toPurchaseDTO)
 				.collect(Collectors.toList())
 				;
