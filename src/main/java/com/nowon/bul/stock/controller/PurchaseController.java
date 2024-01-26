@@ -55,8 +55,6 @@ public class PurchaseController {
 		return "stock/purchase-complete";
 	}
 
-	
-	
-	
+
 	
 }

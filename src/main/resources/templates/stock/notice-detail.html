@@ -22,6 +22,7 @@
 <link rel="stylesheet" href="/css/stock/noticechj.css">
 
 <link rel="stylesheet" href="/summerNote/summernote-lite.css">
+<link rel="stylesheet" href="/css/stock/notice-update.css">
 <script>
 	$(document)
 			.ready(
@@ -179,12 +180,12 @@
 		
 			    <textarea id="summernote"  type="hidden" name="boardContent" th:value="${boardContent}"></textarea>
 			    
-				<div class="postBtn">  
+				<div class="postBtn">  	
 					
 					<input type="hidden" name="no" th:value="${detail.boardNo}">
 					<input type="hidden" name="_method" value="put">
-			  	    <button type="submit">수정완료</button>
-					<button type="button" onclick="btnCancelClicked()">취소</button>
+			  	    <button class="updateButton" type="submit"><h1>수정</h1></button>
+					<button class="updateButton" type="button" onclick="btnCancelClicked()"><h1>취소</h1></button>
 				</div>  
 			
 			</form>

@@ -25,7 +25,6 @@ public class PurchaseDTO {
 	private int totalPrice;
 	private LocalDateTime purchaseDate;
 	private int ea;
-	
 
 
 }

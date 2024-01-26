@@ -32,6 +32,7 @@ public class PurchaseEntity extends BaseEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int purchaseNum;
+
 	
 	
 	@ManyToOne
