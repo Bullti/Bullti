@@ -27,7 +27,7 @@ public class PurchaseServiceImpl implements PurchaseService{
 		
 		//PurchaseEntity 생성
 		PurchaseEntity purchaseEntity = PurchaseEntity.builder()
-				.product(dto.getProduct())
+				
 				.ea(dto.getEa())
 				.build();
 		
@@ -37,7 +37,7 @@ public class PurchaseServiceImpl implements PurchaseService{
 		
 	}
 
-	/*
+	
 	@Override
 	public List<PurchaseDTO> getAllPurchases() {
 		
@@ -46,7 +46,7 @@ public class PurchaseServiceImpl implements PurchaseService{
 				.collect(Collectors.toList())
 				;
 	}
-	*/
+	
 	
 	
 	

@@ -23,25 +23,25 @@ public class PurchaseController {
 	private PurchaseService purchaseService;
 	
 	
-	/*
+	
 	@GetMapping("/members/purchase")
 	public String purchase(Model model) {
-		model.addAttribute("purchases", purchaseService.getAllPurchases());
+		model.addAttribute("products", productService.getAllProducts());
 		return "stock/purchase";
 	}
-	*/
+	
 	
 	
 	@GetMapping("/members/purchase-post")
-	public String purchase_post() {
-		
+	public String purchase_post(Model model) {
+		model.addAttribute("purchases", purchaseService.getAllPurchases());
 		return "stock/purchase-post";
 	}
 	
 	@ResponseBody
 	@PostMapping("/members/purchase-post")
 	public String purchase_post(@RequestBody PurchaseDTO dto) {
-		System.out.println(">>>>"+dto.getProduct());
+		System.out.println(">>>>"+dto.getProductName());
 		System.out.println(">>>>"+dto.getEa());
 
 		purchaseService.purchaseSave(dto);
