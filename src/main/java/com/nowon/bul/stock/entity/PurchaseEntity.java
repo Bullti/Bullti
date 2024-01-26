@@ -35,7 +35,7 @@ public class PurchaseEntity extends BaseEntity{
 	
 	
 	@ManyToOne
-	@JoinColumn(name = "product_productNum")
+	@JoinColumn(name = "product_num")
 	private ProductEntity product;
 	
 	
@@ -54,12 +54,12 @@ public class PurchaseEntity extends BaseEntity{
 	@Column(columnDefinition = "timestamp(6) null", nullable = false)
 	private LocalDateTime purchaseDate;
 	
-	/*
+	
 	
 	public PurchaseDTO toPurchaseDTO(){
 		
 		return PurchaseDTO.builder()
-				.product(product.getProductName())
+				.productName(product.getProductName())
 				.franchiseName(franchise.getName())
 				.ea(ea)
 				.totalPrice(this.calculateTotalPrice())
@@ -71,7 +71,7 @@ public class PurchaseEntity extends BaseEntity{
 		return ea * product.getProductPrice();
 	}
 	
-	*/
+	
 	
 	
 	

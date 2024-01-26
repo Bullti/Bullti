@@ -6,10 +6,8 @@ import com.nowon.bul.stock.dto.PurchaseDTO;
 
 public interface PurchaseService {
 	
-	/*
-	List<PurchaseDTO> getAllPurchases();
-	*/
 	
+	List<PurchaseDTO> getAllPurchases();
 	
 	void purchaseSave(PurchaseDTO dto);
 
