@@ -73,7 +73,7 @@
 					<td style="width: 150px" th:text="${pur.totalPrice}">productPrice</td>
 					<td style="width: 300px" th:text="${#temporals.format(pur.purchaseDate, pur.purchaseDate.year != #dates.createNow().year ? 'MM-dd HH:mm:ss' : 'yyyy-MM-dd HH:mm:ss')}">productDate</td>
 				</tr>
-				<tr th:if="${#lists.isEmpty(products)}">
+				<tr th:if="${#lists.isEmpty(purchases)}">
 					<td colspan="5" style="width:100%;display:block; text-align: center;padding: 2em 0">
 						등록된 발주가 존재하지 않습니다.
 					</td>
