@@ -9,8 +9,9 @@ import com.nowon.bul.stock.entity.PurchaseEntity;
 
 public interface PurchaseRepository extends JpaRepository<PurchaseEntity, Integer>{
 
-	@Query("SELECT p FROM PurchaseEntity p JOIN FETCH p.product JOIN FETCH p.franchise")
-    List<PurchaseEntity> getAllPurchases();
+	@Query("SELECT p FROM PurchaseEntity p JOIN FETCH p.product")
+	List<PurchaseEntity> getAllPurchases();
+
 	
 	
 }
