@@ -36,12 +36,12 @@ public class PurchaseEntity extends BaseEntity{
 	private int purchaseNum;
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "product_num")
 	private ProductEntity product;
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "franchise_id")
 	private FranEntity franchise;
 	
@@ -56,7 +56,14 @@ public class PurchaseEntity extends BaseEntity{
 	@Column(columnDefinition = "timestamp(6) null", nullable = false)
 	private LocalDateTime purchaseDate;
 	
-	
+	public void setProduct(ProductEntity product) {
+	    this.product = product;
+	    this.totalPrice = calculateTotalPrice();
+	    if (product != null) {
+	        // 강제로 product 엔터티를 로딩하도록 함
+	        product.getProductNum();
+	    }
+	}
 	
 	public PurchaseDTO toPurchaseDTO(){
 		
@@ -69,7 +76,10 @@ public class PurchaseEntity extends BaseEntity{
 		    }
 
 		    if (franchise != null) {
-		        builder.franchiseName(franchise.getName());
+		        builder.name(franchise.getName());
+		    }else {
+		        // If franchise is null, set a default value ("테스트")
+		        builder.name("테스트");
 		    }
 
 		

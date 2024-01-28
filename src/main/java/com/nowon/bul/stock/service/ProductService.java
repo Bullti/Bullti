@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.security.core.Authentication;
 
 import com.nowon.bul.stock.dto.ProductDTO;
+import com.nowon.bul.stock.entity.ProductEntity;
 
 public interface ProductService {
 	
@@ -12,6 +13,6 @@ public interface ProductService {
 	
 	String registerProduct(ProductDTO productDTO);
 	
-	
+	ProductEntity getProductByName(String productName);
 	
 }
