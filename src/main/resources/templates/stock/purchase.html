@@ -14,25 +14,27 @@
 <link rel="stylesheet" href="/css/stock/homeTemp.css">
 <link rel="stylesheet" href="/css/stock/stock-side.css">
 <script>
-	function placeOrder(btn){
-		var productNum=$(btn).parents(".product-wrap").find(".productNum").val(); // input 태그에 value를 읽어들인다.
-		var productName=$(btn).parents(".product-wrap").find(".productName").text(); // 일반태그내부의 글(text)을 읽어들인다
-		var ea=prompt("발주할 상품["+productName+"] 수량을 입력하세요","1");
-		//console.log("수량:"+ea);
-		
-	$.ajax({
+function placeOrder(button) {
+  var row = $(button).closest("tr");
+  var productName = row.find(".productName").text();
+  var productPrice = row.find(".productPrice").text();
+  var ea = prompt("발주할 상품 [" + productName + "] 수량을 입력하세요", "1");
+
+  $.ajax({
     type: "POST",
     url: "/members/purchase-post",
-    contentType: "application/json",  // Content-Type을 application/json으로 설정
-    data: JSON.stringify({ productNum: productNum, ea: ea }),  // 데이터를 JSON 문자열로 변환
+    contentType: "application/json",
+    data: JSON.stringify({ productName: productName, ea: ea, productPrice: productPrice }),
     success: function (response) {
-        alert(response);
+      alert(response);
+      location.reload(); // 성공 시 페이지 새로고침
     },
     error: function (error) {
-        alert("주문 등록 중 오류가 발생했습니다: " + error.responseText);
+      alert("주문 등록 중 오류가 발생했습니다: " + error.responseText);
     }
-});
-	}
+  });
+}
+
 </script>
 </head>
 <body>
@@ -95,8 +97,9 @@
 					<td style="width: 150px" th:text="${prod.productPrice}">productPrice</td>
 					<td style="width: 150px">
 						<input type="hidden" th:value="${prod.productNum}" class="productNum">
-						<button style="font-size: 12px; padding: 4px 12px; background-color: var(--bullti1); color: white; border: none; cursor: pointer;" onclick="placeOrder(this)">발주</button></td>
-					
+						<button style="font-size: 12px; padding: 4px 12px; background-color: var(--bullti1); color: white; border: none; cursor: pointer;" onclick="placeOrder(this)">발주</button>
+
+
 				</tr>
 				<tr th:if="${#lists.isEmpty(products)}">
 					<td colspan="7" style="width:100%;display:block; text-align: center;padding: 2em 0">

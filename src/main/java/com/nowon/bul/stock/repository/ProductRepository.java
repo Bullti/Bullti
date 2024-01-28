@@ -1,7 +1,10 @@
 package com.nowon.bul.stock.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Optional;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.nowon.bul.stock.entity.ProductEntity;
 
@@ -18,5 +21,9 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
 	 * 이렇게 하면 데이터베이스와의 상호작용이 간결하게 처리됩니다.
 	 */
 	
+	Optional<ProductEntity> findByProductName(String productName);
+	
+	@Query("SELECT p FROM ProductEntity p WHERE p.productName = :productName")
+    ProductEntity findByName(@Param("productName") String productName);
 	
 }
