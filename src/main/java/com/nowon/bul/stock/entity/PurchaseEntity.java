@@ -76,7 +76,10 @@ public class PurchaseEntity extends BaseEntity{
 		    }
 
 		    if (franchise != null) {
-		        builder.franchiseName(franchise.getName());
+		        builder.name(franchise.getName());
+		    }else {
+		        // If franchise is null, set a default value ("테스트")
+		        builder.name("테스트");
 		    }
 
 		
