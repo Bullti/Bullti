@@ -35,8 +35,10 @@ public class AttendanceController {
 		return "views/emp/atten/list";
 	}
 	
+	//출근시간 반환
+	@ResponseBody
 	@GetMapping("/status")
-	public @ResponseBody String attendanceList(Authentication auth) {
+	public String attendanceList(Authentication auth) {
 		return attendanceService.workingStatus(auth);
 	}
 }
