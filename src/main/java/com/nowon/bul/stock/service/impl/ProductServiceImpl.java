@@ -40,4 +40,9 @@ public class ProductServiceImpl implements ProductService{
 		
 	}
 	 
+	
+	@Override
+	public ProductEntity getProductByName(String productName) {
+	    return productRepository.findByName(productName);
+	}
 }
