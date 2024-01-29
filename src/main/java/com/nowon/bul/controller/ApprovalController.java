@@ -6,9 +6,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.nowon.bul.department.DeService;
 import com.nowon.bul.domain.dto.ApprovalDeptList;
@@ -32,7 +35,7 @@ public class ApprovalController {
 	
 	@GetMapping("")
 	public String approvalModal() {
-		return "/views/approval/home";
+		return "views/approval/home";
 	}
 	
 	
@@ -45,13 +48,13 @@ public class ApprovalController {
 		model.addAttribute("member", member);
 		model.addAttribute("deptList", deptList);
 		
-		return "/views/approval/write";
+		return "views/approval/write";
 	}
 	
 	//임시저장함
 	@GetMapping("/temp/list")
 	public String tempLlist() {
-		return "/views/approval/tempList";
+		return "views/approval/tempList";
 	}
 	
 	
@@ -61,5 +64,17 @@ public class ApprovalController {
 	public List<ApprovalMemberListDTO> approvalMemberList(@RequestParam(name = "deptName") String deptName) {
 		List<ApprovalMemberListDTO> list = memberService.getApprovalList(deptName);
 		return list;
+	}
+	
+	
+	//결재선 저장
+	@ResponseBody
+	@PostMapping("/line")
+	public ModelAndView approvalLine(ModelAndView model, EmpDTO dto) {
+		for(long val : dto.getEmps()) {
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>"+val);
+		}
+		
+		return model;
 	}
 }

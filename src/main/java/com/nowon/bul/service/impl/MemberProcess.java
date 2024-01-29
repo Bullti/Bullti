@@ -48,7 +48,7 @@ public class MemberProcess implements MemberService{
 	@Override
 	public List<ApprovalMemberListDTO> getApprovalList(String DeptName) {
 		List<ApprovalMemberListDTO> list = memberRepo.findByDept_deptName(DeptName).stream()
-				.map(i -> ApprovalMemberListDTO.builder().name(i.getName()).rank(i.getRank().getRankName()).build()).collect(Collectors.toList());
+				.map(i -> ApprovalMemberListDTO.builder().name(i.getName()).rank(i.getRank().getRankName()).no(i.getNo()).build()).collect(Collectors.toList());
 		return list;
 	}
 

@@ -5,26 +5,24 @@
 		<div class="modal-bady">
 			<h3>결재선 설정</h3>
 			<div class="flex modal-content">
-			
+
 				<div class="de-form">
 					<ul class="depart">
 						<li th:each="dept : ${deptList}" th:if="${dept.parentId == 0}">
-							<span class="clickable" onclick="getEmployee(this)" >[[${dept.deptName}]]</span>
+							<span class="clickable" onclick="getEmployee(this)">[[${dept.deptName}]]</span>
 							<ul>
-								<li th:each="subDept : ${dept.child}">
-									<span class="clickable" onclick="getEmployee(this)">[[${subDept.deptName}]]</span>
+								<li th:each="subDept : ${dept.child}"><span
+									class="clickable" onclick="getEmployee(this)">[[${subDept.deptName}]]</span>
 									<ul>
-										<li  th:each="subsubDept : ${subDept.child}">
-											<span class="clickable" onclick="getEmployee(this)">[[${subsubDept.deptName}]]</span>
+										<li th:each="subsubDept : ${subDept.child}"><span
+											class="clickable" onclick="getEmployee(this)">[[${subsubDept.deptName}]]</span>
 										</li>
-									</ul>
-								</li>
+									</ul></li>
 							</ul>
 						</li>
 					</ul>
 				</div>
-				<div class="em-form">
-				</div>
+				<div class="em-form"></div>
 				<div class="btn-form flex col center">
 					<img src="/img/right-arrow.png" onclick="addAproval()"> <img
 						src="/img/left-arrow.png" onclick="removeAproval()">
@@ -33,11 +31,12 @@
 					<div class="title">
 						<h3>결재</h3>
 					</div>
-					<div class="wrap"></div>
+					<div class="wrap">
+					</div>
 				</div>
 			</div>
 			<div class="btn-area flex center">
-				<button>확인</button>
+				<button onclick="approval_line()">확인</button>
 				<button onclick="btn_approval()">취소</button>
 			</div>
 		</div>
@@ -47,6 +46,29 @@
 				modal.css('display', modal.css('display') === 'none' ? 'flex'
 						: 'none');
 			}
+		</script>
+		<script type="text/javascript">
+		 function approval_line() {
+		        var inputValues = $(".re-form .wrap p input").map(function() {
+		            return parseInt($(this).val(), 10);
+		        }).get(); // 배열
+				
+		        console.log(inputValues);
+		        
+		        $.ajax({
+		            type: "POST",
+		            url: "/approval/line",
+		            data: {emps: inputValues},
+		            dataType: "json",
+		            success: function(data) {
+		                // Ajax 요청이 성공한 후에 실행되는 로직
+		                btn_approval();
+		            },
+		            error: function(error) {
+		                console.error("Ajax 요청 중 에러 발생:", error);
+		            }
+		        });
+		    };
 		</script>
 	</div>
 </body>

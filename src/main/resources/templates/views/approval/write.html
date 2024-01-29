@@ -105,7 +105,7 @@
 		for (var i = 0; i < employeeList.length; i++) {
 			var employee = employeeList[i];
 			var employeeInfo = "<p class='target-list'>" + employee.name + " ("
-					+ employee.rank + ")</p>";
+					+ employee.rank + ")<input type='hidden' value='"+ employee.no + "'></p>";
 
 			$(".em-form").append(employeeInfo);
 		}
@@ -190,32 +190,14 @@
 					<h1 class="title">
 						결재선<a onclick="btn_approval()">결재선설정</a>
 					</h1>
-					<table>
-						<tbody>
-							<tr class="wrap">
-								<th rowspan="3">결재</th>
-								<th>과장</th>
-								<th>부장</th>
-								<th>이사</th>
-								<th></th>
-								<th></th>
-							</tr>
-							<tr class="sign">
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr class="name">
-								<td>김과장</td>
-								<td>최부장</td>
-								<td>박이사</td>
-								<td></td>
-								<td></td>
-							</tr>
-						</tbody>
-					</table>
+					<ul class="approval-line flex">
+						<li class="title flex center">결재</li>
+						<li>
+							<div class="flex center rank"></div>
+							<div class="sign flex center"></div>
+							<div class="flex center name"></div>
+						</li>
+					</ul>
 				</div>
 				<div class="form bn">
 					<h1 class="title">상세입력</h1>
