@@ -1,6 +1,6 @@
 package com.nowon.bul.domain.dto;
 
-import com.nowon.bul.domain.entity.FranEntity;
+import com.nowon.bul.domain.entity.fran.FranEntity;
 
 import lombok.Setter;
 

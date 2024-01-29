@@ -2,6 +2,10 @@ package com.nowon.bul.stock.dto;
 
 import java.time.LocalDateTime;
 
+import com.nowon.bul.stock.entity.ProductEntity;
+import com.nowon.bul.stock.entity.PurchaseEntity;
+import com.nowon.bul.stock.entity.PurchaseEntity.PurchaseEntityBuilder;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,8 +19,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PurchaseDTO {
 	
-	private int purchaseNum;
 	private String productName;
+	private int purchaseNum;
 	private String name;
 	private int totalPrice;
 	private LocalDateTime purchaseDate;

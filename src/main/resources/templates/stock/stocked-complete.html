@@ -30,6 +30,18 @@
 			<h2></h2>
 		</div>
 		
+		<div class="container_point">
+			<ul class="list_group">
+				<li>
+					<a href="/members/stocked" class="list_group_item">
+						<span class="text_list">입고 대기</span>
+					</a>
+					<a href="/members/stocked-complete" class="list_group_item">
+						<span class="text_list">입고 완료</span>
+					</a>
+				</li>
+			</ul>
+		</div>
 		
 		<div class="tableup">
 			<div class="page_entries">페이지 스크롤</div>
@@ -46,7 +58,7 @@
 					<th style="width: 130px">공급가액</th>
 					<th style="width: 130px">상품단가</th>
 					<th style="width: 130px">작성자</th>
-					<th style="width: 130px">창고선택</th>
+					<th style="width: 130px">입고일자</th>
 				</tr>
 				
 			</thead>
@@ -72,9 +84,9 @@
 			
 			<tfoot>
 				<tr>
-					<td colspan="6" class="flex center" id="table_bottom">
-						<div class="cancel"><button style="font-size: 12px; padding: 4px 12px; background-color: var(--bullti1); color: white; border: none; cursor: pointer;" onclick="placeOrder('${pur.productPrice}')">초기화</button></div>
-						<div class="purchasing"><button style="font-size: 12px; padding: 4px 12px; background-color: var(--bullti1); color: white; border: none; cursor: pointer;" onclick="placeOrder('${pur.productPrice}')">저장</button></div>
+					<td colspan="7" class="flex center" id="table_bottom">
+						<div class="the_number_of_pages">총 22페이지&nbsp;&nbsp;</div>
+						<div class="paging">1</div>
 					</td>
 				</tr>
 				
