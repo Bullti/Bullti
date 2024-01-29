@@ -14,6 +14,8 @@
 	<link rel="stylesheet" href="/css/stock/homeTemp.css">
 	<link rel="stylesheet" href="/css/stock/stock-side.css">
 
+
+
 </head>
 <body>
 <main>
@@ -56,9 +58,10 @@
 				<tr style="font-size: 14px;">
 					<th style="width: 200px">발주상품명</th>
 					<th style="width: 150px">발주가맹점</th>
-					<th style="width: 150px">발주수량</th>
+					<th style="width: 100px">발주수량</th>
 					<th style="width: 150px">발주총액</th>
-					<th style="width: 250px">발주일자</th>
+					<th style="width: 250px">신청일자</th>
+					<th style="width: 100px">삭제</th>
 				
 				</tr>
 				
@@ -68,13 +71,16 @@
 				
 				<tr th:each="pur:${purchases}">
 					<td style="width: 200px" th:text="${pur.productName}">productName</td>
-					<td style="width: 150px" th:text="${pur.franchiseName}">franchiseId</td>
-					<td style="width: 150px" th:text="${pur.ea}">productWeight</td>
+					<td style="width: 150px" th:text="${pur.name}">franchiseId</td>
+					<td style="width: 100px" th:text="${pur.ea}">productWeight</td>
 					<td style="width: 150px" th:text="${pur.totalPrice}">productPrice</td>
-					<td style="width: 300px" th:text="${#temporals.format(pur.purchaseDate, pur.purchaseDate.year != #dates.createNow().year ? 'MM-dd HH:mm:ss' : 'yyyy-MM-dd HH:mm:ss')}">productDate</td>
-				</tr>
+					<td style="width: 250px" th:text="${#temporals.format(pur.purchaseDate, pur.purchaseDate.year != #dates.createNow().year ? 'MM-dd HH:mm:ss' : 'yyyy-MM-dd HH:mm:ss')}">productDate</td>
+					 <td style="width: 100px">
+					        <button th:attr="data-id=${pur.purchaseNum}" onclick="deletePurchase(this)" style="font-size: 12px; padding: 4px 12px; background-color: var(--bullti1); color: white; border: none; cursor: pointer;">삭제</button>
+					    </td>
+								</tr>
 				<tr th:if="${#lists.isEmpty(purchases)}">
-					<td colspan="5" style="width:100%;display:block; text-align: center;padding: 2em 0">
+					<td colspan="6" style="width:100%;display:block; text-align: center;padding: 2em 0">
 						등록된 발주가 존재하지 않습니다.
 					</td>
 				</tr>
@@ -83,9 +89,9 @@
 			
 			<tfoot>
 				<tr>
-					<td colspan="7" class="flex center" id="table_bottom">
-						<div class="cancel"><button style="font-size: 12px; padding: 4px 12px; background-color: var(--bullti1); color: white; border: none; cursor: pointer;" onclick="placeOrder('${prod.productPrice}')">취소</button></div>
-						<div class="purchasing"><button style="font-size: 12px; padding: 4px 12px; background-color: var(--bullti1); color: white; border: none; cursor: pointer;" onclick="placeOrder('${prod.productPrice}')">저장</button></div>
+					<td colspan="6" class="flex center" id="table_bottom">
+						<div class="cancel"><button style="font-size: 12px; padding: 4px 12px; background-color: var(--bullti1); color: white; border: none; cursor: pointer;" onclick="placeOrder('${pur.productPrice}')">전체취소</button></div>
+						<div class="purchasing"><button style="font-size: 12px; padding: 4px 12px; background-color: var(--bullti1); color: white; border: none; cursor: pointer;" onclick="placeOrder('${pur.productPrice}')">저장</button></div>
 					</td>
 				</tr>
 				
@@ -100,6 +106,27 @@
 <div></div>
 </div>
 </div>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    function deletePurchase(button) {
+        var purchaseNum = button.getAttribute("data-id");
+
+        var form = document.createElement("form");
+        form.method = "POST";
+        form.action = "/members/purchase-post";
+        var methodInput = document.createElement("input");
+        methodInput.type = "hidden";
+        methodInput.name = "_method";
+        methodInput.value = "DELETE";
+        form.appendChild(methodInput);
+
+        document.body.appendChild(form);
+        form.submit();
+    }
+    /*]]>*/
+</script>
+
 </main>
 </body>
 </html>
