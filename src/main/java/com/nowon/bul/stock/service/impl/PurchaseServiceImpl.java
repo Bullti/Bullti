@@ -5,12 +5,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
-import com.nowon.bul.domain.entity.FranEntity;
-import com.nowon.bul.domain.entity.FranEntityRepository;
+import com.nowon.bul.domain.entity.fran.FranEntityRepository;
 import com.nowon.bul.stock.dto.PurchaseDTO;
-import com.nowon.bul.stock.entity.ProductEntity;
 import com.nowon.bul.stock.entity.PurchaseEntity;
 import com.nowon.bul.stock.repository.ProductRepository;
 import com.nowon.bul.stock.repository.PurchaseRepository;
@@ -51,6 +48,15 @@ public class PurchaseServiceImpl implements PurchaseService{
 				.map(PurchaseEntity::toPurchaseDTO)
 				.collect(Collectors.toList())
 				;
+	}
+
+
+	@Override
+	public void deletePurchase(int purchaseNum) {
+	    if (!purchaseRepository.existsById(purchaseNum)) {
+	        throw new IllegalArgumentException("Invalid purchaseNum: " + purchaseNum);
+	    }
+	    purchaseRepository.deleteById(purchaseNum);
 	}
 	
 	

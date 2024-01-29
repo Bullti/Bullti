@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.nowon.bul.domain.entity.FranEntity;
+import com.nowon.bul.domain.entity.fran.FranEntity;
 import com.nowon.bul.stock.dto.PurchaseDTO;
 import com.nowon.bul.stock.dto.PurchaseDTO.PurchaseDTOBuilder;
 
