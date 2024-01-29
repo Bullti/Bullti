@@ -1,16 +1,11 @@
 package com.nowon.bul.service.impl;
 
-import java.time.LocalDateTime;
-import java.util.Date;
-
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.nowon.bul.domain.dto.attendance.AttendanceCheckDTO;
 import com.nowon.bul.domain.dto.attendance.AttendanceDTO;
-import com.nowon.bul.domain.entity.member.MyUser;
 import com.nowon.bul.mybatis.mapper.AttendanceMapper;
 import com.nowon.bul.service.AttendanceService;
 import com.nowon.bul.utils.AuthenUtils;
@@ -50,7 +45,7 @@ public class AttendanceProcess implements AttendanceService {
 		if(Resultdto.getLeaveWorkTime()==null) {
 			result = Resultdto.getGoWorkTime().toString();
 		} else {
-			result = "근무 중 아님";
+			result = "";
 		};
 		return result;
 	}
