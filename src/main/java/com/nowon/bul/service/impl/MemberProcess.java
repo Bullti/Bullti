@@ -19,6 +19,7 @@ import com.nowon.bul.domain.dto.MemberListDTO;
 import com.nowon.bul.domain.dto.MemberSaveDTO;
 import com.nowon.bul.domain.entity.member.Member;
 import com.nowon.bul.domain.entity.member.MemberRepository;
+import com.nowon.bul.domain.entity.member.Rank;
 import com.nowon.bul.service.MemberService;
 import com.nowon.bul.utils.jpaPage.PageRequestDTO;
 import com.nowon.bul.utils.jpaPage.PageResultDTO;
@@ -87,7 +88,9 @@ public class MemberProcess implements MemberService{
 		return Pattern.matches("^[0-9]*$", id);
 	}
 
-
-
+	// storeManager인 멤버 조회
+    public List<Member> getStoreManagers() {
+        return memberRepo.findByRank(Rank.StoreManager);
+    }
 
 }
