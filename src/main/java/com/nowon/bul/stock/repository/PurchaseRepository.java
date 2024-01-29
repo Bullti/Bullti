@@ -12,7 +12,6 @@ public interface PurchaseRepository extends JpaRepository<PurchaseEntity, Intege
 	@Query("SELECT p FROM PurchaseEntity p JOIN FETCH p.product")
 	List<PurchaseEntity> getAllPurchases();
 
-	// 삭제 작업을 위한 메서드 추가
-    void deleteByPurchaseNum(int purchaseNum);
+	
 	
 }

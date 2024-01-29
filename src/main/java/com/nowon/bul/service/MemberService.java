@@ -29,6 +29,5 @@ public interface MemberService {
 
 	//사원번호 유효성 검사
 	boolean patternId(String id);
-
 	
 }
