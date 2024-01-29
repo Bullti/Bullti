@@ -2,7 +2,7 @@ package com.nowon.bul.department;
 
 import org.springframework.stereotype.Service;
 
-import com.nowon.bul.domain.entity.fran.FranEntity;
+import com.nowon.bul.domain.entity.FranEntity;
 
 import lombok.Getter;
 import lombok.Setter;

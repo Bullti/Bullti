@@ -43,6 +43,10 @@
 	width: 280px;
 	height: 100%;
 }
+.approval-modal>.modal-bady > .modal-content > .em-form > .row {
+	padding: 5px;
+	cursor: pointer;
+}
 .approval-modal>.modal-bady > .modal-content > .btn-form {
 	width: 50px;
 	height: 100%;
@@ -88,10 +92,7 @@
 .depart span {
     cursor: pointer;
 }
-.target-list {
-	cursor: pointer;
-	padding: 5px;
-}
+
 /* 트리 구조 스타일 */
 .depart ul {
    padding-left: 20px;
@@ -107,7 +108,7 @@
 }
 
 /***********************************/
-.target-list:hover{
+.em-form > p:hover{
 	background-color: #a9a9a9;
 }
 /**********************************/

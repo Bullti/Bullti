@@ -13,11 +13,8 @@ import com.nowon.bul.domain.dto.FranEditDTO;
 import com.nowon.bul.domain.dto.FranListDTO;
 import com.nowon.bul.domain.dto.FranSaveDTO;
 import com.nowon.bul.domain.dto.FranUpdateDTO;
-import com.nowon.bul.domain.entity.fran.FranEntity;
-import com.nowon.bul.domain.entity.fran.FranEntityRepository;
-import com.nowon.bul.domain.entity.member.Member;
-import com.nowon.bul.domain.entity.member.MemberRepository;
-import com.nowon.bul.domain.entity.member.Rank;
+import com.nowon.bul.domain.entity.FranEntity;
+import com.nowon.bul.domain.entity.FranEntityRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,7 +23,6 @@ import lombok.RequiredArgsConstructor;
 public class FranProcess implements FranService{
 
 	private final FranEntityRepository franEntityRepository;
-	private final MemberRepository memberRepository;
 
 	public String saveFran(FranSaveDTO dto, Authentication auth) {
 		
@@ -92,11 +88,4 @@ public class FranProcess implements FranService{
             franEntityRepository.save(entity);
         }
     }
-
-	@Override
-	public void ownerList(Model model) {
-	    model.addAttribute("owner", memberRepository.findByRank(Rank.StoreManager).stream()
-	            .map(Member::toFranOwnerDTO)
-	            .collect(Collectors.toList()));
-	}
 }

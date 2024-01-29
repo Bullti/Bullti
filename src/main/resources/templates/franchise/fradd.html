@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{layout/common-layout :: commonLayout(~{this::head}, ~{this::main})}">
+	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
 <head>
 <script src="/js/department.js"></script>
 <!-- <link rel="stylesheet" href="/css/department/side.css" /> -->
-<link rel="stylesheet" href="/css/franchise/fradd.css" />
+<link rel="stylesheet" href="/css/Franchise/fradd.css" />
 <link rel="stylesheet" href="/css/approval/homeTemp.css">
 </head>
 <body>
@@ -38,13 +38,6 @@
 								name="ph">
 							<!-- name 속성 추가 -->
 						</div>
-
-						<div>
-							<label for="owner">점주</label> <input type="text" maxlength="10"
-								name="owner">
-							<!-- name 속성 추가 -->
-							<input type="button" value='점주 검색' onclick="openOwnerList()">
-						</div>
 						<div class="button_area">
 							<button class="join_button">
 								<span>등록하기</span>
@@ -62,28 +55,24 @@
 				new daum.Postcode(
 						{
 							oncomplete : function(data) {
+								// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+								// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+								// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
 								var roadAddr = data.roadAddress; // 도로명 주소 변수
 								var extraRoadAddr = ''; // 참고 항목 변수
+								// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+								// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
 								if (data.bname !== ''
 										&& /[동|로|가]$/g.test(data.bname)) {
 									extraRoadAddr += data.bname;
 								}
+								// 우편번호와 주소 정보를 해당 필드에 넣는다.
 								document.getElementById("sample4_roadAddress").value = roadAddr;
 							}
 						}).open();
 			}
-
-			function openOwnerList() {
-                window.open("/search", "OwnerList", "width=600,height=400");
-            }
-			
-			function selectOwner(ownerId, ownerName) {
-		        // 선택한 데이터를 fradd 페이지로 전달
-		        document.getElementById('fraddForm').elements['ownerName'].value = ownerName;
-		        // ownerlist 창 닫기
-		        window.close();
-		    }
 		</script>
 	</main>
+
 </body>
 </html>

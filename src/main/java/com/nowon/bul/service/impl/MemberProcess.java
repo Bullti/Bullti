@@ -19,7 +19,6 @@ import com.nowon.bul.domain.dto.MemberListDTO;
 import com.nowon.bul.domain.dto.MemberSaveDTO;
 import com.nowon.bul.domain.entity.member.Member;
 import com.nowon.bul.domain.entity.member.MemberRepository;
-import com.nowon.bul.domain.entity.member.Rank;
 import com.nowon.bul.service.MemberService;
 import com.nowon.bul.utils.jpaPage.PageRequestDTO;
 import com.nowon.bul.utils.jpaPage.PageResultDTO;
@@ -47,8 +46,9 @@ public class MemberProcess implements MemberService{
 	//결재선 멤버 리스트
 	@Override
 	public List<ApprovalMemberListDTO> getApprovalList(String DeptName) {
+		System.out.println(">>>>>>>>>>>>>>>>>프로세스 실행");
 		List<ApprovalMemberListDTO> list = memberRepo.findByDept_deptName(DeptName).stream()
-				.map(i -> ApprovalMemberListDTO.builder().name(i.getName()).rank(i.getRank().getRankName()).build()).collect(Collectors.toList());
+				.map(i -> ApprovalMemberListDTO.builder().name(i.getName()).build()).collect(Collectors.toList());
 		return list;
 	}
 
@@ -87,9 +87,7 @@ public class MemberProcess implements MemberService{
 		return Pattern.matches("^[0-9]*$", id);
 	}
 
-	// storeManager인 멤버 조회
-    public List<Member> getStoreManagers() {
-        return memberRepo.findByRank(Rank.StoreManager);
-    }
+
+
 
 }

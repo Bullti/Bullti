@@ -1,6 +1,6 @@
 package com.nowon.bul.domain.dto.attendance;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,8 +8,8 @@ import lombok.Setter;
 @Setter
 @Getter
 public class AttendanceDTO {
-	private LocalDateTime goWorkTime;
-	private LocalDateTime leaveWorkTime;
+	private LocalTime goWorkTime;
+	private LocalTime leaveWorkTime;
 	private int regiType;
 	private long memberNo;
 }
