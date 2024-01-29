@@ -12,4 +12,5 @@ import lombok.Setter;
 public class ApprovalMemberListDTO {
 	private String name;
 	private String rank;
+	private long no;
 }
