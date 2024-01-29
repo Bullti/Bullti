@@ -14,7 +14,24 @@
 <link rel="stylesheet" href="/css/stock/homeTemp.css">
 <link rel="stylesheet" href="/css/stock/stock-side.css">
 <script>
-	
+	function placeOrder(btn){
+		var productNum=$(btn).parents(".product-wrap").find(".productNum").val(); // input 태그에 value를 읽어들인다.
+		var productName=$(btn).parents(".product-wrap").find(".productName").text(); // 일반태그내부의 글(text)을 읽어들인다
+		var ea=prompt("발주할 상품["+productName+"] 수량을 입력하세요","1");
+		//console.log("수량:"+ea);
+		
+		$.ajax({
+        type: "POST",
+        url: "/members/purchase-post",
+        data: { productNum: productNum, ea: ea },
+        success: function (response) {
+			alert(response);
+        },
+        error: function (error) {
+            alert("주문 등록 중 오류가 발생했습니다: " + error.responseText);
+        }
+    });
+	}
 </script>
 </head>
 <body>
@@ -57,12 +74,12 @@
 			<thead class="table_h">
 				
 				<tr style="font-size: 14px;">
-					<th style="width: 200px">발주상품명</th>
-					<th style="width: 150px">발주가맹점</th>
-					<th style="width: 150px">발주수량</th>
-					<th style="width: 150px">발주총액</th>
-					<th style="width: 150px">확인일자</th>
-					<th style="width: 150px">입고완료</th>
+					<th style="width: 200px">상품명</th>
+					<th style="width: 150px">상품분류</th>
+					<th style="width: 150px">상품중량</th>
+					<th style="width: 150px">공급가액</th>
+					<th style="width: 150px">상품단가</th>
+					<th style="width: 150px">발주</th>
 				</tr>
 				
 			</thead>
@@ -77,11 +94,11 @@
 					<td style="width: 150px" th:text="${prod.productPrice}">productPrice</td>
 					<td style="width: 150px">
 						<input type="hidden" th:value="${prod.productNum}" class="productNum">
-						<button style="font-size: 12px; padding: 4px 12px; background-color: var(--bullti1); color: white; border: none; cursor: pointer;" onclick="placeOrder(this)">입고</button></td>
+						<button style="font-size: 12px; padding: 4px 12px; background-color: var(--bullti1); color: white; border: none; cursor: pointer;" onclick="placeOrder(this)">발주</button></td>
 					
 				</tr>
 				<tr th:if="${#lists.isEmpty(products)}">
-					<td colspan="6" style="width:100%;display:block; text-align: center;padding: 2em 0">
+					<td colspan="7" style="width:100%;display:block; text-align: center;padding: 2em 0">
 						등록된 상품이 존재하지 않습니다.
 					</td>
 				</tr>
@@ -90,7 +107,7 @@
 			
 			<tfoot>
 				<tr>
-					<td colspan="6" class="flex center" id="table_bottom">
+					<td colspan="7" class="flex center" id="table_bottom">
 						<div class="the_number_of_pages">총 22페이지&nbsp;&nbsp;</div>
 						<div class="paging">1</div>
 					</td>

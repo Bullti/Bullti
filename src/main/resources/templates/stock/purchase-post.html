@@ -14,7 +14,27 @@
 	<link rel="stylesheet" href="/css/stock/homeTemp.css">
 	<link rel="stylesheet" href="/css/stock/stock-side.css">
 
-
+<script>
+$(document).ready(function(){
+    $('.delete-btn').click(function(){
+        const purchaseNum = $(this).attr('data-id');
+         console.log(purchaseNum); // purchaseNum 값 출력
+        
+        $.ajax({
+            url: '/members/purchase/' + purchaseNum, // 서버로 보낼 URL
+            type: 'DELETE', // HTTP method
+            success: function(result) {
+                // 성공 시 동작
+                location.reload(); // or remove the item on the front-end
+            },
+            error: function(request,msg,error) {
+                // 실패 시 동작
+                alert('삭제 실패');
+            }
+        });
+    });
+});
+</script>
 
 </head>
 <body>
@@ -60,7 +80,7 @@
 					<th style="width: 150px">발주가맹점</th>
 					<th style="width: 100px">발주수량</th>
 					<th style="width: 150px">발주총액</th>
-					<th style="width: 250px">신청일자</th>
+					<th style="width: 250px">발주일자</th>
 					<th style="width: 100px">삭제</th>
 				
 				</tr>
@@ -75,10 +95,9 @@
 					<td style="width: 100px" th:text="${pur.ea}">productWeight</td>
 					<td style="width: 150px" th:text="${pur.totalPrice}">productPrice</td>
 					<td style="width: 250px" th:text="${#temporals.format(pur.purchaseDate, pur.purchaseDate.year != #dates.createNow().year ? 'MM-dd HH:mm:ss' : 'yyyy-MM-dd HH:mm:ss')}">productDate</td>
-					 <td style="width: 100px">
-					        <button th:attr="data-id=${pur.purchaseNum}" onclick="deletePurchase(this)" style="font-size: 12px; padding: 4px 12px; background-color: var(--bullti1); color: white; border: none; cursor: pointer;">삭제</button>
-					    </td>
-								</tr>
+					<td style="width: 100px"><button style="font-size: 12px; padding: 4px 12px; background-color: var(--bullti1); color: white; border: none; cursor: pointer;" class="delete-btn" th:data-id="${pur.purchaseNum}">삭제</button></td>
+
+				</tr>
 				<tr th:if="${#lists.isEmpty(purchases)}">
 					<td colspan="6" style="width:100%;display:block; text-align: center;padding: 2em 0">
 						등록된 발주가 존재하지 않습니다.
@@ -106,27 +125,6 @@
 <div></div>
 </div>
 </div>
-
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    function deletePurchase(button) {
-        var purchaseNum = button.getAttribute("data-id");
-
-        var form = document.createElement("form");
-        form.method = "POST";
-        form.action = "/members/purchase-post";
-        var methodInput = document.createElement("input");
-        methodInput.type = "hidden";
-        methodInput.name = "_method";
-        methodInput.value = "DELETE";
-        form.appendChild(methodInput);
-
-        document.body.appendChild(form);
-        form.submit();
-    }
-    /*]]>*/
-</script>
-
 </main>
 </body>
 </html>
