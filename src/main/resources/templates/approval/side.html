@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
+
+<div class="side" th:fragment="side">
+	<div class="write center flex" style="height: 57px">
+		<a href="/approval/write">작성하기</a>
+	</div>
+	<button type="button" class="collapsible" onclick="collapse(this);">진행 중인 문서</button>
+	<div class="content">
+		<button>전체</button>
+	</div>
+	<button type="button" class="collapsible" onclick="collapse(this);">문서함</button>
+	<div class="content">
+		<button>전체</button>
+		<button><a href="/approval/temp/list">임시저장</a></button>
+	</div>
+</div>
+
+</html>

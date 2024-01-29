@@ -4,10 +4,11 @@ import java.util.List;
 
 import org.springframework.ui.Model;
 
-import com.nowon.bul.domain.dto.ApprovalMemberDTO;
-import com.nowon.bul.domain.dto.ApprovalMemberListDTO;
+import com.nowon.bul.controller.EmpDTO;
 import com.nowon.bul.domain.dto.MemberListDTO;
 import com.nowon.bul.domain.dto.MemberSaveDTO;
+import com.nowon.bul.domain.dto.approval.ApprovalMemberDTO;
+import com.nowon.bul.domain.dto.approval.ApprovalMemberListDTO;
 import com.nowon.bul.domain.entity.member.Member;
 import com.nowon.bul.utils.jpaPage.PageRequestDTO;
 import com.nowon.bul.utils.jpaPage.PageResultDTO;
@@ -29,5 +30,7 @@ public interface MemberService {
 
 	//사원번호 유효성 검사
 	boolean patternId(String id);
+
+	List<ApprovalMemberListDTO> getFindById(EmpDTO dto);
 	
 }

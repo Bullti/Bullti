@@ -3,8 +3,8 @@ package com.nowon.bul.department;
 import java.util.List;
 import java.util.Map;
 
-import com.nowon.bul.domain.dto.ApprovalDeptList;
 import com.nowon.bul.domain.dto.DeptListDTO;
+import com.nowon.bul.domain.dto.approval.ApprovalDeptList;
 
 
 

@@ -24,14 +24,14 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class NaverApiService {
 	
-	@Value("${naver.ncp.access-key}")
-	private String accessyKey;
+	//@Value("${naver.ncp.access-key}")
+	private String accessyKey="acKQezNGQUukxZMY3DRE";
 	
-	@Value("${naver.ncp.secret-key}")
-	private String secretKey;
+	//@Value("${naver.ncp.secret-key}")
+	private String secretKey="dLaS8OQyGulRWsRVLyQq45djC9QNM0BkjIAW8Kss";
 	
-	@Value("${naver.ncp.company-id}")
-	private String companyId;
+	//@Value("${naver.ncp.company-id}")
+	private String companyId="235919e8-1b4b-41cb-a334-5ecff0631e37";
 	
 	private final OpenApiUtil api;
 	

@@ -20,13 +20,15 @@
 	//결재선 부서
 	function getEmployee(elemental) {
 		$('.clickable').css("color", "");
-
+		
 		// jQuery로 감싸지 않은 경우 jQuery로 감싸기
-		var $elemental = $(elemental);
+	    var $elemental = $(elemental);
 
-		// 텍스트 색상을 파란색으로 변경
-		$elemental.css("color", "blue");
-
+	    // 텍스트 색상을 파란색으로 변경
+	    $elemental.css("color", "blue");
+	    
+	    
+		
 		let deptName = elemental.textContent;
 		$.ajax({
 			type : "GET",
@@ -56,8 +58,7 @@
 		for (var i = 0; i < employeeList.length; i++) {
 			var employee = employeeList[i];
 			var employeeInfo = "<p class='target-list'>" + employee.name + " ("
-					+ employee.rank
-					+ ")<input type='hidden' value='"+ employee.id + "'></p>";
+					+ employee.rank + ")<input type='hidden' value='"+ employee.id + "'></p>";
 
 			$(".em-form").append(employeeInfo);
 		}
@@ -74,40 +75,31 @@
 	function addAproval() {
 		var targetText = target.text();
 
-		// 이미 해당 텍스트를 가진 요소가 존재하는지 확인
-		var existingTarget = $(".re-form .wrap").find(".target-list").filter(
-				function() {
-					return $(this).text() === targetText;
-				});
+	    // 이미 해당 텍스트를 가진 요소가 존재하는지 확인
+	    var existingTarget = $(".re-form .wrap").find(".target-list").filter(function() {
+	        return $(this).text() === targetText;
+	    });
 
-		if (existingTarget.length === 0) {
-			let clone = target.clone();
-			clone.css("background-color", "");
-			$(".re-form .wrap").append(clone);
-		} else {
-			alert("결재선에 등록되어 있는 사원입니다.")
-		}
-
-		$(".re-form").on("click", ".target-list", function() {
+	    if (existingTarget.length === 0) {
+	    	let clone = target.clone();
+	    	clone.css("background-color", "");
+	        $(".re-form .wrap").append(clone);
+	    } else {
+	    	alert("결재선에 등록되어 있는 사원입니다.")
+	    }
+	    
+	    $(".re-form").on("click", ".target-list", function() {
 			$(".target-list").css("background-color", "");
 			$(this).css("background-color", "#a9a9a9");
 			target = $(this)
 		});
 	}
 	function removeAproval() {
-		if (target && target.closest('.re-form').length) {
-			target.remove();
-			target = null;
-		}
-	}
-</script>
-<script type="text/javascript">
-	function submitForm(action) {
-		// JavaScript를 사용하여 폼의 action 값을 변경하고 서브밋
-		var form = document.getElementById("approvalId");
-		form.action = action;
-		form.submit();
-	}
+		 if (target && target.closest('.re-form').length) {
+		        target.remove();
+		        target = null;
+		    }
+	} 
 </script>
 </head>
 
@@ -116,28 +108,25 @@
 		<div th:replace="~{views/approval/sideTemp :: side}"></div>
 		<div class="content" style="flex: 1">
 			<th:block th:replace="~{layout/header :: header}"></th:block>
-			<form action="" method="post" id="approvalId">
-				<div class="main flex col">
-					<ul class="flex list">
-						<li><a onclick="submitForm('/approval')"
-							style="cursor: pointer;">결재요청</a></li>
-						<li><a onclick="submitForm('/approval/temp')"
-							style="cursor: pointer;">임시저장</a></li>
-					</ul>
+			<div class="main flex col">
+				<ul class="flex list">
+					<li>결재요청</li>
+					<li>임시저장</li>
+				</ul>
 
-					<div class="form">
-						<h1 class="title">기본 설정</h1>
-						<table>
-							<tbody>
-								<tr>
-									<th>문서 종류</th>
-									<td style="width: 470px;"><select name="type">
-											<option>일반문서</option>
-									</select></td>
-									<th>작성자</th>
-									<td>[[${member.name}]]</td>
-								</tr>
-								<!-- <tr>
+				<div class="form">
+					<h1 class="title">기본 설정</h1>
+					<table>
+						<tbody>
+							<tr>
+								<th>문서 종류</th>
+								<td style="width: 470px;"><select>
+										<option>일반문서</option>
+								</select></td>
+								<th>작성자</th>
+								<td>[[${member.name}]]</td>
+							</tr>
+							<!-- <tr>
 							<th>보존 연한</th>
 							<td><select>
 									<option>공용</option>
@@ -147,32 +136,36 @@
 									<option>A등급</option>
 							</select></td>
 						</tr> -->
-							</tbody>
-						</table>
-					</div>
-					<div class="form">
-						<h1 class="title">
-							결재선<a onclick="btn_approval()">결재선설정</a>
-						</h1>
-						<ul class="approval-line flex">
-							<!--ModelAndView -->
-						</ul>
-					</div>
-					<div class="form bn">
-						<h1 class="title">상세입력</h1>
-						<div class="flex">
-							<h1 class="doc-title flex center">제목</h1>
-							<input class="title-content">
-						</div>
-					</div>
-					<div>
-						<textarea id="summernote" name="content"></textarea>
-					</div>
-					<div class="file-aera flex hcenter">
-						<input type="file">
+						</tbody>
+					</table>
+				</div>
+				<div class="form">
+					<h1 class="title">
+						결재선<a onclick="btn_approval()">결재선설정</a>
+					</h1>
+					<ul class="approval-line flex">
+						<li class="title flex center">결재</li>
+						<li>
+							<div class="flex center rank"></div>
+							<div class="sign flex center"></div>
+							<div class="flex center name"></div>
+						</li>
+					</ul>
+				</div>
+				<div class="form bn">
+					<h1 class="title">상세입력</h1>
+					<div class="flex">
+						<h1 class="doc-title flex center">제목</h1>
+						<input class="title-content">
 					</div>
 				</div>
-			</form>
+				<form method="post">
+					<textarea id="summernote" name="editordata"></textarea>
+				</form>
+				<div class="file-aera flex hcenter">
+					<input type="file">
+				</div>
+			</div>
 			<th:block th:replace="~{views/approval/modal :: modal}"></th:block>
 		</div>
 	</main>

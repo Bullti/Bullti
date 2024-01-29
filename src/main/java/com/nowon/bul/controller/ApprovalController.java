@@ -7,16 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.nowon.bul.department.DeService;
-import com.nowon.bul.domain.dto.ApprovalDeptList;
-import com.nowon.bul.domain.dto.ApprovalMemberDTO;
-import com.nowon.bul.domain.dto.ApprovalMemberListDTO;
+import com.nowon.bul.domain.dto.approval.ApprovalDeptList;
+import com.nowon.bul.domain.dto.approval.ApprovalMemberDTO;
+import com.nowon.bul.domain.dto.approval.ApprovalMemberListDTO;
 import com.nowon.bul.service.ApprovalService;
 import com.nowon.bul.service.MemberService;
 
@@ -70,11 +69,10 @@ public class ApprovalController {
 	//결재선 저장
 	@ResponseBody
 	@PostMapping("/line")
-	public ModelAndView approvalLine(ModelAndView model, EmpDTO dto) {
-		for(long val : dto.getEmps()) {
-			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>"+val);
-		}
-		
-		return model;
+	public ModelAndView approvalLine(ModelAndView mv, EmpDTO dto) {
+		List<ApprovalMemberListDTO> list = memberService.getFindById(dto);
+		mv.addObject("list", list);
+		mv.setViewName("views/approval/approval-line");
+		return mv;
 	}
 }

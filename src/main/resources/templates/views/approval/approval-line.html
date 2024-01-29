@@ -1,0 +1,5 @@
+<li th:each="emp : ${list}">
+	<div class="flex center rank">[[${emp.rank}]]</div>
+	<div class="sign flex center"><input type="hidden" th:value="${emp.id}"></div>
+	<div class="flex center name">[[${emp.name}]]</div>
+</li>
