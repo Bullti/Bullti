@@ -62,11 +62,8 @@
 		            data: {emps: empArr},
 		            dataType: "json",
 		            success: function(data) {
-		            	alert("여기가 아예 안되네");
-		            	//console.log(data);
-		            	
 		                // Ajax 요청이 성공한 후에 실행되는 로직
-		                //$(".approval-line").html(data);
+		                btn_approval();
 		            },
 		            error: function(error) {
 		                console.error("Ajax 요청 중 에러 발생:", error);

@@ -1,6 +1,7 @@
 package com.nowon.bul.service.impl;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -11,12 +12,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.nowon.bul.controller.EmpDTO;
 import com.nowon.bul.department.DeEntity;
 import com.nowon.bul.department.DeRepository;
-import com.nowon.bul.domain.dto.ApprovalMemberDTO;
-import com.nowon.bul.domain.dto.ApprovalMemberListDTO;
 import com.nowon.bul.domain.dto.MemberListDTO;
 import com.nowon.bul.domain.dto.MemberSaveDTO;
+import com.nowon.bul.domain.dto.approval.ApprovalMemberDTO;
+import com.nowon.bul.domain.dto.approval.ApprovalMemberListDTO;
 import com.nowon.bul.domain.entity.member.Member;
 import com.nowon.bul.domain.entity.member.MemberRepository;
 import com.nowon.bul.domain.entity.member.Rank;
@@ -48,7 +50,7 @@ public class MemberProcess implements MemberService{
 	@Override
 	public List<ApprovalMemberListDTO> getApprovalList(String DeptName) {
 		List<ApprovalMemberListDTO> list = memberRepo.findByDept_deptName(DeptName).stream()
-				.map(i -> ApprovalMemberListDTO.builder().name(i.getName()).rank(i.getRank().getRankName()).no(i.getNo()).build()).collect(Collectors.toList());
+				.map(i -> ApprovalMemberListDTO.builder().name(i.getName()).rank(i.getRank().getRankName()).id(i.getId()).build()).collect(Collectors.toList());
 		return list;
 	}
 
@@ -91,5 +93,16 @@ public class MemberProcess implements MemberService{
     public List<Member> getStoreManagers() {
         return memberRepo.findByRank(Rank.StoreManager);
     }
+
+    //결재선 등록
+	@Override
+	public List<ApprovalMemberListDTO> getFindById(EmpDTO dto) {
+		List<String> list = dto.getEmps();
+		List<ApprovalMemberListDTO> result = list.stream().map(i->memberRepo.findById(i).orElse(null)) // orElse로 null 반환하도록 수정
+				 .filter(Objects::nonNull) // null이 아닌 경우만 필터링		
+				 .map(Member::toApprovalMemberListDTO) // DTO 변환
+				 .collect(Collectors.toList());
+		return result;
+	}
 
 }

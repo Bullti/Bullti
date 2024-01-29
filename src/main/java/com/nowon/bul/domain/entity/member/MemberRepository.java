@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.nowon.bul.domain.dto.ApprovalMemberDTO;
+import com.nowon.bul.domain.dto.approval.ApprovalMemberDTO;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
 

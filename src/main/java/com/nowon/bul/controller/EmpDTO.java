@@ -8,5 +8,5 @@ import lombok.Setter;
 @Data
 public class EmpDTO {
 
-	List<Long> emps;
+	List<String> emps;
 }

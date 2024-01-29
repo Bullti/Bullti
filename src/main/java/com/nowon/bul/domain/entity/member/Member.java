@@ -9,9 +9,10 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.nowon.bul.department.DeEntity;
-import com.nowon.bul.domain.dto.ApprovalMemberDTO;
 import com.nowon.bul.domain.dto.FranOwnerDTO;
 import com.nowon.bul.domain.dto.MemberListDTO;
+import com.nowon.bul.domain.dto.approval.ApprovalMemberDTO;
+import com.nowon.bul.domain.dto.approval.ApprovalMemberListDTO;
 import com.nowon.bul.domain.entity.approval.ApprovalDoc;
 import com.nowon.bul.domain.entity.fran.FranEntity;
 
@@ -133,4 +134,7 @@ public class Member {
 				.build();
 	}
 
+	public ApprovalMemberListDTO toApprovalMemberListDTO() {
+		return ApprovalMemberListDTO.builder().id(id).name(name).rank(rank.getRankName()).build();
+	}
 }
