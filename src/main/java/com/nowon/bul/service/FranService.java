@@ -22,4 +22,6 @@ public interface FranService {
 	void franchiseclose(Long id);
 
 	void updateProcess(Long id, FranUpdateDTO dto);
+
+	void ownerList(Model model);
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nowon.bul.domain.dto.FranListDTO;
@@ -23,63 +24,71 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class FranController {
-	
+
 	@Autowired
 	private FranService franService;
-	
+
 	@ResponseBody
 	@GetMapping("/sl/fran")
-    public List<FranListDTO> fr() {
-        return franService.franList();
-    }
-	
+	public List<FranListDTO> fr() {
+		return franService.franList();
+	}
+
 	@GetMapping("/sl")
-    public String storeLocation() {
-        // 해당 경로에 대한 로직 처리
-        return "/franchise/sl";
-    }
-	
+	public String storeLocation() {
+		// 해당 경로에 대한 로직 처리
+		return "franchise/sl";
+	}
+
 	@GetMapping("/fr")
 	public String franchiseList(Model model) {
 		franService.franchiseList(model);
-		return "/franchise/fr";
+		return "franchise/fr";
 	}
-	
+
 	@GetMapping("/fradd")
 	public String FranchiseAdd() {
-		return "/franchise/fradd";
+		return "franchise/fradd";
 	}
-	
+
 	@PostMapping("/fradd/register")
 	public String registerFran(FranSaveDTO dto, Authentication auth) {
-		//TODO: process POST request
+		// TODO: process POST request
 		return franService.saveFran(dto, auth);
 	}
-	
+
 	@PostMapping("/fr/register")
 	public String franciseclose(@RequestParam(name = "id") String id) {
-	    System.out.println(id);
-	    long parsedId = Long.parseLong(id);
-	    franService.franchiseclose(parsedId);
-	    return "redirect:/fr";
+		System.out.println(id);
+		long parsedId = Long.parseLong(id);
+		franService.franchiseclose(parsedId);
+		return "redirect:/fr";
 	}
-	
+
 	@GetMapping("/index2")
-    public String index2() {
-        // 해당 경로에 대한 로직 처리
-        return "/views/index2";
-    }
-	
+	public String index2() {
+		// 해당 경로에 대한 로직 처리
+		return "views/index2";
+	}
+
 	@GetMapping("/fredit/{id}")
 	public String franchiseedit(@PathVariable(name = "id") long id, Model model) {
-	    franService.franchiseedit(id, model);
-	    return "/franchise/fredit";
+		franService.franchiseedit(id, model);
+		return "franchise/fredit";
 	}
-	
+
 	@PutMapping("/fredit/{id}")
 	public String update(@PathVariable(name = "id") long id, FranUpdateDTO dto) {
 		franService.updateProcess(id, dto);
-		
-		return "redirect:/fredit/"+id;
+
+		return "redirect:/fredit/" + id;
 	}
+
+	@GetMapping("/search")
+    public String showSearchPage(Model model) {
+		franService.ownerList(model);
+		
+        return "franchise/ownerlist";
+    }
+	
 }
