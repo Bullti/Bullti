@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+#update-view{
+	
+	width:1200px;
+	height: 300px;
+}
+
+.note-editable{
+	
+	height: 300px !important;
+}
+
+
+.updateButton{
+	background-color: rgb(128, 255, 255);
+	width: 50px !important;
+	  padding: 10px  !important;
+    font-size: 12px !important;
+    height: 20px;
+    writing-mode : horizontal-tb;
+}	
+
+.updateButton h1{
+	font-size: 12px;
+	position: relative;
+  
+    top: -10px;
+	padding-bottom: 40px;
+}

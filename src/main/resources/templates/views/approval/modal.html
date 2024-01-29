@@ -12,10 +12,10 @@
 							<span class="clickable" onclick="getEmployee(this)" >[[${dept.deptName}]]</span>
 							<ul>
 								<li th:each="subDept : ${dept.child}">
-									<span class="clickable" onclick="getEmployee(this)">[[${subDept.deptName}]]</span>
+									<span onclick="getEmployee(this)">[[${subDept.deptName}]]</span>
 									<ul>
 										<li  th:each="subsubDept : ${subDept.child}">
-											<span class="clickable" onclick="getEmployee(this)">[[${subsubDept.deptName}]]</span>
+											<span onclick="getEmployee(this)">[[${subsubDept.deptName}]]</span>
 										</li>
 									</ul>
 								</li>
@@ -24,10 +24,11 @@
 					</ul>
 				</div>
 				<div class="em-form">
+					<p class="row">최부장 (개발부)</p>
 				</div>
 				<div class="btn-form flex col center">
-					<img src="/img/right-arrow.png" onclick="addAproval()"> <img
-						src="/img/left-arrow.png" onclick="removeAproval()">
+					<img src="/img/right-arrow.png"> <img
+						src="/img/left-arrow.png">
 				</div>
 				<div class="re-form">
 					<div class="title">

@@ -1,7 +1,5 @@
 package com.nowon.bul.stock.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -79,17 +77,14 @@ public class PurchaseController {
 	}
 
 	
-	//상품 삭제
-	 @DeleteMapping("/members/purchase/{purchaseNum}")
-	    public ResponseEntity<?> deletePurchase(@PathVariable("purchaseNum") int purchaseNum) {
-	        try {
-	            purchaseService.deletePurchase(purchaseNum);
-	            return new ResponseEntity<>(HttpStatus.OK);
-	        } catch (Exception e) {
-	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	        }
-	    }
-	
+	// 상품 삭제
+	@PostMapping("/members/purchase-post/{purchaseNum}")
+	public String deletePurchase(@PathVariable("purchaseNum") int purchaseNum) {
+	    purchaseService.deletePurchase(purchaseNum);
+	    return "redirect:/members/purchase-post";
+	}
+
+
 	
 	
 }

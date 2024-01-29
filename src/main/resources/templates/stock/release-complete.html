@@ -63,7 +63,7 @@
 					<th style="width: 130px">공급가액</th>
 					<th style="width: 130px">상품단가</th>
 					<th style="width: 130px">작성자</th>
-					<th style="width: 130px">입고일자</th>
+					<th style="width: 130px">출고완료</th>
 				</tr>
 				
 			</thead>
@@ -77,7 +77,7 @@
 					<td style="width: 130px" th:text="${prod.productSupply}">productSupply</td>
 					<td style="width: 130px" th:text="${prod.productPrice}">productPrice</td>
 					<td style="width: 130px" th:text="${prod.authorName}">authorName</td>
-					<td style="width: 130px" th:text="${#temporals.format(prod.productDate, prod.productDate.year != #dates.createNow().year ? 'MM-dd HH:mm:ss' : 'yyyy-MM-dd HH:mm:ss')}">productDate</td>
+					<td style="width: 130px" th:text="${#temporals.format(prod.productDate, prod.productDate.year != #dates.createNow().year ? 'MM-dd HH:mm:ss' : 'yyyy-MM-dd HH:mm:ss')}">출고완료</td>
 				</tr>
 				<tr th:if="${#lists.isEmpty(products)}">
 					<td colspan="7" style="width:100%;display:block; text-align: center;padding: 2em 0">
