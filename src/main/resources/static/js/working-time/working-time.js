@@ -34,10 +34,13 @@ function updateClock(resultTime) {
     document.getElementById('clock').innerText = timeString;
 
     // 다음 프레임에서 updateTime 함수 호출
-    requestAnimationFrame(updateTime);
+    setInterval(updateTime, 1000);
   }
-
-  updateTime();
+  if(resultTime == "") {
+	  document.getElementById('clock').innerText = '근무 중 아님';
+  }else {
+  	updateTime();
+  }
 }
 
 async function workingTime() {
@@ -49,8 +52,8 @@ async function workingTime() {
 	    return response.text(); // 또는 response.text()를 사용하여 텍스트로 읽을 수 있습니다.
 	  })
 	  .then(data => {
+		  console.log(data)
 	    return data; // 여기서 데이터를 사용하여 원하는 작업을 수행합니다.
 	  })
 	  .catch(error => console.error('fetch 중 에러:', error));
-
 }
