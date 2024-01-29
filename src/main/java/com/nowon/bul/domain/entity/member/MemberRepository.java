@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.nowon.bul.domain.dto.ApprovalMemberDTO;
 
-public interface MemberRepository extends JpaRepository<Member, Long>{
+public interface MemberRepository extends JpaRepository<Member, Long> {
 
 	Optional<Member> findById(String memberId);
 
@@ -15,5 +15,5 @@ public interface MemberRepository extends JpaRepository<Member, Long>{
 
 	boolean existsById(String id);
 
-
+	List<Member> findByRank(Rank rank);
 }

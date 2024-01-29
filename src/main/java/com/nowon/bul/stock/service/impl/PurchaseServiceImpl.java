@@ -5,8 +5,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.nowon.bul.domain.entity.fran.FranEntityRepository;
 import com.nowon.bul.stock.dto.PurchaseDTO;
@@ -15,7 +13,6 @@ import com.nowon.bul.stock.repository.ProductRepository;
 import com.nowon.bul.stock.repository.PurchaseRepository;
 import com.nowon.bul.stock.service.PurchaseService;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 
@@ -53,11 +50,15 @@ public class PurchaseServiceImpl implements PurchaseService{
 				;
 	}
 
-	@Transactional
+
 	@Override
 	public void deletePurchase(int purchaseNum) {
-	   purchaseRepository.deleteById(purchaseNum);
-	}	
+	    if (!purchaseRepository.existsById(purchaseNum)) {
+	        throw new IllegalArgumentException("Invalid purchaseNum: " + purchaseNum);
+	    }
+	    purchaseRepository.deleteById(purchaseNum);
+	}
+	
 	
 	
 	
