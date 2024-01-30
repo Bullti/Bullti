@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.nowon.bul.domain.dto.AnnualSaveDTO;
 import com.nowon.bul.service.AnnualService;
@@ -39,8 +40,9 @@ public class AnnualController {
 	}
 	
 	@DeleteMapping
-	public String annualList() {
-		System.out.println("델리트매핑테스트");
+	public String annualList(@RequestParam("annualNo") long annualNo) {
+		System.out.println("델리트매핑테스트"+annualNo);
+		servie.cancel(annualNo);
 		return "redirect:/emp/annu";
 	}
 }
