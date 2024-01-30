@@ -128,6 +128,7 @@ public class Member {
 	
 	public  FranOwnerDTO toFranOwnerDTO() {
 		return FranOwnerDTO.builder()
+				.MemberNo(no)
 				.name(name)
 				.birthDate(birthDate)
 				.build();
