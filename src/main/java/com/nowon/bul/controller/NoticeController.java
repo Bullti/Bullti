@@ -1,5 +1,6 @@
 package com.nowon.bul.controller;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -46,8 +47,8 @@ public class NoticeController {
 	
 	//게시글 저장
 	@PostMapping("/members/notice-post")	
-	public String save(NoticeSaveDTO dto) {
-		service.saveProcess(dto);
+	public String save(Authentication auth,NoticeSaveDTO dto) {
+		service.saveProcess(auth,dto);
 		return "redirect:/members/notice";
 		
 	}
