@@ -31,7 +31,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "franchise")
 public class FranEntity {
-
+	 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -60,11 +60,16 @@ public class FranEntity {
     	this.closedAt = LocalDate.now();
     }
 
-	public FranEditDTO toFranEditDTO() {
-		return FranEditDTO.builder()
-	            .id(id).name(name).address(address).address2(address2).ph(ph)
-	            .build();
-	}
+    public FranEditDTO toFranEditDTO() {
+        return FranEditDTO.builder()
+                .id(id)
+                .name(name)
+                .address(address)
+                .address2(address2)
+                .ph(ph)
+                .ownerName(owner.getName())  // Owner의 이름 추가
+                .build();
+    }
     
 	public void updateFran(FranUpdateDTO dto) {
         // 필요한 업데이트 로직을 구현
