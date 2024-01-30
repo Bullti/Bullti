@@ -8,5 +8,6 @@ import lombok.ToString;
 @Builder
 public class ApprovalMemberDTO {
 	private String name;
-	private String DeptName;
+	private String deptName;
+	private String rank;
 }

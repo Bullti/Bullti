@@ -32,5 +32,7 @@ public interface MemberService {
 	boolean patternId(String id);
 
 	List<ApprovalMemberListDTO> getFindById(EmpDTO dto);
+
+	Member getFindById(long memberNo);
 	
 }
