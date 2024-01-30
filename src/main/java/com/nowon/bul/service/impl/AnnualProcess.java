@@ -32,4 +32,9 @@ public class AnnualProcess implements AnnualService {
 		
 		model.addAttribute("list",mapper.findByMemberNo(AuthenUtils.extractMemberNo(auth)));
 	}
+
+	@Override
+	public void cancel(long annualNo) {
+		mapper.cancelByNo(annualNo);
+	}
 }
