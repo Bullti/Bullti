@@ -2,11 +2,16 @@ package com.nowon.bul.domain.dto;
 
 import java.time.LocalDateTime;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 
 @Getter
-//@Builder //
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class NoticeDTO {
 	
 	private long boardNo;
