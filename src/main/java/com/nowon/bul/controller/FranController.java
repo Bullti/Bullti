@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.nowon.bul.domain.dto.FranListDTO;
 import com.nowon.bul.domain.dto.FranSaveDTO;
 import com.nowon.bul.domain.dto.FranUpdateDTO;
-import com.nowon.bul.service.FranProcess;
+import com.nowon.bul.service.impl.FranProcess;
 import com.nowon.bul.service.FranService;
 
 import org.springframework.web.bind.annotation.RequestParam;
