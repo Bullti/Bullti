@@ -1,14 +1,20 @@
 package com.nowon.bul.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.ibatis.session.RowBounds;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.nowon.bul.department.DeEntity;
+import com.nowon.bul.department.DeRepository;
 import com.nowon.bul.domain.dto.NoticeDTO;
 import com.nowon.bul.domain.dto.NoticeSaveDTO;
 import com.nowon.bul.domain.dto.NoticeUpdateDTO;
+import com.nowon.bul.domain.entity.member.Member;
+import com.nowon.bul.domain.entity.member.MemberRepository;
 import com.nowon.bul.mybatis.mapper.NoticeMapper;
 import com.nowon.bul.service.NoticeService;
 import com.nowon.bul.utils.PageData;
@@ -23,6 +29,9 @@ import lombok.extern.slf4j.Slf4j;
 public class NoticeProcess implements NoticeService{
 
 	private final NoticeMapper noticeMapper;
+	private final MemberRepository memberRepository;
+	private final DeRepository deRepository;
+	
 	
 	@Override
 	public void listProcess(Model model) {
@@ -53,10 +62,14 @@ public class NoticeProcess implements NoticeService{
 	}
 
 	@Override
-	public void saveProcess(NoticeSaveDTO dto) {
+	public void saveProcess(Authentication auth,NoticeSaveDTO dto) {
 		
-		noticeMapper.save(dto);
+		String author=auth.getName();
+		Optional<Member> member = memberRepository.findById(author);
 		
+			
+			Member memb = member.get();
+			
 	}
 
 	@Override
