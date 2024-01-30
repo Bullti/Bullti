@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<ul class="approval-line flex">
+	<li class="flex center"
+		style="border: 1px solid; box-sizing: border-box;">결재</li>
+	<li th:each="emp : ${list}">
+		<div class="flex center rank">[[${emp.rank}]]</div>
+		<div class="sign flex center">
+			<input type="hidden" th:value="${emp.id}" name="line">
+		</div>
+		<div class="flex center name">[[${emp.name}]]</div>
+	</li>
+</ul>

@@ -43,6 +43,9 @@ th {
 
 td {
 	padding: 5px;
+    height: 40px;
+    box-sizing: border-box;
+    vertical-align: middle;
 }
 td > select {
 	padding: 2px;
@@ -55,13 +58,6 @@ td > .rank {
 
 tbody > .wrap > th {
 	padding: 5px;
-}
-.sign > td {
-	height: 80px;
-}
-.name > td {
-	vertical-align: middle;
-	text-align: center;
 }
 .doc-title {
 	font-size: 16px;
@@ -79,4 +75,39 @@ tbody > .wrap > th {
 }
 .file-aera {
 	height: 50px;
+}
+.approval-line {
+	height: 150px;
+}
+
+.approval-line .title {
+	border: 1px solid;
+    box-sizing: border-box;
+}
+
+.approval-line li {
+	width: 165px;
+	height: 100%;
+}
+.approval-line > li > .rank {
+	border-top: 1px solid;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+    height: 20%;
+    box-sizing: border-box;
+}
+
+
+.approval-line > li > .sign {
+	border-right: 1px solid;
+    border-bottom: 1px solid;
+    box-sizing: border-box;
+    height: 60%;
+}
+
+.approval-line > li > .name {
+	border-right: 1px solid;
+    border-bottom: 1px solid;
+    height: 20%;
+    box-sizing: border-box;
 }

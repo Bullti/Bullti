@@ -39,7 +39,7 @@ public class UserController {
 	//개인정보 조회
 	@GetMapping("/individual")
 	public String individualPage() {
-		return "/views/members/individual";
+		return "views/members/individual";
 	}
 	
 	//로그인 페이지
@@ -51,7 +51,7 @@ public class UserController {
 		//System.out.println(exception);
 		//model.addAttribute("error", error);
 		//model.addAttribute("exception", exception);
-		return "/views/login";
+		return "views/login";
 	}
 	
 	//회원가입 페이지
@@ -59,7 +59,7 @@ public class UserController {
 	public String joinPage(Model model) {
 		List<DeptListDTO> deptList = deptService.getDeptList();
 		model.addAttribute("deptList", deptList);
-		return "/views/members/signup";
+		return "views/members/signup";
 	}
 	
 	//사원 조회 페이지
@@ -71,7 +71,7 @@ public class UserController {
 		 PageResultDTO<MemberListDTO, Member> memberList = memberSerivce.getFindAllList(pageRequestDTO);
 		 model.addAttribute("result", memberList);
 		 
-		return "/views/members/list";
+		return "views/members/list";
 	}
 	
 	//회원가입
@@ -85,7 +85,7 @@ public class UserController {
 			String profileUrl = awsService.s3fileTemptoSrc(dto.getNewName());
 			memberSerivce.save(dto, profileUrl);
 		}
-		return "redirect:/members";
+		return "redirect:members";
 	}
 	
 	//사진 임시저장

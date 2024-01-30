@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import com.nowon.bul.domain.dto.ApprovalDeptList;
+import com.nowon.bul.domain.dto.approval.ApprovalDeptList;
 import com.nowon.bul.domain.entity.member.Member;
 
 import jakarta.persistence.Column;

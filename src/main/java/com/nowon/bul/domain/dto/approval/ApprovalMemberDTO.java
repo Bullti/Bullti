@@ -1,4 +1,4 @@
-package com.nowon.bul.domain.dto;
+package com.nowon.bul.domain.dto.approval;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -8,5 +8,6 @@ import lombok.ToString;
 @Builder
 public class ApprovalMemberDTO {
 	private String name;
-	private String DeptName;
+	private String deptName;
+	private String rank;
 }
