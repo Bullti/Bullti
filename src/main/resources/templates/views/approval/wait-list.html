@@ -39,7 +39,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="doc : ${list}" onclick="location.href='/approval'" style="cursor:pointer;">
+					<tr th:each="doc : ${list}" th:onclick="|location.href='/approval/wait-list/${doc.docNo}'|" style="cursor:pointer;">
 						<td class="a">[[${doc.createdDate}]]</td>
 						<td class="b">일반결재</td>
 						<td class="c">[[${doc.title}]]</td>

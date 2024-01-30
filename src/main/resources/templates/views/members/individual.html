@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
 <head>
-<link rel="stylesheet" href="/css/signup.css">
-<script src="/js/department.js"></script>
+<link rel="stylesheet" href="/css/members/individual.css">
+<link rel="stylesheet" href="/css/approval/homeTemp.css">
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
@@ -63,73 +63,66 @@
 </head>
 <body>
 	<main class="warp-main">
+			<div th:replace="~{views/members/sideTemp :: side}"></div>
+			<div class="content" style="flex: 1">
 			<th:block th:replace="~{layout/header :: header}"></th:block>
-			<div class="main flex center">
+			<div class="main flex">
 				<form action="/members" method="post">
-					<div class="join_area">
-						<h1 class="join_tilte">수정예정</h1>
-						<div class="add_img flex center">
-							<label class="btn-file"> <input type="file"
+					<div>
+						<h1 class="tilte">기본정보</h1>
+						<div class="row flex">
+							<label class="left">사진</label>
+							<label class="btn-file" th:style="'background-image:url('+ ${dto.profile} +');'"> <input type="file"
 								accept="image/*" onchange="changedImg(this)"> <img
 								src="/img/plus-icon.png">
 							</label>
 						</div>
-						<div>
-							<label for="id">사원번호</label> <input type="text" id="id" name="id"
-								placeholder="사원번호를 입력해주세요" required="required">
+						<div class="row flex">
+							<label for="id">사원번호</label>
+							<p>[[${dto.id}]]</p>
 						</div>
-						<div>
-							<label for="pass">비밀번호</label> <input type="password" id="pass"
-								placeholder="최초 비밀번호는 아이디랑 같습니다." required readonly="readonly">
+						<div class="flex row">
+							<label for="pass">비밀번호</label>
+							<button>비밀번호 변경</button>
 						</div>
-						<div>
-							<label for="name">이름</label> <input type="text" id="name"
-								name="name" placeholder="예) 김대리" required="required">
+						<div class="flex row">
+							<label for="name">이름</label>
+							<p>[[${dto.name}]]</p>
 						</div>
-						<div>
-							<label>부서</label> <select name="deptId" onchange="updateRank()"
-								id="dept">
-								<option th:each="dept : ${deptList}" th:value="${dept.deptId}"
-									th:text="${dept.deptName}"></option>
-							</select>
+						<div class="row flex">
+							<label>부서</label>
+							<p>[[${dto.deptName}]]</p>
 						</div>
-						<div id="rank">
-							<label>직급</label> <select name="rank" id="rankSelect">
-								<option value="Assistant">사원</option>
-								<option value="SeniorAssistant">대리</option>
-								<option value="Manager">과장</option>
-								<option value="SeniorManager">부장</option>
-								<option value="StoreManager">점장</option>
-							</select>
+						<div id="rank" class="flex row">
+							<label>직급</label>
+							<p>[[${dto.rank}]]</p>
 						</div>
-						<div>
+						<div class="flex row">
 							<label for="tel">전화번호</label> <input type="tel" id="tel"
 								name="tel" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
-								placeholder="010-1234-5678" required="required">
+								placeholder="ex) 010-1234-5678" required="required"
+								th:value="${dto.tel}">
 						</div>
-						<div>
-							<label for="tel">주소<a onclick="findAdress()"
-								class="find-adress">주소찾기</a></label> <input type="tel" id="adress"
-								name="adress" placeholder="기본주소" required="required"> <input
-								id="detail_adress" type="text" placeholder="상세주소"
-								name="addressDetail" required="required">
+						<div class="flex row">
+							<label for="tel">주소</label>
+							<p>[[${dto.adress}]]</p>
 						</div>
-						<div>
-							<label for="birth_date">생년월일</label> <input type="date"
-								id="birth_date" name="birthDate" required="required">
+						<div class="row flex">
+							<label for="birth_date">생년월일</label>
+							<p>[[${dto.birthDate}]]</p>
 						</div>
-						<div>
-							<label for="joinCompanyDate">입사일</label> <input type="date"
-								id="joinCompanyDate" name="joinCompanyDate" required="required">
+						<div class="row flex">
+							<label for="joinCompanyDate">입사일</label>
+							<p>[[${dto.joinCompanyDate}]]</p>
 						</div>
 						<div class="button_area">
-							<button class="join_button">
-								<span>등록하기</span>
-							</button>
+							<button class="join_button" style="margin-right: 20px">저 장</button>
+							<button class="join_button">취 소</button>
 						</div>
 					</div>
 				</form>
 			</div>
+		</div>
 		</div>
 		<script type="text/javascript">
 			function updateRank() {

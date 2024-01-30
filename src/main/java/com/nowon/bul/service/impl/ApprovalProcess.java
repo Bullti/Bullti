@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.nowon.bul.domain.dto.ApprovalWaitListDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalDTO;
+import com.nowon.bul.domain.dto.approval.ApprovalWaitDTO;
 import com.nowon.bul.domain.entity.approval.Approval;
 import com.nowon.bul.domain.entity.approval.ApprovalDoc;
 import com.nowon.bul.domain.entity.approval.ApprovalDocRepository;
@@ -59,6 +60,17 @@ public class ApprovalProcess implements ApprovalService{
 		return approvalDocRepo.findAllByMember(member).stream()
 				.map(ApprovalDoc::toWaitListDTO)
 				.collect(Collectors.toList());
+	}
+	@Override
+	public ApprovalDoc getDocByid(Long docNo) {
+		return approvalDocRepo.findById(docNo).orElseThrow();
+	}
+	
+	//결재대기문서 상세
+	@Transactional
+	@Override
+	public ApprovalWaitDTO getWait(Long docNo) {
+		return approvalDocRepo.findById(docNo).orElseThrow().toApprovalWaitDTO();
 	}
 	
 	

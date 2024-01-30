@@ -10,10 +10,9 @@ import lombok.Getter;
 public class ApprovalWaitListDTO {
 	
 	private LocalDateTime createdDate;
-	
 	private String title;
-	
 	private String docName;
-	
 	private String state;
+	private Long docNo;
+
 }

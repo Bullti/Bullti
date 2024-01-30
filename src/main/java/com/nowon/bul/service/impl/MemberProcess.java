@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.nowon.bul.controller.EmpDTO;
 import com.nowon.bul.department.DeEntity;
 import com.nowon.bul.department.DeRepository;
+import com.nowon.bul.domain.dto.IndividualDTO;
 import com.nowon.bul.domain.dto.MemberListDTO;
 import com.nowon.bul.domain.dto.MemberSaveDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalMemberDTO;
@@ -107,6 +108,14 @@ public class MemberProcess implements MemberService{
 	@Override
 	public Member getFindById(long memberNo) {
 		return memberRepo.findById(memberNo).orElseThrow();
+	}
+
+	//개인정보
+	@Transactional
+	@Override
+	public IndividualDTO getIndividual(long memberNo) {
+		return memberRepo.findById(memberNo).orElseThrow()
+				.toIndevidualDTO();
 	}
 
 }
