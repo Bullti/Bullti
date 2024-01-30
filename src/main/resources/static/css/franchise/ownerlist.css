@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+
+thead {
+	font-weight: bold;
+}
+
+td {
+	border-bottom: 1px solid #0b5394;
+	height: 40px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.title > h1{
+	font-size: 30px;
+	font-weight: bold;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin-top: 20px;
+	margin-bottom: 50px;
+	border-top: 1px solid #0b5394;
+}
