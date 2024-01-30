@@ -24,4 +24,5 @@ public interface FranService {
 	void updateProcess(Long id, FranUpdateDTO dto);
 
 	void ownerList(Model model);
+	
 }

@@ -14,5 +14,7 @@ public interface AnnualMapper {
 
 	List<AnnualListDTO> findByMemberNo(long memberNo);
 
+	void cancelByNo(long annualNo);
+
 	
 }

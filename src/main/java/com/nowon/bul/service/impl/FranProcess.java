@@ -1,4 +1,4 @@
-package com.nowon.bul.service;
+package com.nowon.bul.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +18,7 @@ import com.nowon.bul.domain.entity.fran.FranEntityRepository;
 import com.nowon.bul.domain.entity.member.Member;
 import com.nowon.bul.domain.entity.member.MemberRepository;
 import com.nowon.bul.domain.entity.member.Rank;
+import com.nowon.bul.service.FranService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,7 +31,7 @@ public class FranProcess implements FranService{
 
 	public String saveFran(FranSaveDTO dto, Authentication auth) {
 		
-		franEntityRepository.save(dto.toEntity());
+		franEntityRepository.save(dto.toEntity(memberRepository));
 		
 		return "redirect:/fr";
 	}

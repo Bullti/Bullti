@@ -11,4 +11,6 @@ public interface AnnualService {
 
 	void list(Authentication auth, Model model);
 
+	void cancel(long annualNo);
+
 }
