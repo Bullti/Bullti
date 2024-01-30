@@ -119,7 +119,7 @@ public class Member {
 	}
 
 	public ApprovalMemberDTO toApprovalMemberDTO() {
-		return ApprovalMemberDTO.builder().name(name).build();
+		return ApprovalMemberDTO.builder().name(name).deptName(dept.getDeptName()).rank(rank.getRankName()).build();
 	}
 
 	public MemberListDTO toListDTO() {

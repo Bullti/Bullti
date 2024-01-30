@@ -55,11 +55,10 @@ public class MemberProcess implements MemberService{
 	}
 
 	//결재문서 작성자
+	@Transactional
 	@Override
 	public ApprovalMemberDTO getMemberByName(String memberName) {
-		System.out.println(">>>>>>>>>>>>>>>>>>Service " + memberName);
 		ApprovalMemberDTO member = memberRepo.findById(memberName).orElseThrow().toApprovalMemberDTO();
-		System.out.println(">>>>>>>>>>>멤버DTO>>>>>>>>>>>>> " + member.toString());
 		return member;
 	}
 
@@ -103,6 +102,11 @@ public class MemberProcess implements MemberService{
 				 .map(Member::toApprovalMemberListDTO) // DTO 변환
 				 .collect(Collectors.toList());
 		return result;
+	}
+
+	@Override
+	public Member getFindById(long memberNo) {
+		return memberRepo.findById(memberNo).orElseThrow();
 	}
 
 }
