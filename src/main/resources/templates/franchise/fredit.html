@@ -10,34 +10,38 @@
 	<main class="warp-main">
 		<div th:replace="~{department/side :: side}"></div>
 		<div class="main">
-			<div class="title">
-				<h1>가맹점 상세</h1>
+			<div class="join_area">
+				<h1 class="join_tilte">가맹점 상세</h1>
 			</div>
-			<table id="detail-view">
-				<tbody>
-					<tr th:each="detail : ${franchiseEditDTO}">
-						<th>매장명</th>
-						<td th:text="${detail.name}"></td>
-						<th>주소</th>
-						<td th:text="${detail.address}"></td>
-						<th>상세주소</th>
-						<td th:text="${detail.address2}"></td>
-						<th>전화번호</th>
-						<td th:text="${detail.ph}"></td>
-						<td>
-							<button type="button" onclick="btnUpdateClicked()">수정</button>
-						</td>
-						<td>
-							<form action="/fr/register" method="post">
-								<div>
-									<button type="submit">폐업</button>
-									<input type="hidden" name="id" th:value="${detail.id}">
-								</div>
-							</form>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+			<div id="detail-view">
+				<div>
+					<div th:each="detail : ${franchiseEditDTO}">
+						<div class="name">매장명</div>
+						<div class="text" th:text="${detail.name}"></div>
+						<div class="name">주소</div>
+						<div class="text" th:text="${detail.address}"></div>
+						<div class="name">상세주소</div>
+						<div class="text" th:text="${detail.address2}"></div>
+						<div class="name">전화번호</div>
+						<div class="text" th:text="${detail.ph}"></div>
+						<div class="name">점주명</div>
+						<div class="text" th:text="${detail.ownerName}"></div>
+						<div class="button_area">
+							<div>
+								<button class="button01" type="button" onclick="btnUpdateClicked()">수정</button>
+							</div>
+							<div>
+								<form action="/fr/register" method="post">
+									<div>
+										<button class="button02" type="submit">폐업</button>
+										<input type="hidden" name="id" th:value="${detail.id}">
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			<script type="text/javascript">
 				function btnUpdateClicked() {
 					//const element = document.getElementById("intro");
@@ -50,33 +54,33 @@
 			</script>
 			<form th:action="|/fredit/${franchiseEditDTO.id}|" method="post"
 				id="update-view" style="display: none;">
-				<table>
-					<tr>
-						<th>주소</th>
-						<td colspan="3"><input type="text" maxlength="255"
-							name="address" id="sample4_roadAddress" 
+				<div>
+					<div>
+						<div class="name">주소</div>
+						<div class="text"><input class="inp" type="text" maxlength="255"
+							name="address" id="sample4_roadAddress"
 							th:value="${franchiseEditDTO.address}"> <span id="guide"
-							style="color: #999; display: none"></span> <input type="button"
-							onclick="sample4_execDaumPostcode()" value="주소 검색"></td>
-					</tr>
-					<tr>
-						<th>상세주소</th>
-						<td colspan="3"><input type="text" name="address2"
-							th:value="${franchiseEditDTO.address2}"></td>
-					</tr>
-					<tr>
-						<th>전화번호</th>
-						<td colspan="3"><input type="text" name="ph"
-							th:value="${franchiseEditDTO.ph}"></td>
-					</tr>
-					<tr>
-						<td colspan="4"><input type="hidden" name="id"
+							style="color: #999; display: none"></span> <input class="search-button" type="button"
+							onclick="sample4_execDaumPostcode()"></div>
+					</div>
+					<div>
+						<div class="name">상세주소</div>
+						<div class="text"><input class="inp" type="text" name="address2"
+							th:value="${franchiseEditDTO.address2}"></div>
+					</div>
+					<div>
+						<div class="name">전화번호</div>
+						<div class="text"><input  maxlength="255" class="inp" type="text" name="ph"
+							th:value="${franchiseEditDTO.ph}"></div>
+					</div>
+					<div class="button_area">
+						<div><input type="hidden" name="id"
 							th:value="${franchiseEditDTO.id}"> <input type="hidden"
 							name="_method" value="put">
-							<button type="submit">수정완료</button>
-							<button type="button" onclick="history.go(-1)">취소</button></td>
-					</tr>
-				</table>
+							<button class="button01" type="submit">수정</button>
+							<button class="button02" type="button" onclick="history.go(-1)">취소</button></div>
+					</div>
+				</div>
 			</form>
 			<script
 				src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -105,5 +109,6 @@
 				}
 			</script>
 		</div>
+		<div></div>
 	</main>
 </body>

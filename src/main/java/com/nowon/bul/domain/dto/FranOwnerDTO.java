@@ -13,6 +13,8 @@ import lombok.Setter;
 @Setter
 public class FranOwnerDTO {
 	
+	private Long MemberNo;
+	
 	private String name;
 	private LocalDate birthDate;
 

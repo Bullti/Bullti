@@ -37,7 +37,8 @@
 						<td th:text="${dto.approve}"></td>
 						<td>
 							<form action="/emp/annu" method="post">
-								<input type="hidden" name="_method" value="delete">
+								<input type="hidden" readonly="readonly" name="annualNo" th:value="${dto.annualNo}">
+								<input type="hidden" readonly="readonly" name="_method" value="delete">
 								<button>취소</button>
 							</form>
 						</td>
