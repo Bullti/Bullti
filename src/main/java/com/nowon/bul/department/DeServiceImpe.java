@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.nowon.bul.domain.dto.ApprovalDeptList;
 import com.nowon.bul.domain.dto.DeptListDTO;
+import com.nowon.bul.domain.dto.approval.ApprovalDeptList;
 
 import lombok.RequiredArgsConstructor;
 

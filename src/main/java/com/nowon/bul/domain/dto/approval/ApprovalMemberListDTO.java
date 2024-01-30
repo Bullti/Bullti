@@ -1,4 +1,4 @@
-package com.nowon.bul.domain.dto;
+package com.nowon.bul.domain.dto.approval;
 
 import com.nowon.bul.domain.entity.member.Rank;
 
@@ -12,4 +12,5 @@ import lombok.Setter;
 public class ApprovalMemberListDTO {
 	private String name;
 	private String rank;
+	private String id;
 }

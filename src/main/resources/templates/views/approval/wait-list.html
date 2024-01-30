@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
+<head>
+<script src="/js/department.js"></script>
+<link rel="stylesheet" href="/css/approval/homeTemp.css">
+<link rel="stylesheet" href="/css/approval/wait-list.css">
+</head>
+<body>
+	<main class="warp-main">
+		<div th:replace="~{views/approval/sideTemp :: side}"></div>
+		<div class="content" style="flex: 1">
+		<th:block th:replace="~{layout/header :: header}"></th:block>
+		<div class="main">
+			<div class="title">
+				<h1>결재 대기 함</h1>
+			</div>
+			<div class="search">
+				<label for="name">부서명</label>
+					<select name="parentName" id="up-depart" class="custom-select">
+						<option class="option" th:each="name : ${names}" th:text="${name}"></option>
+				</select>
+				<label for="name" class="label2" id="center">재직상태</label>
+					<select class="custom-select">
+							<option class="option" >재직</option>
+							<option class="option" >퇴사</option>
+					</select>
+				<input class="search-input">
+				<button class="search-button"></button>	
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<td class="a">기안일</td>
+						<td class="b">결재양식</td>
+						<td class="c">제목</td>
+						<td class="d">문서번호</td>
+						<td class="e">결재상태</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="doc : ${list}" onclick="location.href='/approval'" style="cursor:pointer;">
+						<td class="a">[[${doc.createdDate}]]</td>
+						<td class="b">일반결재</td>
+						<td class="c">[[${doc.title}]]</td>
+						<td class="d">[[${doc.docName}]]</td>
+						<td class="e">[[${doc.state}]]</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		</div>
+	</main>
+</body>
+</html>
