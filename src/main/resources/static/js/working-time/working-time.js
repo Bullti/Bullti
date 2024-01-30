@@ -31,15 +31,17 @@ function updateClock(resultTime) {
 
     var timeString = hours + ':' + minutes + ':' + seconds;
 
-    document.getElementById('clock').innerText = timeString;
+    document.getElementById('workingTime').innerText = timeString;
 
     // 다음 프레임에서 updateTime 함수 호출
     setInterval(updateTime, 1000);
   }
   if(resultTime == "") {
-	  document.getElementById('clock').innerText = '근무 중 아님';
+	  document.getElementById('workingTime').innerText = '근무 중 아님';
+	  document.getElementById('workCheck').innerText = '출근';
   }else {
-  	updateTime();
+  	  updateTime();
+	  document.getElementById('workCheck').innerText = '퇴근';
   }
 }
 
