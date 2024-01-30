@@ -3,11 +3,13 @@ package com.nowon.bul.domain.entity.approval;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.nowon.bul.domain.dto.ApprovalWaitListDTO;
+import com.nowon.bul.domain.dto.approval.ApprovalWaitDTO;
 import com.nowon.bul.domain.entity.member.Member;
 
 import io.netty.buffer.search.BitapSearchProcessorFactory;
@@ -72,6 +74,7 @@ public class ApprovalDoc {
 				.title(title)
 				.docName(docName)
 				.state(state.getSateName())
+				.docNo(no)
 				.build();
 	}
 
@@ -80,5 +83,17 @@ public class ApprovalDoc {
 		int currentYear = LocalDate.now().getYear();
 		String number = String.format("%05d", this.no);
 		this.docName = "(주)불티" + currentYear +"-"+number;
+	}
+	
+	
+	public ApprovalWaitDTO toApprovalWaitDTO() {
+		return ApprovalWaitDTO.builder()
+				.deptName(member.getDept().getDeptName())
+				.rank(member.getRank().getRankName())
+				.memberName(member.getName())
+				.title(title)
+				.content(content)
+				.approvalLine(approval.stream().map(Approval::toApprovalLineDTO).collect(Collectors.toList()))
+				.build();
 	}
 }

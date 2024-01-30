@@ -3,10 +3,10 @@ package com.nowon.bul.controller;
 import java.util.List;
 
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +19,7 @@ import com.nowon.bul.domain.dto.approval.ApprovalDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalDeptList;
 import com.nowon.bul.domain.dto.approval.ApprovalMemberDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalMemberListDTO;
+import com.nowon.bul.domain.dto.approval.ApprovalWaitDTO;
 import com.nowon.bul.domain.entity.member.Member;
 import com.nowon.bul.domain.entity.member.MyUser;
 import com.nowon.bul.service.ApprovalService;
@@ -84,16 +85,21 @@ public class ApprovalController {
 	}
 
 	// 결재대기문서 상세
-//	@GetMapping("/wait-list/{no}")
-//	public String waitDetail(Model model, Authentication authentication) {
-//		MyUser user = (MyUser) authentication.getPrincipal();
-//		Member member = memberService.getFindById(user.getMemberNo());
-//
-//		List<ApprovalWaitListDTO> list = approvalService.getWaitList(member);
-//
-//		model.addAttribute("list", list);
-//		return "views/approval/wait-list";
-//	}
+	@GetMapping("/wait-list/{no}")
+	public String waitDetail(@PathVariable(name = "no") Long docNo, Model model, Authentication authentication) {
+		MyUser user = (MyUser) authentication.getPrincipal();
+		Member member = memberService.getFindById(user.getMemberNo());
+		
+		//url직접 접근 방지
+		if(member.getNo()!=approvalService.getDocByid(docNo).getMember().getNo()) {
+		  return "views/approval/wait-list";
+		};
+		
+		ApprovalWaitDTO dto = approvalService.getWait(docNo);
+
+		model.addAttribute("dto", dto);
+		return "views/approval/wait";
+	}
 
 	/********************** 아래 비동기 ****************************/
 

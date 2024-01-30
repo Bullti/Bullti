@@ -47,7 +47,7 @@ public class SecurityConfig {
             // token을 사용하는 방식이기 때문에 csrf를 disable합니다.
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-            	.requestMatchers("/approval/**").hasRole("USER")
+            	.requestMatchers("/approval/**", "/individual").hasRole("USER")
                 .requestMatchers("/static/**","/**").permitAll()
                 .anyRequest().authenticated()
             )
