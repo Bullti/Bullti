@@ -16,13 +16,14 @@ public class NoticeDTO {
 	
 	private long boardNo;
 	private long memberId;
+	private String name;
+	private String deptName;
 	private String boardTitle;
 	private String boardContent;
 	private int boardHitcnt;
 	private LocalDateTime createdDatetime;
 	private LocalDateTime updatedDatetime;
-	private String writer;
-	private String rank;
+
 	
 	
 }

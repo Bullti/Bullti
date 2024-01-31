@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Param;
 import com.nowon.bul.domain.dto.NoticeDTO;
 import com.nowon.bul.domain.dto.NoticeSaveDTO;
 import com.nowon.bul.domain.dto.NoticeUpdateDTO;
+import com.nowon.bul.domain.entity.member.Member;
 
 @Mapper
 public interface NoticeMapper {
@@ -30,6 +31,8 @@ public interface NoticeMapper {
 
 	void updateTitleOrContent(NoticeUpdateDTO dto);
 	
+	NoticeSaveDTO findNameById(long memberId);
 	
+	String findDeptNameById(long deptId);
 	
 }
