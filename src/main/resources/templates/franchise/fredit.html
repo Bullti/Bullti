@@ -28,7 +28,8 @@
 						<div class="text" th:text="${detail.ownerName}"></div>
 						<div class="button_area">
 							<div>
-								<button class="button01" type="button" onclick="btnUpdateClicked()">수정</button>
+								<button class="button01" type="button"
+									onclick="btnUpdateClicked()">수정</button>
 							</div>
 							<div>
 								<form action="/fr/register" method="post">
@@ -57,28 +58,33 @@
 				<div>
 					<div>
 						<div class="name">주소</div>
-						<div class="text"><input class="inp" type="text" maxlength="255"
-							name="address" id="sample4_roadAddress"
-							th:value="${franchiseEditDTO.address}"> <span id="guide"
-							style="color: #999; display: none"></span> <input class="search-button" type="button"
-							onclick="sample4_execDaumPostcode()"></div>
+						<div class="text">
+							<input class="inp" type="text" maxlength="255" name="address"
+								id="sample4_roadAddress" th:value="${franchiseEditDTO.address}"
+								onclick="sample4_execDaumPostcode()">
+						</div>
 					</div>
 					<div>
 						<div class="name">상세주소</div>
-						<div class="text"><input class="inp" type="text" name="address2"
-							th:value="${franchiseEditDTO.address2}"></div>
+						<div class="text">
+							<input class="inp" type="text" name="address2"
+								th:value="${franchiseEditDTO.address2}">
+						</div>
 					</div>
 					<div>
 						<div class="name">전화번호</div>
-						<div class="text"><input  maxlength="255" class="inp" type="text" name="ph"
-							th:value="${franchiseEditDTO.ph}"></div>
+						<div class="text">
+							<input maxlength="255" class="inp" type="text" name="ph"
+								th:value="${franchiseEditDTO.ph}">
+						</div>
 					</div>
 					<div class="button_area">
-						<div><input type="hidden" name="id"
-							th:value="${franchiseEditDTO.id}"> <input type="hidden"
-							name="_method" value="put">
+						<div>
+							<input type="hidden" name="id" th:value="${franchiseEditDTO.id}">
+							<input type="hidden" name="_method" value="put">
 							<button class="button01" type="submit">수정</button>
-							<button class="button02" type="button" onclick="history.go(-1)">취소</button></div>
+							<button class="button02" type="button"  onclick="history.back()">취소</button>
+						</div>
 					</div>
 				</div>
 			</form>

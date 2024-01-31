@@ -40,11 +40,7 @@ public class FranController {
 		return "franchise/sl";
 	}
 
-	@GetMapping("/fr")
-	public String franchiseList(Model model) {
-		franService.franchiseList(model);
-		return "franchise/fr";
-	}
+	
 
 	@GetMapping("/fradd")
 	public String FranchiseAdd() {
@@ -90,5 +86,15 @@ public class FranController {
 		
         return "franchise/ownerlist";
     }
+	
+	@GetMapping("/fr")
+	public String notice_post(
+			@RequestParam(name="page",defaultValue = "1") int page,
+			Model model) {
+		
+		franService.listProcess(page,model);
+		
+		return "franchise/fr";
+	}
 	
 }

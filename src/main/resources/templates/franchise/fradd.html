@@ -1,76 +1,86 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-    th:replace="~{layout/common-layout :: commonLayout(~{this::head}, ~{this::main})}">
+	th:replace="~{layout/common-layout :: commonLayout(~{this::head}, ~{this::main})}">
 <head>
-    <script src="/js/department.js"></script>
-    <link rel="stylesheet" href="/css/franchise/fradd.css" />
-    <link rel="stylesheet" href="/css/approval/homeTemp.css">
+<script src="/js/department.js"></script>
+<link rel="stylesheet" href="/css/franchise/fradd.css" />
+<link rel="stylesheet" href="/css/approval/homeTemp.css">
 </head>
 <body>
-    <main class="warp-main">
-        <div th:replace="~{department/sideTemp :: side}"></div>
-        <div class="container" style="flex: 1">
-            <th:block th:replace="~{layout/header :: header}"></th:block>
-            <div class="main flex center">
-                <form action="/fradd/register" method="post">
-                    <!-- 폼태그 시작 -->
-                    <div class="join_area" >
-                        <h1 class="join_tilte">가맹점 등록</h1>
-                        <div>
-                            <!-- name 속성 추가 -->
-                            <label for="name">매장명</label><input type="text" maxlength="30" name="name">
-                        </div>
-                        <div>
-                            <label for="address1">주소</label> <input type="text" maxlength="255" name="address" id="sample4_roadAddress">
-                            <span id="guide" style="color: #999; display: none"></span> <input type="button" onclick="sample4_execDaumPostcode()" value="주소 검색">
-                        </div>
-                        <div>
-                            <label for="address2">상세주소</label> <input type="text" maxlength="255" name="address2">
-                            <!-- name 속성 추가 -->
-                        </div>
-                        <div>
-                            <label for="ph">전화번호</label> <input type="text" maxlength="15" name="ph">
-                            <!-- name 속성 추가 -->
-                        </div>
+	<main class="warp-main">
+		<div th:replace="~{department/sideTemp :: side}"></div>
+		<div class="container" style="flex: 1">
+			<th:block th:replace="~{layout/header :: header}"></th:block>
+			<div class="main flex center">
+				<form action="/fradd/register" method="post">
+					<!-- 폼태그 시작 -->
+					<div class="join_area">
+						<h1 class="join_tilte">가맹점 등록</h1>
+						<div>
+							<!-- name 속성 추가 -->
+							<label for="name">매장명</label><input type="text" maxlength="30"
+								name="name">
+						</div>
+						<div>
+							<label for="address1">주소</label> <input type="text"
+								maxlength="255" name="address" id="sample4_roadAddress"
+								onclick="sample4_execDaumPostcode()"> <span id="guide"
+								style="color: #999; display: none"></span>
+						</div>
+						<div>
+							<label for="address2">상세주소</label> <input type="text"
+								maxlength="255" name="address2">
+							<!-- name 속성 추가 -->
+						</div>
+						<div>
+							<label for="ph">전화번호</label> <input type="text" maxlength="15"
+								name="ph">
+							<!-- name 속성 추가 -->
+						</div>
 
-                        <div>
-                            <label for="owner">점주</label> <input type="text" maxlength="10" name="owner" id="owner"> <input type="hidden" name="memberNo" id="memberNo"> <input type="button" value='점주 검색' onclick="openOwnerList()">
-                        </div>
-                        <div class="button_area">
-                            <button class="join_button">
-                                <span>등록하기</span>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-        <script>
-            function sample4_execDaumPostcode() {
-                new daum.Postcode({
-                    oncomplete : function(data) {
-                        var roadAddr = data.roadAddress; // 도로명 주소 변수
-                        var extraRoadAddr = ''; // 참고 항목 변수
-                        if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
-                            extraRoadAddr += data.bname;
-                        }
-                        document.getElementById("sample4_roadAddress").value = roadAddr;
-                    }
-                }).open();
-            }
+						<div>
+							<label for="owner">점주</label> <input type="text" maxlength="10"
+								name="owner" id="owner" onclick="openOwnerList()"> <input
+								type="hidden" name="memberNo" id="memberNo">
+						</div>
+						<div class="button_area">
+							<button class="join_button">
+								<span>등록하기</span>
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<script
+			src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<script>
+			function sample4_execDaumPostcode() {
+				new daum.Postcode(
+						{
+							oncomplete : function(data) {
+								var roadAddr = data.roadAddress; // 도로명 주소 변수
+								var extraRoadAddr = ''; // 참고 항목 변수
+								if (data.bname !== ''
+										&& /[동|로|가]$/g.test(data.bname)) {
+									extraRoadAddr += data.bname;
+								}
+								document.getElementById("sample4_roadAddress").value = roadAddr;
+							}
+						}).open();
+			}
 
-            function openOwnerList() {
-                window.open("/search", "OwnerList", "width=600,height=400");
-            }
+			function openOwnerList() {
+				window.open("/search", "OwnerList", "width=400,height=400");
+			}
 
-            function selectOwner(ownerName) {
-                // 선택한 데이터를 fradd 페이지로 전달
-                document.getElementById('memberId').value = ownerName;
-                // ownerlist 창 닫기
-                window.close();
-            }
-        </script>
-    </main>
+			function selectOwner(ownerName) {
+				// 선택한 데이터를 fradd 페이지로 전달
+				document.getElementById('memberId').value = ownerName;
+				// ownerlist 창 닫기
+				window.close();
+			}
+		</script>
+	</main>
 </body>
 </html>
