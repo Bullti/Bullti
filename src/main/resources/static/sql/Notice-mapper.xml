@@ -6,9 +6,10 @@
  	
  	
  	<insert id="save">
- 		insert into notice(board_title, board_content)
- 		values(#{boardTitle},#{boardContent})
- 	</insert>
+    	insert into notice(board_title, board_content, name, dept_name)
+   		 values(#{boardTitle}, #{boardContent}, #{name}, #{deptName})
+	</insert>
+
  	
  	<select id="findAllLimit" resultType="com.nowon.bul.domain.dto.NoticeDTO">
  		select * from notice
@@ -37,5 +38,15 @@
  		set board_title=#{boardTitle}, board_content=#{boardContent}
  		where board_no=#{boardNo}
  	</update>
+ 	
+ 	<select id="findNameById" resultType="com.nowon.bul.domain.dto.NoticeSaveDTO">
+ 		select dept_id,name from member
+ 		where member_no=#{memberId}
+ 	</select>
+ 	
+ 	<select id="findDeptNameById" resultType="String">
+ 		select dept_name from department
+ 		where dept_id=#{deptId}
+ 	</select>
  	
 </mapper>

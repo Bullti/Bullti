@@ -48,8 +48,8 @@ public class NoticeController {
 	//게시글 저장
 	@PostMapping("/members/notice-post")	
 	public String save(Authentication auth,NoticeSaveDTO dto) {
-		service.saveProcess(auth,dto);
-		return "redirect:/members/notice";
+		
+		return service.saveProcess(auth,dto);
 		
 	}
 	
