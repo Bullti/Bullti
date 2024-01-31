@@ -1,9 +1,5 @@
 package com.nowon.bul.domain.dto;
 
-import java.util.Optional;
-
-import com.nowon.bul.domain.entity.member.Member;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,10 +15,10 @@ public class NoticeSaveDTO {
 	
 	private String boardTitle;
 	private String boardContent;
-	private String writer;
-	private String dept;
-
-
+	private String name;
+	private long deptId;
+	private String deptName;
+	private DeptListDTO dept; 
 	
 	
 }
