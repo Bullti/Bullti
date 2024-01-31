@@ -2,9 +2,8 @@ package com.nowon.bul.service;
 
 import java.util.List;
 
-import org.springframework.ui.Model;
-
 import com.nowon.bul.controller.EmpDTO;
+import com.nowon.bul.domain.dto.IndividualDTO;
 import com.nowon.bul.domain.dto.MemberListDTO;
 import com.nowon.bul.domain.dto.MemberSaveDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalMemberDTO;
@@ -34,5 +33,7 @@ public interface MemberService {
 	List<ApprovalMemberListDTO> getFindById(EmpDTO dto);
 
 	Member getFindById(long memberNo);
+
+	IndividualDTO getIndividual(long memberNo);
 	
 }

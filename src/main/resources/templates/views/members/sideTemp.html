@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
+
+<div class="side" th:fragment="side">
+	<h1 class="title">설정</h1>
+	<div class="tap">
+		<ul>
+			<h2 class="tap-title"><a href="#">기본정보</a></h2>
+		</ul>		
+	</div>
+</div>
+
+</html>

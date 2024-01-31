@@ -2,10 +2,13 @@ package com.nowon.bul.domain.entity.approval;
 
 import java.time.LocalDateTime;
 
+import com.nowon.bul.domain.dto.approval.ApprovalLineDTO;
 import com.nowon.bul.domain.entity.member.Member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -36,6 +39,7 @@ public class Approval {
 	@Column(name = "ap_order")
 	private int order;
 	
+	@Enumerated(EnumType.STRING)
 	private Result result;
 	
 	//반려 사유
@@ -58,5 +62,12 @@ public class Approval {
 	private ApprovalDoc apDoc;
 	
 	
-	
+	public ApprovalLineDTO toApprovalLineDTO() {
+		return ApprovalLineDTO.builder()
+				.rank(member.getRank().getRankName())
+				.name(member.getName())
+				.result(result.getResultName())
+				.approvaledDate(approvaledDate)
+				.build();
+	}
 }

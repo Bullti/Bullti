@@ -6,8 +6,11 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.nowon.bul.domain.dto.ApprovalWaitListDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalDTO;
+import com.nowon.bul.domain.dto.approval.ApprovalDraftDTO;
+import com.nowon.bul.domain.dto.approval.ApprovalDraftListDTO;
+import com.nowon.bul.domain.dto.approval.ApprovalWaitDTO;
+import com.nowon.bul.domain.dto.approval.ApprovalWaitListDTO;
 import com.nowon.bul.domain.entity.approval.Approval;
 import com.nowon.bul.domain.entity.approval.ApprovalDoc;
 import com.nowon.bul.domain.entity.approval.ApprovalDocRepository;
@@ -30,6 +33,7 @@ public class ApprovalProcess implements ApprovalService{
 	private final ApprovalDocRepository approvalDocRepo;
 	
 	private final MemberRepository memberRepo;
+	
 	//결재 상신
 	@Transactional
 	@Override
@@ -52,14 +56,41 @@ public class ApprovalProcess implements ApprovalService{
 					.build(); 
 			approvalRepo.save(approval);
 		}
-		
-	}
+	}	
+	
 	@Override
-	public List<ApprovalWaitListDTO> getWaitList(Member member) {
-		return approvalDocRepo.findAllByMember(member).stream()
-				.map(ApprovalDoc::toWaitListDTO)
-				.collect(Collectors.toList());
+	public ApprovalDoc getDocByid(Long docNo) {
+		return approvalDocRepo.findById(docNo).orElseThrow();
 	}
 	
+	//기안문서함 상세
+	@Transactional
+	@Override
+	public ApprovalDraftDTO getDraft(Long docNo) {
+		return approvalDocRepo.findById(docNo).orElseThrow().toApprovalDraftDTO();
+	}
+	//기안문서함 리스트
+	@Override
+	public List<ApprovalDraftListDTO> getDraftList(Member member) {
+		return approvalDocRepo.findAllByMember(member).stream()
+				.map(ApprovalDoc::toDraftListDTO)
+				.collect(Collectors.toList());
+	}
+	//결재대기함 상세
+	@Transactional
+	@Override
+	public ApprovalWaitDTO getWait(Long docNo) {
+		return approvalDocRepo.findById(docNo).orElseThrow().toApprovalWaitDTO();
+	}
+	
+	//결재대기함 리스트
+	@Transactional
+	@Override
+	public List<ApprovalWaitListDTO> getWaitList(Member member) {
+		Result result=Result.UnderReview;
+		return approvalRepo.findAllByMemberAndResult(member,result).stream()
+				.map(approval -> approval.getApDoc().toWaitListDTO())
+				.collect(Collectors.toList());
+	}
 	
 }
