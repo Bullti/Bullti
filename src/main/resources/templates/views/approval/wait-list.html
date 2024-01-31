@@ -13,7 +13,7 @@
 		<th:block th:replace="~{layout/header :: header}"></th:block>
 		<div class="main">
 			<div class="title">
-				<h1>결재 대기 함</h1>
+				<h1>결재 대기 문서</h1>
 			</div>
 			<div class="search">
 				<label for="name">부서명</label>
@@ -35,7 +35,7 @@
 						<td class="b">결재양식</td>
 						<td class="c">제목</td>
 						<td class="d">문서번호</td>
-						<td class="e">결재상태</td>
+						<td class="e">기안자</td>
 					</tr>
 				</thead>
 				<tbody>
@@ -43,8 +43,8 @@
 						<td class="a">[[${doc.createdDate}]]</td>
 						<td class="b">일반결재</td>
 						<td class="c">[[${doc.title}]]</td>
-						<td class="d">[[${doc.docName}]]</td>
-						<td class="e">[[${doc.state}]]</td>
+						<td class="d">[[${doc.docNo}]]</td>
+						<td class="e">[[${doc.writer}]]</td>
 					</tr>
 				</tbody>
 			</table>

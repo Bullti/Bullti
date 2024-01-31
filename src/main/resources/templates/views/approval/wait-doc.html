@@ -3,9 +3,8 @@
 	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
 
 <head>
-<link rel="stylesheet" href="/css/approval/wait.css">
+<link rel="stylesheet" href="/css/approval/draft-doc.css">
 <script src="/js/department.js"></script>
-<link rel="stylesheet" href="/css/approval/modal.css">
 <link rel="stylesheet" href="/css/approval/homeTemp.css">
 
 <!-- 결재상신, 임시저장 -->
@@ -21,7 +20,11 @@
 				<div class="main flex col">
 					<ul class="flex list">
 						<li><a onclick="submitForm('/approval')"
-							style="cursor: pointer;">목록</a>
+							style="cursor: pointer;">목록</a></li>
+						<li><a onclick="submitForm('/approval')"
+							style="cursor: pointer;">승인</a></li>
+						<li><a onclick="submitForm('/approval')"
+							style="cursor: pointer;">반려</a></li>
 					</ul>
 					<div class="form">
 						<h1 class="title">기본 설정</h1>
@@ -83,45 +86,6 @@
 					</div>
 				</div>
 			</form>
-			<div class="approval-modal">
-				<div class="modal-bady">
-					<h3>결재선 설정</h3>
-					<div class="flex modal-content">
-
-						<div class="de-form">
-							<ul class="depart">
-								<li th:each="dept : ${deptList}" th:if="${dept.parentId == 0}">
-									<span class="clickable" onclick="getEmployee(this)">[[${dept.deptName}]]</span>
-									<ul>
-										<li th:each="subDept : ${dept.child}"><span
-											class="clickable" onclick="getEmployee(this)">[[${subDept.deptName}]]</span>
-											<ul>
-												<li th:each="subsubDept : ${subDept.child}"><span
-													class="clickable" onclick="getEmployee(this)">[[${subsubDept.deptName}]]</span>
-												</li>
-											</ul></li>
-									</ul>
-								</li>
-							</ul>
-						</div>
-						<div class="em-form"></div>
-						<div class="btn-form flex col center">
-							<img src="/img/right-arrow.png" onclick="addAproval()"> <img
-								src="/img/left-arrow.png" onclick="removeAproval()">
-						</div>
-						<div class="re-form">
-							<div class="title">
-								<h3>결재</h3>
-							</div>
-							<div class="wrap"></div>
-						</div>
-					</div>
-					<div class="btn-area flex center">
-						<button onclick="approval_line()">확인</button>
-						<button onclick="btn_approval()">취소</button>
-					</div>
-				</div>
-			</div>
 		</div>
 	</main>
 </body>

@@ -3,15 +3,17 @@
 	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
 <head>
 <script src="/js/department.js"></script>
-<link rel="stylesheet" href="/css/approval/home.css">
-<link rel="stylesheet" href="/css/approval/tempList.css">
+<link rel="stylesheet" href="/css/approval/homeTemp.css">
+<link rel="stylesheet" href="/css/approval/draft-list.css">
 </head>
 <body>
 	<main class="warp-main">
-		<div th:replace="~{views/approval/side :: side}"></div>
+		<div th:replace="~{views/approval/sideTemp :: side}"></div>
+		<div class="content" style="flex: 1">
+		<th:block th:replace="~{layout/header :: header}"></th:block>
 		<div class="main">
 			<div class="title">
-				<h1>임시보관함</h1>
+				<h1>기안 문서함</h1>
 			</div>
 			<div class="search">
 				<label for="name">부서명</label>
@@ -26,32 +28,27 @@
 				<input class="search-input">
 				<button class="search-button"></button>	
 			</div>
-			
 			<table>
 				<thead>
 					<tr>
-						<td class="a">문서종류</td>
-						<td class="b">제목</td>
-						<td class="c">저장일자</td>
-				
+						<td class="a">기안일</td>
+						<td class="b">결재양식</td>
+						<td class="c">제목</td>
+						<td class="d">문서번호</td>
+						<td class="e">결재상태</td>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td class="a">사번</td>
-						<td class="b">이름</td>
-						<td class="c">직급</td>
+					<tr th:each="doc : ${list}" th:onclick="|location.href='/approval/draft-list/${doc.docNo}'|" style="cursor:pointer;">
+						<td class="a">[[${doc.createdDate}]]</td>
+						<td class="b">일반결재</td>
+						<td class="c">[[${doc.title}]]</td>
+						<td class="d">[[${doc.docName}]]</td>
+						<td class="e">[[${doc.state}]]</td>
 					</tr>
-
-					<tr>
-						<td class="a">240119</td>
-						<td class="b">이예슬</td>
-						<td class="c">대리</td>
-					</tr>
-					
-
 				</tbody>
 			</table>
+		</div>
 		</div>
 	</main>
 </body>

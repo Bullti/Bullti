@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
+
+<head>
+<link rel="stylesheet" href="/css/approval/draft-doc.css">
+<script src="/js/department.js"></script>
+<link rel="stylesheet" href="/css/approval/homeTemp.css">
+
+<!-- 결재상신, 임시저장 -->
+<script type="text/javascript" src="/js/approval/submitForm.js"></script>
+
+</head>
+<body>
+	<main class="warp-main">
+		<div th:replace="~{views/approval/sideTemp :: side}"></div>
+		<div class="content" style="flex: 1">
+			<th:block th:replace="~{layout/header :: header}"></th:block>
+			<form action="" method="post" id="approvalId">
+				<div class="main flex col">
+					<ul class="flex list">
+						<li><a onclick="submitForm('/approval')"
+							style="cursor: pointer;">목록</a>
+					</ul>
+					<div class="form">
+						<h1 class="title">기본 설정</h1>
+						<table>
+							<tbody>
+								<tr>
+									<th>문서 종류</th>
+									<td style="width: 470px;"><select>
+											<option>일반문서</option>
+									</select></td>
+									<th>소 속</th>
+									<td>[[${dto.deptName}]]</td>
+								</tr>
+								<tr>
+									<th>작 성 일</th>
+									<td style="width: 470px;">[[${dto.createdDate}]]</td>
+									<th>직 급</th>
+									<td>[[${dto.rank}]]</td>
+								</tr>
+								<tr>
+									<th></th>
+									<td style="width: 470px;"></td>
+									<th>작 성 자</th>
+									<td>[[${dto.memberName}]]</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="form">
+						<h1 class="title">
+							결재선
+						</h1>
+					</div>
+					<ul class="approval-line flex">
+						<li class="flex center"
+							style="border: 1px solid; box-sizing: border-box;">결재</li>
+						<li th:each="emp : ${dto.approvalLine}">
+							<div class="flex center rank">[[${emp.rank}]]</div>
+							<div class="sign flex center">
+								<div th:if="${emp.result} eq '승인'">승인</div>
+								<div th:if="${emp.result} eq '승인'">[[${emp.approvaledDate}]]</div>
+							</div>
+							<div class="flex center name">[[${emp.name}]]</div>
+						</li>
+					</ul>
+					<div id="exchange"></div>
+					<div class="form bn">
+						<h1 class="title">상세 내용</h1>
+						<div class="flex">
+							<h1 class="doc-title flex center">제목</h1>
+							<p>[[${dto.title}]]</p>
+						</div>
+					</div>
+					<div class="ap-content">
+						[(${dto.content})]
+					</div>
+					<div class="file-aera flex hcenter">
+						<input type="file" multiple>
+					</div>
+				</div>
+			</form>
+		</div>
+	</main>
+</body>
+
+</html>

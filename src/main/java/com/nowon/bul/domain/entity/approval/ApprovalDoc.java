@@ -8,13 +8,16 @@ import java.util.stream.Collectors;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.nowon.bul.domain.dto.ApprovalWaitListDTO;
+import com.nowon.bul.domain.dto.approval.ApprovalDraftDTO;
+import com.nowon.bul.domain.dto.approval.ApprovalDraftListDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalWaitDTO;
+import com.nowon.bul.domain.dto.approval.ApprovalWaitListDTO;
 import com.nowon.bul.domain.entity.member.Member;
 
-import io.netty.buffer.search.BitapSearchProcessorFactory;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,7 +25,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -57,6 +59,7 @@ public class ApprovalDoc {
 	@Column(columnDefinition = "longtext")
 	private String content;
 	
+	@Enumerated(EnumType.STRING)
 	private State state;
 	
 	@CreationTimestamp
@@ -68,16 +71,7 @@ public class ApprovalDoc {
 	public LocalDateTime updated_date;
 	
 	
-	public ApprovalWaitListDTO toWaitListDTO() {
-		return ApprovalWaitListDTO.builder()
-				.createdDate(created_date)
-				.title(title)
-				.docName(docName)
-				.state(state.getSateName())
-				.docNo(no)
-				.build();
-	}
-
+	
 	
 	public void setDocName() {
 		int currentYear = LocalDate.now().getYear();
@@ -85,6 +79,27 @@ public class ApprovalDoc {
 		this.docName = "(주)불티" + currentYear +"-"+number;
 	}
 	
+	
+	public ApprovalDraftDTO toApprovalDraftDTO() {
+		return ApprovalDraftDTO.builder()
+				.deptName(member.getDept().getDeptName())
+				.rank(member.getRank().getRankName())
+				.memberName(member.getName())
+				.title(title)
+				.content(content)
+				.approvalLine(approval.stream().map(Approval::toApprovalLineDTO).collect(Collectors.toList()))
+				.build();
+	}
+	
+	public ApprovalDraftListDTO toDraftListDTO() {
+		return ApprovalDraftListDTO.builder()
+				.createdDate(created_date)
+				.title(title)
+				.docName(docName)
+				.state(state.getSateName())
+				.docNo(no)
+				.build();
+	}
 	
 	public ApprovalWaitDTO toApprovalWaitDTO() {
 		return ApprovalWaitDTO.builder()
@@ -94,6 +109,16 @@ public class ApprovalDoc {
 				.title(title)
 				.content(content)
 				.approvalLine(approval.stream().map(Approval::toApprovalLineDTO).collect(Collectors.toList()))
+				.build();
+	}
+	
+	public ApprovalWaitListDTO toWaitListDTO() {
+		return ApprovalWaitListDTO.builder()
+				.createdDate(created_date)
+				.title(title)
+				.writer(member.getName())
+				.docName(docName)
+				.docNo(no)
 				.build();
 	}
 }
