@@ -70,4 +70,24 @@ public class Approval {
 				.approvaledDate(approvaledDate)
 				.build();
 	}
+	
+	//결재승인
+	public int accept() {
+		this.result=Result.Accept;
+		this.approvaledDate=LocalDateTime.now();
+		return this.order;
+	}
+	
+	public void UpdateReceivedDate() {
+		this.receivedDate=LocalDateTime.now();
+	}
+	
+	public void underReview() {
+		this.result = Result.UnderReview;
+	}
+
+	public void reject() {
+		this.result=Result.Reject;
+		this.approvaledDate=LocalDateTime.now();
+	}
 }

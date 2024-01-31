@@ -18,7 +18,8 @@ public class ApprovalDraftDTO {
 	private String rank;
 	private String memberName;
 	private LocalDateTime createdDate;
-	 
+	private String docName;
+	
 	private List<ApprovalLineDTO> approvalLine;
 	 
 	private String title;

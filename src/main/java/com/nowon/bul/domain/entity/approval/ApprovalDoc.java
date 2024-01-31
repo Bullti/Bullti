@@ -88,6 +88,8 @@ public class ApprovalDoc {
 				.title(title)
 				.content(content)
 				.approvalLine(approval.stream().map(Approval::toApprovalLineDTO).collect(Collectors.toList()))
+				.docName(docName)
+				.createdDate(created_date)
 				.build();
 	}
 	
@@ -98,6 +100,7 @@ public class ApprovalDoc {
 				.docName(docName)
 				.state(state.getSateName())
 				.docNo(no)
+				.docName(docName)
 				.build();
 	}
 	
@@ -109,6 +112,9 @@ public class ApprovalDoc {
 				.title(title)
 				.content(content)
 				.approvalLine(approval.stream().map(Approval::toApprovalLineDTO).collect(Collectors.toList()))
+				.createdDate(created_date)
+				.docName(docName)
+				.no(no)
 				.build();
 	}
 	
@@ -120,5 +126,14 @@ public class ApprovalDoc {
 				.docName(docName)
 				.docNo(no)
 				.build();
+	}
+	
+	public void completed() {
+		this.state=State.completed;
+	}
+
+
+	public void reject() {
+		this.state=State.Rejected;
 	}
 }
