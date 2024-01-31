@@ -50,12 +50,15 @@ public class NoticeProcess implements NoticeService{
 
 	@Override
 	public void listProcess(int page, Model model) {
+		
 		int limit = 10;
 		int offset=(page-1)*limit;
 		
 		
 		List<NoticeDTO> result = noticeMapper.findAllLimit(offset,limit);
+		
 		model.addAttribute("list",result);
+		
 		
 		int rowCount = noticeMapper.countAll();
 		
