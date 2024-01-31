@@ -18,7 +18,9 @@ public class ApprovalWaitDTO {
 	private String rank;
 	private String memberName;
 	private LocalDateTime createdDate;
-	 
+	private String docName;
+	private Long no; 
+	
 	private List<ApprovalLineDTO> approvalLine;
 	 
 	private String title;

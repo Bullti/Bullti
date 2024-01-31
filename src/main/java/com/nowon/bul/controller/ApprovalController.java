@@ -74,6 +74,17 @@ public class ApprovalController {
 		return "views/approval/tempList";
 	}
 
+	// 결재문서함
+	@GetMapping("/list")
+	public String list(Model model, Authentication authentication) {
+		MyUser user = (MyUser) authentication.getPrincipal();
+
+		List<ApprovalWaitListDTO> list = approvalService.getApprovalList(user.getMemberNo());
+		model.addAttribute("list", list);
+
+		return "views/approval/list";
+	}
+
 	// 결재대기함
 	@GetMapping("/wait-list")
 	public String waitLlist(Model model, Authentication authentication) {
@@ -130,6 +141,24 @@ public class ApprovalController {
 
 		model.addAttribute("dto", dto);
 		return "views/approval/draft-doc";
+	}
+
+	// 승인
+	@PostMapping("/accept/{no}")
+	public String docAccept(@PathVariable(name = "no") Long docno, Authentication authentication) {
+		MyUser user = (MyUser) authentication.getPrincipal();
+		approvalService.accept(docno, user.getMemberNo());
+
+		return "redirect:/approval/wait-list/" + docno;
+	}
+
+	// 반려
+	@PostMapping("/reject/{no}")
+	public String docReject(@PathVariable(name = "no") Long docno, Authentication authentication) {
+		MyUser user = (MyUser) authentication.getPrincipal();
+		approvalService.reject(docno, user.getMemberNo());
+
+		return "redirect:/approval/wait-list/" + docno;
 	}
 
 	/********************** 아래 비동기 ****************************/

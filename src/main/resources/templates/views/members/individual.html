@@ -7,33 +7,6 @@
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
-	function findAdress() {
-		new daum.Postcode({
-			oncomplete : function(data) {
-				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-				// 각 주소의 노출 규칙에 따라 주소를 조합한다.
-				// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-				var addr = ''; // 주소 변수
-				var extraAddr = ''; // 참고항목 변수
-
-				//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-				if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-					addr = data.roadAddress;
-				} else { // 사용자가 지번 주소를 선택했을 경우(J)
-					addr = data.jibunAddress;
-				}
-
-				// 우편번호와 주소 정보를 해당 필드에 넣는다.
-				//document.getElementById('sample6_postcode').value = data.zonecode;
-				document.getElementById("adress").value = addr;
-				// 커서를 상세주소 필드로 이동한다.
-				document.getElementById("detail_adress").focus();
-			}
-		}).open();
-	}
-</script>
-<script type="text/javascript">
 	function changedImg(element) {
 
 		var formData = new FormData();
@@ -59,22 +32,27 @@
 		});
 	}
 </script>
-
+<script type="text/javascript">
+	function changePass() {
+		var ret = window.open("/members/pass"
+				, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=300,left=500,width=400,height=400")
+	}
+</script>
 </head>
 <body>
 	<main class="warp-main">
-			<div th:replace="~{views/members/sideTemp :: side}"></div>
-			<div class="content" style="flex: 1">
+		<div th:replace="~{views/members/sideTemp :: side}"></div>
+		<div class="content" style="flex: 1">
 			<th:block th:replace="~{layout/header :: header}"></th:block>
 			<div class="main flex">
 				<form action="/members" method="post">
 					<div>
 						<h1 class="tilte">기본정보</h1>
 						<div class="row flex">
-							<label class="left">사진</label>
-							<label class="btn-file" th:style="'background-image:url('+ ${dto.profile} +');'"> <input type="file"
-								accept="image/*" onchange="changedImg(this)"> <img
-								src="/img/plus-icon.png">
+							<label class="left">사진</label> <label class="btn-file"
+								th:style="'background-image:url('+ ${dto.profile} +');'">
+								<input type="file" accept="image/*" onchange="changedImg(this)">
+								<img src="/img/plus-icon.png">
 							</label>
 						</div>
 						<div class="row flex">
@@ -83,7 +61,7 @@
 						</div>
 						<div class="flex row">
 							<label for="pass">비밀번호</label>
-							<button>비밀번호 변경</button>
+							<button onclick="changePass()" type="button">비밀번호 변경</button>
 						</div>
 						<div class="flex row">
 							<label for="name">이름</label>
@@ -116,31 +94,14 @@
 							<p>[[${dto.joinCompanyDate}]]</p>
 						</div>
 						<div class="button_area">
-							<button class="join_button" style="margin-right: 20px">저 장</button>
+							<button class="join_button" style="margin-right: 20px">저
+								장</button>
 							<button class="join_button">취 소</button>
 						</div>
 					</div>
 				</form>
 			</div>
 		</div>
-		</div>
-		<script type="text/javascript">
-			function updateRank() {
-				// 부서 선택 값 가져오기
-				var deptSelect = document.getElementById("dept");
-				var selectedDept = deptSelect.value;
-				// 직급을 감추기 위한 조건 설정
-				var rankDiv = document.getElementById("rank");
-				if (selectedDept == 8000) { // 예시 부서에 따라 변경 필요
-					rankDiv.style.display = "none";
-
-					document.getElementById("rankSelect").value = "StoreManager";
-					alert("직급이 점장으로 자동 선택됩니다.")
-				} else {
-					rankDiv.style.display = "block";
-				}
-			}
-		</script>
 	</main>
 </body>
 </html>
