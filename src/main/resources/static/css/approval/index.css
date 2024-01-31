@@ -5,12 +5,13 @@
 }
 
 .wrap2{
-	width: calc(100vw - 150px);
+	width: 1400px;
 	height: calc(100vh - 110px);
 	display: flex;
 	justify-content: space-around;
 	margin-right: 10px;
 	margin-left: 10px;
+	margin-top : 20px;
 }
 
 .wrap3{
@@ -52,9 +53,9 @@
     object-fit: scale-down;
     }
 
-.check > h1 {
+.check-lable > h1 {
 	position: relative;
-    left: -8px;
+    left: -6px;
     top: -10px;
     background-color: #273f87;
     color: white;
@@ -67,7 +68,7 @@
 	
 }
 
-.check > h1::after{
+.check-lable > h1::after{
 	content: '';
     position: absolute;
     left: 0px;
@@ -102,10 +103,118 @@
 	margin-top: 15px;
 }
 
-.button-area > button {
+button {
 	background-color: transparent;
 	border: 1px solid #a9a9a9;
 	cursor: pointer;
 	font-size: 14px;
 }
 
+.button-area > div {
+	margin-top: 10px;
+}
+
+.Approval{
+	margin-top: 20px;
+	padding-bottom: 20px;
+
+}
+
+.ApprovalButtonArea{
+    text-align: -webkit-right;
+    top: -18px;
+    right: 9px;
+    position: relative;
+}
+
+.situation{
+	display: flex;
+	justify-content: space-around;
+	text-align: -webkit-center;
+	align-items: center;
+}
+
+.situation > div{
+	width: 110px;
+	height: 75px;
+}
+
+.situation > div > p{
+	margin-top: 5px;	
+}
+
+.situation > div > span {
+	margin-top: 30px;	
+	font-size: 16px;
+}
+
+.situation > div:nth-child(1){
+	/*background-color: #f6b97922;*/
+}
+
+.situation > div:nth-child(2){
+	/*background-color: #f6b97922;*/
+}
+
+.calendar{
+	height: 400px;
+}
+
+.board{
+	margin-top: 20px;
+	height: 400px;
+	
+}
+    
+.notice_table{
+	margin: auto;
+	width: 400px;
+	
+}
+
+
+
+td {
+	border-bottom: 1px solid #6c97be;
+	height: 20px;
+	margin-top: 5px;
+	padding-top: 3px;
+}
+
+.pagging-wrap{
+    text-align: -webkit-center;
+    margin-top: 15px;
+}
+
+#calendar{
+	height: 357px;
+	padding: 20px;
+}
+
+.mail-button-area{
+	text-align: -webkit-center;
+	margin: auto;
+	
+}
+
+.mail-button-area > button {
+	width: 130px;
+	height: 40px;
+/*	font-weight: bold;*/
+	font-size: 15px;
+}
+	
+.mail-button-area > button +button{
+	margin-left: 20px;
+	background-color: #6c97be;
+	color: white;
+}	
+
+.mail-box{
+	margin-top: 20px;
+	height: 500px;
+}
+
+.sales{
+	margin-top: 20px;
+}

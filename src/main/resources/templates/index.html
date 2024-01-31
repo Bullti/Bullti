@@ -2,13 +2,15 @@
 	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
 <head>
 <link rel="stylesheet" href="/css/approval/index.css">
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js'></script>
+    <script defer src="/js/calendar/fullcalendar.js"></script>
 </head>
 <body>
 	<main>
 		<th:block th:replace="~{layout/header :: header}"></th:block>
 		<div class="wrap2">
-			<div class="wrap3 border">
-				<div class="check border">
+			<div class="wrap3">
+				<div class="check check-lable border">
 					<h1>근태관리</h1>
 					<section class="check-section">
 						<div class="check-profile border">
@@ -23,30 +25,118 @@
 						<span id="last-span">개발부</span>
 					</div>	
 					<div class="button-area">
-						<button>출근</butto>
+						<button onclick="recordAttendance()">출근</button>
+						<div id="attendanceRecord"></div>
+						<div id="leaveRecord"></div>
 					</div>
 				</div>
-				<div class="Approval border">
+				<div class="check-lable Approval border">
 					<h1>결재상황</h1>
+					<div class="ApprovalButtonArea"><button onclick="location.href='/approval'">더보기</button></div>
+					<section class="situation">
+						<div class="border">
+							<p>[진행중 문서]</p>
+							<hr>
+							<span>@</span>
+							<span>건</span>
+						</div>
+						<div class="border">
+							<p>[완료 문서]</p>
+							<hr>
+							<span>@</span>
+							<span>건</span>
+						</div>
+					</section>
 				</div>
 			</div>
-			<div class="wrap4 border">
-				<div class="calendar border">
+			<div class="wrap4">
+				<div class="check-lable calendar border">
 					<h1>일정관리</h1>
+					<div id='calendar'></div>
 				</div>
-				<div class="board border">
+				<div class="check-lable board border">
 					<h1>공지사항</h1>
+					<div class="ApprovalButtonArea"><button onclick="location.href='/members/notice'">더보기</button></div>
+					<table class="notice_table">
+					<thead>
+						<tr>
+							<td class="d" style="font-weight: bold;">제목</td>
+							<td class="f" style="font-weight: bold;">작성일</td>
+						</tr>
+					</thead>
+					<tbody>
+						<th:block th:each="dto:${list}">
+							<tr>
+								<td class="d">
+									<a th:href="|/members/notice/${dto.boardNo}|" th:text="${dto.boardTitle}">제목</a>
+								</td>
+								<td th:text="${#temporals.format(dto.createdDatetime, 'MM/dd HH:mm')}" class="g">작성일
+								</td>
+							</tr>
+					</tbody>
+				</table>
+
+					
 				</div>
 			</div>
-			<div class="wrap5 border">
-				<div class="mail border">
+			<div class="wrap5">
+				<div class="check-lable mail border">
 					<h1>메일함</h1>
+					<div class="mail-button-area">
+						<button>메일쓰기</button>
+						<button>내게쓰기</button>
+					</div>
+					<div class="mail-box border">
+						<div id="mailResults">
+					        <table>
+					            <thead>
+					                <tr>
+					                    <th>제목</th>
+					                    <th>보낸 날짜</th>
+					                </tr>
+					            </thead>
+					            <tbody>
+					                <!-- Thymeleaf의 th:each를 사용하여 메일 목록을 반복 -->
+					                 <tr th:each="mail:${mailList}">
+									 	<td th:text="${mail.subject}"></td>
+									 	<td th:text="${mail.sentDate}"></td>
+					               	 </tr>
+					            </tbody>
+					        </table>
+					    </div>					
+					</div>
 				</div>
-				<div class="sales border">
+				<div class="check-lable sales border">
 					<h1>메일함</h1>
 				</div>
 			</div>
 		</div>
+		
+		<script>
+		    let isAttendanceRecorded = false;
+		
+		    function recordAttendance() {
+		        const button = document.querySelector('.button-area button');
+		        const attendanceRecord = document.getElementById('attendanceRecord');
+		        const leaveRecord = document.getElementById('leaveRecord');
+		        const now = new Date();
+		        const timeString = now.toLocaleTimeString();
+		
+		        if (isAttendanceRecorded) {
+		            // 이미 출근이 기록되어 있을 때
+		            leaveRecord.textContent = `퇴근 기록: ${timeString}`;
+		            button.textContent = '출근';
+		        } else {
+		            // 출근 기록
+		            attendanceRecord.textContent = `출근 기록: ${timeString}`;
+		            button.textContent = '퇴근';
+		        }
+		
+		        // 토글
+		        isAttendanceRecorded = !isAttendanceRecorded;
+		    }
+		</script>
+
 	</main>
 </body>
 </html>
