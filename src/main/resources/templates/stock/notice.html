@@ -49,8 +49,8 @@
 						<th:block th:each="dto:${list}">
 							<tr>
 								<td th:text="${dto.boardNo}" class="a">글번호</td>
-								<td th:text="${dto.writer}" class="b">이름</td>
-								<td th:text="${dto.rank}" class="c">부서</td>
+								<td th:text="${dto.name}" class="b">이름</td>
+								<td th:text="${dto.deptName}" class="c">부서</td>
 								<td class="d">
 									<a th:href="|/members/notice/${dto.boardNo}|" th:text="${dto.boardTitle}">제목</a>
 								</td>
@@ -59,17 +59,6 @@
 								</td>
 
 							</tr>
-
-
-							<!--
-					<tr>
-						<td colspan="6" th:utext="${dto.boardContent}">
-						</td>
-					</tr>
-					
-					</th:block>
-					-->
-
 
 					</tbody>
 				</table>

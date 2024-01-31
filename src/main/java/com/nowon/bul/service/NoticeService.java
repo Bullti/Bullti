@@ -13,7 +13,7 @@ public interface NoticeService {
 
 	void listProcess(int page, Model model);
 
-	void saveProcess(Authentication auth,NoticeSaveDTO dto);
+	String saveProcess(Authentication auth,NoticeSaveDTO dto);
 
 	void detailProcess(long boardNo, Model model);
 
