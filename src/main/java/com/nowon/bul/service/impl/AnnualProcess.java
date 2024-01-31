@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.nowon.bul.domain.dto.AnnualSaveDTO;
+import com.nowon.bul.domain.dto.annual.AnnualApproveCode;
+import com.nowon.bul.domain.dto.annual.AnnualCancelDTO;
 import com.nowon.bul.domain.dto.annual.AnnualListDTO;
 import com.nowon.bul.mybatis.mapper.AnnualMapper;
 import com.nowon.bul.service.AnnualService;
@@ -34,7 +36,11 @@ public class AnnualProcess implements AnnualService {
 	}
 
 	@Override
-	public void cancel(long annualNo) {
-		mapper.cancelByNo(annualNo);
+	public void cancel(Authentication auth, long annualNo) {
+		mapper.cancelByNo(AnnualCancelDTO.builder()
+				.memberNo(AuthenUtils.extractMemberNo(auth)) // AuthenUtils를 이용하여 Authentication 객체에서 memberNo 추출
+				.annualNo(annualNo)
+				.approveCode(AnnualApproveCode.CANCEL.getApproveCode())//enum에서 휴가신청취소코드 출력 
+				.build());
 	}
 }
