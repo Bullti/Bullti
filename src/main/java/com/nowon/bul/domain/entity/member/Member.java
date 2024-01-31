@@ -2,23 +2,16 @@ package com.nowon.bul.domain.entity.member;
 
 import java.util.Set;
 
-import org.springframework.aop.support.DelegatePerTargetObjectIntroductionInterceptor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import com.nowon.bul.department.DeEntity;
 import com.nowon.bul.domain.dto.FranOwnerDTO;
+import com.nowon.bul.domain.dto.IndividualDTO;
 import com.nowon.bul.domain.dto.MemberListDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalMemberDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalMemberListDTO;
-import com.nowon.bul.domain.entity.approval.ApprovalDoc;
 import com.nowon.bul.domain.entity.fran.FranEntity;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
@@ -36,7 +29,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -137,5 +129,19 @@ public class Member {
 
 	public ApprovalMemberListDTO toApprovalMemberListDTO() {
 		return ApprovalMemberListDTO.builder().id(id).name(name).rank(rank.getRankName()).build();
+	}
+
+	public IndividualDTO toIndevidualDTO() {
+		return IndividualDTO.builder()
+				.profile(profile)
+				.id(id)
+				.name(name)
+				.deptName(dept.getDeptName())
+				.rank(rank.getRankName())
+				.tel(phone)
+				.adress(adress)
+				.birthDate(birthDate)
+				.joinCompanyDate(joinCompanyDate)
+				.build();
 	}
 }

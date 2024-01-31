@@ -3,29 +3,28 @@ package com.nowon.bul.controller;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.nowon.bul.department.DeController;
 import com.nowon.bul.department.DeService;
 import com.nowon.bul.domain.dto.DeptListDTO;
+import com.nowon.bul.domain.dto.IndividualDTO;
 import com.nowon.bul.domain.dto.MemberListDTO;
 import com.nowon.bul.domain.dto.MemberSaveDTO;
 import com.nowon.bul.domain.entity.member.Member;
+import com.nowon.bul.domain.entity.member.MyUser;
 import com.nowon.bul.service.AwsService;
 import com.nowon.bul.service.MemberService;
 import com.nowon.bul.utils.jpaPage.PageRequestDTO;
 import com.nowon.bul.utils.jpaPage.PageResultDTO;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RequiredArgsConstructor
@@ -38,7 +37,11 @@ public class UserController {
 	
 	//개인정보 조회
 	@GetMapping("/individual")
-	public String individualPage() {
+	public String individualPage(Model model, Authentication authentication) {
+		MyUser user = (MyUser) authentication.getPrincipal();
+		IndividualDTO dto = memberSerivce.getIndividual(user.getMemberNo());
+		
+		model.addAttribute("dto", dto);
 		return "views/members/individual";
 	}
 	
