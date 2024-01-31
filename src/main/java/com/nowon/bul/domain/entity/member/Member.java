@@ -87,11 +87,6 @@ public class Member {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "dept_id")
 	private DeEntity dept;
-
-	@OneToMany
-	@JoinColumn(name = "id")
-	private List<FranEntity> store;
-
 	/*
 	 * UserEntity에 대응하는 권한을 나타내는 테이블을 만듬 *UserEntity내부 테이블에 생성되지 않음!!! 중복을 허용하지 않고
 	 * 순서가 상관없으므로 Set Collection을 이용해서 만듬
