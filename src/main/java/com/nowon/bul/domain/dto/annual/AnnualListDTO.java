@@ -18,4 +18,8 @@ public class AnnualListDTO {
 	private String head;
 	private int approve;
 	
+    // Enum에 대응하는 문자열 반환 메서드
+    public String getApprove() {
+        return AnnualApproveCode.valueOfNumber(approve).getApproveState();
+    }
 }

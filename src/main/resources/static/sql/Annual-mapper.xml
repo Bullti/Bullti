@@ -11,6 +11,6 @@
 		select * from annual where member_no = #{memberNo}
 	</select>
 	<update id="cancelByNo">
-		update annual set approve = 99 where annual_no = #{annualNo}
+		update annual set approve = #{approveCode} where member_no=#{memberNo} and annual_no = #{annualNo}
 	</update>
 </mapper>
