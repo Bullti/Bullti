@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+	<div class="flex center date" th:if="${msg.today}" th:text="${msg.today}"></div>
+	<div class="msg bot flex">
+		<div  class="icon">
+			<img src="/images/icon/robot-solid.svg">
+		</div>
+		<div class="message" >
+			<div class="part" th:if="${msg.answer.keyword ne '전화번호' or msg.answer.phone != null}">
+				<p th:utext="${msg.answer.content}"></p>
+			</div>
+			<div th:if="${msg.answer.keyword eq '전화번호'}" >
+				<div class="part" th:each="p:${msg.answer.phone}"  >
+					<p>
+						<span th:text="${p.deptName}"></span>&nbsp;:&nbsp;
+						<span th:text="${p.memberName}"></span>&nbsp;:&nbsp;
+						<span th:text="${p.phone}"></span>
+					</p>
+				</div>
+				<div class="part" th:if="${#lists.isEmpty(msg.answer.phone)}">
+					<p>
+						존재하지 않는 사원입니다.
+					</p>
+				</div>
+			</div>
+			<div class="time" th:text="${msg.time}">메세지 작성 시간</div>
+		</div>
+	</div>
+</html>
