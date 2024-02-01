@@ -139,4 +139,9 @@ public class Member {
 				.joinCompanyDate(joinCompanyDate)
 				.build();
 	}
+
+	//비밀번호 변경
+	public void changePassword(String newPass) {
+		this.password = newPass;
+	}
 }
