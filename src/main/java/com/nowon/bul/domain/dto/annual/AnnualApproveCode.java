@@ -12,11 +12,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum AnnualApproveCode {
 
-	ERROR(30, "오류"),
-	PROGRESS(20, "진행중"),
-    APPROVE(50, "승인"),
+	ERROR(4, "오류"),
+	PROGRESS(50, "진행중"),
     REJECT(90, "반려"),
-    CANCEL(99, "취소");
+    CANCEL(99, "취소"),
+	APPROVE(100, "승인");
 
     private final int approveCode;
     private final String approveState;
