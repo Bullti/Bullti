@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.nowon.bul.domain.entity.fran.FranEntity;
+import com.nowon.bul.domain.entity.member.Member;
 import com.nowon.bul.stock.dto.PurchaseDTO;
 import com.nowon.bul.stock.dto.PurchaseDTO.PurchaseDTOBuilder;
 
@@ -41,9 +42,6 @@ public class PurchaseEntity extends BaseEntity{
 	private ProductEntity product;
 	
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "franchise_id")
-	private FranEntity franchise;
 	
 	
 	@Column(nullable = false)
@@ -59,7 +57,7 @@ public class PurchaseEntity extends BaseEntity{
 		return PurchaseDTO.builder()
 				.productName(product.getProductName())
 				.purchaseNum(purchaseNum)
-				.franchiseName(franchise!=null?franchise.getName():"테스트")
+				.totalWeight(calculateTotalWeight())
 				.totalPrice(calculateTotalPrice())
 				.ea(ea)
 				.purchaseDate(purchaseDate)
@@ -67,11 +65,13 @@ public class PurchaseEntity extends BaseEntity{
 				.build();		
 	}
 		
-	private int calculateTotalPrice() {
+	public int calculateTotalPrice() {
 		return ea * product.getProductPrice();
 	}
 
-	
+	public int calculateTotalWeight() {
+		return ea * product.getProductWeight();
+	}
 	
 	
 	

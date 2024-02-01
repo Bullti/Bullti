@@ -35,6 +35,27 @@ $(document).ready(function(){
         });
     });
 });
+
+$(document).ready(function(){
+    $(document).on('click', '.delete-all-btn', function(){
+        if (confirm('정말로 모든 구매 정보를 삭제하시겠습니까?')) {
+            $.ajax({
+                url: '/members/purchase-post/all', // 전체 삭제를 위한 URL
+                type: 'POST', // HTTP method
+                data:{_method: "DELETE"},
+                success: function(result) {
+                    // 성공 시 동작
+                    location.reload(); // 페이지 새로고침
+                },
+                error: function(request,msg,error) {
+                    // 실패 시 동작
+                    alert('전체 삭제 실패');
+                }
+            });
+        }
+    });
+});
+
 </script>
 
 </head>
@@ -77,9 +98,9 @@ $(document).ready(function(){
 			<thead class="table_h">
 				
 				<tr style="font-size: 14px;">
-					<th style="width: 200px">발주상품명</th>
-					<th style="width: 150px">발주가맹점</th>
-					<th style="width: 100px">발주수량</th>
+					<th style="width: 150px">발주상품명</th>
+					<th style="width: 150px">중량합계</th>
+					<th style="width: 150px">발주수량</th>
 					<th style="width: 150px">발주총액</th>
 					<th style="width: 250px">신청일자</th>
 					<th style="width: 100px">삭제</th>
@@ -89,30 +110,38 @@ $(document).ready(function(){
 			</thead>
 			
 			<tbody id="dynamic_table">
-				
+			
 				<tr th:each="pur:${purchases}">
-					<td style="width: 200px" th:text="${pur.productName}">productName</td>
-					<td style="width: 150px" th:text="${pur.franchiseName}">franchiseName</td>
-					<td style="width: 100px" th:text="${pur.ea}">productWeight</td>
-					<td style="width: 150px" th:text="${pur.totalPrice}">productPrice</td>
-					<td style="width: 250px" th:text="${#temporals.format(pur.purchaseDate, pur.purchaseDate.year != #dates.createNow().year ? 'MM-dd HH:mm:ss' : 'yyyy-MM-dd HH:mm:ss')}">productDate</td>
-					 <td style="width: 100px">
-					        <button type="button" th:attr="data-id=${pur.purchaseNum}" class="delete-btn" style="font-size: 12px; padding: 4px 12px; background-color: var(--bullti1); color: white; border: none; cursor: pointer;">삭제</button>
-					    </td>
-					</tr>
+					<td style="width: 150px" th:text="${pur.productName}">productName</td>
+					<td style="width: 150px" th:text="${pur.getFormattedTotalWeight()}"></td>
+					<td style="width: 150px" th:text="${pur.getFormattedSupply()}">productSupply</td>
+					<td style="width: 150px" th:text="${'￦' + pur.getFormattedTotalPrice()}">productPrice</td>
+					<td style="width: 250px"
+						th:text="${#temporals.format(pur.purchaseDate, pur.purchaseDate.year != #dates.createNow().year ? 'MM-dd HH:mm:ss' : 'yyyy-MM-dd HH:mm:ss')}">
+						productDate</td>
+					<td style="width: 100px">
+						<button type="button" th:attr="data-id=${pur.purchaseNum}" class="delete-btn"
+							style="font-size: 12px; padding: 4px 12px; background-color: var(--bullti1); color: white; border: none; cursor: pointer;">삭제</button>
+					</td>
+				</tr>
 				<tr th:if="${#lists.isEmpty(purchases)}">
 					<td colspan="6" style="width:100%;display:block; text-align: center;padding: 2em 0">
 						등록된 발주가 존재하지 않습니다.
 					</td>
 				</tr>
-				
-			</tbody>
 			
+			</tbody>
 			<tfoot>
 				<tr>
 					<td colspan="6" class="flex center" id="table_bottom">
-						<div class="cancel"><button style="font-size: 12px; padding: 4px 12px; background-color: var(--bullti1); color: white; border: none; cursor: pointer;" onclick="placeOrder('${pur.productPrice}')">전체취소</button></div>
-						<div class="purchasing"><button style="font-size: 12px; padding: 4px 12px; background-color: var(--bullti1); color: white; border: none; cursor: pointer;" onclick="placeOrder('${pur.productPrice}')">저장</button></div>
+						<div class="cancel">
+						    <button class="delete-all-btn" style="font-size: 12px; padding: 4px 12px; background-color: var(--bullti1); color: white; border: none; cursor: pointer;">전체취소</button>
+						</div>
+
+						<div class="purchasing"><button style="font-size: 12px; padding: 4px 12px; background-color: var(--bullti1); color: white; border: none; cursor: pointer;" onclick="submitPurchase()">저장</button>
+</div>
+					
+					
 					</td>
 				</tr>
 				

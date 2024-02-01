@@ -1,10 +1,13 @@
 package com.nowon.bul.stock.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import com.nowon.bul.domain.entity.fran.FranEntity;
 import com.nowon.bul.stock.dto.PurchaseDTO;
 import com.nowon.bul.stock.entity.ProductEntity;
 import com.nowon.bul.stock.entity.PurchaseEntity;
@@ -25,6 +28,8 @@ public class PurchaseController {
     @Autowired
     private PurchaseRepository purchaseRepository;
     
+  
+    
     
     @GetMapping("/purchase")
     public String purchase(Model model) {
@@ -44,17 +49,7 @@ public class PurchaseController {
         System.out.println(">>>>" + dto.getProductName());
         System.out.println(">>>>" + dto.getEa());
     
-        // 상품 조회
-        ProductEntity product = productService.getProductByName(dto.getProductName());
-    
-        // PurchaseEntity 생성
-        PurchaseEntity purchaseEntity = PurchaseEntity.builder()
-                .product(product)
-                .ea(dto.getEa())
-                .build();
-    
-        // 생성된 PurchaseEntity를 DB에 저장
-        purchaseRepository.save(purchaseEntity);
+        purchaseService.purchaseSave(dto);
     
         return "등록 성공";
     }
@@ -70,4 +65,31 @@ public class PurchaseController {
         purchaseService.deletebyid(purchaseNum);
         return "redirect:/members/purchase-post";  // 삭제 후 목록으로 리다이렉션
     }
+    
+    @DeleteMapping("/purchase-post/all")
+    public String deleteAllPurchases() {
+        purchaseService.deleteAllPurchases();
+        return "redirect:/members/purchase-post";  // 삭제 후 리다이렉트할 페이지
+    }
+    
+    /*
+    @PostMapping("/purchase-post")
+    public String submitPurchase(PurchaseDTO purchaseDTO, Authentication auth,Model model) {
+        // 현재 인증된 사용자의 정보를 가져옵니다.
+        UserDetails userDetails = (UserDetails) auth.getPrincipal();
+        String username = userDetails.getUsername();
+
+        // 발주 정보를 'purchase-complete' 테이블에 저장합니다.
+        purchaseService.savePurchaseComplete(purchaseDTO, username,model);
+        model.addAttribute("purCom",purchaseService.getAllPurchaseComplements());
+
+        // 'purchase' 테이블의 모든 데이터를 삭제합니다.
+        purchaseService.deleteAllPurchases();
+
+        // '발주 신청 현황' 페이지로 리다이렉트합니다.
+        return "redirect:/members/purchase-complete";
+    }
+
+    */
+    
 }
