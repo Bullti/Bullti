@@ -35,18 +35,7 @@ public class NoticeProcess implements NoticeService{
 	private final MemberRepository memberRepository;
 	private final DeRepository deRepository;
 	
-	
-	@Override
-	public void listProcess(Model model) {
-		
-		//int limit=10;
-		//int offset=0;
-		
-		//RowBounds rowBounds = new RowBounds(offset, limit);
-		//List<NoticeDTO> result = noticeMapper.findAll(rowBounds);
-		//model.addAttribute("list", result);
-		
-	}
+
 
 	@Override
 	public void listProcess(int page, Model model) {
