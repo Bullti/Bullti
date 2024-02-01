@@ -89,6 +89,7 @@ public class MemberProcess implements MemberService{
 		return Pattern.matches("^[0-9]*$", id);
 	}
 
+	
 	// storeManager인 멤버 조회
     public List<Member> getStoreManagers() {
         return memberRepo.findByRank(Rank.StoreManager);
@@ -116,6 +117,23 @@ public class MemberProcess implements MemberService{
 	public IndividualDTO getIndividual(long memberNo) {
 		return memberRepo.findById(memberNo).orElseThrow()
 				.toIndevidualDTO();
+	}
+
+	//비밀번호 변경
+	@Transactional
+	@Override
+	public void changePassword(long memberNo, String newPass) {
+		passEncoder.encode(newPass);
+		Member member = memberRepo.findById(memberNo).orElseThrow();
+		
+		member.changePassword(passEncoder.encode(newPass));
+		memberRepo.save(member);
+	}
+
+	//현재 비밀번호 일치 검사
+	@Override
+	public boolean checkpass(long memberNo, String pass) {
+		return passEncoder.matches(pass, memberRepo.findById(memberNo).orElseThrow().getPassword());
 	}
 
 }

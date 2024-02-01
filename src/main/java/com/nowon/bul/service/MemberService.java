@@ -35,5 +35,11 @@ public interface MemberService {
 	Member getFindById(long memberNo);
 
 	IndividualDTO getIndividual(long memberNo);
+
+	//비밀번호 변경
+	void changePassword(long memberNo, String newPass);
+
+	//현재 비밀번호 일치 검사
+	boolean checkpass(long memberNo, String pass);
 	
 }
