@@ -41,8 +41,7 @@ public class AnnualController {
 	
 	@DeleteMapping
 	public String annualList(Authentication auth,@RequestParam("annualNo") long annualNo) {
-		System.out.println("델리트매핑테스트"+annualNo);
 		servie.cancel(auth, annualNo);
-		return "redirect:/emp/annu";
+		return "redirect:/emp/annu/list";
 	}
 }
