@@ -9,7 +9,6 @@ import com.nowon.bul.domain.dto.NoticeUpdateDTO;
 
 public interface NoticeService {
 
-	void listProcess(Model model);
 
 	void listProcess(int page, Model model);
 

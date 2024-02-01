@@ -16,13 +16,14 @@
 
 <script>
 $(document).ready(function(){
-    $('.delete-btn').click(function(){
+    $(document).on('click', '.delete-btn', function(){
         const purchaseNum = $(this).attr('data-id');
          console.log(purchaseNum); // purchaseNum 값 출력
         
         $.ajax({
-            url: '/members/purchase/' + purchaseNum, // 서버로 보낼 URL
-            type: 'DELETE', // HTTP method
+            url: `/members/purchase-post/${purchaseNum}`, // 템플릿 리터럴을 사용한 URL // 서버로 보낼 URL
+            type: 'POST', // HTTP method
+            data:{_method: "DELETE"},
             success: function(result) {
                 // 성공 시 동작
                 location.reload(); // or remove the item on the front-end
@@ -91,12 +92,12 @@ $(document).ready(function(){
 				
 				<tr th:each="pur:${purchases}">
 					<td style="width: 200px" th:text="${pur.productName}">productName</td>
-					<td style="width: 150px" th:text="${pur.name}">franchiseId</td>
+					<td style="width: 150px" th:text="${pur.franchiseName}">franchiseName</td>
 					<td style="width: 100px" th:text="${pur.ea}">productWeight</td>
 					<td style="width: 150px" th:text="${pur.totalPrice}">productPrice</td>
 					<td style="width: 250px" th:text="${#temporals.format(pur.purchaseDate, pur.purchaseDate.year != #dates.createNow().year ? 'MM-dd HH:mm:ss' : 'yyyy-MM-dd HH:mm:ss')}">productDate</td>
 					 <td style="width: 100px">
-					        <button th:attr="data-id=${pur.purchaseNum}" onclick="deletePurchase(this)" style="font-size: 12px; padding: 4px 12px; background-color: var(--bullti1); color: white; border: none; cursor: pointer;">삭제</button>
+					        <button type="button" th:attr="data-id=${pur.purchaseNum}" class="delete-btn" style="font-size: 12px; padding: 4px 12px; background-color: var(--bullti1); color: white; border: none; cursor: pointer;">삭제</button>
 					    </td>
 					</tr>
 				<tr th:if="${#lists.isEmpty(purchases)}">
@@ -128,25 +129,6 @@ $(document).ready(function(){
 </div>
 
 
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    function deletePurchase(button) {
-        var purchaseNum = button.getAttribute("data-id");
-
-        var form = document.createElement("form");
-        form.method = "POST";
-        form.action = "/members/purchase-post";
-        var methodInput = document.createElement("input");
-        methodInput.type = "hidden";
-        methodInput.name = "_method";
-        methodInput.value = "DELETE";
-        form.appendChild(methodInput);
-
-        document.body.appendChild(form);
-        form.submit();
-    }
-    /*]]>*/
-</script>
 
 
 

@@ -49,47 +49,31 @@ public class PurchaseEntity extends BaseEntity{
 	@Column(nullable = false)
 	private int ea;
 	
-	@Column(nullable = false)
-	private int totalPrice;
 	
 	@CreationTimestamp
 	@Column(columnDefinition = "timestamp(6) null", nullable = false)
 	private LocalDateTime purchaseDate;
 	
-	public void setProduct(ProductEntity product) {
-	    this.product = product;
-	    this.totalPrice = calculateTotalPrice();
-	    if (product != null) {
-	        // 강제로 product 엔터티를 로딩하도록 함
-	        product.getProductNum();
-	    }
-	}
 	
 	public PurchaseDTO toPurchaseDTO(){
-		
-		 PurchaseDTOBuilder builder = PurchaseDTO.builder();
-
-		    if (product != null) {
-		        builder.productName(product.getProductName())
-		               .ea(ea)
-		               .totalPrice(this.calculateTotalPrice());
-		    }
-
-		    if (franchise != null) {
-		        builder.name(franchise.getName());
-		    }else {
-		        // If franchise is null, set a default value ("테스트")
-		        builder.name("테스트");
-		    }
-
-		
-		
-		    return builder.purchaseDate(purchaseDate).build();
+		return PurchaseDTO.builder()
+				.productName(product.getProductName())
+				.purchaseNum(purchaseNum)
+				.franchiseName(franchise!=null?franchise.getName():"테스트")
+				.totalPrice(calculateTotalPrice())
+				.ea(ea)
+				.purchaseDate(purchaseDate)
+				.productPrice(product.getProductPrice())
+				.build();		
 	}
 		
 	private int calculateTotalPrice() {
 		return ea * product.getProductPrice();
 	}
+
+	
+	
+	
 	
 
 }

@@ -13,6 +13,6 @@ public interface PurchaseService {
 	
 	void purchaseSave(PurchaseDTO dto);
 
-	void deletePurchase(int purchaseNum);
+	void deletebyid(int purchaseNum);
 
 }
