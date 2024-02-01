@@ -104,7 +104,9 @@ tbody > .wrap > th {
     box-sizing: border-box;
     height: 60%;
 }
-
+.approval-line > li > .sign > .accept {
+	height: 80%
+}
 .approval-line > li > .name {
 	border-right: 1px solid;
     border-bottom: 1px solid;

@@ -92,5 +92,57 @@ public class ApprovalProcess implements ApprovalService{
 				.map(approval -> approval.getApDoc().toWaitListDTO())
 				.collect(Collectors.toList());
 	}
+
+	//결재 승인
+	@Transactional
+	@Override
+	public void accept(Long docno, long memberNo) {
+		ApprovalDoc approvalDoc = approvalDocRepo.findById(docno).orElseThrow();
+		Member member = memberRepo.findById(memberNo).orElseThrow();
+		
+		Approval approval = approvalRepo.findByMemberAndApDoc(member, approvalDoc).orElseThrow();
+		
+		//다음 순서 반환
+		int order = approval.accept();
+		order++;
+		
+		//다음 순서가 없을 시 결재문서 상태 -> 결재완료
+		Approval nextApproval = approvalRepo.findByApDocAndOrder(approvalDoc ,order).orElse(null);
+		if(nextApproval == null) {
+			System.out.println("최종결재가 완료되었습니다.");
+			approvalDoc.completed();
+			return;
+		}else {
+			nextApproval.UpdateReceivedDate();
+			nextApproval.underReview();
+		}
+		
+	}
+
+	//결재리스트
+	@Transactional
+	@Override
+	public List<ApprovalWaitListDTO> getApprovalList(long memberNo) {
+		Member member = memberRepo.findById(memberNo).orElseThrow();
+		Result result=Result.Accept;
+		
+		
+		return approvalRepo.findAllByMemberAndResult(member, result).stream()
+				.map(approval -> approval.getApDoc().toWaitListDTO())
+				.collect(Collectors.toList());
+	}
+
+	//결재 반려
+	@Transactional
+	@Override
+	public void reject(Long docno, long memberNo) {
+		ApprovalDoc approvalDoc = approvalDocRepo.findById(docno).orElseThrow();
+		Member member = memberRepo.findById(memberNo).orElseThrow();
+		
+		Approval approval = approvalRepo.findByMemberAndApDoc(member, approvalDoc).orElseThrow();
+		
+		approval.reject();
+		approvalDoc.reject();
+	}
 	
 }

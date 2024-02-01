@@ -19,11 +19,13 @@
 			<form action="" method="post" id="approvalId">
 				<div class="main flex col">
 					<ul class="flex list">
-						<li><a onclick="submitForm('/approval')"
+						<li><a onclick="submitForm('/approval/wait-list')"
 							style="cursor: pointer;">목록</a></li>
-						<li><a onclick="submitForm('/approval')"
+						<li><a
+							th:onclick="|submitForm('/approval/accept/${dto.no}')|"
 							style="cursor: pointer;">승인</a></li>
-						<li><a onclick="submitForm('/approval')"
+						<li><a
+							th:onclick="|submitForm('/approval/reject/${dto.no}')|"
 							style="cursor: pointer;">반려</a></li>
 					</ul>
 					<div class="form">
@@ -32,9 +34,9 @@
 							<tbody>
 								<tr>
 									<th>문서 종류</th>
-									<td style="width: 470px;"><select>
-											<option>일반문서</option>
-									</select></td>
+									<td style="width: 470px;">
+										<p>일반문서</p>
+									</td>
 									<th>소 속</th>
 									<td>[[${dto.deptName}]]</td>
 								</tr>
@@ -45,8 +47,10 @@
 									<td>[[${dto.rank}]]</td>
 								</tr>
 								<tr>
-									<th></th>
-									<td style="width: 470px;"></td>
+									<th>문서 번호</th>
+									<td style="width: 470px;">
+										<p>[[${dto.docName}]]</p>
+									</td>
 									<th>작 성 자</th>
 									<td>[[${dto.memberName}]]</td>
 								</tr>
@@ -54,18 +58,19 @@
 						</table>
 					</div>
 					<div class="form">
-						<h1 class="title">
-							결재선
-						</h1>
+						<h1 class="title">결재선</h1>
 					</div>
 					<ul class="approval-line flex">
 						<li class="flex center"
 							style="border: 1px solid; box-sizing: border-box;">결재</li>
 						<li th:each="emp : ${dto.approvalLine}">
 							<div class="flex center rank">[[${emp.rank}]]</div>
-							<div class="sign flex center">
-								<div th:if="${emp.result} eq '승인'">승인</div>
-								<div th:if="${emp.result} eq '승인'">[[${emp.approvaledDate}]]</div>
+							<div class="sign flex col center">
+								<img th:if="${emp.result} eq '승인'" 	src="/img/approval/accept.png" class="accept"> 
+								<img th:if="${emp.result} eq '반려'" src="/img/approval/reject.png" class="accept">
+								<div th:if="${emp.result eq '승인' or emp.result eq '반려'}">
+									[[${#temporals.format(emp.approvaledDate, 'yyyy-MM-dd HH:mm:ss')}]]
+								</div>
 							</div>
 							<div class="flex center name">[[${emp.name}]]</div>
 						</li>
@@ -78,9 +83,7 @@
 							<p>[[${dto.title}]]</p>
 						</div>
 					</div>
-					<div class="ap-content">
-						[(${dto.content})]
-					</div>
+					<div class="ap-content">[(${dto.content})]</div>
 					<div class="file-aera flex hcenter">
 						<input type="file" multiple>
 					</div>
