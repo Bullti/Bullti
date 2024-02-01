@@ -142,21 +142,12 @@ public class ApprovalController {
 		model.addAttribute("dto", dto);
 		return "views/approval/draft-doc";
 	}
-
-	// 승인
-	@PostMapping("/accept/{no}")
-	public String docAccept(@PathVariable(name = "no") Long docno, Authentication authentication) {
+    
+	
+	@PostMapping("/{result}/{no}")
+	public String docAccept(@PathVariable(name = "result") String result, @PathVariable(name = "no") Long docno, Authentication authentication) {
 		MyUser user = (MyUser) authentication.getPrincipal();
-		approvalService.accept(docno, user.getMemberNo());
-
-		return "redirect:/approval/wait-list/" + docno;
-	}
-
-	// 반려
-	@PostMapping("/reject/{no}")
-	public String docReject(@PathVariable(name = "no") Long docno, Authentication authentication) {
-		MyUser user = (MyUser) authentication.getPrincipal();
-		approvalService.reject(docno, user.getMemberNo());
+		approvalService.changeResult(docno, result ,user.getMemberNo());
 
 		return "redirect:/approval/wait-list/" + docno;
 	}
