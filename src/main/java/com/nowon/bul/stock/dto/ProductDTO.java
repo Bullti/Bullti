@@ -1,5 +1,6 @@
 package com.nowon.bul.stock.dto;
 
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 
 import com.nowon.bul.stock.entity.ProductEntity;
@@ -47,6 +48,27 @@ public class ProductDTO {
 				.productPrice(productPrice)
 				.build();
 	}
+	
+	public String getFormattedWeight() {
+        if (productWeight >= 1000) {
+            DecimalFormat df = new DecimalFormat("#.#");
+            return df.format(productWeight / 1000.0) + "kg";
+        } else {
+            return productWeight + "g";
+        }
+    }
+
+
+    public String getFormattedPrice() {
+        DecimalFormat df = new DecimalFormat("#,###");
+        return "￦" + df.format(productPrice);
+    }
+    
+    
+    public String getFormattedSupply() {
+        DecimalFormat df = new DecimalFormat("#,###");
+        return "￦" + df.format(productSupply);
+    }
 	
 	
 	
