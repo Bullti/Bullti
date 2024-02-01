@@ -14,24 +14,7 @@
 <link rel="stylesheet" href="/css/stock/homeTemp.css">
 <link rel="stylesheet" href="/css/stock/stock-side.css">
 <script>
-	function placeOrder(btn){
-		var productNum=$(btn).parents(".product-wrap").find(".productNum").val(); // input 태그에 value를 읽어들인다.
-		var productName=$(btn).parents(".product-wrap").find(".productName").text(); // 일반태그내부의 글(text)을 읽어들인다
-		var ea=prompt("발주할 상품["+productName+"] 수량을 입력하세요","1");
-		//console.log("수량:"+ea);
-		
-		$.ajax({
-        type: "POST",
-        url: "/members/purchase-post",
-        data: { productNum: productNum, ea: ea },
-        success: function (response) {
-			alert(response);
-        },
-        error: function (error) {
-            alert("주문 등록 중 오류가 발생했습니다: " + error.responseText);
-        }
-    });
-	}
+	
 </script>
 </head>
 <body>
@@ -75,10 +58,10 @@
 				
 				<tr style="font-size: 14px;">
 					<th style="width: 200px">발주상품명</th>
-					<th style="width: 150px">발주가맹점</th>
+					<th style="width: 150px">발주자</th>
 					<th style="width: 150px">발주수량</th>
 					<th style="width: 150px">발주총액</th>
-					<th style="width: 150px">확인일자</th>
+					<th style="width: 150px">신청일자</th>
 					<th style="width: 150px">입고완료</th>
 				</tr>
 				
@@ -86,15 +69,15 @@
 			
 			<tbody id="dynamic_table">
 				
-				<tr th:each="prod:${products}" class="product-wrap">
-					<td style="width: 200px" th:text="${prod.productName}" class="productName">productName</td>
-					<td style="width: 150px" th:text="${prod.productGroup}">productGroup</td>
-					<td style="width: 150px" th:text="${prod.productWeight}">productWeight</td>
-					<td style="width: 150px" th:text="${prod.productSupply}">productSupply</td>
-					<td style="width: 150px" th:text="${prod.productPrice}">productPrice</td>
+				<tr th:each="dto:${purCom}" class="product-wrap">
+					<td style="width: 200px" th:text="${dto.productName}" class="productName">발주상품명</td>
+					<td style="width: 150px" th:text="${dto.username}">발주자</td>
+					<td style="width: 150px" th:text="${dto.ea}">발주수량</td>
+					<td style="width: 150px" th:text="${dto.totalPrice}">발주총액</td>
+					<td style="width: 150px" th:text="${dto.updateDate}">신청일자</td>
 					<td style="width: 150px">
-						<input type="hidden" th:value="${prod.productNum}" class="productNum">
-						<button style="font-size: 12px; padding: 4px 12px; background-color: var(--bullti1); color: white; border: none; cursor: pointer;" onclick="placeOrder(this)">입고</button></td>
+						<input type="hidden" class="stocked">
+						<button style="font-size: 12px; padding: 4px 12px; background-color: var(--bullti1); color: white; border: none; cursor: pointer;" onclick="placeOrder(this)">입고현황</button></td>
 					
 				</tr>
 				<tr th:if="${#lists.isEmpty(products)}">
