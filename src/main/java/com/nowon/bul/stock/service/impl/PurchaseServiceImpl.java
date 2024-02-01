@@ -12,7 +12,10 @@ import com.nowon.bul.stock.entity.PurchaseEntity;
 import com.nowon.bul.stock.repository.ProductRepository;
 import com.nowon.bul.stock.repository.PurchaseRepository;
 import com.nowon.bul.stock.service.PurchaseService;
+import com.nowon.bul.utils.AuthenUtils;
 
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 
@@ -50,16 +53,22 @@ public class PurchaseServiceImpl implements PurchaseService{
 				;
 	}
 
-
+	@Transactional
 	@Override
-	public void deletePurchase(int purchaseNum) {
-	    if (!purchaseRepository.existsById(purchaseNum)) {
-	        throw new IllegalArgumentException("Invalid purchaseNum: " + purchaseNum);
-	    }
-	    purchaseRepository.deleteById(purchaseNum);
+	public void deletebyid(int purchaseNum) {
+	  
+		// 먼저 PurchaseEntity를 불러옵니다.
+	    purchaseRepository.findById(purchaseNum).ifPresentOrElse(e->{
+	    	purchaseRepository.delete(e);
+	    }, () -> {
+	        throw new EntityNotFoundException("PurchaseEntity with id " + purchaseNum + " not found");
+	    });
+
+	    
+	   
+	    
+
 	}
-	
-	
-	
+
 	
 }

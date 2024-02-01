@@ -1,5 +1,7 @@
 package com.nowon.bul.controller;
 
+import java.util.List;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nowon.bul.domain.dto.NoticeDTO;
 import com.nowon.bul.domain.dto.NoticeSaveDTO;
 import com.nowon.bul.domain.dto.NoticeUpdateDTO;
 import com.nowon.bul.service.NoticeService;
@@ -47,7 +50,9 @@ public class NoticeController {
 	
 	//게시글 저장
 	@PostMapping("/members/notice-post")	
-	public String save(Authentication auth,NoticeSaveDTO dto) {
+	public String save(Authentication auth,NoticeSaveDTO dto ) {
+		
+
 		
 		return service.saveProcess(auth,dto);
 		

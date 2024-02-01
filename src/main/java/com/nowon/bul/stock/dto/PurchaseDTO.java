@@ -21,7 +21,7 @@ public class PurchaseDTO {
 	
 	private String productName;
 	private int purchaseNum;
-	private String name;
+	private String franchiseName;//가맹점이름
 	private int totalPrice;
 	private LocalDateTime purchaseDate;
 	private int ea;
