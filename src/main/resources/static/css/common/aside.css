@@ -4,7 +4,7 @@ aside {
 	position: fixed;
 	top: 0;
 	height: 100vh;
-	width: 60px;
+	width: 80px;
 	/*width: 80px;*/
 	background: linear-gradient(to bottom, var(--bullti1), var(--bullti2));
 }

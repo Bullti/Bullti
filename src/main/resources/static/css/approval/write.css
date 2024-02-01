@@ -75,6 +75,10 @@ tbody > .wrap > th {
 }
 .file-aera {
 	height: 50px;
+	margin-bottom: 30px;
+}
+.file-aera > div {
+	margin-right: 15px;
 }
 .approval-line {
 	height: 150px;

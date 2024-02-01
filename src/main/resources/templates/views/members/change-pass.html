@@ -3,8 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/css/members/password.css">
 </head>
 <body>
-	<h1>비밀번호 변경 페이지</h1>
+	<h1 class="title">비밀번호 변경 페이지</h1>
+	<hr>
+	<p class="content">
+		비밀번호는 주기적으로 변경하시는 것이 좋습니다.<br> 안전한 이용을 위해 새 비밀번호를 입력해주세요.
+	</p>
+	<hr>
+	<div class="wrap">
+	<form action="">
+		<div class="row">
+			<p>현재 비밀번호</p>
+			<input type="password" name="pass">
+		</div>
+		<div class="row">
+			<p>새 비밀번호</p>
+			<input type="password" name="newPass">
+		</div>
+		<div class="row">
+			<p>비밀번호 확인</p>
+			<input type="password" name="newPassCheck">
+		</div>
+	</div>
+	<hr>
+	<div class="btn">
+	<button type="submit">변경 완료</button>
+	</div>
+	</form>
 </body>
 </html>

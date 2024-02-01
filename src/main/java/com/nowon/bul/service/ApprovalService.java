@@ -27,10 +27,8 @@ public interface ApprovalService {
 
 	List<ApprovalWaitListDTO> getApprovalList(long memberNo);
 
-	//결재 승인
-	void accept(Long docno, long memberNo);
-	//결재 반려
-	void reject(Long docno, long memberNo);
+	// 승인/반려
+	void changeResult(Long docno, String result, long memberNo);
 
 	
 	
