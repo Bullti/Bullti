@@ -5,19 +5,21 @@
  * 
  */
 
-
+//*
 document.addEventListener("DOMContentLoaded", () => boardList2());
 
 function boardList2() { //event.preventDefault();처리를 안해서 동기처리임
-    fetchAndDisplay("/boards"); //GET매핑 실행
+    fetchAndDisplay("/members/notice"); //GET매핑 실행
 }
+//*/
 function boardList(element,event) {
-	event.preventDefault();
+	event&&event.preventDefault();
 	const formElement = document.querySelector("#search-form");
 	const form = new FormData(formElement);
 	const params = new URLSearchParams(form).toString();
 	console.log("params: "+params);
-    fetchAndDisplay(element.getAttribute("href")+"&"+params); //GET매핑 실행
+	var url=element.getAttribute("href")+"&"+params;
+    fetchAndDisplay(url); //GET매핑 실행
 }
 
 function searchClicked(element, event){
@@ -25,7 +27,7 @@ function searchClicked(element, event){
 	const form = new FormData(element); //get은 불가능 post나 put
 	const params = new URLSearchParams(form).toString();
 	console.log(">>>"+params);
-	fetchAndDisplay(`/boards?${params}`); 
+	fetchAndDisplay(`/members/notice?${params}`); 
 }
 
 /**

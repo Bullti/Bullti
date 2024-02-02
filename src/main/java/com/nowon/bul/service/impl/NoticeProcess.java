@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.nowon.bul.department.DeEntity;
 import com.nowon.bul.department.DeRepository;
@@ -35,13 +36,16 @@ public class NoticeProcess implements NoticeService{
 	private final MemberRepository memberRepository;
 	private final DeRepository deRepository;
 	
-
-
+	
 	@Override
 	public void listProcess(int page, Model model) {
+
+
+		page=page<1?1:page;
 		
 		int limit = 10;
 		int offset=(page-1)*limit;
+		
 		
 		
 		List<NoticeDTO> result = noticeMapper.findAllLimit(offset,limit);
@@ -52,8 +56,29 @@ public class NoticeProcess implements NoticeService{
 		int rowCount = noticeMapper.countAll();
 		
 		model.addAttribute("pu",PageData.create(page, limit, rowCount, 5));
-
 		
+	}
+	
+	
+	
+	
+
+	@Override
+	public ModelAndView listProcess(int page,String search) {
+		
+		page=page<1?1:page;
+		
+		int limit = 10;
+		int offset=(page-1)*limit;
+		
+		//model.addAttribute("list",noticeMapper.findAll(search, offset,limit));
+		int rowCount = noticeMapper.countAllSearch(search);
+		//model.addAttribute("pu",PageData.create(page, limit, rowCount, 5));
+
+		return new ModelAndView("stock/notice-list")
+				.addObject("list",noticeMapper.findAll(search, offset,limit))
+				.addObject("pu",PageData.create(page, limit, rowCount, 5))
+				;
 	}
 
 	//게시글 저장 로직
@@ -89,7 +114,7 @@ public class NoticeProcess implements NoticeService{
 	    noticeMapper.save(dto);
 	    
 	    
-		return "redirect:/members/notice";
+		return "redirect:/members/notice-page";
 			
 	}
 	
@@ -97,12 +122,19 @@ public class NoticeProcess implements NoticeService{
 	public String getIndividual(Authentication auth,Model model) {
 		
 		long memberId = AuthenUtils.extractMemberNo(auth);
-		
+		System.out.println(memberId);
+		if (memberId == 0) {
+		    return "redirect:/login";
+		}
 		NoticeDTO dt = noticeMapper.findNameByIdd(memberId);
-		NoticeSaveDTO mem = noticeMapper.findNameById(memberId);
-		
-		String deptName = noticeMapper.findDeptNameById(mem.getDeptId());
 		String name = dt.getName();
+	
+		
+		NoticeSaveDTO mem = noticeMapper.findNameById(memberId);
+		System.out.println(mem.getName());
+		String deptName = noticeMapper.findDeptNameById(mem.getDeptId());
+		
+		
 		
 
 		model.addAttribute("name",name);
@@ -139,6 +171,8 @@ public class NoticeProcess implements NoticeService{
 		noticeMapper.updateTitleOrContent(dto);
 		
 	}
+
+
 
 	
 	
