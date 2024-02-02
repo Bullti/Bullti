@@ -101,9 +101,9 @@ public class FranProcess implements FranService {
 
 	@Override
 	public void listProcess(int page, Model model) {
-	    int limit = 10;
-	    int offset = (page - 1) * limit;
-
+		int limit = 10; //게시글 개수
+	    //int offset = (page - 1) * limit; //건너뛰는 개수
+	    
 	    // PageRequest를 사용하여 페이징 정보를 생성
 	    Pageable pageable = PageRequest.of(page - 1, limit);
 
@@ -118,4 +118,6 @@ public class FranProcess implements FranService {
 	    int rowCount = (int) franEntityPage.getTotalElements();
 	    model.addAttribute("pu", PageData.create(page, limit, rowCount, 5));
 	}
+	
+	
 }

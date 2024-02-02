@@ -1,46 +1,71 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="/css/Franchise/ownerlist.css" />
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/Franchise/ownerlist.css" />
 </head>
 <body>
-	<div class="title">
-		<h1>점주검색</h1>
-	</div>
-	<table>
-		<thead>
-			<tr>
-				<th style="width: 150px">점주명</th>
-				<th style="width: 150px">생년월일</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="post : ${owner}">
-				<td th:text="${post.name}">이름</td>
-				<td
-					th:text="${#dates.format(#dates.create(post.birthDate.year, post.birthDate.monthValue, post.birthDate.dayOfMonth), 'yyyy.MM.dd')}"></td>
-				<td style="width: 80px">
-					<button type="button" th:attr="data-owner-memberNo=${post.memberNo}, data-owner-name=${post.name}"
-						onclick="selectOwner(this)">선택</button>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-	<script>
-		function selectOwner(button) {
-			var ownerId = button.getAttribute('data-owner-memberNo');
-			var ownerName = button.getAttribute('data-owner-name');
-			
-			if (window.opener) {
-				window.opener.document.getElementById('memberNo').value = ownerId;
-				window.opener.document.getElementById('owner').value = ownerName;
-				window.close();
-			} else {
-				console.error("Window opener not found.");
-			}
-		}
-		
-	</script>
+    <div class="title">
+        <h1>점주검색</h1>
+    </div>
+    <div class="search">
+        <div class="name_search">점주 검색</div>
+        <form onsubmit="searchClicked(this, event)">
+            <input class="search-input" type="search" name="search">
+            <button class="search-button"></button>
+        </form>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 150px">점주명</th>
+                <th style="width: 150px">생년월일</th>
+            </tr>
+        </thead>
+        <tbody id="resultTable">
+            <tr th:each="post : ${owner}">
+                <td th:text="${post.name}">이름</td>
+                <td
+                    th:text="${#dates.format(#dates.create(post.birthDate.year, post.birthDate.monthValue, post.birthDate.dayOfMonth), 'yyyy.MM.dd')}"></td>
+                <td style="width: 80px">
+                    <button type="button" th:attr="data-owner-memberNo=${post.memberNo}, data-owner-name=${post.name}"
+                        onclick="selectOwner(this)">선택</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        function searchClicked(form, event) {
+            event.preventDefault();
+
+            var searchInput = form.querySelector('input[name="search"]');
+            var searchQuery = searchInput.value;
+
+            var allRows = document.querySelectorAll('#resultTable tr');
+
+            allRows.forEach(function (row) {
+                var ownerName = row.querySelector('td:nth-child(1)').innerText;
+
+                if (ownerName.includes(searchQuery)) {
+                    row.style.display = 'table-row'; // 표시
+                } else {
+                    row.style.display = 'none'; // 숨김
+                }
+            });
+        }
+
+        function selectOwner(button) {
+            var ownerId = button.getAttribute('data-owner-memberNo');
+            var ownerName = button.getAttribute('data-owner-name');
+            
+            if (window.opener) {
+                window.opener.document.getElementById('memberNo').value = ownerId;
+                window.opener.document.getElementById('owner').value = ownerName;
+                window.close();
+            } else {
+                console.error("Window opener not found.");
+            }
+        }
+    </script>
 </body>
 </html>

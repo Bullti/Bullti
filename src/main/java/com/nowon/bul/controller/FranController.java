@@ -40,8 +40,6 @@ public class FranController {
 		return "franchise/sl";
 	}
 
-	
-
 	@GetMapping("/fradd")
 	public String FranchiseAdd() {
 		return "franchise/fradd";
@@ -88,7 +86,7 @@ public class FranController {
     }
 	
 	@GetMapping("/fr")
-	public String notice_post(
+	public String frpaging(
 			@RequestParam(name="page",defaultValue = "1") int page,
 			Model model) {
 		

@@ -16,8 +16,27 @@ td {
 	font-size: 30px;
 	font-weight: bold;
 	padding-top: 20px;
-	padding-bottom: 20px;
 	margin-top: 20px;
 	margin-bottom: 50px;
 	border-top: 1px solid #0b5394;
+}
+
+.search-input{
+	border: none;
+	border-bottom: 2px solid #0b5394;
+	font-size: 15px;
+	width: 180px;
+	margin-left: 15px;
+	outline: none;
+	margin-bottom: 20px;
+}
+
+.search-button{
+	background-image: url("/img/search/search_FILL0_wght400_GRAD0_opsz24.svg");
+	background-repeat: no-repeat;
+	width: 25px;
+	height: 25px;
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
 }
