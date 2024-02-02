@@ -1,23 +1,17 @@
 package com.nowon.bul.service.impl;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.apache.ibatis.session.RowBounds;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.nowon.bul.department.DeEntity;
 import com.nowon.bul.department.DeRepository;
 import com.nowon.bul.domain.dto.NoticeDTO;
 import com.nowon.bul.domain.dto.NoticeSaveDTO;
 import com.nowon.bul.domain.dto.NoticeUpdateDTO;
-import com.nowon.bul.domain.entity.member.Member;
 import com.nowon.bul.domain.entity.member.MemberRepository;
-import com.nowon.bul.domain.entity.member.MyUser;
 import com.nowon.bul.mybatis.mapper.NoticeMapper;
 import com.nowon.bul.service.NoticeService;
 import com.nowon.bul.utils.AuthenUtils;
@@ -74,7 +68,7 @@ public class NoticeProcess implements NoticeService{
 		//model.addAttribute("list",noticeMapper.findAll(search, offset,limit));
 		int rowCount = noticeMapper.countAllSearch(search);
 		//model.addAttribute("pu",PageData.create(page, limit, rowCount, 5));
-
+		System.out.println(">>>>>"+search);
 		return new ModelAndView("stock/notice-list")
 				.addObject("list",noticeMapper.findAll(search, offset,limit))
 				.addObject("pu",PageData.create(page, limit, rowCount, 5))
