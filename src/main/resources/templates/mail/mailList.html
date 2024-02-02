@@ -17,33 +17,22 @@
 	<script src="/summerNote/summernote-lite.js"></script>
 	<script src="/summerNote/summernote-ko-KR.js"></script>
 	<link rel="stylesheet" href="/summerNote/summernote-lite.css">
-	
-	<script>
-			   
-	$(document).ready(function() {
-    $('#summernote').summernote({
-        height: 200,
-        minHeight: null,
-        maxHeight: null,
-        focus: true,
-        toolbar: [
-            ['style', ['bold', 'italic', 'underline', 'clear']],
-            ['font', ['strikethrough', 'superscript', 'subscript']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['height', ['height']]
-        ],
-        callbacks: {
-            onInit: function() {
-                $('.note-editable').css('height', '200px');
-            }
-        }
-    });
-});
-	</script>
+
 </head>
 <body>
 	<main class="warp-main">
-	<div th:replace="~{mail/mail-side :: side}"></div>
+		<div class="side" th:fragment="side">
+		<h1 class="title">메일</h1>
+		<div class="btn center flex">
+			<a class="flex center" href="#" onclick="btnclicked()">새 메일 작성</a>
+		</div>
+		<div class="tap">
+			<ul>
+				<h2 class="tap-title">메일함</h2>
+				<li><a href="/mail/list">받은메일함</a></li>
+			</ul>		
+		</div>
+	</div>
 	<div style="flex: 1">
 	<th:block th:replace="~{layout/header :: header}"></th:block>
 	<div class="main">
@@ -83,86 +72,97 @@
 	        </table>
 	    </div>
 	    
-	    <div class="write">
+	<div class="write" style="display: none;">
 			<div class="closebtn">
 				<a>새 메일</a>
-				<button>ㅤ</button>
+				<button onclick="closebtn()">ㅤ</button>
 			</div>
-			<form >
-				<div class="rec-form">
-					<input placeholder="받는사람">
-					<input placeholder="제목">
+			<form>
+				<div id="mailForm2" class="rec-form">
+					<input type="email" id="toAddress" name="toAddress" required placeholder="받는사람">
+					<input type="text" id="subject" name="subject" required placeholder="제목">
 				</div>
 				<textarea id="summernote" name="content"></textarea>
-				<button>전송</button>
+				<button type="button" onclick="getMailData2()">전송</button>
 			</form>
 		</div>
 	</div>
-   <script>
+	<script>
 
+    // 새메일 작성 모달창 열기
+    function btnclicked(){
+        var writeDiv = document.querySelector(".write");
+        writeDiv.style.display = "block";
+    }   
 
-	function formatServerDate(serverDate) {
-    var date = new Date(serverDate);
-    
-    var year = date.getFullYear();
-    var month = (date.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 1을 더하고 2자리로 패딩
-    var day = date.getDate().toString().padStart(2, '0');
-    var hours = date.getHours().toString().padStart(2, '0');
-    var minutes = date.getMinutes().toString().padStart(2, '0');
-    var seconds = date.getSeconds().toString().padStart(2, '0');
+    // 모달창 닫기             
+    function closebtn(){
+        var writeDiv = document.querySelector(".write");
+        writeDiv.style.display = "none";
+    }
 
-    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-}
-	   
-  function getMailData() {
-    var startDate = document.getElementById("startDate").value;
-    var endDate = document.getElementById("endDate").value;
+    // date 타입 변경
+    function formatServerDate(serverDate) {
+        var date = new Date(serverDate);
+        
+        var year = date.getFullYear();
+        var month = (date.getMonth() + 1).toString().padStart(2, '0');
+        var day = date.getDate().toString().padStart(2, '0');
+        var hours = date.getHours().toString().padStart(2, '0');
+        var minutes = date.getMinutes().toString().padStart(2, '0');
+        var seconds = date.getSeconds().toString().padStart(2, '0');
 
-    // 날짜를 JSON 형태로 만들어서 전송
-    var requestData = {
-        startDate: new Date(startDate).toISOString(),
-        endDate: new Date(endDate).toISOString()
+        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     };
 
-    $.ajax({
-        type: 'POST',
-        url: '/mail/list',
-        contentType: 'application/json',
-        data: JSON.stringify(requestData),
-        success: function (data) {
-            console.log(data);
+    // getMailData 함수 정의 추가
+    function getMailData() {
+        var startDate = document.getElementById("startDate").value;
+        var endDate = document.getElementById("endDate").value;
 
-            // Thymeleaf와 연결하여 표시
-            var thymeleafTableBody = document.querySelector("#mailResults tbody");
-            thymeleafTableBody.innerHTML = "";
-            data.forEach(function (mail) {
-                var tr = document.createElement("tr");
-                var tdFrom = document.createElement("td");
-                var tdSubject = document.createElement("td");
-                var tdMessage = document.createElement("td");
-                var tdSentDate = document.createElement("td");
+        var requestData = {
+            startDate: new Date(startDate).toISOString(),
+            endDate: new Date(endDate).toISOString()
+        };
 
-                tdFrom.textContent = mail.from;
-                tdSubject.textContent = mail.subject;
-                tdMessage.textContent = mail.message;
-                tdSentDate.innerHTML = formatServerDate(mail.sentDate);
+        $.ajax({
+            type: 'POST',
+            url: '/mail/list',
+            contentType: 'application/json',
+            data: JSON.stringify(requestData),
+            success: function (data) {
+                console.log(data);
 
-                tr.appendChild(tdFrom);
-                tr.appendChild(tdSubject);
-                tr.appendChild(tdMessage);
-                tr.appendChild(tdSentDate);
+                var thymeleafTableBody = document.querySelector("#mailResults tbody");
+                thymeleafTableBody.innerHTML = "";
+                data.forEach(function (mail) {
+                    var tr = document.createElement("tr");
+                    var tdFrom = document.createElement("td");
+                    var tdSubject = document.createElement("td");
+                    var tdMessage = document.createElement("td");
+                    var tdSentDate = document.createElement("td");
 
-                thymeleafTableBody.appendChild(tr);
-            });
-        },
-        error: function (error) {
-            console.error('에러:', error);
-            var mailResultsDiv = document.getElementById("mailResults");
-            mailResultsDiv.innerHTML = "<p>오류가 발생했습니다. 다시 시도해주세요.</p>";
-        }
-    });
-}
-   </script>
+                    tdFrom.textContent = mail.from;
+                    tdSubject.textContent = mail.subject;
+                    tdMessage.textContent = mail.message;
+                    tdSentDate.innerHTML = formatServerDate(mail.sentDate);
+
+                    tr.appendChild(tdFrom);
+                    tr.appendChild(tdSubject);
+                    tr.appendChild(tdMessage);
+                    tr.appendChild(tdSentDate);
+
+                    thymeleafTableBody.appendChild(tr);
+                });
+            },
+            error: function (error) {
+                console.error('에러:', error);
+                var mailResultsDiv = document.getElementById("mailResults");
+                mailResultsDiv.innerHTML = "<p>오류가 발생했습니다. 다시 시도해주세요.</p>";
+            }
+        });
+    }
+    </script>
 </main>
 </body>
 </html>

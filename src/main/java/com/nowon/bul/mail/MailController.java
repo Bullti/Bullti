@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.mail.MessagingException;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,11 +32,20 @@ public class MailController {
 	private final MailReader mailReader;
 	private final MailService mailService;
 	
-	@GetMapping("/mail")
-	public String mailSend() {
-		// mailSender.sendMail();
-		return "mail/mail";
-	}
+	@ResponseBody
+    @PostMapping("/mail/send")
+    public ResponseEntity<String> sendMail(@RequestBody MailSendDTO dto,Authentication authentication) {
+        try {
+            // mailSender에서 메일 보내는 로직 작성
+            mailSender.sendMail(authentication, dto.getToAddress(), dto.getSubject(), dto.getContent());
+
+            return new ResponseEntity<>("메일이 성공적으로 전송되었습니다.", HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("메일 전송 중 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
 	@GetMapping("/mail/list")
 	public String mailRead2() {
