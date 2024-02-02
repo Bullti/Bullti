@@ -31,10 +31,9 @@ public class NoticeController {
 	
 	//공지사항 작성 페이지 이동
 	@GetMapping("/members/notice-post")
-	public String notice(Model model) {
-		model.addAttribute("boardTitle","");
-		model.addAttribute("boardContent", "");
-		return "stock/notice-post";
+	public String notice(Authentication auth, Model model) {
+		
+		return service.getIndividual(auth,model);
 	}
 	
 	//게시글 리스트
