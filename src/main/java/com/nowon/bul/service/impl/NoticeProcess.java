@@ -92,6 +92,28 @@ public class NoticeProcess implements NoticeService{
 		return "redirect:/members/notice";
 			
 	}
+	
+	@Override
+	public String getIndividual(Authentication auth,Model model) {
+		
+		long memberId = AuthenUtils.extractMemberNo(auth);
+		
+		NoticeDTO dt = noticeMapper.findNameByIdd(memberId);
+		NoticeSaveDTO mem = noticeMapper.findNameById(memberId);
+		
+		String deptName = noticeMapper.findDeptNameById(mem.getDeptId());
+		String name = dt.getName();
+		
+
+		model.addAttribute("name",name);
+		model.addAttribute("deptName",deptName);
+		model.addAttribute("boardTitle","");
+		model.addAttribute("boardContent", "");
+		
+		 return "/stock/notice-post";
+	}
+	
+	
 
 	@Override
 	public void detailProcess(long boardNo, Model model) {
@@ -117,6 +139,7 @@ public class NoticeProcess implements NoticeService{
 		noticeMapper.updateTitleOrContent(dto);
 		
 	}
+
 	
 	
 }

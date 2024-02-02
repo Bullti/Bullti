@@ -3,6 +3,7 @@ package com.nowon.bul.service;
 import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;
 
+import com.nowon.bul.domain.dto.NoticeDTO;
 import com.nowon.bul.domain.dto.NoticeSaveDTO;
 import com.nowon.bul.domain.dto.NoticeUpdateDTO;
 
@@ -19,5 +20,7 @@ public interface NoticeService {
 	void deleteProcess(long boardNo);
 
 	void updateProcess(NoticeUpdateDTO dto);
+
+	String getIndividual(Authentication auth, Model model);
 
 }
