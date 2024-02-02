@@ -49,4 +49,9 @@
  		where dept_id=#{deptId}
  	</select>
  	
+ 	<select id="findNameByIdd" resultType="com.nowon.bul.domain.dto.NoticeDTO">
+ 		select dept_id,name from member
+ 		where member_no=#{memberId}
+ 	</select>
+ 	
 </mapper>

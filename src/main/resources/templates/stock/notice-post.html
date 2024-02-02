@@ -78,18 +78,21 @@
 			<ul class="flex list">
 				
 			</ul>
-
+			
+			
 			<div class="form">
 				<h1 class="title">공지사항 등록</h1>
 				<table>
 					<tbody>
 						<tr>
 							<th>부서명</th>
-								<td style="width: 470px;"><select>
-									<option>인사부</option>
-								</select></td>
+								<td style="width: 470px;">
+								  <p th:text="${deptName}"></p>
+								</td>
 							<th>작성자</th>
-								<td>인사부 인턴 최현종</td>
+								<td>
+									  <p th:text="${name}"></p>
+								</td>
 						</tr>
 					
 					</tbody>

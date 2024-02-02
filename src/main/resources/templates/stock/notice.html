@@ -10,7 +10,7 @@
 	<!--아래 사이드 css-->
 	<link rel="stylesheet" href="/css/stock/homeTemp.css">
 	<link rel="stylesheet" href="/css/stock/noticechj.css">
-
+	<script src="/js/board-fetchAPI.js"></script>
 
 </head>
 
@@ -24,13 +24,13 @@
 					<h1>공지사항</h1>
 				</div>
 				<div class="search">
-					<label for="name">부서명</label>
-					<select name="parentName" id="up-depart" class="custom-select">
-						<option class="option" th:each="name : ${names}" th:text="${name}"></option>
-					</select>
-
-					<input class="search-input">
-					<button class="search-button"></button>
+					<label for="name">작성자</label>
+				
+				<form id="search-form" onsubmit="searchClicked(this, event)">
+					<input class="search-input" name="search">
+					<button class="search-button" type="submit">검색</button>
+				</form>
+				
 				</div>
 
 				<table>
