@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.nowon.bul.domain.dto.NoticeDTO;
 import com.nowon.bul.domain.dto.NoticeSaveDTO;
@@ -35,16 +37,22 @@ public class NoticeController {
 		
 		return service.getIndividual(auth,model);
 	}
-	
 	//게시글 리스트
-	@GetMapping("/members/notice")
-	public String notice_post(
-			@RequestParam(name="page",defaultValue = "1") int page,
-			Model model) {
-		
-		service.listProcess(page,model);
-		
+	@GetMapping("/members/notice-page")
+	public String notice_post() {
 		return "stock/notice";
+	}
+	//게시글 리스트
+	@ResponseBody
+	@GetMapping("/members/notice")
+	public ModelAndView notice_post(
+			@RequestParam(name="page",defaultValue = "1") int page,
+			@RequestParam(name = "search", defaultValue = "", required = false) String search
+			) {
+		
+		
+		
+		return service.listProcess(page,search);
 	}
 	
 	//게시글 저장
