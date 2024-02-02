@@ -2,7 +2,7 @@
 
 사진넣고
 
-- 배포 URL : http://manjuu.shop:8080
+- 배포 URL : https://manjuu.shop
 - Test ID : 
 - Test PW : 
 
