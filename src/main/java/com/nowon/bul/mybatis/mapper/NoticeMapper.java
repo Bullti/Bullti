@@ -15,7 +15,7 @@ import com.nowon.bul.domain.entity.member.Member;
 @Mapper
 public interface NoticeMapper {
 	
-	//List<NoticeDTO> findAll();
+	List<NoticeDTO> findAll();
 
 	//List<NoticeDTO> findAll(RowBounds rowBounds);
 
@@ -32,6 +32,8 @@ public interface NoticeMapper {
 	void updateTitleOrContent(NoticeUpdateDTO dto);
 	
 	NoticeSaveDTO findNameById(long memberId);
+	
+	NoticeDTO findNameByIdd(long memberId);
 	
 	String findDeptNameById(long deptId);
 	
