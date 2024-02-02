@@ -26,18 +26,18 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="dto:${list}">
-						<td th:text="${dto.annualNo}"></td>
-						<td th:text="${dto.memberNo}"></td>
-						<td th:text="${dto.start}"></td>
-						<td th:text="${dto.end}"></td>
-						<td th:text="${dto.createDate}"></td>
-						<td th:text="${dto.halfDayTime}"></td>
-						<td th:text="${dto.head}"></td>
-						<td th:text="${dto.approve}"></td>
+					<tr th:each="livedto:${liveList}">
+						<td th:text="${livedto.annualNo}">휴가번호</td>
+						<td th:text="${livedto.memberNo}">사원번호</td>
+						<td th:text="${livedto.type}">휴가유형</td>
+						<td th:text="${livedto.start}">휴가시작일</td>
+						<td th:text="${livedto.end}">휴가종료일</td>
+						<td th:text="${livedto.createDate}">신청일</td>
+						<td th:text="${livedto.halfDayTime}">반차시간</td>
+						<td th:text="${livedto.approve}"></td>
 						<td>
 							<form action="/emp/annu" method="post">
-								<input type="hidden" readonly="readonly" name="annualNo" th:value="${dto.annualNo}">
+								<input type="hidden" readonly="readonly" name="annualNo" th:value="${livedto.annualNo}">
 								<input type="hidden" readonly="readonly" name="_method" value="delete">
 								<button>취소</button>
 							</form>
@@ -56,7 +56,6 @@
 						<th>휴가마지막일</th>
 						<th>휴가신청시간</th>
 						<th>오전오후</th>
-						<th>결재자</th>
 						<th>승인여부</th>
 					</tr>
 				</thead>
@@ -69,7 +68,6 @@
 						<td th:text="${dto.end}"></td>
 						<td th:text="${dto.createDate}"></td>
 						<td th:text="${dto.halfDayTime}"></td>
-						<td th:text="${dto.head}"></td>
 						<td th:text="${dto.approve}"></td>
 					</tr>
 				</tbody>

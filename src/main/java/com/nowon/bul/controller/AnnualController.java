@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.nowon.bul.domain.dto.AnnualSaveDTO;
+import com.nowon.bul.domain.dto.annual.AnnualType;
 import com.nowon.bul.service.AnnualService;
 
 import lombok.RequiredArgsConstructor;
@@ -24,11 +25,12 @@ public class AnnualController {
 
 
 	@GetMapping
-	public String annualPage() {
+	public String annualPage(Model model) {
+		model.addAttribute("typeArray", AnnualType.values());
 		return "views/emp/annual/annual";
 	}
 	@PostMapping
-	public String annualsave(AnnualSaveDTO dto,Authentication auth) {
+	public String annualSave(AnnualSaveDTO dto,Authentication auth) {
 		servie.save(dto, auth);
 		return "views/emp/annual/annual";
 	}

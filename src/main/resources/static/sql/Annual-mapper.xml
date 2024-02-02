@@ -4,11 +4,14 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nowon.bul.mybatis.mapper.AnnualMapper">
 	<insert id="annuSave">
-	    INSERT INTO annual (type, member_no, content, start, end, half_day_time, head, create_date, approve)
-	    VALUES (#{type}, #{memberNo}, #{content}, #{start}, #{end}, #{halfDayTime}, #{head}, CURRENT_TIMESTAMP, #{approve})
+	    INSERT INTO annual (type, member_no, content, start, end, half_day_time, create_date, approve)
+	    VALUES (#{type}, #{memberNo}, #{content}, #{start}, #{end}, #{halfDayTime}, CURRENT_TIMESTAMP, #{approve})
 	</insert>
 	<select id="findByMemberNo" resultType="com.nowon.bul.domain.dto.annual.AnnualListDTO">
-		select * from annual where member_no = #{memberNo}
+		select * from annual where member_no = #{memberNo} order by annual_no desc
+	</select>
+	<select id="findByLiveMemberNo" resultType="com.nowon.bul.domain.dto.annual.AnnualListDTO">
+		select * from annual where approve not between 90 and 99 and member_no = #{memberNo} order by annual_no desc
 	</select>
 	<update id="cancelByNo">
 		update annual set approve = #{approveCode} where member_no=#{memberNo} and annual_no = #{annualNo}
