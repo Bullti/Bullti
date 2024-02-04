@@ -16,12 +16,13 @@ public class AwsProcess implements AwsService{
 
 	private final S3FileUploadUtilV3 s3FileUploadUtilV3; 
 	
-	//이미지 임시저장소 저장
+	//파일 임시저장소 저장
 	@Override
-	public Map<String, String> s3fileTempUpload(MultipartFile img) {
-		return s3FileUploadUtilV3.s3TempUpload(img);
+	public Map<String, String> s3fileTempUpload(MultipartFile file) {
+		return s3FileUploadUtilV3.s3TempUpload(file);
 	}
-
+	
+	//임시저장소 -> src
 	@Override
 	public String s3fileTemptoSrc(String newName) {
 		return s3FileUploadUtilV3.s3TempToSrc(newName);

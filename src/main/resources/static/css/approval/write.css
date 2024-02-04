@@ -74,11 +74,19 @@ tbody > .wrap > th {
 	margin-bottom: 10px;
 }
 .file-aera {
-	height: 50px;
 	margin-bottom: 30px;
+	margin-top: 10px;
 }
 .file-aera > div {
 	margin-right: 15px;
+    font-weight: bold;
+    flex-flow: column;
+}
+.file-aera > label {
+	color: #a9a9a9;
+    flex-flow: column;
+    display: flex;
+    padding-top: 5px;
 }
 .approval-line {
 	height: 150px;
@@ -114,4 +122,18 @@ tbody > .wrap > th {
     border-bottom: 1px solid;
     height: 20%;
     box-sizing: border-box;
+}
+.attach {
+	border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 5px;
+}
+.file_list > label {
+	color:#a9a9a9;
+	padding-top: 5px;
+}
+.file-title {
+	padding-top: 5px;
 }

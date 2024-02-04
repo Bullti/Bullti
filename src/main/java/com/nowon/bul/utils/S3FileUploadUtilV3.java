@@ -169,7 +169,6 @@ public class S3FileUploadUtilV3 {
 
 	public String s3TempToSrc(String newName) {
 		return s3TempToSrc(s3Client, bucket, temp+newName, upload+newName);
-		
 	}
 	
 	/**

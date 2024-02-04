@@ -78,10 +78,8 @@ public class UserController {
 	// 회원가입
 	@PostMapping("/members")
 	public String join(MemberSaveDTO dto) {
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>" + dto);
-
 		if (dto.getNewName() == null) {
-			memberSerivce.save(dto, null);
+			memberSerivce.save(dto, "/img/person.png");
 		} else {
 			String profileUrl = awsService.s3fileTemptoSrc(dto.getNewName());
 			memberSerivce.save(dto, profileUrl);
@@ -96,6 +94,8 @@ public class UserController {
 		return awsService.s3fileTempUpload(img);
 	}
 
+	/******************사원 등록 유효성 검사 로직******************************/
+	
 	@ResponseBody
 	@GetMapping("/memberIdCheck")
 	public boolean checkId(@RequestParam(name = "member_id") String id) {
