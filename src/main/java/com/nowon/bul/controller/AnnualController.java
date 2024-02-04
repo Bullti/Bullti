@@ -26,6 +26,7 @@ public class AnnualController {
 
 	@GetMapping
 	public String annualPage(Model model) {
+		//이넘 AnnualType 을 보여주기
 		model.addAttribute("typeArray", AnnualType.values());
 		return "views/emp/annual/annual";
 	}

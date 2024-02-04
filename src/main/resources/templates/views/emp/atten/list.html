@@ -1,58 +1,59 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="/js/page/page.js" defer></script>
-<script src="/js/working-time/working-time.js" defer></script>
-</head>
-<body>
-	<main>
-		<h1>근태리스트페이지</h1>
-		<form action="/emp/atte" method="post">
-			<button id="workCheck">출퇴근</button>
-		</form>
-		<div id="workingTime"></div>
-		<div id="clock"></div>
-		<table>
-			<thead>
-				<tr>
-					<th>출근시간</th>
-					<th>퇴근시간</th>
-					<th>체크타입</th>
-					<th>회원넘버</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="alist:${atteList}">
-					<td th:text="${alist.goWorkTime}"></td>
-					<td th:text="${alist.leaveWorkTime}"></td>
-					<td th:text="${alist.regiType}"></td>
-					<td th:text="${alist.memberNo}"></td>
-				</tr>
-			</tbody>
-		</table>
-		
-		<div class="pagging-wrap">
-			<a th:if="${pu.from>1}" th:href="|/emp/atte?page=${1}|">
-				<button>&lt;&lt;</button>
-			</a>
-			<a th:if="${pu.from>1}" th:href="|/emp/atte?page=${pu.from-1}|">
-				<button>&lt;</button>
-			</a>
-			<span id="pagging">
-				<a class="btn-page" th:each="pno:${#numbers.sequence(pu.from,pu.to)}" th:href="|/emp/atte?page=${pno}|" >
-					<button th:text="${pno}"></button>
+		th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script src="/js/page/page.js" defer></script>
+		<script src="/js/working-time/working-time.js" defer></script>
+		<link rel="stylesheet" href="/css/view/attendance-list.css">
+	</head>
+	<body>
+		<main>
+			<h1>근태리스트페이지</h1>
+			<form action="/emp/atte" method="post">
+				<button id="workCheck">출퇴근</button>
+			</form>
+			<div id="workingTime"></div>
+			<div id="clock"></div>
+			<table>
+				<thead>
+					<tr>
+						<th>출근시간</th>
+						<th>퇴근시간</th>
+						<th>체크타입</th>
+						<th>회원넘버</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="alist:${atteList}">
+						<td th:text="${#temporals.format(alist.goWorkTime, 'yyyy년 MM월 dd일 HH시 mm분')}"></td>
+						<td th:text="${#temporals.format(alist.leaveWorkTime, 'yyyy년 MM월 dd일 HH시 mm분')}"></td>
+						<td th:text="${alist.regiType}"></td>
+						<td th:text="${alist.memberNo}"></td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<div class="pagging-wrap">
+				<a th:if="${pu.from>1}" th:href="|/emp/atte?page=${1}|">
+					<button>&lt;&lt;</button>
 				</a>
-			</span>
-			<a th:if="${pu.to < pu.tot}" th:href="|/emp/atte?page=${pu.to+1}|">
-				<button>&gt;</button>
-			</a>
-			<a th:if="${pu.to < pu.tot}" th:href="|/emp/atte?page=${pu.tot}|">
-				<button>&gt;&gt;</button>
-			</a>
-		</div>
-	</main>
-</body>
+				<a th:if="${pu.from>1}" th:href="|/emp/atte?page=${pu.from-1}|">
+					<button>&lt;</button>
+				</a>
+				<span id="pagging">
+					<a class="btn-page" th:each="pno:${#numbers.sequence(pu.from,pu.to)}" th:href="|/emp/atte?page=${pno}|" >
+						<button th:text="${pno}"></button>
+					</a>
+				</span>
+				<a th:if="${pu.to < pu.tot}" th:href="|/emp/atte?page=${pu.to+1}|">
+					<button>&gt;</button>
+				</a>
+				<a th:if="${pu.to < pu.tot}" th:href="|/emp/atte?page=${pu.tot}|">
+					<button>&gt;&gt;</button>
+				</a>
+			</div>
+		</main>
+	</body>
 </html>

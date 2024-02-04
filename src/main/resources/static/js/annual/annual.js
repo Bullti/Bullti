@@ -22,9 +22,10 @@ function endProperties() {
     document.getElementById('end').min = startDate.toISOString().split('T')[0];
 };
 
-//휴가 종류별로 메뉴 보이게하기
+//type가 바뀌면 입력 템플릿 바꾸기
 document.getElementById('type').addEventListener('change', typeClickView)
 
+//휴가 종류별로 메뉴 보이게하기
 function typeClickView() {
 	let selectedtype = document.getElementById('type').value;
 	let specialTextElement = document.getElementById(selectedtype);
