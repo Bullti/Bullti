@@ -5,23 +5,24 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/css/department/side.css" />
+<link rel="stylesheet" href="/css/view/annual-list.css" />
 </head>
 <body>
 	<main class="flex">
 		<div th:replace="~{views/emp/annual/side::side}"></div>
-		<div>
+		<div class="main">
 			<h2>휴가신청현황</h2>
 			<table>
 				<thead>
 					<tr>
 						<th>휴가번호</th>
 						<th>사원번호</th>
+						<th>휴가유형</th>
 						<th>휴가시작일</th>
 						<th>휴가마지막일</th>
-						<th>휴가신청시간</th>
 						<th>오전오후</th>
-						<th>결재자</th>
 						<th>승인여부</th>
+						<th>휴가신청시간</th>
 						<th>취소신청</th>
 					</tr>
 				</thead>
@@ -30,11 +31,11 @@
 						<td th:text="${livedto.annualNo}">휴가번호</td>
 						<td th:text="${livedto.memberNo}">사원번호</td>
 						<td th:text="${livedto.type}">휴가유형</td>
-						<td th:text="${livedto.start}">휴가시작일</td>
-						<td th:text="${livedto.end}">휴가종료일</td>
-						<td th:text="${livedto.createDate}">신청일</td>
+						<td th:text="${#temporals.format(livedto.start, 'yyyy년 MM월 dd일')}">휴가시작일</td>
+						<td th:text="${#temporals.format(livedto.end, 'yyyy년 MM월 dd일')}">휴가종료일</td>
 						<td th:text="${livedto.halfDayTime}">반차시간</td>
-						<td th:text="${livedto.approve}"></td>
+						<td th:text="${livedto.approve}">승인여부</td>
+						<td th:text="${#temporals.format(livedto.createDate, 'yyyy년 MM월 dd일 HH시 mm분')}">신청시간</td>
 						<td>
 							<form action="/emp/annu" method="post">
 								<input type="hidden" readonly="readonly" name="annualNo" th:value="${livedto.annualNo}">
@@ -64,9 +65,9 @@
 						<td th:text="${dto.annualNo}"></td>
 						<td th:text="${dto.memberNo}"></td>
 						<td th:text="${dto.type}"></td>
-						<td th:text="${dto.start}"></td>
-						<td th:text="${dto.end}"></td>
-						<td th:text="${dto.createDate}"></td>
+						<td th:text="${#temporals.format(dto.start, 'yyyy년 MM월 dd일')}"></td>
+						<td th:text="${#temporals.format(dto.end, 'yyyy년 MM월 dd일')}"></td>
+						<td th:text="${#temporals.format(dto.createDate, 'yyyy년 MM월 dd일 HH시 mm분')}"></td>
 						<td th:text="${dto.halfDayTime}"></td>
 						<td th:text="${dto.approve}"></td>
 					</tr>
