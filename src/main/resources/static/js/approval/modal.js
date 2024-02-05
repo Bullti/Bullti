@@ -58,6 +58,12 @@
 	function addAproval() {
 		var targetText = target.text();
 
+		var num = $(".re-form .wrap").find(".target-list")
+		if(num.length >= 3){
+			alert("결재선은 최대 3명까지 가능합니다.");
+			return;
+		}
+
 		// 이미 해당 텍스트를 가진 요소가 존재하는지 확인
 		var existingTarget = $(".re-form .wrap").find(".target-list").filter(
 				function() {

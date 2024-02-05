@@ -12,7 +12,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.nowon.bul.controller.EmpDTO;
 import com.nowon.bul.department.DeEntity;
 import com.nowon.bul.department.DeRepository;
 import com.nowon.bul.domain.dto.IndividualDTO;
@@ -20,6 +19,7 @@ import com.nowon.bul.domain.dto.MemberListDTO;
 import com.nowon.bul.domain.dto.MemberSaveDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalMemberDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalMemberListDTO;
+import com.nowon.bul.domain.dto.approval.EmpDTO;
 import com.nowon.bul.domain.entity.member.Member;
 import com.nowon.bul.domain.entity.member.MemberRepository;
 import com.nowon.bul.domain.entity.member.Rank;
