@@ -45,6 +45,4 @@ public class GoogleQrProcess implements GoogleQrService {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 		return request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
 	}
-
-	
 }
