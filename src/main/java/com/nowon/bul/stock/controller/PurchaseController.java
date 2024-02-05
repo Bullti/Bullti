@@ -1,6 +1,7 @@
 package com.nowon.bul.stock.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,7 @@ public class PurchaseController {
     @Autowired
     private PurchaseRepository purchaseRepository;
     
+   
   
     
     
@@ -89,7 +91,19 @@ public class PurchaseController {
         // '발주 신청 현황' 페이지로 리다이렉트합니다.
         return "redirect:/members/purchase-complete";
     }
-
-    */
+	*/
+    
+    @ResponseBody
+    @PostMapping("/members/purchase-post/submit")
+    public ResponseEntity<Void> movePurchase(Authentication auth,Model model){
+    	
+    	purchaseService.movePurchase(auth,model);
+    	
+    	return ResponseEntity.noContent().build();
+    	
+    }
+    
+    
+    
     
 }
