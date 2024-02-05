@@ -3,12 +3,13 @@
 .write{
 	position: absolute;
 	width: 700px;
-	height: 720px;
+	height: 735px;
   	border: 1px solid #d2d2d2;  
 	right: 50px;
 	bottom: 50px;
 	background-color: white;
 	box-shadow: 0 0 10px 0 gray;
+	border-radius: 2%;
 }
 
 .closebtn{
@@ -31,6 +32,7 @@
 	background-color: transparent;
 	border: none;
 	background-image: url("/img/close_FILL0_wght400_GRAD0_opsz24.svg");
+	cursor: pointer;
 }
 
 
@@ -45,8 +47,16 @@
     outline: none;
 }
 
-.rec-form > input::nht
+.rec-form > input:nth-child(2){
+	margin-bottom: 5px;
+}
 
-#summernote{
-	margin-top: 10px;
+.write > form > button {
+	width: 50px;
+	height: 30px;
+	background-color: #0b5394;
+	color: white;
+	border: none;
+	border-radius: 15%;
+	margin-top: 2px;
 }
