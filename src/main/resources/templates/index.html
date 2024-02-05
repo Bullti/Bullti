@@ -3,6 +3,8 @@
 <head>
 <link rel="stylesheet" href="/css/approval/index.css">
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js'></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0b4d10c092ae135f954caef18aff79de&libraries=services"></script>
+    <script src="/js/api/mapConvertGridXy.js"></script>
     <script defer src="/js/calendar/fullcalendar.js"></script>
 </head>
 <body>
@@ -107,7 +109,8 @@
 					</div>
 				</div>
 				<div class="check-lable sales border">
-					<h1>메일함</h1>
+					<h1>날씨정보</h1>
+					<div id="weather-data"></div>
 				</div>
 			</div>
 		</div>
@@ -136,7 +139,7 @@
 		        isAttendanceRecorded = !isAttendanceRecorded;
 		    }
 		</script>
-
+		<script src="/js/api/weather.js"></script>
 	</main>
 </body>
 </html>

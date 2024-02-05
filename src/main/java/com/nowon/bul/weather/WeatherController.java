@@ -111,7 +111,7 @@ public class WeatherController {
         WeatherResponseDTO result=objectMapper.readValue(sb.toString(), WeatherResponseDTO.class);
         //System.out.println("result: "+result.getResponse().getBody().getItems().getItem());
         model.addAttribute("list", result.getResponse().getBody().getItems().getItem());
-        return "weatherData";
+        return "weather/weather-data";
 		//*/
 	}
 }
