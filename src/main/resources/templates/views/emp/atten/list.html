@@ -11,11 +11,9 @@
 	<body>
 		<main>
 			<h1>근태리스트페이지</h1>
-			<form action="/emp/atte" method="post">
-				<button id="workCheck">출퇴근</button>
-			</form>
+			<div><img id="qr-atte"></img></div>
+			<button id="workCheck" type="button" onclick="createQr()">qr생성</button>
 			<div id="workingTime"></div>
-			<div id="clock"></div>
 			<table>
 				<thead>
 					<tr>

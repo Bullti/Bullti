@@ -20,15 +20,14 @@ public class AnnualSaveDTO {
 	private String content;
 	private int approve;
 	private int type;
-	private int typeCode;
 	//결제라인
 	private String[] line;
 	
 	public long daysDifference() {
 		return ChronoUnit.DAYS.between(start, end);
 	}
-	
 	public void setType(String type) {
-		this.type = AnnualType.valueOf(type.toUpperCase()).getCode();
+		this.type = AnnualType.valueOf(type).getCode();
 	}
+	
 }
