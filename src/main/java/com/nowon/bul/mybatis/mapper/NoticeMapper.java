@@ -16,12 +16,16 @@ import com.nowon.bul.domain.entity.member.Member;
 public interface NoticeMapper {
 	
 	//List<NoticeDTO> findAll();
+	
+	List<NoticeDTO> findAll(@Param("search") String search, @Param("offset") int offset,@Param("limit") int limit);
 
 	//List<NoticeDTO> findAll(RowBounds rowBounds);
 
 	List<NoticeDTO> findAllLimit(@Param("offset") int offset,@Param("limit") int limit);
 
 	int countAll();
+	
+	int countAllSearch(String search);
 
 	void save(NoticeSaveDTO dto);
 
@@ -33,6 +37,10 @@ public interface NoticeMapper {
 	
 	NoticeSaveDTO findNameById(long memberId);
 	
+	NoticeDTO findNameByIdd(long memberId);
+	
 	String findDeptNameById(long deptId);
+
+
 	
 }

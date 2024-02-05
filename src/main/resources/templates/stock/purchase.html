@@ -92,9 +92,11 @@ function placeOrder(button) {
 				<tr th:each="prod:${products}" class="product-wrap">
 					<td style="width: 200px" th:text="${prod.productName}" class="productName">productName</td>
 					<td style="width: 150px" th:text="${prod.productGroup}">productGroup</td>
-					<td style="width: 150px" th:text="${prod.productWeight}">productWeight</td>
-					<td style="width: 150px" th:text="${prod.productSupply}">productSupply</td>
-					<td style="width: 150px" th:text="${prod.productPrice}">productPrice</td>
+					<td style="width: 150px" th:text="${prod.getFormattedWeight()}">productWeight</td>
+					<td style="width: 150px" th:text="${prod.getFormattedSupply()}">productSupply</td>
+					<td style="width: 150px" th:text="${prod.getFormattedPrice()}">productPrice</td>
+
+
 					<td style="width: 150px">
 						<input type="hidden" th:value="${prod.productNum}" class="productNum">
 						<button style="font-size: 12px; padding: 4px 12px; background-color: var(--bullti1); color: white; border: none; cursor: pointer;" onclick="placeOrder(this)">발주</button>

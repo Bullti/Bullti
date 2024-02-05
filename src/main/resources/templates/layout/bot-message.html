@@ -3,7 +3,7 @@
 	<div class="flex center date" th:if="${msg.today}" th:text="${msg.today}"></div>
 	<div class="msg bot flex">
 		<div  class="icon">
-			<img src="/images/icon/robot-solid.svg">
+			<img src="/img/icon/robot-solid.svg">
 		</div>
 		<div class="message" >
 			<div class="part" th:if="${msg.answer.keyword ne '전화번호' or msg.answer.phone != null}">

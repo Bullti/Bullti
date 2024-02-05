@@ -29,7 +29,7 @@ public class AttendanceProcess implements AttendanceService {
 
 	@Override
 	public void find(int page, Authentication auth, Model model) {
-	    int limit=3; // 한페이지 표현할 rows수
+	    int limit=15; // 한페이지 표현할 rows수
 	    int offset=(page-1)*limit; // 건너뛰는 개수 1page={offset=0}
 	    
 		model.addAttribute( "pu", PageData.create(page, limit, 
