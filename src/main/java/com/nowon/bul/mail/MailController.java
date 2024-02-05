@@ -16,7 +16,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.nowon.bul.domain.entity.member.Member;
 import com.nowon.bul.domain.entity.member.MyUser;
@@ -32,21 +34,25 @@ public class MailController {
 	private final MailReader mailReader;
 	private final MailService mailService;
 	
-	@ResponseBody
-    @PostMapping("/mail/send")
-    public ResponseEntity<String> sendMail(@RequestBody MailSendDTO dto,Authentication authentication) {
-        try {
-            // mailSender에서 메일 보내는 로직 작성
-			mailSender.sendMail(authentication, dto.getToAddress(), dto.getSubject()); /* , dto.getContent() */
 
-            return new ResponseEntity<>("메일이 성공적으로 전송되었습니다.", HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>("메일 전송 중 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+	  @PostMapping("/sendMail")
+	   public ResponseEntity<String> sendMail(@RequestBody MailData mailData, Authentication authentication) {
+	       try {
+	           String toAddress = mailData.getToAddress();
+	           String subject = mailData.getSubject();
+	           String content = mailData.getContent();
 
-
+	           // MailSender를 통해 이메일 전송
+	           mailSender.sendMail(authentication, toAddress, subject, content);
+	           
+	            return ResponseEntity.ok("이메일 전송 성공");
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("이메일 전송 중 오류 발생: " + e.getMessage());
+	        }
+	    }
+	   
+	   
 	@GetMapping("/mail/list")
 	public String mailRead2() {
 		return "mail/mailList";
