@@ -2,8 +2,12 @@ package com.nowon.bul.service.impl;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.nowon.bul.domain.dto.approval.AppRequestFilesDTO;
@@ -24,6 +28,8 @@ import com.nowon.bul.domain.entity.approval.State;
 import com.nowon.bul.domain.entity.member.Member;
 import com.nowon.bul.domain.entity.member.MemberRepository;
 import com.nowon.bul.service.ApprovalService;
+import com.nowon.bul.utils.jpaPage.PageRequestDTO;
+import com.nowon.bul.utils.jpaPage.PageResultDTO;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -80,9 +86,15 @@ public class ApprovalProcess implements ApprovalService {
 
 	// 기안문서함 리스트
 	@Override
-	public List<ApprovalDraftListDTO> getDraftList(Member member) {
-		return approvalDocRepo.findAllByMember(member).stream().map(ApprovalDoc::toDraftListDTO)
-				.collect(Collectors.toList());
+	public PageResultDTO<ApprovalDraftListDTO, ApprovalDoc> getDraftList(Member member, PageRequestDTO pageRequestDTO) {
+		
+		Pageable pageable = pageRequestDTO.getPageable(Sort.by("createdDate").descending());
+		
+		Page<ApprovalDoc> result = approvalDocRepo.findAllByMember(member, pageable);
+		
+		Function<ApprovalDoc, ApprovalDraftListDTO> fn = entity -> entity.toDraftListDTO();
+		
+		return new PageResultDTO<>(result, fn);
 	}
 
 	// 결재대기함 상세
@@ -121,7 +133,11 @@ public class ApprovalProcess implements ApprovalService {
 		Member member = memberRepo.findById(memberNo).orElseThrow();
 
 		Approval approval = approvalRepo.findByMemberAndApDoc(member, approvalDoc).orElseThrow();
-
+		
+		String approvalResult = approval.getResult().getResultName();
+		if(!approvalResult.equals("심사중")) {
+			return;
+		}
 		
 		switch (result) {
 		case "accept" : {
@@ -151,7 +167,7 @@ public class ApprovalProcess implements ApprovalService {
 		}
 	}
 	
-	//첨부파일 가져오기
+	// 첨부파일 가져오기
 	@Transactional
 	@Override
 	public List<AppResponseFilesDTO> getFiles(Long docNo) {
@@ -159,5 +175,4 @@ public class ApprovalProcess implements ApprovalService {
 		return approvalFilesRepo.findAllByApprovalDoc(approvalDoc).stream()
 				.map(ApprovalFiles::toAppResponseFilesDTO).collect(Collectors.toList());
 	}
-	
 }

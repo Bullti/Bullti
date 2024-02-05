@@ -4,14 +4,15 @@
 
 <head>
 
-<link rel="stylesheet" href="/css/approval/draft-doc.css">
-<script src="/js/department.js"></script>
-<link rel="stylesheet" href="/css/approval/homeTemp.css">
+	<link rel="stylesheet" href="/css/approval/draft-doc.css">
+	<script src="/js/department.js"></script>
+	<link rel="stylesheet" href="/css/approval/homeTemp.css">
 
-<!-- 결재상신, 임시저장 -->
-<script type="text/javascript" src="/js/approval/submitForm.js"></script>
+	<!-- 결재상신, 임시저장 -->
+	<script type="text/javascript" src="/js/approval/submitResult.js"></script>
 
 </head>
+
 <body>
 	<main class="warp-main">
 		<div th:replace="~{views/approval/sideTemp :: side}"></div>
@@ -20,14 +21,15 @@
 			<form action="" method="post" id="approvalId">
 				<div class="main flex col">
 					<ul class="flex list">
-						<li><a onclick="submitForm('/approval/wait-list')"
-							style="cursor: pointer;">목록</a></li>
-						<li><a
-							th:onclick="|submitForm('/approval/accept/${dto.no}')|"
-							style="cursor: pointer;">승인</a></li>
-						<li><a
-							th:onclick="|submitForm('/approval/reject/${dto.no}')|"
-							style="cursor: pointer;">반려</a></li>
+						<li>
+							<a class="approval-list" onclick="submitForm('/approval/wait-list')">목록</a>
+						</li>
+						<li>
+							<a class="approval-list" th:onclick="|submitForm('/approval/accept/${dto.no}')|">승인</a>
+						</li>
+						<li>
+							<a class="approval-list" th:onclick=" |submitForm('/approval/reject/${dto.no}')|">반려</a>
+						</li>
 					</ul>
 					<div class="form">
 						<h1 class="title">기본 설정</h1>
@@ -43,7 +45,8 @@
 								</tr>
 								<tr>
 									<th>작 성 일</th>
-									<td style="width: 470px;">[[${dto.createdDate}]]</td>
+									<td style="width: 470px;">[[${#temporals.format(dto.createdDate, 'yyyy-MM-dd(E)')}]]
+									</td>
 									<th>직 급</th>
 									<td>[[${dto.rank}]]</td>
 								</tr>
@@ -62,12 +65,11 @@
 						<h1 class="title">결재선</h1>
 					</div>
 					<ul class="approval-line flex">
-						<li class="flex center"
-							style="border: 1px solid; box-sizing: border-box;">결재</li>
+						<li class="flex center" style="border: 1px solid; box-sizing: border-box;">결재</li>
 						<li th:each="emp : ${dto.approvalLine}">
 							<div class="flex center rank">[[${emp.rank}]]</div>
 							<div class="sign flex col center">
-								<img th:if="${emp.result} eq '승인'" 	src="/img/approval/accept.png" class="accept"> 
+								<img th:if="${emp.result} eq '승인'" src="/img/approval/accept.png" class="accept">
 								<img th:if="${emp.result} eq '반려'" src="/img/approval/reject.png" class="accept">
 								<div th:if="${emp.result eq '승인' or emp.result eq '반려'}">
 									[[${#temporals.format(emp.approvaledDate, 'yyyy-MM-dd HH:mm:ss')}]]
@@ -88,7 +90,8 @@
 					<div class="file-aera flex">
 						<div class="file-title">첨부파일</div>
 						<div class="file_list flex" th:if="${files != null and not #lists.isEmpty(files)}">
-							<a th:each="file : ${files}" th:href="|/approval/download?newName=${file.newName}&orgName=${file.orgName}|">[[${file.orgName}]]</a>
+							<a th:each="file : ${files}"
+								th:href="|/approval/download?newName=${file.newName}&orgName=${file.orgName}|">[[${file.orgName}]]</a>
 						</div>
 					</div>
 				</div>

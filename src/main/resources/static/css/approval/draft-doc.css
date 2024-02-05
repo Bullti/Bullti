@@ -75,6 +75,7 @@ tbody > .wrap > th {
 }
 .file-aera {
 	margin-bottom: 20px;
+	margin-top: 20px;
 }
 .approval-line {
 	height: 150px;
@@ -137,4 +138,8 @@ tbody > .wrap > th {
 	font-weight: bold;
 	padding-top: 5px;
 	margin-right: 10px;
+}
+.approval-list {
+	cursor: pointer;
+	font-size: 20px;
 }

@@ -109,7 +109,8 @@ public class Member {
 
 	public MemberListDTO toListDTO() {
 		return MemberListDTO.builder().deptName(dept.getDeptName()).name(name).id(id).rank(rank).tel(phone)
-				.joinCompanyDate(joinCompanyDate).build();
+				.resignationDate(resignationDate).joinCompanyDate(joinCompanyDate)
+				.build();
 	}
 	
 	public  FranOwnerDTO toFranOwnerDTO() {
