@@ -21,7 +21,7 @@ public class MailServiceProcess implements MailService {
 
 	@Override
 	public MemberEmail findById(Long memberno) {
-		return mailRepository.findById(memberno).orElseThrow();
+		return mailRepository.findById(memberno).orElse(null);
 	}
 
 	@Override
