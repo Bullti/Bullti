@@ -12,4 +12,5 @@ public class AttendanceDTO {
 	private LocalDateTime leaveWorkTime;
 	private int regiType;
 	private long memberNo;
+	
 }
