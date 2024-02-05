@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import com.nowon.bul.domain.entity.fran.FranEntityRepository;
@@ -26,7 +27,7 @@ import com.nowon.bul.stock.service.PurchaseService;
 import com.nowon.bul.utils.AuthenUtils;
 
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
+
 import lombok.RequiredArgsConstructor;
 
 
@@ -109,6 +110,31 @@ public class PurchaseServiceImpl implements PurchaseService{
 
 	        purchaseCompleteRepository.save(purchaseCompleteEntity);
 	    }
+
+
+	 @Transactional
+	 @Override
+	 public void movePurchase(Authentication auth,Model model) {
+		 
+		Long memberId = AuthenUtils.extractMemberNo(auth);
+		Integer memberIdInt = memberId.intValue();
+		List<PurchaseEntity> entities = purchaseRepository.findAll();
+
+			
+
+		        for(PurchaseEntity entity : entities) {
+		            PurchaseCompleteEntity completeEntity = new PurchaseCompleteEntity();
+		            
+		            
+		            purchaseCompleteRepository.save(completeEntity);
+		            
+		            purchaseRepository.delete(entity);
+		        }
+
+		       
+		     
+	 }
+
 
 	  
 
