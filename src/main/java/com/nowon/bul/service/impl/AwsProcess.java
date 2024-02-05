@@ -1,5 +1,7 @@
 package com.nowon.bul.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -26,6 +28,18 @@ public class AwsProcess implements AwsService{
 	@Override
 	public String s3fileTemptoSrc(String newName) {
 		return s3FileUploadUtilV3.s3TempToSrc(newName);
+	}
+
+	//다중파일 업로드
+	@Override
+	public List<String> s3fileTemptoSrc(String[] newNames) {
+		List<String> list = new ArrayList<>();
+		
+		for(int i=0; i<newNames.length; i++) {
+			list.add(s3FileUploadUtilV3.s3TempToSrc(newNames[i]));
+		}
+		
+		return list;
 	}
 
 

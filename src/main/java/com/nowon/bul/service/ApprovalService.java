@@ -13,7 +13,7 @@ import com.nowon.bul.domain.entity.member.Member;
 public interface ApprovalService {
 
 	//결재상신
-	void saveApproval(ApprovalDTO dto, Member member);
+	void saveApproval(ApprovalDTO dto, Member member, List<String> files);
 
 	List<ApprovalWaitListDTO> getWaitList(Member member);
 

@@ -35,7 +35,7 @@
 					let fileDiv = document.createElement('div');
 					fileDiv.innerHTML = `
           						<span>${result.orgName}</span>
-								<input type="hidden" value="${result.newName}" class='attach'>
+								<input type="hidden" value="${result.newName}" class='attach' name="newNames">
 								<button type="button" onclick="removeFile(this);"
 									><span>삭제</span></button>
 						        `;
@@ -115,7 +115,7 @@
 						<div class="file-title">첨부파일</div>
 						<div class="file_list flex">
 							<label>[파일추가]
-								<input type="file" name="files" onchange="tempUpload(this)" style="display: none;"
+								<input type="file" onchange="tempUpload(this)" style="display: none;"
 									multiple />
 							</label>
 						</div>

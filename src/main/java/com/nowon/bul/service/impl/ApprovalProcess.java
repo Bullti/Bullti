@@ -14,6 +14,8 @@ import com.nowon.bul.domain.dto.approval.ApprovalWaitListDTO;
 import com.nowon.bul.domain.entity.approval.Approval;
 import com.nowon.bul.domain.entity.approval.ApprovalDoc;
 import com.nowon.bul.domain.entity.approval.ApprovalDocRepository;
+import com.nowon.bul.domain.entity.approval.ApprovalFileRepository;
+import com.nowon.bul.domain.entity.approval.ApprovalFiles;
 import com.nowon.bul.domain.entity.approval.ApprovalRepository;
 import com.nowon.bul.domain.entity.approval.Result;
 import com.nowon.bul.domain.entity.approval.State;
@@ -33,11 +35,13 @@ public class ApprovalProcess implements ApprovalService {
 	private final ApprovalDocRepository approvalDocRepo;
 
 	private final MemberRepository memberRepo;
+	
+	private final ApprovalFileRepository approvalFilesRepo;
 
 	// 결재 상신
 	@Transactional
 	@Override
-	public void saveApproval(ApprovalDTO dto, Member member) {
+	public void saveApproval(ApprovalDTO dto, Member member, List<String> files) {
 		ApprovalDoc approvalDoc = ApprovalDoc.builder().member(member).title(dto.getTitle()).content(dto.getContent())
 				.state(State.UnderReview).build();
 		approvalDocRepo.save(approvalDoc);
@@ -49,6 +53,14 @@ public class ApprovalProcess implements ApprovalService {
 					.member(memberRepo.findById(dto.getLine()[i - 1]).orElseThrow()).apDoc(approvalDoc).build();
 			approvalRepo.save(approval);
 		}
+		
+		if(files != null) {
+			for(String file : files) {
+				ApprovalFiles  approvalFiles= ApprovalFiles.builder().fileUrl(file).ApprovalDoc(approvalDoc).build();  
+				approvalFilesRepo.save(approvalFiles);
+			}
+		}
+		
 	}
 	@Override
 	public ApprovalDoc getDocByid(Long docNo) {
