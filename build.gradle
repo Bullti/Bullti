@@ -30,6 +30,11 @@ ext {
 }
 
 dependencies {
+	//google qr코드 생성 https://mvnrepository.com/artifact/com.google.zxing/core
+	implementation 'com.google.zxing:core:3.5.3'
+	// https://mvnrepository.com/artifact/com.google.zxing/javase
+	implementation 'com.google.zxing:javase:3.5.3'
+
 	implementation 'com.github.shin285:KOMORAN:3.3.9'
 	implementation 'org.webjars:stomp-websocket:2.3.4'
 	implementation 'org.webjars:sockjs-client:1.5.1'
@@ -58,12 +63,6 @@ dependencies {
 	
 	implementation 'javax.mail:javax.mail-api:1.6.2'
 	implementation 'com.sun.mail:javax.mail:1.6.0'
-	
-
-	
-	
-	
-
 }
 
 dependencyManagement {
