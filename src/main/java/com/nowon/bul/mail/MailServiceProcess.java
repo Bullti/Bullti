@@ -17,7 +17,7 @@ public class MailServiceProcess implements MailService {
 
 	private final MailRepository mailRepository;
 	private final MailReader mailReader;
-	private final MailSender mailSender;
+	
 
 	@Override
 	public MemberEmail findById(Long memberno) {
@@ -38,6 +38,8 @@ public class MailServiceProcess implements MailService {
 		System.out.println(startDate);
 		System.out.println(endDate);
 		mailReader.getMailList(memberEmail.getEmail(), memberEmail.getPassword(), startDate, endDate, mailCount ,model);
+		
+		
 	}
 
 }
