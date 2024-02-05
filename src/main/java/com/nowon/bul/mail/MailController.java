@@ -37,7 +37,7 @@ public class MailController {
     public ResponseEntity<String> sendMail(@RequestBody MailSendDTO dto,Authentication authentication) {
         try {
             // mailSender에서 메일 보내는 로직 작성
-            mailSender.sendMail(authentication, dto.getToAddress(), dto.getSubject(), dto.getContent());
+			mailSender.sendMail(authentication, dto.getToAddress(), dto.getSubject()); /* , dto.getContent() */
 
             return new ResponseEntity<>("메일이 성공적으로 전송되었습니다.", HttpStatus.OK);
         } catch (Exception e) {

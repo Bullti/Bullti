@@ -30,6 +30,7 @@
 			<ul>
 				<h2 class="tap-title">메일함</h2>
 				<li><a href="/mail/list">받은메일함</a></li>
+				<li><a href="/naver/works/mail">네이버메일함</a></li>
 			</ul>		
 		</div>
 	</div>
@@ -54,20 +55,21 @@
 	        <table>
 	            <thead>
 	                <tr>
-	                    <th style="width: 120px;">보낸 사람</th>
-	                    <th style="width: 285px">제목</th>
-	                    <th style="width: 520px;">내용</th>
-	                    <th>보낸 날짜</th>
-	                </tr>
+	                    <th style="width: 620px;">보낸 사람</th>
+	                    <th style="width: 850px">제목</th>
+		                <th style="width: 220px;">보낸 날짜</th>	
+					</tr>
 	            </thead>
 	            <tbody>
 	                <!-- Thymeleaf의 th:each를 사용하여 메일 목록을 반복 -->
-	                 <tr th:each="mail:${mailList}">
-					 	<td th:text="${mail.from}" class="mail-a"></td>
-					 	<td th:text="${mail.subject}" class="mail-b"></td>
-					 	<td th:text="${mail.message}" class="mail-c"></td>
-					 	<td th:text="${mail.sentDate}" class="mail-d"></td>
-	               	 </tr>
+	                 <tr th:each="mail:${list}">
+					 	<td>
+							<span th:text="${mail.from.email}"></span>
+							&lt;<span th:text="${mail.from.email}"></span>&gt;
+						</td>
+					 	<td th:text="${mail.subject}">제목</td>
+					 	<td th:text="${#temporals.format(mail.receivedTime, 'yyyy/MM/dd HH:mm')}">날짜</td>
+	            	 </tr>
 	            </tbody>
 	        </table>
 	    </div>

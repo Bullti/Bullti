@@ -81,23 +81,15 @@ public class MailReader {
 				MailDTO mail = new MailDTO();
 				mail.setFrom(fromAddress[0].toString());
 				mail.setSubject(msg.getSubject());
-				
-			    Object content = msg.getContent();
-			    if (content instanceof MimeMultipart) {
-			        MimeMultipart multipart = (MimeMultipart) content;
-			        // text/plain 부분 추출
-			        for (int i = 0; i < multipart.getCount(); i++) {
-			            BodyPart bodyPart = multipart.getBodyPart(i);
-			            if (bodyPart.isMimeType("text/plain")) {
-			            	mail.setMessage(bodyPart.getContent().toString());
-			                break; // text/plain 부분을 찾으면 루프를 종료합니다.
-			            }
-			        }
-			    } else {
-			        // 간단한 텍스트 메시지의 경우
-			        mail.setMessage(content.toString());
-			    }
-
+				/*
+				 * Object content = msg.getContent(); if (content instanceof MimeMultipart) {
+				 * MimeMultipart multipart = (MimeMultipart) content; // text/plain 부분 추출 for
+				 * (int i = 0; i < multipart.getCount(); i++) { BodyPart bodyPart =
+				 * multipart.getBodyPart(i); if (bodyPart.isMimeType("text/plain")) {
+				 * mail.setMessage(bodyPart.getContent().toString()); break; // text/plain 부분을
+				 * 찾으면 루프를 종료합니다. } } } else { // 간단한 텍스트 메시지의 경우
+				 * mail.setMessage(content.toString()); }
+				 */
 				mail.setSentDate(msg.getReceivedDate());
 				mailList.add(0, mail);
 

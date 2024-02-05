@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	
+</script>
+</head>
+<body>
+	<a href="/naver/works/mail">메일</a>
+	
+	<a href="/login">로그인</a>
+	
+	<hr>
+	<form action="https://auth.worksmobile.com/oauth2/v2.0/authorize">
+		<input type="hidden" name="client_id" value="xtDGEPBTro90uozPrgr6">
+		<input type="hidden" name="redirect_uri" value="http://localhost:8080/oauth2/v2.0/code">
+		<input type="hidden" name="scope" value="mail,mail.read">
+		<input type="hidden" name="response_type" value="code">
+		<input type="hidden" name="state" value="test">
+		<input type="hidden" name="domain" value="300124957">
+		<button >메일</button>
+	</form>
+	
+</body>
+</html>
