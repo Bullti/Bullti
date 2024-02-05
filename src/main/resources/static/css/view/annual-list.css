@@ -1,7 +1,10 @@
 @charset "UTF-8";
 
 
-
+.main {
+	margin-top: 20px;
+	margin-left: 20px;
+}
 .main div {
     background-color: #fff;
     padding: 20px;
@@ -41,7 +44,7 @@ form {
 }
 
 .main button {
-    background-color: #dc3545;
+    background-color: var(--bullti2);
     color: #fff;
     border: none;
     padding: 8px 16px;
