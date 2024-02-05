@@ -15,6 +15,6 @@ public interface AwsService {
 	
 	List<String> s3fileTemptoSrc(String[] newNames);
 
-	ResponseEntity<Resource> fileDownload(String fileUrl);
+	ResponseEntity<Resource> fileDownload(String newName, String orgName);
 
 }

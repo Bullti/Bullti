@@ -1,6 +1,5 @@
 package com.nowon.bul.controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,7 +35,7 @@ import com.nowon.bul.service.ApprovalService;
 import com.nowon.bul.service.AwsService;
 import com.nowon.bul.service.MemberService;
 
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -59,18 +57,17 @@ public class ApprovalController {
 	}
 
 	// 결재상신
+	@Transactional
 	@PostMapping("")
 	public String approval(ApprovalDTO dto,AppRequestFilesDTO filesDto ,Authentication authentication) {
 		MyUser user = (MyUser) authentication.getPrincipal();
 		Member member = memberService.getFindById(user.getMemberNo());
-		System.out.println(filesDto.toString());
 		
 		if(filesDto.getNewNames()==null) {
 			approvalService.saveApproval(dto, member, null);
 		}else {
-			List<String> files = new ArrayList<>();
-			files = awsService.s3fileTemptoSrc(filesDto.getNewNames());
-			approvalService.saveApproval(dto, member, files, filesDto.getOrgNames(), filesDto.getBucketKeys());
+			awsService.s3fileTemptoSrc(filesDto.getNewNames());
+			approvalService.saveApproval(dto, member, filesDto);
 		}
 		
 		
@@ -201,9 +198,8 @@ public class ApprovalController {
 	
 	//파일 다운로드
 	@GetMapping("/download")
-	public ResponseEntity<Resource> downloadFile(@RequestParam(name = "bucketKey") String bucketKey) {
-		System.out.println(">>>>>>bucketKey: " + bucketKey);
-		return awsService.fileDownload(bucketKey);
+	public ResponseEntity<Resource> downloadFile(@RequestParam(name = "newName") String newName, @RequestParam(name = "orgName") String orgName) {
+		return awsService.fileDownload(newName, orgName);
     }
 	
 }

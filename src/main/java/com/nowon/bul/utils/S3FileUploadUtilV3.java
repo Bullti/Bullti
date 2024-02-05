@@ -251,13 +251,19 @@ public class S3FileUploadUtilV3 {
 		return orgName.substring(0, idx) + "-" + (System.nanoTime() / 1000000) + orgName.substring(idx); // .확장자
 	}
 
-	// 파일 다운로드
-	public ResponseEntity<Resource> fileDownload(String bucketKey) {
+	/**
+	 * 
+	 * @param newName : bucketKey = upload+newName
+	 * @param orgName : 다운로드 파일 이름
+	 * @return
+	 */
+	public ResponseEntity<Resource> fileDownload(String newName, String orgName) {
 
-		System.out.println(bucketKey);
-		String filePath=null;
+		System.out.println("newName : >>>>>>>>>>>>"+newName);
+		System.out.println("orgName : >>>>>>>>>>>>"+orgName);
+		String filePath=upload+newName;
 		try {
-			filePath = URLDecoder.decode("goods/upload/images/OpenApiUtil-27775827.java", "UTF-8");
+			filePath = URLDecoder.decode(filePath, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			
 		}
@@ -271,8 +277,7 @@ public class S3FileUploadUtilV3 {
 
 		// Content-Disposition 헤더 설정
 		HttpHeaders headers = new HttpHeaders();
-		String filename = "다운로드 파일";
-		headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename);
+		headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + orgName);
 
 		return ResponseEntity.ok()
 				.headers(headers)

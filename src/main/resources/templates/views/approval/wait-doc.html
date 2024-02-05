@@ -88,7 +88,7 @@
 					<div class="file-aera flex">
 						<div class="file-title">첨부파일</div>
 						<div class="file_list flex" th:if="${files != null and not #lists.isEmpty(files)}">
-							<a th:each="file : ${files}" th:href="|/approval/download?bucketKey=${file.bucketKey}|">[[${file.orgName}]]</a>
+							<a th:each="file : ${files}" th:href="|/approval/download?newName=${file.newName}&orgName=${file.orgName}|">[[${file.orgName}]]</a>
 						</div>
 					</div>
 				</div>
