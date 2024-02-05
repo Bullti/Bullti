@@ -57,17 +57,18 @@
 				<div class="check-lable board border">
 					<h1>공지사항</h1>
 					<div class="ApprovalButtonArea"><button onclick="location.href='/members/notice'">더보기</button></div>
+					<div class="board-box inner-border">
 					<table class="notice_table">
 					<thead>
 						<tr>
-							<td class="d" style="font-weight: bold;">제목</td>
-							<td class="f" style="font-weight: bold;">작성일</td>
+							<td style="font-weight: bold;">제목</td>
+							<td style="font-weight: bold;">작성일</td>
 						</tr>
 					</thead>
 					<tbody>
 						<th:block th:each="dto:${list}">
 							<tr>
-								<td class="d">
+								<td>
 									<a th:href="|/members/notice/${dto.boardNo}|" th:text="${dto.boardTitle}">제목</a>
 								</td>
 								<td th:text="${#temporals.format(dto.createdDatetime, 'MM/dd HH:mm')}" class="g">작성일
@@ -75,7 +76,7 @@
 							</tr>
 					</tbody>
 				</table>
-
+				</div>
 					
 				</div>
 			</div>
@@ -86,9 +87,9 @@
 						<button>메일쓰기</button>
 						<button>내게쓰기</button>
 					</div>
-					<div class="mail-box border">
+					<div class="mail-box inner-border">
 						<div id="mailResults">
-					        <table>
+					        <table class="mail_table">
 					            <thead>
 					                <tr>
 					                    <th>제목</th>
@@ -98,17 +99,19 @@
 					            <tbody>
 					                <!-- Thymeleaf의 th:each를 사용하여 메일 목록을 반복 -->
 					                 <tr th:each="mail:${mailList}">
-									 	<td th:text="${mail.subject}"></td>
-									 	<td th:text="${mail.sentDate}"></td>
+										<td>
+									 	<a th:href="|/mail/list|" th:text="${mail.subject}">제목</a>
+									 	</td>
+									 	<td th:text="${mail.formattedSentDate}"></td>
 					               	 </tr>
 					            </tbody>
 					        </table>
 					    </div>					
 					</div>
 				</div>
-				<div class="check-lable sales border">
+				<!--<div class="check-lable sales border">
 					<h1>메일함</h1>
-				</div>
+				</div>-->
 			</div>
 		</div>
 		

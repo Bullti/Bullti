@@ -1,5 +1,7 @@
 package com.nowon.bul.controller;
 
+import java.util.List;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,8 +11,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.nowon.bul.domain.dto.NoticeDTO;
 import com.nowon.bul.domain.dto.NoticeSaveDTO;
 import com.nowon.bul.domain.dto.NoticeUpdateDTO;
 import com.nowon.bul.service.NoticeService;
@@ -28,33 +33,40 @@ public class NoticeController {
 	
 	//공지사항 작성 페이지 이동
 	@GetMapping("/members/notice-post")
-	public String notice(Model model) {
-		model.addAttribute("boardTitle","");
-		model.addAttribute("boardContent", "");
-		return "stock/notice-post";
+	public String notice(Authentication auth, Model model) {
+		
+		return service.getIndividual(auth,model);
 	}
-	
 	//게시글 리스트
-	@GetMapping("/members/notice")
-	public String notice_post(
-			@RequestParam(name="page",defaultValue = "1") int page,
-			Model model) {
-		
-		service.listProcess(page,model);
-		
+	@GetMapping("/members/notice-page")
+	public String notice_post() {
 		return "stock/notice";
+	}
+	//게시글 리스트
+	@ResponseBody
+	@GetMapping("/members/notice")
+	public ModelAndView notice_post(
+			@RequestParam(name="page",defaultValue = "1") int page,
+			@RequestParam(name = "search", defaultValue = "", required = false) String search
+			) {
+		System.out.println(">>>>>"+search);
+		
+		
+		return service.listProcess(page,search);
 	}
 	
 	//게시글 저장
 	@PostMapping("/members/notice-post")	
-	public String save(Authentication auth,NoticeSaveDTO dto) {
+	public String save(Authentication auth,NoticeSaveDTO dto ) {
+		
+
 		
 		return service.saveProcess(auth,dto);
 		
 	}
 	
 	//상세페이지 조회
-	@GetMapping("members/notice/{boardNo}")
+	@GetMapping("members/notice-page/{boardNo}")
 	public String detail(@PathVariable(name = "boardNo") long boardNo, Model model) {
 		
 		service.detailProcess(boardNo, model);
@@ -63,22 +75,22 @@ public class NoticeController {
 	}
 	
 	//삭제 처리
-	@DeleteMapping("/members/notice/{boardNo}")
+	@DeleteMapping("/members/notice-page/{boardNo}")
 	public String delete(@PathVariable(name = "boardNo") long boardNo) {
 		
 		service.deleteProcess(boardNo);
 		
-		return "redirect:/members/notice";
+		return "redirect:/members/notice-page";
 		
 	}
 	
 	//수정 처리
-	@PutMapping("/members/notice/{boardNo}")
+	@PutMapping("/members/notice-page/{boardNo}")
 	public String update(NoticeUpdateDTO dto) {
 		
 		service.updateProcess(dto);
 		
-		return "redirect:/members/notice/{boardNo}";
+		return "redirect:/members/notice-page/{boardNo}";
 	}
 	
 }

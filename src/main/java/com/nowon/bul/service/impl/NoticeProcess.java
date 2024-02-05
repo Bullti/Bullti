@@ -1,22 +1,17 @@
 package com.nowon.bul.service.impl;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.apache.ibatis.session.RowBounds;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.nowon.bul.department.DeEntity;
 import com.nowon.bul.department.DeRepository;
 import com.nowon.bul.domain.dto.NoticeDTO;
 import com.nowon.bul.domain.dto.NoticeSaveDTO;
 import com.nowon.bul.domain.dto.NoticeUpdateDTO;
-import com.nowon.bul.domain.entity.member.Member;
 import com.nowon.bul.domain.entity.member.MemberRepository;
-import com.nowon.bul.domain.entity.member.MyUser;
 import com.nowon.bul.mybatis.mapper.NoticeMapper;
 import com.nowon.bul.service.NoticeService;
 import com.nowon.bul.utils.AuthenUtils;
@@ -37,31 +32,47 @@ public class NoticeProcess implements NoticeService{
 	
 	
 	@Override
-	public void listProcess(Model model) {
-		
-		//int limit=10;
-		//int offset=0;
-		
-		//RowBounds rowBounds = new RowBounds(offset, limit);
-		//List<NoticeDTO> result = noticeMapper.findAll(rowBounds);
-		//model.addAttribute("list", result);
-		
-	}
-
-	@Override
 	public void listProcess(int page, Model model) {
+
+
+		page=page<1?1:page;
+		
 		int limit = 10;
 		int offset=(page-1)*limit;
 		
 		
+		
 		List<NoticeDTO> result = noticeMapper.findAllLimit(offset,limit);
+		
 		model.addAttribute("list",result);
+		
 		
 		int rowCount = noticeMapper.countAll();
 		
 		model.addAttribute("pu",PageData.create(page, limit, rowCount, 5));
-
 		
+	}
+	
+	
+	
+	
+
+	@Override
+	public ModelAndView listProcess(int page,String search) {
+		
+		page=page<1?1:page;
+		
+		int limit = 10;
+		int offset=(page-1)*limit;
+		
+		//model.addAttribute("list",noticeMapper.findAll(search, offset,limit));
+		int rowCount = noticeMapper.countAllSearch(search);
+		//model.addAttribute("pu",PageData.create(page, limit, rowCount, 5));
+		System.out.println(">>>>>"+search);
+		return new ModelAndView("stock/notice-list")
+				.addObject("list",noticeMapper.findAll(search, offset,limit))
+				.addObject("pu",PageData.create(page, limit, rowCount, 5))
+				;
 	}
 
 	//게시글 저장 로직
@@ -97,9 +108,38 @@ public class NoticeProcess implements NoticeService{
 	    noticeMapper.save(dto);
 	    
 	    
-		return "redirect:/members/notice";
+		return "redirect:/members/notice-page";
 			
 	}
+	
+	@Override
+	public String getIndividual(Authentication auth,Model model) {
+		
+		long memberId = AuthenUtils.extractMemberNo(auth);
+		System.out.println(memberId);
+		if (memberId == 0) {
+		    return "redirect:/login";
+		}
+		NoticeDTO dt = noticeMapper.findNameByIdd(memberId);
+		String name = dt.getName();
+	
+		
+		NoticeSaveDTO mem = noticeMapper.findNameById(memberId);
+		System.out.println(mem.getName());
+		String deptName = noticeMapper.findDeptNameById(mem.getDeptId());
+		
+		
+		
+
+		model.addAttribute("name",name);
+		model.addAttribute("deptName",deptName);
+		model.addAttribute("boardTitle","");
+		model.addAttribute("boardContent", "");
+		
+		 return "/stock/notice-post";
+	}
+	
+	
 
 	@Override
 	public void detailProcess(long boardNo, Model model) {
@@ -125,6 +165,9 @@ public class NoticeProcess implements NoticeService{
 		noticeMapper.updateTitleOrContent(dto);
 		
 	}
+
+
+
 	
 	
 }
