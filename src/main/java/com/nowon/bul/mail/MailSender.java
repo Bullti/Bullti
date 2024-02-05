@@ -25,7 +25,7 @@ public class MailSender {
 	private final MailService mailService;
 
 
-	public void sendMail(Authentication authentication, String toAddress, String subject, String content) {
+	public void sendMail(Authentication authentication, String toAddress, String subject) /* String content */ {
 		MyUser myuser = (MyUser) authentication.getPrincipal();
 		MemberEmail memberEmail = mailService.findById(myuser.getMemberNo());
 		
@@ -54,7 +54,7 @@ public class MailSender {
             message.setFrom(new InternetAddress(userName));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toAddresss));
             message.setSubject(subject);
-            message.setText(content);
+			/* message.setText(content); */
 
             Transport.send(message);
 

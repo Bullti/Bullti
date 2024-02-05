@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>메일</h1>
+	<section>
+		<h1></h1>
+		<div class="wrap" style="display: flex;">
+			<ul class="menu">
+				<th:block th:each="box:${boxList}">
+				<li th:text="${box.folderName}" th:value="${box.folderId}"></li>
+				</th:block>
+			</ul>
+			<div class="display">
+				<table>
+					<tr th:each="mail:${list}">
+						<td th:text="${mail.status}">상태</td>
+						<td >
+							<span th:text="${mail.from.name}"></span>
+							&lt;<span th:text="${mail.from.email}"></span>&gt;
+						</td>
+						<td th:text="${mail.subject}">제목</td>
+						<td th:text="${#temporals.format(mail.receivedTime, 'yyyy/MM/dd HH:mm')}">날짜</td>
+						<td th:text="${mail.size}">용량</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</section>
+	
+</body>
+
+</html>
