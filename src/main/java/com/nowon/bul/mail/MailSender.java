@@ -22,26 +22,28 @@ import lombok.RequiredArgsConstructor;
 @Component
 public class MailSender {
 
-	private final MailService mailService;
+    private final MailService mailService;
 
+    public void sendMail(Authentication authentication, String toAddress, String subject, String content) {
+        MyUser myuser = (MyUser) authentication.getPrincipal();
+        MemberEmail memberEmail = mailService.findById(myuser.getMemberNo());
 
-	public void sendMail(Authentication authentication, String toAddress, String subject) /* String content */ {
-		MyUser myuser = (MyUser) authentication.getPrincipal();
-		MemberEmail memberEmail = mailService.findById(myuser.getMemberNo());
-		
-		String userName = memberEmail.getEmail();
-		String password = memberEmail.getPassword();
-		
-		System.out.println(">>>>>>>>>>>>>>"+userName);
-		System.out.println(">>>>>>>>>>>>>>"+password);
-		
+        String userName = memberEmail.getEmail();
+        String password = memberEmail.getPassword();
+
+        System.out.println(">>>>>>>>>>>>>>" + userName);
+        System.out.println(">>>>>>>>>>>>>>" + password);
+
         String toAddresss = toAddress;  // 받는 사람의 이메일 주소 지정
+        
+        System.out.println(">>>>>>>>>>>>>>" + toAddresss);
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.localhost", "bulti");
 
         Session session = Session.getInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -49,12 +51,14 @@ public class MailSender {
             }
         });
 
+        session.setDebug(true);
+        
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(userName));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toAddresss));
             message.setSubject(subject);
-			/* message.setText(content); */
+            message.setText(content);
 
             Transport.send(message);
 
@@ -63,7 +67,5 @@ public class MailSender {
             e.printStackTrace();
             System.out.println("메일 전송 중 오류 발생: " + e.getMessage());
         }
-		
-	}
-
+    }
 }
