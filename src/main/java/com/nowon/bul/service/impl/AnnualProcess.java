@@ -49,7 +49,7 @@ public class AnnualProcess implements AnnualService {
 		requestDTO.setContent(dto.getContent());
 		// 휴가 결재라인 입력
 		requestDTO.setLine(dto.getLine());
-		approvalService.saveApproval(requestDTO, memberService.getFindById(dto.getMemberNo()));
+		approvalService.saveApproval(requestDTO, memberService.getFindById(dto.getMemberNo()),null);
 	}
 
 	@Override
