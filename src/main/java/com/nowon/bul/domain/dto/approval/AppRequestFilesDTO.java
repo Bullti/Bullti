@@ -7,9 +7,8 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class ApprovalDTO {
+public class AppRequestFilesDTO {
+
+	private String[] newNames;
 	
-	private String title;
-	private String content;
-	private String[] line;
 }

@@ -1,5 +1,6 @@
 package com.nowon.bul.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.nowon.bul.department.DeService;
+import com.nowon.bul.domain.dto.approval.AppRequestFilesDTO;
+import com.nowon.bul.domain.dto.approval.AppResponseFilesDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalDeptList;
 import com.nowon.bul.domain.dto.approval.ApprovalDraftDTO;
@@ -52,11 +55,20 @@ public class ApprovalController {
 
 	// 결재상신
 	@PostMapping("")
-	public String approval(ApprovalDTO dto, Authentication authentication) {
+	public String approval(ApprovalDTO dto,AppRequestFilesDTO filesDto ,Authentication authentication) {
 		MyUser user = (MyUser) authentication.getPrincipal();
 		Member member = memberService.getFindById(user.getMemberNo());
-
-		approvalService.saveApproval(dto, member);
+		System.out.println(filesDto.toString());
+		
+		if(filesDto.getNewNames()==null) {
+			approvalService.saveApproval(dto, member, null);
+		}else {
+			List<String> files = new ArrayList<>();
+			files = awsService.s3fileTemptoSrc(filesDto.getNewNames());
+			approvalService.saveApproval(dto, member, files);
+		}
+		
+		
 		return "redirect:approval";
 	}
 
@@ -113,6 +125,7 @@ public class ApprovalController {
 //		};
 
 		ApprovalWaitDTO dto = approvalService.getWait(docNo);
+		
 
 		model.addAttribute("dto", dto);
 		return "views/approval/wait-doc";
