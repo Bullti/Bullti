@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form id="mail-form" action="//auth.worksmobile.com/oauth2/v2.0/authorize" method="get">
+		<input type="hidden" name="client_id" th:value="${mail.clientId}">
+		<input type="hidden" name="redirect_uri" th:value="${mail.redirectUri}">
+		<input type="hidden" name="scope" th:value="${mail.scope}">
+		<input type="hidden" name="response_type" th:value="${mail.responseType}">
+		<input type="hidden" name="state" th:value="${mail.state}">
+		<input type="hidden" name="domain" th:value="${mail.domain}">
+	</form>
+	<script>
+		//페이지가 로딩되면 form을 실행
+		document.addEventListener('DOMContentLoaded', function () {
+			// Find the form and submit button
+			var form = document.querySelector("#mail-form");
+			form.submit();
+		});
+	</script>
+</body>
+
+</html>
