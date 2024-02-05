@@ -12,7 +12,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AppResponseFilesDTO {
-	String fileUrl;
+	String newName;
 	String orgName;
-	String bucketKey;
 }

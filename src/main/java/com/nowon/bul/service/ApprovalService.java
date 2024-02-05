@@ -2,6 +2,7 @@ package com.nowon.bul.service;
 
 import java.util.List;
 
+import com.nowon.bul.domain.dto.approval.AppRequestFilesDTO;
 import com.nowon.bul.domain.dto.approval.AppResponseFilesDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalDraftDTO;
@@ -14,7 +15,7 @@ import com.nowon.bul.domain.entity.member.Member;
 public interface ApprovalService {
 
 	//결재상신
-	void saveApproval(ApprovalDTO dto, Member member, List<String> files);
+	void saveApproval(ApprovalDTO dto, Member member, AppRequestFilesDTO files);
 
 	List<ApprovalWaitListDTO> getWaitList(Member member);
 
@@ -34,8 +35,4 @@ public interface ApprovalService {
 	// 첨부파일 가져오기
 	List<AppResponseFilesDTO> getFiles(Long docNo);
 
-	void saveApproval(ApprovalDTO dto, Member member, List<String> files, String[] orgNames, String[] bucketKeys);
-
-	
-	
 }

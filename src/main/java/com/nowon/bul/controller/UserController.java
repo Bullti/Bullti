@@ -31,10 +31,12 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
 
 	private final MemberService memberSerivce;
+	
 	private final DeService deptService;
+	
 	private final AwsService awsService;
 
-	// 개인정보 조회
+	// 개인정보 조회 페이지
 	@GetMapping("/individual")
 	public String individualPage(Model model, Authentication authentication) {
 		MyUser user = (MyUser) authentication.getPrincipal();

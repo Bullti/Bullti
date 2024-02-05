@@ -12,8 +12,6 @@ public interface DeRepository extends JpaRepository<DeEntity, Integer> {
 
     void deleteByDeptName(String name);
 
-
-
 }
 
 
