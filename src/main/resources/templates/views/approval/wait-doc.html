@@ -87,11 +87,8 @@
 					<div class="ap-content">[(${dto.content})]</div>
 					<div class="file-aera flex">
 						<div class="file-title">첨부파일</div>
-						<div class="file_list flex">
-							<a href="#">파일명</a>
-							<a href="#">파일명</a>
-							<a href="#">파일명</a>
-							<a href="#">파일명</a>
+						<div class="file_list flex" th:if="${files != null and not #lists.isEmpty(files)}">
+							<a th:each="file : ${files}" th:href="|/approval/download?bucketKey=${file.bucketKey}|">[[${file.orgName}]]</a>
 						</div>
 					</div>
 				</div>
