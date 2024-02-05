@@ -33,7 +33,10 @@ public class AttendanceController {
 		attendanceService.find(page, auth, model);
 		return "views/emp/atten/list";
 	}
-	
+	@GetMapping("/chec")
+	public String attendanceList() {
+		return "views/emp/atten/check";
+	}
 	//출근시간 반환
 	@ResponseBody
 	@GetMapping("/status")
