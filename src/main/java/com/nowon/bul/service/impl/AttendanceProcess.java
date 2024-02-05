@@ -23,7 +23,6 @@ public class AttendanceProcess implements AttendanceService {
 	public void workIn(Authentication auth) {
 		mapper.workIn(AttendanceCheckDTO.builder()
 				.memberNo(AuthenUtils.extractMemberNo(auth))
-				.regiType(1)
 				.build());
 	}
 
