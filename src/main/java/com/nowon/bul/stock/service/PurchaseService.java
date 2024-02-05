@@ -23,4 +23,6 @@ public interface PurchaseService {
 
 	List<PurchaseCompleteDTO> getAllPurchaseComplements();
 
+	void movePurchase(Authentication auth,Model model);
+
 }
