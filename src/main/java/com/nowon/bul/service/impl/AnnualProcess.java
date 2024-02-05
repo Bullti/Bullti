@@ -32,9 +32,9 @@ public class AnnualProcess implements AnnualService {
 	@Override
 	@Transactional
 	public void save(AnnualSaveDTO dto, Authentication auth) {
-		dto.setLine(annualApprovalMapper.findAll());
-		dto.setApprove(AnnualApproveCode.PROGRESS.getApproveCode());
-		dto.setMemberNo(AuthenUtils.extractMemberNo(auth));
+		dto.setLine(annualApprovalMapper.findAll()); // 등록된 휴가 결재자 세팅
+		dto.setApprove(AnnualApproveCode.PROGRESS.getApproveCode()); //승인상태코드 세팅
+		dto.setMemberNo(AuthenUtils.extractMemberNo(auth)); // 사원번호 dto에 세팅
 		
 		mapper.annuSave(dto); // 휴가신청이력에 추가
 		RequestApproval(dto, auth.getName()); // 결재요청
@@ -44,7 +44,7 @@ public class AnnualProcess implements AnnualService {
 	private void RequestApproval(AnnualSaveDTO dto, String name) {
 		
 		ApprovalDTO requestDTO =new ApprovalDTO();
-		//사원번호 + 이름 + 휴가유형 + 휴가일수
+		//결재문서제목 : 사원번호 + 이름 + 휴가유형 + 휴가일수
 		requestDTO.setTitle(dto.getMemberNo()+name+dto.getType()+dto.daysDifference()+"일");
 		requestDTO.setContent(dto.getContent());
 		// 휴가 결재라인 입력
