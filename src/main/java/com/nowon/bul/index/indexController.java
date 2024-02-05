@@ -28,13 +28,13 @@ public class indexController {
 	public String indexNotice(Authentication authentication, Model model) {
 		MyUser myuser = (MyUser) authentication.getPrincipal();
 		MemberEmail memberEmail = mailService.findById(myuser.getMemberNo());
-		
-		//공지사항 1번 페이지
+//		
+//		//공지사항 1번 페이지
 		int page = 1;
 		int mailCount=10;
 		
 		noticeService.listProcess(page, model);
-		mailService.listProcess(memberEmail, mailCount, model);
+		if(memberEmail!=null) mailService.listProcess(memberEmail, mailCount, model);
 	
 		
 		return "index";
