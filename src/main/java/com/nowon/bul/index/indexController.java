@@ -34,7 +34,9 @@ public class indexController {
 		int mailCount=10;
 		
 		noticeService.listProcess(page, model);
-		if(memberEmail!=null) mailService.listProcess(memberEmail, mailCount, model);
+
+		if(memberEmail!=null)mailService.listProcess(memberEmail, mailCount, model);
+
 	
 		
 		return "index";
