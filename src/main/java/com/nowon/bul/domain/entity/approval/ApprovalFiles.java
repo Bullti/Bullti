@@ -1,6 +1,7 @@
 package com.nowon.bul.domain.entity.approval;
 
 
+import com.nowon.bul.domain.dto.approval.AppResponseFilesDTO;
 import com.nowon.bul.domain.entity.member.Member;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,8 +32,20 @@ public class ApprovalFiles {
 	
 	private String fileUrl;
 	
+	private String bucketKey;
+	
+	private String orgName;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ap_doc_no")
-	private ApprovalDoc ApprovalDoc;
+	private ApprovalDoc approvalDoc;
 	
+	
+	public AppResponseFilesDTO toAppResponseFilesDTO() {
+		return AppResponseFilesDTO.builder()
+				.fileUrl(fileUrl)
+				.orgName(orgName)
+				.bucketKey(bucketKey)
+				.build();
+	}
 }
