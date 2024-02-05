@@ -54,6 +54,9 @@ public class ApprovalDoc {
 	@OneToMany(mappedBy = "apDoc")
 	private List<Approval> approval;
 	
+	@OneToMany(mappedBy = "ApprovalDoc")
+	private List<ApprovalFiles> files;
+	
 	private String title;
 	
 	@Column(columnDefinition = "longtext")

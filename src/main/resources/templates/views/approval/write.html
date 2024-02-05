@@ -3,24 +3,58 @@
 	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
 
 <head>
-<link rel="stylesheet" href="/css/approval/write.css">
-<script src="/js/department.js"></script>
-<link rel="stylesheet" href="/css/approval/modal.css">
-<link rel="stylesheet" href="/css/approval/homeTemp.css">
+	<link rel="stylesheet" href="/css/approval/write.css">
+	<script src="/js/department.js"></script>
+	<link rel="stylesheet" href="/css/approval/modal.css">
+	<link rel="stylesheet" href="/css/approval/homeTemp.css">
 
-<!-- summer-note -->
-<script src="/js/approval/summer-note.js"></script>
-<script src="/summerNote/summernote-lite.js"></script>
-<script src="/summerNote/summernote-ko-KR.js"></script>
-<link rel="stylesheet" href="/summerNote/summernote-lite.css">
+	<!-- summer-note -->
+	<script src="/js/approval/summer-note.js"></script>
+	<script src="/summerNote/summernote-lite.js"></script>
+	<script src="/summerNote/summernote-ko-KR.js"></script>
+	<link rel="stylesheet" href="/summerNote/summernote-lite.css">
 
-<!-- 모달창 -->
-<script th:inline="javascript" src="/js/approval/modal.js"></script>
+	<!-- 모달창 -->
+	<script th:inline="javascript" src="/js/approval/modal.js"></script>
 
-<!-- 결재상신, 임시저장 -->
-<script type="text/javascript" src="/js/approval/submitForm.js"></script>
+	<!-- 결재상신, 임시저장 -->
+	<script type="text/javascript" src="/js/approval/submitForm.js"></script>
 
+	<script>
+		function tempUpload(element) {
+			var formData = new FormData();
+			formData.append("file", $(element)[0].files[0]);
+
+			$.ajax({
+				url: "/approval/temp-upload",
+				data: formData,
+				type: "post",
+				contentType: false,
+				processData: false,
+				success: function (result) {
+					let fileDiv = document.createElement('div');
+					fileDiv.innerHTML = `
+          						<span>${result.orgName}</span>
+								<input type="hidden" value="${result.newName}" class='attach' name="newNames">
+								<button type="button" onclick="removeFile(this);"
+									><span>삭제</span></button>
+						        `;
+					// 부모 엘리먼트를 찾습니다.
+					let parentElement = document.querySelector('.file_list');
+					// 첫 번째 자식으로 추가합니다.
+					parentElement.insertBefore(fileDiv, parentElement.firstChild);
+				}
+			});
+		}
+
+		function removeFile(element) {
+			// 부모 div를 찾아서 제거
+			let parentDiv = element.closest('div');
+			parentDiv.remove();
+		}
+	</script>
 </head>
+
 <body>
 	<main class="warp-main">
 		<div th:replace="~{views/approval/sideTemp :: side}"></div>
@@ -29,10 +63,8 @@
 			<form action="" method="post" id="approvalId">
 				<div class="main flex col">
 					<ul class="flex list">
-						<li><a onclick="submitForm('/approval')"
-							style="cursor: pointer;">결재요청</a></li>
-						<li><a onclick="submitForm('/approval/temp')"
-							style="cursor: pointer;">임시저장</a></li>
+						<li><a onclick="submitForm('/approval')" style="cursor: pointer;">결재요청</a></li>
+						<li><a onclick="submitForm('/approval/temp')" style="cursor: pointer;">임시저장</a></li>
 					</ul>
 					<div class="form">
 						<h1 class="title">기본 설정</h1>
@@ -42,7 +74,7 @@
 									<th>문서 종류</th>
 									<td style="width: 470px;"><select>
 											<option>일반문서</option>
-									</select></td>
+										</select></td>
 									<th>소 속</th>
 									<td>[[${member.deptName}]]</td>
 								</tr>
@@ -53,8 +85,10 @@
 									<td>[[${member.rank}]]</td>
 								</tr>
 								<tr>
-									<th></th>
-									<td style="width: 470px;"></td>
+									<th>문서 번호</th>
+									<td style="width: 470px;">
+										<p></p>
+									</td>
 									<th>작 성 자</th>
 									<td>[[${member.name}]]</td>
 								</tr>
@@ -77,8 +111,14 @@
 					<div>
 						<textarea id="summernote" name="content"></textarea>
 					</div>
-					<div class="file-aera flex hcenter">
-						<input type="file" multiple>
+					<div class="file-aera flex">
+						<div class="file-title">첨부파일</div>
+						<div class="file_list flex">
+							<label>[파일추가]
+								<input type="file" onchange="tempUpload(this)" style="display: none;"
+									multiple />
+							</label>
+						</div>
 					</div>
 				</div>
 			</form>
@@ -92,21 +132,22 @@
 								<li th:each="dept : ${deptList}" th:if="${dept.parentId == 0}">
 									<span class="clickable" onclick="getEmployee(this)">[[${dept.deptName}]]</span>
 									<ul>
-										<li th:each="subDept : ${dept.child}"><span
-											class="clickable" onclick="getEmployee(this)">[[${subDept.deptName}]]</span>
+										<li th:each="subDept : ${dept.child}"><span class="clickable"
+												onclick="getEmployee(this)">[[${subDept.deptName}]]</span>
 											<ul>
-												<li th:each="subsubDept : ${subDept.child}"><span
-													class="clickable" onclick="getEmployee(this)">[[${subsubDept.deptName}]]</span>
+												<li th:each="subsubDept : ${subDept.child}"><span class="clickable"
+														onclick="getEmployee(this)">[[${subsubDept.deptName}]]</span>
 												</li>
-											</ul></li>
+											</ul>
+										</li>
 									</ul>
 								</li>
 							</ul>
 						</div>
 						<div class="em-form"></div>
 						<div class="btn-form flex col center">
-							<img src="/img/right-arrow.png" onclick="addAproval()"> <img
-								src="/img/left-arrow.png" onclick="removeAproval()">
+							<img src="/img/right-arrow.png" onclick="addAproval()"> <img src="/img/left-arrow.png"
+								onclick="removeAproval()">
 						</div>
 						<div class="re-form">
 							<div class="title">
@@ -124,8 +165,8 @@
 					function btn_approval() {
 						var modal = $('.approval-modal');
 						modal.css('display',
-								modal.css('display') === 'none' ? 'flex'
-										: 'none');
+							modal.css('display') === 'none' ? 'flex'
+								: 'none');
 					}
 				</script>
 			</div>

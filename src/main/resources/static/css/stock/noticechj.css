@@ -105,3 +105,11 @@ tfoot{
 	display: flex;
 	justify-content: flex-end;
 }
+
+#search-form{
+	
+	display: flex;
+    flex-direction: row-reverse;
+    position: relative;
+    right: -130px;
+}

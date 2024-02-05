@@ -11,7 +11,7 @@
 			<h1></h1>
 			<div class="logo"></div>
 			<div class="flex center profile">
-				<img alt="img" src="/img/profileTemp.jpeg">
+				<img alt="img" th:src="${#authentication.getPrincipal().getProfile()}">
 				<div id="individual">
 					<ul>
 						<li><a href="/logout">로그아웃</a></li>
