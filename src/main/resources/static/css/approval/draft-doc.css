@@ -74,7 +74,7 @@ tbody > .wrap > th {
 	margin-bottom: 10px;
 }
 .file-aera {
-	height: 50px;
+	margin-bottom: 20px;
 }
 .approval-line {
 	height: 150px;
@@ -119,4 +119,22 @@ tbody > .wrap > th {
     height: 500px;
     padding: 10px;
     box-sizing: border-box;
+}
+.attach {
+	border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 5px;
+}
+.file_list {
+	color:#a9a9a9;
+	padding-top: 5px;
+	cursor: pointer;
+	flex-flow: column;
+}
+.file-title {
+	font-weight: bold;
+	padding-top: 5px;
+	margin-right: 10px;
 }
