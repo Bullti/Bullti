@@ -84,7 +84,7 @@ public class Member {
 	@OneToMany(mappedBy = "owner")
 	private List<FranEntity> franchises;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "dept_id")
 	private DeEntity dept;
 	/*
