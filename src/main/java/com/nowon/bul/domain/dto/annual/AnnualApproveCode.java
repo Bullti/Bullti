@@ -12,9 +12,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum AnnualApproveCode {
 
-    APPROVE(50, "승인"),
+	ERROR(4, "오류"),
+	PROGRESS(50, "진행중"),
     REJECT(90, "반려"),
-    CANCEL(99, "취소");
+    CANCEL(99, "취소"),
+	APPROVE(100, "승인");
 
     private final int approveCode;
     private final String approveState;
@@ -23,7 +25,7 @@ public enum AnnualApproveCode {
             Stream.of(values()).collect(Collectors.toMap(AnnualApproveCode::getApproveCode, Function.identity()));
 
     public static AnnualApproveCode valueOfNumber(int number) {
-        return BY_NUMBER.getOrDefault(number, null);
+        return BY_NUMBER.getOrDefault(number, AnnualApproveCode.ERROR);
     }
 }
 

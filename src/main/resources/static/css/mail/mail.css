@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+.write{
+	position: absolute;
+	width: 700px;
+	height: 720px;
+  	border: 1px solid #d2d2d2;  
+	right: 50px;
+	bottom: 50px;
+	background-color: white;
+	box-shadow: 0 0 10px 0 gray;
+}
+
+.closebtn{
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #6c97be22;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+
+.closebtn > a{
+	font-size: 18px;
+	margin-left: 10px;
+}
+
+.closebtn > button{
+	margin-right: 10px;
+	background-color: transparent;
+	border: none;
+	background-image: url("/img/close_FILL0_wght400_GRAD0_opsz24.svg");
+}
+
+
+.rec-form > input{
+	display: block;
+	border: none;
+    border-bottom: 1.5px solid #6c97be44;
+    font-size: 15px;
+    width: 660px;
+    height: 30px;
+    margin-left: 15px;
+    outline: none;
+}
+
+.rec-form > input::nht
+
+#summernote{
+	margin-top: 10px;
+}

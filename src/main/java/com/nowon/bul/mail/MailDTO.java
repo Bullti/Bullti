@@ -16,25 +16,27 @@ import lombok.ToString;
 @Getter
 @Setter
 public class MailDTO {
-
 	private String from;
     private String subject;
     private Date sentDate;
     private String message;
     private String attachments;
-
-    // 생성자, getter, setter 등 필요한 메서드들 추가
-
-    // 예시로 필드들을 출력하는 toString 메서드
-    @Override
-    public String toString() {
-        return "MailDTO{" +
-                "from='" + from + '\'' +
-                ", subject='" + subject + '\'' +
-                ", sentDate='" + sentDate + '\'' +
-                ", message='" + message + '\'' +
-                ", attachments='" + attachments + '\'' +
-                '}';
-    }
+    private String formattedSentDate;
+    
+    //날짜변경
+	public void setFormattedSentDate(String formattedSentDate) {
+		this.formattedSentDate = formattedSentDate;
+		
+	}
+	
+	//제목길이 
+	 public void setSubject(String subject) {
+	        final int MAX_SUBJECT_LENGTH = 30;
+	        if (subject.length() > MAX_SUBJECT_LENGTH) {
+	            this.subject = subject.substring(0, MAX_SUBJECT_LENGTH) + "...";
+	        } else {
+	            this.subject = subject;
+	        }
+	    }
 
 }
