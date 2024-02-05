@@ -54,7 +54,7 @@ public class ApprovalDoc {
 	@OneToMany(mappedBy = "apDoc")
 	private List<Approval> approval;
 	
-	@OneToMany(mappedBy = "ApprovalDoc")
+	@OneToMany(mappedBy = "approvalDoc")
 	private List<ApprovalFiles> files;
 	
 	private String title;

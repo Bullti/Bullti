@@ -1,12 +1,16 @@
 package com.nowon.bul.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +37,7 @@ import com.nowon.bul.service.ApprovalService;
 import com.nowon.bul.service.AwsService;
 import com.nowon.bul.service.MemberService;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -65,7 +70,7 @@ public class ApprovalController {
 		}else {
 			List<String> files = new ArrayList<>();
 			files = awsService.s3fileTemptoSrc(filesDto.getNewNames());
-			approvalService.saveApproval(dto, member, files);
+			approvalService.saveApproval(dto, member, files, filesDto.getOrgNames(), filesDto.getBucketKeys());
 		}
 		
 		
@@ -125,8 +130,9 @@ public class ApprovalController {
 //		};
 
 		ApprovalWaitDTO dto = approvalService.getWait(docNo);
-		
+		List<AppResponseFilesDTO> files = approvalService.getFiles(docNo);
 
+		model.addAttribute("files", files);
 		model.addAttribute("dto", dto);
 		return "views/approval/wait-doc";
 	}
@@ -192,4 +198,12 @@ public class ApprovalController {
 	public Map<String, String> s3fileUpload(@RequestParam(name = "file") MultipartFile file) {
 		return awsService.s3fileTempUpload(file);
 	}
+	
+	//파일 다운로드
+	@GetMapping("/download")
+	public ResponseEntity<Resource> downloadFile(@RequestParam(name = "bucketKey") String bucketKey) {
+		System.out.println(">>>>>>bucketKey: " + bucketKey);
+		return awsService.fileDownload(bucketKey);
+    }
+	
 }
