@@ -1,7 +1,5 @@
 package com.nowon.bul.mybatis.mapper;
 
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;

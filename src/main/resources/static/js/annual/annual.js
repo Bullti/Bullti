@@ -36,7 +36,7 @@ function typeClickView() {
 	}
 	
 	if (selectedtype != 'halfDay') {
-		document.getElementById('fullDay').style.display = 'inline-block';
+		document.getElementById('fullDay').style.display = 'flex';
 	}
-	specialTextElement.style.display = 'inline-block';
+	specialTextElement.style.display = 'block';
 }

@@ -33,7 +33,7 @@ public class AnnualController {
 	@PostMapping
 	public String annualSave(AnnualSaveDTO dto,Authentication auth) {
 		servie.save(dto, auth);
-		return "views/emp/annual/annual";
+		return "redirect:/emp/annu";
 	}
 	
 	@GetMapping("/list")

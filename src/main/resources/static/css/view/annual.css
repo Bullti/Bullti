@@ -35,21 +35,28 @@ select, input, textarea {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-
+#fullDay {
+	width: 93%;
+    display: flex;
+    flex-direction: column;
+}
 .select-container {
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     gap: 10px;
 }
 
 .selectView {
+	display: flex;
     background-color: #f0f0f0;
     padding: 10px;
     border-radius: 4px;
 }
 
 .t-btn {
-    background-color: #4caf50;
+    background-color: var(--bullti2);
     color: #fff;
     padding: 10px;
     border: none;
@@ -58,6 +65,12 @@ select, input, textarea {
 }
 
 .t-btn:hover {
-    background-color: #45a049;
+    background-color: var(--bullti1);
 }
 
+#annfrom {
+	height: 600px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
