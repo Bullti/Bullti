@@ -30,9 +30,15 @@ ext {
 }
 
 dependencies {
+
 	implementation 'io.jsonwebtoken:jjwt-api:0.12.3'
-    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.3'
-    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.3'
+  runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.3'
+  runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.3'
+
+	//google qr코드 생성 https://mvnrepository.com/artifact/com.google.zxing/core
+	implementation 'com.google.zxing:core:3.5.3'
+	// https://mvnrepository.com/artifact/com.google.zxing/javase
+	implementation 'com.google.zxing:javase:3.5.3'
 
 
 	implementation 'com.github.shin285:KOMORAN:3.3.9'
@@ -63,12 +69,6 @@ dependencies {
 	
 	implementation 'javax.mail:javax.mail-api:1.6.2'
 	implementation 'com.sun.mail:javax.mail:1.6.0'
-	
-
-	
-	
-	
-
 }
 
 dependencyManagement {

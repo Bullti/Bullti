@@ -4,6 +4,10 @@
 
 <head>
 	
+<script src="/webjars/jquery/jquery.min.js"></script>
+<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+<script src="/chatbot/chatbot-app.js"></script>
 	<link rel="stylesheet" href="/css/stock/list.css">
 	<script src="/js/department.js"></script>
 	<!--<link rel="stylesheet" href="/css/department/side.css" />-->
@@ -20,6 +24,8 @@
 		<div th:replace="~{stock/notice-side :: side}"></div>
 		<div style="flex: 1">
 			<th:block th:replace="~{layout/header :: header}"></th:block>
+			
+			
 			<div class="main">
 				<div class="title">
 					<h1>공지사항</h1>
@@ -38,11 +44,18 @@
 				</div>
 				
 
-
+				
 			</div>
+			
+			
+			
 		</div>
+		
+	
 	</main>
-
+	
+	
+	
 </body>
 
 </html>
