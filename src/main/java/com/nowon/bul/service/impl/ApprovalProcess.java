@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.nowon.bul.domain.dto.approval.AppRequestFilesDTO;
 import com.nowon.bul.domain.dto.approval.AppResponseFilesDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalDraftDTO;
@@ -42,7 +43,7 @@ public class ApprovalProcess implements ApprovalService {
 	// 결재 상신
 	@Transactional
 	@Override
-	public void saveApproval(ApprovalDTO dto, Member member, List<String> files) {
+	public void saveApproval(ApprovalDTO dto, Member member, AppRequestFilesDTO files) {
 		ApprovalDoc approvalDoc = ApprovalDoc.builder().member(member).title(dto.getTitle()).content(dto.getContent())
 				.state(State.UnderReview).build();
 		approvalDocRepo.save(approvalDoc);
@@ -56,8 +57,10 @@ public class ApprovalProcess implements ApprovalService {
 		}
 		
 		if(files != null) {
-			for(String file : files) {
-				ApprovalFiles  approvalFiles= ApprovalFiles.builder().fileUrl(file).approvalDoc(approvalDoc).build();  
+			int size = files.getNewNames().length;
+			for(int i=0; i<size; i++) {
+				ApprovalFiles approvalFiles = ApprovalFiles.builder().approvalDoc(approvalDoc)
+						.orgName(files.getOrgNames()[i]).newName(files.getNewNames()[i]).build();
 				approvalFilesRepo.save(approvalFiles);
 			}
 		}
@@ -157,29 +160,4 @@ public class ApprovalProcess implements ApprovalService {
 				.map(ApprovalFiles::toAppResponseFilesDTO).collect(Collectors.toList());
 	}
 	
-	@Transactional
-	@Override
-	public void saveApproval(ApprovalDTO dto, Member member, List<String> files, String[] orgNames,
-			String[] bucketKeys) {
-		ApprovalDoc approvalDoc = ApprovalDoc.builder().member(member).title(dto.getTitle()).content(dto.getContent())
-				.state(State.UnderReview).build();
-		approvalDocRepo.save(approvalDoc);
-		approvalDoc.setDocName();
-
-		for (int i = 1; i < dto.getLine().length + 1; i++) {
-			Approval approval = Approval.builder().order(i).result(i == 1 ? Result.UnderReview : Result.Wait) // 0 : 대기중
-					.receivedDate(i == 1 ? LocalDateTime.now() : null)
-					.member(memberRepo.findById(dto.getLine()[i - 1]).orElseThrow()).apDoc(approvalDoc).build();
-			approvalRepo.save(approval);
-		}
-		
-		if(files != null) {
-			for(int i=0; i<files.size(); i++) {
-				ApprovalFiles  approvalFiles= ApprovalFiles.builder().fileUrl(files.get(i).substring(57))
-						.approvalDoc(approvalDoc).bucketKey(bucketKeys[i]).orgName(orgNames[i]).build();  
-				approvalFilesRepo.save(approvalFiles);
-			}
-		}
-		
-	}
 }

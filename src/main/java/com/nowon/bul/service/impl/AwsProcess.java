@@ -45,9 +45,9 @@ public class AwsProcess implements AwsService{
 	}
 
 	@Override
-	public ResponseEntity<Resource> fileDownload(String fileUrl) {
+	public ResponseEntity<Resource> fileDownload(String newName, String orgName) {
 		System.out.println("서비스 프로세스 실행");
-		return s3FileUploadUtilV3.fileDownload(fileUrl);
+		return s3FileUploadUtilV3.fileDownload(newName, orgName);
 	}
 
 
