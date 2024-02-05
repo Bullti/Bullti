@@ -65,7 +65,7 @@
 				<div class="title">
 					<h1>사원조회/삭제/수정</h1>
 				</div>
-				<div class="search">
+				<!--<div class="search">
 					<label for="name">부서명</label> <select name="parentName"
 						id="up-depart" class="custom-select">
 						<option class="option" th:each="name : ${names}" th:text="${name}"></option>
@@ -76,7 +76,7 @@
 					</select>
 
 					<button class="search-button"></button>
-				</div>
+				</div>-->
 
 				<table>
 					<thead>
@@ -99,7 +99,7 @@
 							<td class="d">[[${member.deptName}]]</td>
 							<td class="e">[[${member.tel}]]</td>
 							<td class="f">[[${member.joinCompanyDate}]]</td>
-							<td class="g">[[${member.joinCompanyDate}]]</td>
+							<td class="g">[[${member.resignationDate}]]</td>
 						</tr>
 
 					</tbody>

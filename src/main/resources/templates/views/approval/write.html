@@ -37,8 +37,9 @@
           						<span>${result.orgName}</span>
 								<input type="hidden" value="${result.newName}" class='attach' name="newNames">
 								<input type="hidden" value="${result.orgName}" class='attach' name="orgNames">
-								<button type="button" onclick="removeFile(this);"
-									><span>삭제</span></button>
+								<button type="button" onclick="removeFile(this);" class="fileRemoveBtn">
+									<span>[삭제]</span>
+								</button>
 						        `;
 					// 부모 엘리먼트를 찾습니다.
 					let parentElement = document.querySelector('.file_list');
@@ -64,8 +65,7 @@
 			<form action="" method="post" id="approvalId">
 				<div class="main flex col">
 					<ul class="flex list">
-						<li><a onclick="submitForm('/approval')" style="cursor: pointer;">결재요청</a></li>
-						<li><a onclick="submitForm('/approval/temp')" style="cursor: pointer;">임시저장</a></li>
+						<li><a class="approval-list" onclick="submitForm('/approval')">결재상신</a></li>
 					</ul>
 					<div class="form">
 						<h1 class="title">기본 설정</h1>

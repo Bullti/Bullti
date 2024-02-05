@@ -9,8 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
 @Builder
+@AllArgsConstructor
 public class PageRequestDTO {
 
 	private int page;

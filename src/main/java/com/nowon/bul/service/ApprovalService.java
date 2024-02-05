@@ -11,10 +11,12 @@ import com.nowon.bul.domain.dto.approval.ApprovalWaitDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalWaitListDTO;
 import com.nowon.bul.domain.entity.approval.ApprovalDoc;
 import com.nowon.bul.domain.entity.member.Member;
+import com.nowon.bul.utils.jpaPage.PageRequestDTO;
+import com.nowon.bul.utils.jpaPage.PageResultDTO;
 
 public interface ApprovalService {
 
-	//결재상신
+	// 결재상신
 	void saveApproval(ApprovalDTO dto, Member member, AppRequestFilesDTO files);
 
 	List<ApprovalWaitListDTO> getWaitList(Member member);
@@ -23,7 +25,8 @@ public interface ApprovalService {
 
 	ApprovalDraftDTO getDraft(Long docNo);
 
-	List<ApprovalDraftListDTO> getDraftList(Member member);
+	// 기안문서 리스트
+	PageResultDTO<ApprovalDraftListDTO, ApprovalDoc> getDraftList(Member member, PageRequestDTO pageRequestDTO);
 
 	ApprovalWaitDTO getWait(Long docNo);
 
