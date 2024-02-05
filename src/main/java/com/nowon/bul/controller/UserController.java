@@ -78,10 +78,8 @@ public class UserController {
 	// 회원가입
 	@PostMapping("/members")
 	public String join(MemberSaveDTO dto) {
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>" + dto);
-
 		if (dto.getNewName() == null) {
-			memberSerivce.save(dto, null);
+			memberSerivce.save(dto, "/img/person.png");
 		} else {
 			String profileUrl = awsService.s3fileTemptoSrc(dto.getNewName());
 			memberSerivce.save(dto, profileUrl);
@@ -96,6 +94,8 @@ public class UserController {
 		return awsService.s3fileTempUpload(img);
 	}
 
+	/******************사원 등록 유효성 검사 로직******************************/
+	
 	@ResponseBody
 	@GetMapping("/memberIdCheck")
 	public boolean checkId(@RequestParam(name = "member_id") String id) {
@@ -108,10 +108,30 @@ public class UserController {
 		return memberSerivce.patternId(id);
 	}
 
+	/*******************비밀번호 변경 관련 로직******************************/
+	
 	//비밀번호 변경 페이지 (blank)
 	@GetMapping("/members/pass")
 	public String changePass() {
 
 		return "views/members/change-pass";
 	}
+	
+	//현재비밀번호, 새 비밀번호 일치 검사
+	@ResponseBody
+	@PostMapping("/members/current-pass")
+	public boolean currentPass(@RequestParam(name = "pass") String pass, Authentication authentication) {
+		MyUser user = (MyUser) authentication.getPrincipal();
+		return memberSerivce.checkpass(user.getMemberNo(),pass);
+	}
+	
+
+	//비밀번호 변경
+	@ResponseBody
+	@PostMapping("/members/password")
+	public void changePass(@RequestParam(name = "newPass") String newPass, Authentication authentication) {
+		MyUser user = (MyUser) authentication.getPrincipal();
+		memberSerivce.changePassword(user.getMemberNo(), newPass);
+	}
+	
 }

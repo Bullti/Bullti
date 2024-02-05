@@ -3,14 +3,16 @@
 aside {
 	position: fixed;
 	top: 0;
-	height: 100vh;
+
+	min-height: 100vh;
 	width: 70px;
 	/*width: 80px;*/
 	background: linear-gradient(to bottom, var(--bullti1), var(--bullti2));
 }
 main {
+
 	margin-left: 70px;
-	height: 100vh;
+	min-height: 100vh;
 }
 .aside-menu-container{
 	margin-top: 16px;

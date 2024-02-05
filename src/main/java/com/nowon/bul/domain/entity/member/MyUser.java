@@ -14,7 +14,7 @@ public class MyUser extends User{
 
 	private static final long serialVersionUID = 1L;
 	private long memberNo;
-	
+	private String profile;
 	
 	private MyUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
 		super(username, password, authorities);
@@ -23,5 +23,6 @@ public class MyUser extends User{
 	public MyUser(Member member, Set<SimpleGrantedAuthority> grnatedAuthority) {
 		this(member.getId(), member.getPassword(), grnatedAuthority);
 		memberNo = member.getNo();
+		profile = member.getProfile();
 	}
 }
