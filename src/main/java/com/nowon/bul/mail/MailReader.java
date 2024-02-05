@@ -20,27 +20,30 @@ import javax.mail.Part;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMultipart;
 import javax.mail.search.AndTerm;
 import javax.mail.search.ComparisonTerm;
 import javax.mail.search.ReceivedDateTerm;
 import javax.mail.search.SearchTerm;
 import javax.mail.search.SentDateTerm;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-@Service
+@Component
 public class MailReader {
-	private String saveDirectory;
+	//private String saveDirectory;
+	private static String imaps = "imaps";
 
 	/**
 	 * 첨부파일이 저장될 위치 설정
 	 * 
 	 * @param dir
 	 */
-	public void setSaveDirectory(String dir) {
-		this.saveDirectory = dir;
-	}
+//	public void setSaveDirectory(String dir) {
+//		this.saveDirectory = dir;
+//	}
 
 	/**
 	 * Google gmail에 접근하여 지정한 기간 내에 모든 메일 가져오기
@@ -50,39 +53,55 @@ public class MailReader {
 	 * @param startDate
 	 * @param endDate
 	 * @return
+	 * @throws IOException 
 	 * @throws MessagingException
 	 */
 
-	public List<MailDTO> getMailList(String userName, String password, Date startDate, Date endDate, Model model) {
-	    System.out.println("receiveMailAttachedFile 시작");
+	public List<MailDTO> getMailList(String userName, String password, Date startDate, Date endDate, Model model) throws IOException {
+		System.out.println("receiveMailAttachedFile 시작");
 
-	    Properties props = System.getProperties();
-	    props.setProperty("mail.store.protocol", "imaps");
-	    List<MailDTO> mailList = new ArrayList<>();
+		Properties props = System.getProperties();
+		props.setProperty("mail.store.protocol", imaps);
+		List<MailDTO> mailList = new ArrayList<>();
 
-	    try {
-	        Session session = Session.getDefaultInstance(props, null);
-	        Store store = session.getStore("imaps");
-	        store.connect("imap.gmail.com", userName, password);
 
-	        Folder inbox = store.getFolder("INBOX");
-	        inbox.open(Folder.READ_ONLY);
+		try {
+			Session session = Session.getDefaultInstance(props, null);
+			Store store = session.getStore(imaps);
+			store.connect("imap.gmail.com", userName, password);
+			Folder inbox = store.getFolder("INBOX");
+			inbox.open(Folder.READ_ONLY);
+			SearchTerm sentDateTerm = new SentDateTerm(ComparisonTerm.GE, startDate);
+			SearchTerm andTerm = new AndTerm(sentDateTerm, new SentDateTerm(ComparisonTerm.LE, endDate));
+			Message[] arrMessages = inbox.search(andTerm);
 
-	        SearchTerm sentDateTerm = new SentDateTerm(ComparisonTerm.GE, startDate);
-	        SearchTerm andTerm = new AndTerm(sentDateTerm, new SentDateTerm(ComparisonTerm.LE, endDate));
+		
+			for (Message msg : arrMessages) {
+				Address[] fromAddress = msg.getFrom();
+				MailDTO mail = new MailDTO();
+				mail.setFrom(fromAddress[0].toString());
+				mail.setSubject(msg.getSubject());
+				
+			    Object content = msg.getContent();
+			    if (content instanceof MimeMultipart) {
+			        MimeMultipart multipart = (MimeMultipart) content;
+			        // text/plain 부분 추출
+			        for (int i = 0; i < multipart.getCount(); i++) {
+			            BodyPart bodyPart = multipart.getBodyPart(i);
+			            if (bodyPart.isMimeType("text/plain")) {
+			            	mail.setMessage(bodyPart.getContent().toString());
+			                break; // text/plain 부분을 찾으면 루프를 종료합니다.
+			            }
+			        }
+			    } else {
+			        // 간단한 텍스트 메시지의 경우
+			        mail.setMessage(content.toString());
+			    }
 
-	        Message[] arrayMessages = inbox.search(andTerm);
-	        
-	        System.out.println("본인이");
-	        for (Message msg : arrayMessages) {
-	            Address[] fromAddress = msg.getFrom();
-	            MailDTO mail = new MailDTO();
-	            mail.setFrom(fromAddress[0].toString());
-	            mail.setSubject(msg.getSubject());
-	            mail.setSentDate(msg.getReceivedDate());
-	            mailList.add(mail);
+				mail.setSentDate(msg.getReceivedDate());
+				mailList.add(0, mail);
 
-	            // 첨부파일
+				// 첨부파일
 				/*
 				 * if (contentType.contains("multipart")) { Multipart multiPart = (Multipart)
 				 * msg.getContent(); for (int partCount = 0; partCount < multiPart.getCount();
@@ -97,28 +116,85 @@ public class MailReader {
 				 * contentType.contains("text/html")) { Object content = msg.getContent(); if
 				 * (content != null) { messageContent = content.toString(); } }
 				 */
-	        }
-	        System.out.println("해결을해야지");
-	        // disconnect
-	        inbox.close(false);
-	        store.close();
-	    } catch (NoSuchProviderException e) {
-	        e.printStackTrace();
-	        System.out.println("NoSuchProviderException: " + e.getMessage());
-	        e.printStackTrace(System.out);
-	        System.exit(1);
-	    } catch (MessagingException e) {
-	        e.printStackTrace();
-	        System.out.println("MessagingException: " + e.getMessage());
-	        e.printStackTrace(System.out);
-	        System.exit(2);
+			}
+			System.out.println("7");
+			// disconnect
+			inbox.close(false);
+			store.close();
+		} catch (NoSuchProviderException e) {
+			e.printStackTrace();
+			System.out.println("NoSuchProviderException: " + e.getMessage());
+			e.printStackTrace(System.out);
+			System.exit(1);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+			System.out.println("MessagingException: " + e.getMessage());
+			e.printStackTrace(System.out);
+			System.exit(2);
 		} /*
 			 * catch (IOException ex) { ex.printStackTrace();
 			 * System.out.println("IOException: " + ex.getMessage());
 			 * ex.printStackTrace(System.out); }
 			 */
 
-	    //System.out.println("receiveMailAttachedFile 종료");
-	    return mailList;
+		System.out.println("9");
+		// System.out.println("receiveMailAttachedFile 종료");
+		return mailList;
+	}
+
+	public void getMailList(String email, String password, Date startDate, Date endDate, int mailCount, Model model) {
+
+		Properties props = System.getProperties();
+		props.setProperty("mail.store.protocol", imaps);
+		List<MailDTO> mailList = new ArrayList<>();
+
+		try {
+			Session session = Session.getDefaultInstance(props, null);
+			Store store = session.getStore(imaps);
+			store.connect("imap.gmail.com", email, password);
+			Folder inbox = store.getFolder("INBOX");
+			inbox.open(Folder.READ_ONLY);
+
+			SearchTerm sentDateTerm = new SentDateTerm(ComparisonTerm.GE, startDate);
+			SearchTerm andTerm = new AndTerm(sentDateTerm, new SentDateTerm(ComparisonTerm.LE, endDate));
+
+			Message[] arrayMessages = inbox.search(andTerm);
+
+				
+			for (int i = 0; i < mailCount; i++) {
+				MailDTO mail = new MailDTO();
+				mail.setFrom(arrayMessages[i].getFrom()[0].toString());
+				mail.setSubject(arrayMessages[i].getSubject());
+				//mail.setSentDate(arrayMessages[i].getReceivedDate());
+				
+				Date sentDate = arrayMessages[i].getReceivedDate();
+		        
+				String formattedSentDate = formatDate(sentDate); // 사용자 정의 메서드 호출
+		        mail.setFormattedSentDate(formattedSentDate);
+
+		        mail.setSentDate(sentDate);
+				
+		        mailList.add(0, mail);
+			}
+			inbox.close(false);
+			store.close();
+		} catch (NoSuchProviderException e) {
+			e.printStackTrace();
+			System.out.println("NoSuchProviderException: " + e.getMessage());
+			e.printStackTrace(System.out);
+			System.exit(1);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+			System.out.println("MessagingException: " + e.getMessage());
+			e.printStackTrace(System.out);
+			System.exit(2);
+		}
+		model.addAttribute("mailList", mailList);
+		
+	}
+
+	private String formatDate(Date sentDate) {
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd HH:mm");
+	    return sdf.format(sentDate);
 	}
 }

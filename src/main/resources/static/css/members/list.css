@@ -1,13 +1,13 @@
 @charset "UTF-8";
 .main {
-	height: 800px;
+	height: 780px;
     width: 1200px;
     /* border: 1px solid gray; */
     border-radius: 2%;
     justify-content: center;
     padding-left: 50px;
     padding-right: 50px;
-    margin: 100px auto;
+    margin: 35px auto;
     box-shadow: 2px 2px 2px 2px #d2d2d2;
 }
 table {
@@ -35,6 +35,10 @@ label{
 
 .label2{
 	margin-left: 5px;
+}
+
+.title {
+	border-top: 15px solid transparent;
 }
 
 .title > h1{

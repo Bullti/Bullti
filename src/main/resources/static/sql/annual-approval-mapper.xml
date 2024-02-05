@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nowon.bul.mybatis.mapper.AnnualApprovalMapper">
+	<select id="findAll" resultMap="stringArrayResultMap">
+		select id from member where member_no in (select member_no from annual_approval where member_no > 0)
+	</select>
+	<resultMap id="stringArrayResultMap" type="java.lang.String">
+	    <result property="array" column="id"/>
+	</resultMap>
+</mapper>

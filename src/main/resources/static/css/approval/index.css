@@ -1,7 +1,12 @@
 @charset "UTF-8";
 
 .border{
-	border: 1px solid #a9a9a9
+	border: 1px solid #a9a9a9;
+	box-shadow: 0 0 1px 0;
+}
+
+.inner-border{
+	border: 1px solid #6c97be;
 }
 
 .wrap2{
@@ -165,10 +170,17 @@ button {
 	height: 400px;
 	
 }
+
+.board-box{
+	width: 455px;
+    height: 330px;
+    margin: auto;
+}
     
-.notice_table{
+.notice_table {
 	margin: auto;
 	width: 400px;
+	
 	
 }
 
@@ -211,8 +223,16 @@ td {
 }	
 
 .mail-box{
-	margin-top: 20px;
-	height: 500px;
+    margin: 15px auto;
+    height: 350px;
+    width: 460px;
+}
+
+.mail_table{
+	width: 440px;
+	margin: 20px auto;
+	text-align: justify;
+	padding-top: 20px;
 }
 
 .sales{

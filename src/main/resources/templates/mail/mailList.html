@@ -9,45 +9,97 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link rel="stylesheet" href="/css/approval/homeTemp.css">
     <link rel="stylesheet" href="/css/department/DeList.css" />
-    <title>Mail Reader</title>
+    <link rel="stylesheet" href="/css/members/list.css">
+    <link rel="stylesheet" href="/css/mail/mail.css">
+ 	
+ 	 <!-- summer-note -->
+	<script src="/js/approval/summer-note.js"></script>
+	<script src="/summerNote/summernote-lite.js"></script>
+	<script src="/summerNote/summernote-ko-KR.js"></script>
+	<link rel="stylesheet" href="/summerNote/summernote-lite.css">
+	
+	<script>
+			   
+	$(document).ready(function() {
+    $('#summernote').summernote({
+        height: 200,
+        minHeight: null,
+        maxHeight: null,
+        focus: true,
+        toolbar: [
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']]
+        ],
+        callbacks: {
+            onInit: function() {
+                $('.note-editable').css('height', '200px');
+            }
+        }
+    });
+});
+	</script>
 </head>
 <body>
 	<main class="warp-main">
 	<div th:replace="~{mail/mail-side :: side}"></div>
 	<div style="flex: 1">
 	<th:block th:replace="~{layout/header :: header}"></th:block>
-    <form id="mailForm">
-        <label for="startDate">시작 날짜:</label>
-        <input type="date" id="startDate" name="startDate" required>
-
-        <label for="endDate">종료 날짜:</label>
-        <input type="date" id="endDate" name="endDate" required>
-
-        <!-- 버튼 클릭 시 getMailData 함수 실행 -->
-        <button type="button" onclick="getMailData()">메일 데이터 가져오기</button>
-    </form>
+	<div class="main">
+		<div class="title">
+			<h1>받은 메일함</h1>
+		</div>	
+	    <form id="mailForm" class="search">
+	        <label for="startDate">시작 날짜:</label>
+	        <input type="date" id="startDate" name="startDate" required>
 	
-    <div id="mailResults">
-        <table>
-            <thead>
-                <tr>
-                    <th>보낸 사람</th>
-                    <th>제목</th>
-                    <th>보낸 날짜</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Thymeleaf의 th:each를 사용하여 메일 목록을 반복 -->
-                 <tr th:each="mail:${mailList}">
-				 	<td th:text="${mail.from}"></td>
-				 	<td th:text="${mail.subject}"></td>
-				 	<td th:text="${mail.sentDate}"></td>
-               	 </tr>
-            </tbody>
-        </table>
-    </div>
-
+	        <label for="endDate">종료 날짜:</label>
+	        <input type="date" id="endDate" name="endDate" required>
+	
+	        <!-- 버튼 클릭 시 getMailData 함수 실행 -->
+	        <button type="button" onclick="getMailData()">검색</button>
+	    </form>
+		
+	    <div id="mailResults">
+	        <table>
+	            <thead>
+	                <tr>
+	                    <th style="width: 120px;">보낸 사람</th>
+	                    <th style="width: 285px">제목</th>
+	                    <th style="width: 520px;">내용</th>
+	                    <th>보낸 날짜</th>
+	                </tr>
+	            </thead>
+	            <tbody>
+	                <!-- Thymeleaf의 th:each를 사용하여 메일 목록을 반복 -->
+	                 <tr th:each="mail:${mailList}">
+					 	<td th:text="${mail.from}" class="mail-a"></td>
+					 	<td th:text="${mail.subject}" class="mail-b"></td>
+					 	<td th:text="${mail.message}" class="mail-c"></td>
+					 	<td th:text="${mail.sentDate}" class="mail-d"></td>
+	               	 </tr>
+	            </tbody>
+	        </table>
+	    </div>
+	    
+	    <div class="write">
+			<div class="closebtn">
+				<a>새 메일</a>
+				<button>ㅤ</button>
+			</div>
+			<form >
+				<div class="rec-form">
+					<input placeholder="받는사람">
+					<input placeholder="제목">
+				</div>
+				<textarea id="summernote" name="content"></textarea>
+				<button>전송</button>
+			</form>
+		</div>
+	</div>
    <script>
+
 
 	function formatServerDate(serverDate) {
     var date = new Date(serverDate);
@@ -87,14 +139,17 @@
                 var tr = document.createElement("tr");
                 var tdFrom = document.createElement("td");
                 var tdSubject = document.createElement("td");
+                var tdMessage = document.createElement("td");
                 var tdSentDate = document.createElement("td");
 
                 tdFrom.textContent = mail.from;
                 tdSubject.textContent = mail.subject;
+                tdMessage.textContent = mail.message;
                 tdSentDate.innerHTML = formatServerDate(mail.sentDate);
 
                 tr.appendChild(tdFrom);
                 tr.appendChild(tdSubject);
+                tr.appendChild(tdMessage);
                 tr.appendChild(tdSentDate);
 
                 thymeleafTableBody.appendChild(tr);

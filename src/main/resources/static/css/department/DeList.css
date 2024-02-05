@@ -5,14 +5,14 @@
 }
 
 .main-area {
-	height: 800px;
+	height: 750px;
     width: 800px;
     /* border: 1px solid gray; */
     border-radius: 2%;
     justify-content: center;
     padding-left: 50px;
     padding-right: 50px;
-    margin: 100px auto;
+    margin: 35px auto;
     /* margin-top: 60px; */
     box-shadow: 2px 2px 2px 2px #d2d2d2;
 }
