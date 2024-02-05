@@ -11,10 +11,12 @@ import com.nowon.bul.domain.entity.member.Member;
 import com.nowon.bul.domain.entity.member.Rank;
 import com.nowon.bul.domain.entity.member.Role;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -33,9 +35,14 @@ import lombok.RequiredArgsConstructor;
 public class MemberEmail {
 	
 	@Id
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "member_email_no")
+	@Column(name = "member_no")
+	private Long no;
+	
+	@OneToOne(fetch = FetchType.EAGER)
+	@MapsId
+	@JoinColumn(name="member_no")
 	private Member member;
+	
 	private String email;
 	private String password;
 	
