@@ -18,12 +18,13 @@
 					<h1>근태관리</h1>
 					<section class="check-section">
 						<div class="check-profile border">
-							<img class="profile-photo" src="/img/profileTemp.jpeg">
+							<img class="profile-photo" alt="img" th:src="${#authentication.getPrincipal().getProfile()}">
 						</div>
 					</section>
 					<div class="check-info">
-						<span>이예슬</span> <span>사원</span> <br> <br> <span
-							id="last-span">개발부</span>
+						<span th:text="${#authentication.getPrincipal().getMemberName()}"></span>
+						<span th:text="${#authentication.getPrincipal().getMemberRank()}"></span> <br> <br> 
+						<span id="last-span" th:text="${#authentication.getPrincipal().getMemberDept()}"></span>
 					</div>
 					<div class="button-area">
 						<button onclick="recordAttendance()">출근</button>
