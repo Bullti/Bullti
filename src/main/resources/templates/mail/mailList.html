@@ -164,6 +164,38 @@
             }
         });
     }
+  
+    function getMailData2() {
+    var toAddress = document.getElementById('toAddress').value;
+    var subject = document.getElementById('subject').value;
+    var content = document.getElementById('summernote').value;
+
+    // 서버로 데이터 전송 (예: AJAX 사용)
+    // 이 부분은 서버와의 통신 방법에 따라 달라질 수 있습니다.
+    // Spring Controller 등을 통해 서버로 데이터를 전송하는 방법을 사용하면 됩니다.
+
+    // 예시: AJAX를 사용한 데이터 전송
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/sendMail'); // 실제 URL에 맞게 수정
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    
+    var data = {
+        toAddress: toAddress,
+        subject: subject,
+        content: content
+    };
+    
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            // 메일 전송이 완료되면 모달 창을 닫음
+            closeModal(".write");
+        }
+    };
+
+    xhr.send(JSON.stringify(data));
+
+}
+    
     </script>
 </main>
 </body>
