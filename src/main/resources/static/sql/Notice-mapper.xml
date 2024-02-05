@@ -9,11 +9,15 @@
     	insert into notice(board_title, board_content, name, dept_name)
    		 values(#{boardTitle}, #{boardContent}, #{name}, #{deptName})
 	</insert>
-
- 	
+	<select id="findAll" resultType="com.nowon.bul.domain.dto.NoticeDTO">
+ 		select * from notice
+ 		WHERE board_no > 0 AND board_title LIKE CONCAT('%', #{search}, '%')
+ 		order by board_no desc
+ 		LIMIT #{offset}, #{limit}
+ 	</select>
  	<select id="findAllLimit" resultType="com.nowon.bul.domain.dto.NoticeDTO">
  		select * from notice
- 		where board_no>0
+ 		WHERE board_no > 0 
  		order by board_no desc
  		LIMIT #{offset}, #{limit}
  	</select>
@@ -22,6 +26,12 @@
  		select count(*) from notice
  		where board_no>0
  	</select>
+ 	
+ 	<select id="countAllSearch" resultType="int">
+ 		select count(*) from notice
+ 		WHERE board_no > 0 AND board_title LIKE CONCAT('%', #{search}, '%')
+ 	</select>
+ 	
  	
  	<select id="findById" resultType="com.nowon.bul.domain.dto.NoticeDTO">
  		select * from notice

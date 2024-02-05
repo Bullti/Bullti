@@ -121,3 +121,19 @@ tbody > .wrap > th {
     padding: 10px;
     box-sizing: border-box;
 }
+.attach {
+	border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 5px;
+}
+.file_list {
+	color:#a9a9a9;
+	padding-top: 5px;
+	cursor: pointer;
+	flex-flow: column;
+}
+.file-title {
+	padding-top: 5px;
+}

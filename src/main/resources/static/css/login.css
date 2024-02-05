@@ -20,13 +20,9 @@
 }
 
 .login_area {
-	width: 240px;
-	padding: 60px 50px 40px;
-	border: 1px solid #a9a9a9;
-	border-radius: 20px;
-	background-color: #E4DCCF;
-	box-shadow: 2px 2px 5px -2px;
-	z-index: 5;
+	width: 350px;
+    padding: 60px 50px 40px;
+    border-radius: 20px;
 }
 
 
@@ -34,11 +30,14 @@
 	text-align: center;
     height: 50px;
     margin-bottom: 30px;
-    color: #ea5455;
-    font-size: 40px;
+    color: #ed1a1b;
+    font-size: 35px;
+}
+.login_title > span {
+	color: #222;
 }
 .login_area>form>div {
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 }
 
 .login_area>form>div>input {
@@ -48,7 +47,8 @@
 	border-bottom: 1px solid #ebebeb;
 	outline-style: none;
 	box-sizing: border-box;
-	height: 40px;
+	height: 50px;
+	font-size: 17px;
 }
 
 .login_area>form>div>input:focus {
@@ -75,7 +75,7 @@
 .login_button>span {
 	font-size: 15px;
 	font-weight: bold;
-	color: #333;
+	color: #000;
 }
 
 .login_sub_box {
