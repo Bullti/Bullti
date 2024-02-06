@@ -2,10 +2,16 @@ package com.nowon.bul.service.impl;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.nowon.bul.domain.dto.approval.AppRequestFilesDTO;
+import com.nowon.bul.domain.dto.approval.AppResponseFilesDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalDraftDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalDraftListDTO;
@@ -22,6 +28,8 @@ import com.nowon.bul.domain.entity.approval.State;
 import com.nowon.bul.domain.entity.member.Member;
 import com.nowon.bul.domain.entity.member.MemberRepository;
 import com.nowon.bul.service.ApprovalService;
+import com.nowon.bul.utils.jpaPage.PageRequestDTO;
+import com.nowon.bul.utils.jpaPage.PageResultDTO;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -41,7 +49,7 @@ public class ApprovalProcess implements ApprovalService {
 	// 결재 상신
 	@Transactional
 	@Override
-	public void saveApproval(ApprovalDTO dto, Member member, List<String> files) {
+	public void saveApproval(ApprovalDTO dto, Member member, AppRequestFilesDTO files) {
 		ApprovalDoc approvalDoc = ApprovalDoc.builder().member(member).title(dto.getTitle()).content(dto.getContent())
 				.state(State.UnderReview).build();
 		approvalDocRepo.save(approvalDoc);
@@ -55,8 +63,10 @@ public class ApprovalProcess implements ApprovalService {
 		}
 		
 		if(files != null) {
-			for(String file : files) {
-				ApprovalFiles  approvalFiles= ApprovalFiles.builder().fileUrl(file).ApprovalDoc(approvalDoc).build();  
+			int size = files.getNewNames().length;
+			for(int i=0; i<size; i++) {
+				ApprovalFiles approvalFiles = ApprovalFiles.builder().approvalDoc(approvalDoc)
+						.orgName(files.getOrgNames()[i]).newName(files.getNewNames()[i]).build();
 				approvalFilesRepo.save(approvalFiles);
 			}
 		}
@@ -76,9 +86,15 @@ public class ApprovalProcess implements ApprovalService {
 
 	// 기안문서함 리스트
 	@Override
-	public List<ApprovalDraftListDTO> getDraftList(Member member) {
-		return approvalDocRepo.findAllByMember(member).stream().map(ApprovalDoc::toDraftListDTO)
-				.collect(Collectors.toList());
+	public PageResultDTO<ApprovalDraftListDTO, ApprovalDoc> getDraftList(Member member, PageRequestDTO pageRequestDTO) {
+		
+		Pageable pageable = pageRequestDTO.getPageable(Sort.by("createdDate").descending());
+		
+		Page<ApprovalDoc> result = approvalDocRepo.findAllByMember(member, pageable);
+		
+		Function<ApprovalDoc, ApprovalDraftListDTO> fn = entity -> entity.toDraftListDTO();
+		
+		return new PageResultDTO<>(result, fn);
 	}
 
 	// 결재대기함 상세
@@ -109,7 +125,7 @@ public class ApprovalProcess implements ApprovalService {
 	}
 
 
-	// 문서 승인/반려
+	// 문서 승인or반려
 	@Transactional
 	@Override
 	public void changeResult(Long docno, String result, long memberNo) {
@@ -117,7 +133,11 @@ public class ApprovalProcess implements ApprovalService {
 		Member member = memberRepo.findById(memberNo).orElseThrow();
 
 		Approval approval = approvalRepo.findByMemberAndApDoc(member, approvalDoc).orElseThrow();
-
+		
+		String approvalResult = approval.getResult().getResultName();
+		if(!approvalResult.equals("심사중")) {
+			return;
+		}
 		
 		switch (result) {
 		case "accept" : {
@@ -145,5 +165,14 @@ public class ApprovalProcess implements ApprovalService {
 		default:
 			throw new IllegalArgumentException("잘못된 문서 결과입니다. : " + result);
 		}
+	}
+	
+	// 첨부파일 가져오기
+	@Transactional
+	@Override
+	public List<AppResponseFilesDTO> getFiles(Long docNo) {
+		ApprovalDoc approvalDoc = approvalDocRepo.findById(docNo).orElseThrow();
+		return approvalFilesRepo.findAllByApprovalDoc(approvalDoc).stream()
+				.map(ApprovalFiles::toAppResponseFilesDTO).collect(Collectors.toList());
 	}
 }

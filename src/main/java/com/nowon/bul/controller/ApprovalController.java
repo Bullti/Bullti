@@ -1,9 +1,10 @@
 package com.nowon.bul.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,12 +28,17 @@ import com.nowon.bul.domain.dto.approval.ApprovalMemberDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalMemberListDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalWaitDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalWaitListDTO;
+import com.nowon.bul.domain.dto.approval.EmpDTO;
+import com.nowon.bul.domain.entity.approval.ApprovalDoc;
 import com.nowon.bul.domain.entity.member.Member;
 import com.nowon.bul.domain.entity.member.MyUser;
 import com.nowon.bul.service.ApprovalService;
 import com.nowon.bul.service.AwsService;
 import com.nowon.bul.service.MemberService;
+import com.nowon.bul.utils.jpaPage.PageRequestDTO;
+import com.nowon.bul.utils.jpaPage.PageResultDTO;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -54,20 +60,18 @@ public class ApprovalController {
 	}
 
 	// 결재상신
+	@Transactional
 	@PostMapping("")
 	public String approval(ApprovalDTO dto,AppRequestFilesDTO filesDto ,Authentication authentication) {
 		MyUser user = (MyUser) authentication.getPrincipal();
 		Member member = memberService.getFindById(user.getMemberNo());
-		System.out.println(filesDto.toString());
 		
 		if(filesDto.getNewNames()==null) {
 			approvalService.saveApproval(dto, member, null);
 		}else {
-			List<String> files = new ArrayList<>();
-			files = awsService.s3fileTemptoSrc(filesDto.getNewNames());
-			approvalService.saveApproval(dto, member, files);
+			awsService.s3fileTemptoSrc(filesDto.getNewNames());
+			approvalService.saveApproval(dto, member, filesDto);
 		}
-		
 		
 		return "redirect:approval";
 	}
@@ -125,21 +129,22 @@ public class ApprovalController {
 //		};
 
 		ApprovalWaitDTO dto = approvalService.getWait(docNo);
-		
+		List<AppResponseFilesDTO> files = approvalService.getFiles(docNo);
 
+		model.addAttribute("files", files);
 		model.addAttribute("dto", dto);
 		return "views/approval/wait-doc";
 	}
 
 	// 기안문서함
 	@GetMapping("/draft-list")
-	public String draftLlist(Model model, Authentication authentication) {
+	public String draftLlist(PageRequestDTO pageRequestDTO, Model model, Authentication authentication) {
 		MyUser user = (MyUser) authentication.getPrincipal();
 		Member member = memberService.getFindById(user.getMemberNo());
 
-		List<ApprovalDraftListDTO> list = approvalService.getDraftList(member);
+		PageResultDTO<ApprovalDraftListDTO, ApprovalDoc> result = approvalService.getDraftList(member, pageRequestDTO);
 
-		model.addAttribute("list", list);
+		model.addAttribute("result", result);
 		return "views/approval/draft-list";
 	}
 
@@ -161,12 +166,12 @@ public class ApprovalController {
 		return "views/approval/draft-doc";
 	}
     
-	
+	// 전자결재 승인or반려
 	@PostMapping("/{result}/{no}")
 	public String docAccept(@PathVariable(name = "result") String result, @PathVariable(name = "no") Long docno, Authentication authentication) {
 		MyUser user = (MyUser) authentication.getPrincipal();
 		approvalService.changeResult(docno, result ,user.getMemberNo());
-
+		
 		return "redirect:/approval/wait-list/" + docno;
 	}
 
@@ -186,10 +191,17 @@ public class ApprovalController {
 		return new ModelAndView("views/approval/approval-line").addObject("list", memberService.getFindById(dto));
 	}
 	
-	//첨부파일 임시저장
+	// 첨부파일 임시저장
 	@ResponseBody
 	@PostMapping("/temp-upload")
 	public Map<String, String> s3fileUpload(@RequestParam(name = "file") MultipartFile file) {
 		return awsService.s3fileTempUpload(file);
 	}
+	
+	// 파일 다운로드
+	@GetMapping("/download")
+	public ResponseEntity<Resource> downloadFile(@RequestParam(name = "newName") String newName, @RequestParam(name = "orgName") String orgName) {
+		return awsService.fileDownload(newName, orgName);
+    }
+	
 }

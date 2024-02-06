@@ -25,6 +25,10 @@ public interface DeService {
 	//사원등록시 부서리스트
 	List<DeptListDTO> getDeptList();
 
+	
+	/***********아래 전부 네이버 API 메서드************************/
+	int getDeptId(String deptName);
+
 
 	
 

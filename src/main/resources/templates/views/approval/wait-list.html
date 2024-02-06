@@ -15,7 +15,7 @@
 			<div class="title">
 				<h1>결재 대기 문서</h1>
 			</div>
-			<div class="search">
+			<!-- <div class="search">
 				<label for="name">부서명</label>
 					<select name="parentName" id="up-depart" class="custom-select">
 						<option class="option" th:each="name : ${names}" th:text="${name}"></option>
@@ -27,7 +27,7 @@
 					</select>
 				<input class="search-input">
 				<button class="search-button"></button>	
-			</div>
+			</div> -->
 			<table>
 				<thead>
 					<tr>
@@ -40,7 +40,7 @@
 				</thead>
 				<tbody>
 					<tr th:each="doc : ${list}" th:onclick="|location.href='/approval/wait-list/${doc.docNo}'|" style="cursor:pointer;">
-						<td class="a">[[${#temporals.format(doc.createdDate, 'yyyy-MM-dd HH:mm:ss')}]]</td>
+						<td class="a">[[${#temporals.format(doc.createdDate, 'yyyy-MM-dd(E)')}]]</td>
 						<td class="b">일반결재</td>
 						<td class="c">[[${doc.title}]]</td>
 						<td class="d">[[${doc.docName}]]</td>

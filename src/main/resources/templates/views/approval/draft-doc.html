@@ -19,8 +19,7 @@
 			<form action="" method="post" id="approvalId">
 				<div class="main flex col">
 					<ul class="flex list">
-						<li><a onclick="submitForm('/approval')"
-							style="cursor: pointer;">목록</a>
+						<li><a href="/approval/draft-list" class="approval-list">목록</a>
 					</ul>
 					<div class="form">
 						<h1 class="title">기본 설정</h1>
@@ -36,7 +35,7 @@
 								</tr>
 								<tr>
 									<th>작 성 일</th>
-									<td style="width: 470px;">[[${#temporals.format(dto.createdDate, 'yyyy-MM-dd HH:mm:ss')}]]</td>
+									<td style="width: 470px;">[[${#temporals.format(dto.createdDate, 'yyyy-MM-dd(E)')}]]</td>
 									<th>직 급</th>
 									<td>[[${dto.rank}]]</td>
 								</tr>
@@ -82,8 +81,11 @@
 					<div class="ap-content">
 						[(${dto.content})]
 					</div>
-					<div class="file-aera flex hcenter">
-						<input type="file" multiple>
+					<div class="file-aera flex">
+						<div class="file-title">첨부파일</div>
+						<div class="file_list flex" th:if="${files != null and not #lists.isEmpty(files)}">
+							<a th:each="file : ${files}" th:href="|/approval/download?newName=${file.newName}&orgName=${file.orgName}|">[[${file.orgName}]]</a>
+						</div>
 					</div>
 				</div>
 			</form>
