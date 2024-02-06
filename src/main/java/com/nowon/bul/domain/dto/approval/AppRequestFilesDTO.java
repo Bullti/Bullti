@@ -10,5 +10,5 @@ import lombok.ToString;
 public class AppRequestFilesDTO {
 
 	private String[] newNames;
-	
+	private String[] orgNames;
 }

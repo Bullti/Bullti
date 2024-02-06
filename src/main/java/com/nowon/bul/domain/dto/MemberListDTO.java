@@ -21,5 +21,5 @@ public class MemberListDTO {
 	private String tel;
 	private String deptName; 
 	private LocalDate joinCompanyDate;
-	
+	private LocalDate resignationDate;
 }
