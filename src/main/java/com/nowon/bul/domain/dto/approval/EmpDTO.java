@@ -1,4 +1,4 @@
-package com.nowon.bul.controller;
+package com.nowon.bul.domain.dto.approval;
 
 import java.util.List;
 

@@ -54,7 +54,7 @@ public class ApprovalDoc {
 	@OneToMany(mappedBy = "apDoc")
 	private List<Approval> approval;
 	
-	@OneToMany(mappedBy = "ApprovalDoc")
+	@OneToMany(mappedBy = "approvalDoc")
 	private List<ApprovalFiles> files;
 	
 	private String title;
@@ -67,11 +67,11 @@ public class ApprovalDoc {
 	
 	@CreationTimestamp
 	@Column(columnDefinition = "timestamp(6) null")
-	private LocalDateTime created_date;
+	private LocalDateTime createdDate;
 	
 	@UpdateTimestamp
 	@Column(columnDefinition = "timestamp(6) null")
-	public LocalDateTime updated_date;
+	public LocalDateTime updatedDate;
 	
 	
 	
@@ -92,13 +92,13 @@ public class ApprovalDoc {
 				.content(content)
 				.approvalLine(approval.stream().map(Approval::toApprovalLineDTO).collect(Collectors.toList()))
 				.docName(docName)
-				.createdDate(created_date)
+				.createdDate(createdDate)
 				.build();
 	}
 	
 	public ApprovalDraftListDTO toDraftListDTO() {
 		return ApprovalDraftListDTO.builder()
-				.createdDate(created_date)
+				.createdDate(createdDate)
 				.title(title)
 				.docName(docName)
 				.state(state.getSateName())
@@ -115,7 +115,7 @@ public class ApprovalDoc {
 				.title(title)
 				.content(content)
 				.approvalLine(approval.stream().map(Approval::toApprovalLineDTO).collect(Collectors.toList()))
-				.createdDate(created_date)
+				.createdDate(createdDate)
 				.docName(docName)
 				.no(no)
 				.build();
@@ -123,7 +123,7 @@ public class ApprovalDoc {
 	
 	public ApprovalWaitListDTO toWaitListDTO() {
 		return ApprovalWaitListDTO.builder()
-				.createdDate(created_date)
+				.createdDate(createdDate)
 				.title(title)
 				.writer(member.getName())
 				.docName(docName)

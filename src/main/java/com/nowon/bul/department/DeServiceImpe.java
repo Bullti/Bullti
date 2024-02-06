@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.nowon.bul.chatbot.DeptEntity;
 import com.nowon.bul.domain.dto.DeptListDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalDeptList;
 
@@ -96,10 +97,21 @@ public class DeServiceImpe implements DeService {
 		//사원등록페이지 부서 리스트
 		@Override
 		public List<DeptListDTO> getDeptList() {
-			System.out.println("여기서 에러잖아ㅡㅡ>>>>>>>>>>>>");
 			return deRepository.findAll().stream().map(i -> 
 			DeptListDTO.builder().deptName(i.getDeptName()).deptId(i.getDeptId()).build())
 					.collect(Collectors.toList());
 		}
 
+		/*************네이버API 메서드*****************************/
+		@Transactional
+		@Override
+		public int getDeptId(String deptName) {
+			System.out.println(">>>>>>>>>>"+deptName);
+			System.out.println(">>>>>>>>>>"+deRepository.findByDeptName(deptName).orElseThrow());
+			
+			
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+deRepository.findByDeptName(deptName).orElseThrow().getDeptId());
+			
+			return deRepository.findByDeptName(deptName).orElseThrow().getDeptId();
+		}
  }

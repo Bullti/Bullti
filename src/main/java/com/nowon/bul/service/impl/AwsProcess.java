@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -40,6 +42,12 @@ public class AwsProcess implements AwsService{
 		}
 		
 		return list;
+	}
+
+	@Override
+	public ResponseEntity<Resource> fileDownload(String newName, String orgName) {
+		System.out.println("서비스 프로세스 실행");
+		return s3FileUploadUtilV3.fileDownload(newName, orgName);
 	}
 
 
