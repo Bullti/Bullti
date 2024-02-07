@@ -39,9 +39,69 @@
 					</form>
 				
 				</div>
-				<div id="content-area">
-					리스트가 비동기로 적용됨
-				</div>
+				
+<div id="content-area">
+	
+	
+	<!--<table>
+		<thead>
+			<tr>
+				<td class="a">글번호</td>
+				<td class="b">작성자</td>
+				<td class="c">부서</td>
+				<td class="d">제목</td>
+				<td class="e">조회수</td>
+				<td class="f">작성일</td>
+
+			</tr>
+		</thead>
+		<tbody>
+			<th:block th:each="dto:${list}">
+				<tr>
+					<td th:text="${dto.boardNo}" class="a">글번호</td>
+					<td th:text="${dto.name}" class="b">이름</td>
+					<td th:text="${dto.deptName}" class="c">부서</td>
+					<td class="d">
+						<a th:href="|/members/notice-page/${dto.boardNo}|" th:text="${dto.boardTitle}">제목</a>
+					</td>
+					<td th:text="${dto.boardHitcnt}" class="e">조회수</td>
+					<td th:text="${#temporals.format(dto.createdDatetime, 'MM월 dd일 a:hh:mm')}" class="g">작성일
+					</td>
+
+				</tr>
+
+		</tbody>
+	</table>
+	
+	
+	                                                                                                                       
+	<div class="pagging-wrap">
+		<a th:if="${pu.from > 1}" th:href="|/members/notice?page=${1}|">
+			<button>&lt;&lt;</button>
+		</a>
+		<a th:if="${pu.from > 1}" th:href="|/members/notice?page=${pu.from-1}|">
+			<button>&lt;</button>
+		</a>
+
+		<span id="pagging">
+			<a class="btn-page" th:each="pno:${#numbers.sequence(pu.from,pu.to)}"
+				th:href="|/members/notice?page=${pno}|">
+				<button th:text="${pno}"></button>
+			</a>
+		</span>
+
+		<a th:if="${pu.to < pu.tot}" class="btn-page" th:href="|/members/notice?page=${pu.to+1}|">
+			<button>&gt;</button>
+		</a>
+		<a class="lastPage" th:href="|/members/notice?page=${pu.tot}|">
+			<button>&gt;&gt;</button>
+		</a>
+	</div>-->
+	
+
+
+
+</div>
 				
 
 				
