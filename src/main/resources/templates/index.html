@@ -1,17 +1,14 @@
 <html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
+	th:replace="~{layout/ver2/ver2-layout :: commonLayout(~{this::head},~{this::main}, ~{})}">
 <head>
-<link rel="stylesheet" href="/css/approval/index.css">
-<script
-	src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js'></script>
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0b4d10c092ae135f954caef18aff79de&libraries=services"></script>
+<link rel="stylesheet" href="/css/index.css">
+<script	src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js'></script>
+<script type="text/javascript"	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0b4d10c092ae135f954caef18aff79de&libraries=services"></script>
 <script src="/js/api/mapConvertGridXy.js"></script>
 <script defer src="/js/calendar/fullcalendar.js"></script>
 </head>
 <body>
 	<main>
-		<th:block th:replace="~{layout/header :: header}"></th:block>
 		<div class="wrap2">
 			<div class="wrap3">
 				<div class="check check-lable border">
