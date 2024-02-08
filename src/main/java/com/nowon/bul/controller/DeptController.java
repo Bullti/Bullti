@@ -1,4 +1,4 @@
-package com.nowon.bul.department;
+package com.nowon.bul.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -12,40 +12,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.nowon.bul.department.DeSaveDTO;
+import com.nowon.bul.domain.dto.dept.DeptSaveDTO;
 import com.nowon.bul.naver.NaverApiService;
 import com.nowon.bul.naver.dto.NaverDeptSaveDTO;
+import com.nowon.bul.service.DeptService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class DeController {
+@Controller
+public class DeptController {
 
-	private final DeService deptService;
+	private final DeptService deptService;
 	private final NaverApiService naverApiService;
 
-	@Transactional
-	@PostMapping("/department/deList")
-	public String delete(HttpServletRequest request) {
-		String name = request.getParameter("name");
-		
-		////////////////////네이버API 메서드/////////////////////////////
-		System.out.println("name= "+name);
-		int deptId = deptService.getDeptId(name);
-		naverApiService.DeleteDept(deptId);
-		/////////////////////여기까지 네이버API////////////////////////////
-		
-		deptService.delete(name);
-		
-		return "redirect:/depart/list";
-	}
+	/**************** 관리자 영역 ****************************/
 
-	@GetMapping("/depart")
-	public String delist() {
-		return "department/temp";
-	}
-
-	@GetMapping("/depart/save")
+	// 부서등록 페이지
+	@GetMapping("/oms/depart")
 	public String desave(Model model) {
 
 		List<String> departmentNames = deptService.getDepartmentNames(); // 상위부서 목록을 가져옴
@@ -53,11 +39,38 @@ public class DeController {
 
 		return "department/save";
 	}
-	
-	
+
+	// 부서리스트 페이지
+	@GetMapping("/oms/depart/list")
+	public String showOrgChart(Model model) {
+		List<Map<String, String>> orgChartData = deptService.getOrgChartData();
+		model.addAttribute("orgChartData", orgChartData);
+
+		return "department/deList";
+
+	}
+
+	// 부서삭제
 	@Transactional
-	@PostMapping("/depart")
-	public String desave(DeSaveDTO dto) {
+	@PostMapping("/oms/department/deList")
+	public String delete(HttpServletRequest request) {
+		String name = request.getParameter("name");
+
+		//////////////////// 네이버API 메서드/////////////////////////////
+		System.out.println("name= " + name);
+		int deptId = deptService.getDeptId(name);
+		naverApiService.DeleteDept(deptId);
+		///////////////////// 여기까지 네이버API////////////////////////////
+
+		deptService.delete(name);
+
+		return "redirect:/depart/list";
+	}
+
+	//부서등록
+	@Transactional
+	@PostMapping("/oms/depart")
+	public String desave(DeptSaveDTO dto) {
 		deptService.save(dto);
 
 		//////////////////// 네이버API 메서드//////////////////////////////
@@ -70,15 +83,6 @@ public class DeController {
 		///////////////////// 여기까지 네이버API////////////////////////////
 
 		return "redirect:/depart/save";
-	}
-
-	@GetMapping("/depart/list")
-	public String showOrgChart(Model model) {
-		List<Map<String, String>> orgChartData = deptService.getOrgChartData();
-		model.addAttribute("orgChartData", orgChartData);
-
-		return "department/deList";
-
 	}
 
 }

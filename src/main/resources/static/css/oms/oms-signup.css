@@ -1,23 +1,24 @@
 @charset "UTF-8";
-.main {
-	padding-left: 20px;
+.warp-main {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
-
+.content {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 .join_area {
 	width: 400px;
-	margin-top: 80px;
 	padding: 50px 0 160px;
 }
 .join_area > div {
 	padding-bottom: 30px;
 }
-.row {
-	margin-bottom: 50px;
-}
-
-.row > label {
-	display: flex;
-	width: 200px;
+.join_area > div > label {
+	display: block;
+	font-weight: bold;
 }
 .join_area > div > input, select {
 	width: 100%;
@@ -30,7 +31,8 @@
 	border-bottom: 1px solid #000;
 }
 
-.tilte {
+.join_tilte {
+	text-align: center;
 	color: #000;
 	font-size: 32px;
 	letter-spacing: -.48px;
@@ -44,18 +46,21 @@
 }
 .join_button {
 	height: 50px;
-    width: 100px;
+    width: 220px;
     border-radius: 10px;
     border: 1px solid #a9a9a9;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
 }
+.join_button > span {
+	font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 8px;
+}
+
 .btn-file {
 	display: flex !important;
-	width: 100px !important;
+	width: 100px;
 	height: 100px;
-	border: 1px solid #a9a9a9;
+	border: 1px dashed #222;
 	justify-content: center;
 	align-items: center;
 	font-size: 32px;
@@ -63,7 +68,6 @@
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: contain;
-	border-radius: 50%;
 }
 .btn-file img {
 	cursor: pointer;
@@ -81,4 +85,13 @@ input[type=file] {
 	color: #3a54e5;
 	margin-left: 10px;
 	cursor: pointer;
+}
+
+.hidden {
+	display: none;
+}
+
+.join_area > div> .danger {
+    font-size: 13px;
+    position: absolute;
 }
