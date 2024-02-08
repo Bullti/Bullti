@@ -2,16 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<title>Insert title here</title>
 <link rel="stylesheet" href="/css/login.css">
 <link rel="stylesheet" href="/css/common/common.css">
-<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<!-- <script src="/webjars/jquery/jquery.min.js"></script> -->
 </head>
 <body>
 	<main class="container">
 		<div class="logo-area"></div>
 		<div class="login_area">
 			<h2 class="login_title">불티치킨 <span>그룹웨어</span></h2>
-			<form action="/login" method="post">
+			<form action="/login" method="post" id="login-form">
 				<div>
 					<input placeholder="Id" type="text" id="id" name="id" required>
 				</div>
@@ -20,13 +22,12 @@
 						required>
 				</div>
 				<div class="button_area">
-					<button class="login_button">
+					<button class="login_button" id="loginbtn">
 						<span>로그인</span>
 					</button>
 				</div>
 			</form>
 		</div>
-
 	</main>
 </body>
 </html>

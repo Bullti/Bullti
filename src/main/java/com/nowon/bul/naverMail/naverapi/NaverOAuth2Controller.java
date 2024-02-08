@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nowon.bul.naverMail.naverapi.response.MailBoxResponse;
 import com.nowon.bul.naverMail.naverapi.response.MailFoldersResponse;
+import com.nowon.bul.utils.OpenApiUtil;
 
 import lombok.RequiredArgsConstructor;
 
