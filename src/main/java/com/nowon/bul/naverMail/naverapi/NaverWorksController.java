@@ -27,6 +27,7 @@ import com.nowon.bul.naverMail.naverapi.response.Mail;
 import com.nowon.bul.naverMail.naverapi.response.MailBoxResponse;
 import com.nowon.bul.naverMail.naverapi.response.MailFolder;
 import com.nowon.bul.naverMail.naverapi.response.MailFoldersResponse;
+import com.nowon.bul.utils.OpenApiUtil;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,4 +1,4 @@
-package com.nowon.bul.security.handle;
+package com.nowon.bul.security.handler;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Component
-public class CustomAuthFailureHandler extends SimpleUrlAuthenticationFailureHandler {
+public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
@@ -40,11 +40,14 @@ public class CustomAuthFailureHandler extends SimpleUrlAuthenticationFailureHand
 			code="code5";
 			//errorMessage = "알 수 없는 오류로 로그인 요청을 처리할 수 없습니다. 관리자에게 문의하세요.";
 		}
-
+		
 		code = URLEncoder.encode(code, "UTF-8"); /* 한글 인코딩 깨진 문제 방지 */
 		
 		setDefaultFailureUrl("/login?error&"+code);
-		super.onAuthenticationFailure(request, response, exception);
+		
+		
+		//부모클래스의 onAuthenticationFailure로 처리를 위임하자.
+        super.onAuthenticationFailure(request, response, exception);
 	}
 
 }

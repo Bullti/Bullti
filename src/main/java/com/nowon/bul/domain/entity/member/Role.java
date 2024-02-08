@@ -8,7 +8,9 @@ import lombok.RequiredArgsConstructor;
 public enum Role {
 	
 	USER("일반유저"),
-	FR("프렌차이즈");
+	FR("프렌차이즈"),
+	OMS("인사관리"),
+	SMS("물류관리");
 	
 	private final String roleName;
 }
