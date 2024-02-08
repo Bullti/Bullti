@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/oms/oms-layout :: commonLayout(~{this::head},~{this::main}, ~{this::side})}">
+<head>
+<link rel="stylesheet" href="/css/oms/oms-dept.css" />
+<link rel="stylesheet" href="/css/common/oms/oms-inner-side.css" />
+<head>
+</head>
+<body>
+	<aside th:fragment="side" th:replace="~{oms/dept-side :: side}"></aside>
+	<main>
+		<div class="main">
+			<h1>부서관리 합시다</h1>
+		</div>
+	</main>
+</body>
+</html>

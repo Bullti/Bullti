@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nowon.bul.naver.dto.NaverDeptSaveDTO;
-import com.nowon.bul.naverMail.naverapi.OpenApiUtil;
+import com.nowon.bul.utils.OpenApiUtil;
 
 import lombok.RequiredArgsConstructor;
 

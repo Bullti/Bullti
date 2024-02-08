@@ -1,16 +1,9 @@
 @charset "UTF-8";
 
 header {
-	/*top: 0;
-    left: 280px;
-    min-width: calc(100vw - 280px);
-    height: 50px;
-    background-color: aliceblue;
-    z-index: 1;*/
+    margin-left: 70px;
 	top: 0;
-	left: 280px;
 	height: 50px;
-	/*border-bottom: 1px solid #efefef;*/
 }
 
 .header {

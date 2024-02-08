@@ -1,4 +1,4 @@
-package com.nowon.bul.index;
+package com.nowon.bul.controller;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -33,8 +33,11 @@ public class indexController {
 
 		if(memberEmail!=null)mailService.listProcess(memberEmail, mailCount, model);
 
-	
-		
 		return "index";
+	}
+	
+	@GetMapping("/oms")
+	public String organizationalManagementSys() {
+		return "/oms/home";
 	}
 }
