@@ -10,11 +10,13 @@ import com.nowon.bul.domain.entity.member.Member;
 import com.nowon.bul.domain.entity.member.MemberRepository;
 import com.nowon.bul.domain.entity.member.MyUser;
 
+
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class CustomUserDetailsService implements UserDetailsService {
 
+	
 	@Autowired
 	private MemberRepository memberRepository;
 
@@ -43,4 +45,5 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 		return new MyUser(member, grnatedAuthority);
 	}
+
 }
