@@ -34,6 +34,7 @@ import com.nowon.bul.domain.entity.member.Member;
 import com.nowon.bul.domain.entity.member.MyUser;
 import com.nowon.bul.service.ApprovalService;
 import com.nowon.bul.service.AwsService;
+import com.nowon.bul.service.DeptService;
 import com.nowon.bul.service.MemberService;
 import com.nowon.bul.utils.jpaPage.PageRequestDTO;
 import com.nowon.bul.utils.jpaPage.PageResultDTO;
@@ -46,7 +47,7 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class ApprovalController {
 
-	private final DeService deptService;
+	private final DeptService deptService;
 
 	private final ApprovalService approvalService;
 
