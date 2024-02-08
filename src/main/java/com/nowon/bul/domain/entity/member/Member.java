@@ -6,9 +6,11 @@ import java.util.Set;
 import com.nowon.bul.department.DeEntity;
 import com.nowon.bul.domain.dto.FranOwnerDTO;
 import com.nowon.bul.domain.dto.IndividualDTO;
-import com.nowon.bul.domain.dto.MemberListDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalMemberDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalMemberListDTO;
+import com.nowon.bul.domain.dto.member.MemberListDTO;
+import com.nowon.bul.domain.dto.member.MyDTO;
+import com.nowon.bul.domain.entity.dept.DeptEntity;
 import com.nowon.bul.domain.entity.fran.FranEntity;
 
 import java.time.LocalDate;
@@ -84,7 +86,7 @@ public class Member {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "dept_id")
-	private DeEntity dept;
+	private DeptEntity dept;
 	/*
 	 * UserEntity에 대응하는 권한을 나타내는 테이블을 만듬 *UserEntity내부 테이블에 생성되지 않음!!! 중복을 허용하지 않고
 	 * 순서가 상관없으므로 Set Collection을 이용해서 만듬
@@ -142,5 +144,11 @@ public class Member {
 	//비밀번호 변경
 	public void changePassword(String newPass) {
 		this.password = newPass;
+	}
+
+	//개인정보 수정
+	public void updateMy(MyDTO dto) {
+		this.phone=dto.getTel();
+		this.profile = dto.getProfile();
 	}
 }

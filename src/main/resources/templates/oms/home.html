@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{layout/oms/oms-layout :: commonLayout(~{this::head},~{this::main}, ~{})}">
+	th:replace="~{layout/ver2/ver2-layout :: commonLayout(~{this::head},~{this::main}, ~{this::side})}">
 <head>
+<link rel="stylesheet" href="/css/common/ver2/ver2-inner-side.css" />
 </head>
 <body>
+	<aside th:fragment="side" th:replace="~{oms/oms-side :: side}"></aside>
 	<main>
 		<h1>인사관리시스템</h1>
 	</main>

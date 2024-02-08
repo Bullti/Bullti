@@ -13,13 +13,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.nowon.bul.department.DeEntity;
-import com.nowon.bul.department.DeRepository;
 import com.nowon.bul.domain.dto.IndividualDTO;
-import com.nowon.bul.domain.dto.MemberListDTO;
-import com.nowon.bul.domain.dto.MemberSaveDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalMemberDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalMemberListDTO;
 import com.nowon.bul.domain.dto.approval.EmpDTO;
+import com.nowon.bul.domain.dto.member.MemberListDTO;
+import com.nowon.bul.domain.dto.member.MemberSaveDTO;
+import com.nowon.bul.domain.dto.member.MyDTO;
+import com.nowon.bul.domain.entity.dept.DeptEntity;
+import com.nowon.bul.domain.entity.dept.DeptRepository;
 import com.nowon.bul.domain.entity.member.Member;
 import com.nowon.bul.domain.entity.member.MemberRepository;
 import com.nowon.bul.domain.entity.member.Rank;
@@ -38,11 +40,11 @@ public class MemberProcess implements MemberService{
 	
 	private final PasswordEncoder passEncoder;
 	
-	private final DeRepository deptRepo;
+	private final DeptRepository deptRepo;
 	
 	@Override
 	public void save(MemberSaveDTO dto, String profileUrl) {
-		DeEntity dept = deptRepo.findById(dto.getDeptId()).orElseThrow();
+		DeptEntity dept = deptRepo.findById(dto.getDeptId()).orElseThrow();
 		memberRepo.save(dto.toEntity(passEncoder, profileUrl, dept));
 	}
 	
@@ -133,6 +135,14 @@ public class MemberProcess implements MemberService{
 	@Override
 	public boolean checkpass(long memberNo, String pass) {
 		return passEncoder.matches(pass, memberRepo.findById(memberNo).orElseThrow().getPassword());
+	}
+
+	//개인정보 수정
+	@Transactional
+	@Override
+	public void update(MyDTO dto, long Memberno) {
+		Member user = memberRepo.findById(Memberno).orElseThrow();
+		user.updateMy(dto);
 	}
 
 }
