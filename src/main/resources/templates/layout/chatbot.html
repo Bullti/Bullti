@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+		<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+		<link rel="stylesheet" href="/chatbot/chatbot.css">
+		<script defer src="/chatbot/chatbot.js"></script>
+	</head>
+	<article id="chat-bot">
+		<h1>챗봇</h1>
+		<div class="wrap">
+			<section id="conversation">
+				<h1>대화화면</h1>
+				<div class="wrap view-size">
+					<ul class="bot-menu">
+						<li></li>
+						<li>
+							<button class="btn-bot" id="btn-bot"></button>
+						</li>
+						<li></li>
+					</ul>
+					<div class="container" id="bot-container" >
+						<div class="c-header flex between hcenter">
+							<p class="help flex hcenter">
+								<span>HELP</span></p>
+							<p><b>그린챗봇</b></p>
+							<p class="close flex end hcenter">
+								<span onclick="btnCloseClicked()"></span>
+							</p>
+						</div>
+						<div class="c-content" id="chat-content">
+							<!--대화내용 들어가는 영역-->
+							
+						</div>
+						<div class="c-question flex hcenter">
+							<span class="home-icon"></span>
+							<span class="q-wrap">
+								<input type="text" onkeyup="checkEnterKey(event)" class="question" id="question" placeholder="질문을 입력하세요">
+								<button class="btn-send" onclick="btnMsgSendClicked()"></button>
+							</span>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</article>
+</html>
