@@ -60,18 +60,38 @@ public class NoticeProcess implements NoticeService{
 	@Override
 	public ModelAndView listProcess(int page,String search) {
 		
-		page=page<1?1:page;
+	
 		
 		int limit = 10;
-		int offset=(page-1)*limit;
+		int offset = Math.max(0, (page - 1) * limit); 
 		
 		//model.addAttribute("list",noticeMapper.findAll(search, offset,limit));
+		
+		 // Revised Calculation (Includes Protection for Negative Values and 'Page 0')
+	    int calculatedPage = page - 1; // Calculate for potential previous page
+	    if (calculatedPage < 1) {  // Check if attempting to go below page 1
+	        page = 1;  // Reset to page 1
+	    } else {
+	        page = calculatedPage; // Otherwise, use the calculated page
+	    }
+		
 		int rowCount = noticeMapper.countAllSearch(search);
 		//model.addAttribute("pu",PageData.create(page, limit, rowCount, 5));
+		
+		if (rowCount <=0) {
+			
+			page=1;
+			rowCount=0;
+		}
+		
+		boolean hasResults = (rowCount > 0);
+		
 		System.out.println(">>>>>"+search);
 		return new ModelAndView("stock/notice")
 				.addObject("list",noticeMapper.findAll(search, offset,limit))
 				.addObject("pu",PageData.create(page, limit, rowCount, 5))
+				.addObject("search",search)
+				.addObject("hasResults", hasResults)
 				;
 	}
 
