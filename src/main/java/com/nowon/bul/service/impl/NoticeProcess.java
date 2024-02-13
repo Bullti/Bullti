@@ -69,7 +69,7 @@ public class NoticeProcess implements NoticeService{
 		int rowCount = noticeMapper.countAllSearch(search);
 		//model.addAttribute("pu",PageData.create(page, limit, rowCount, 5));
 		System.out.println(">>>>>"+search);
-		return new ModelAndView("stock/notice-list")
+		return new ModelAndView("stock/notice")
 				.addObject("list",noticeMapper.findAll(search, offset,limit))
 				.addObject("pu",PageData.create(page, limit, rowCount, 5))
 				;
@@ -108,7 +108,7 @@ public class NoticeProcess implements NoticeService{
 	    noticeMapper.save(dto);
 	    
 	    
-		return "redirect:/members/notice-page";
+		return "redirect:/members/notice";
 			
 	}
 	
@@ -165,6 +165,13 @@ public class NoticeProcess implements NoticeService{
 		noticeMapper.updateTitleOrContent(dto);
 		
 	}
+	
+	@Override
+	public NoticeDTO getNoticeDetail(long boardNo) {
+        NoticeDTO notice = noticeMapper.findById(boardNo).orElseThrow();
+        noticeMapper.increaseHitCount(boardNo);
+        return notice;
+    }
 
 
 
