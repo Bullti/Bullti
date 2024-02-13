@@ -51,7 +51,7 @@ public class NoticeController {
 			@RequestParam(name="page",defaultValue = "1") int page,
 			@RequestParam(name = "search", defaultValue = "", required = false) String search
 			) {
-		System.out.println(">>>>>"+search);
+		
 		
 		
 		return service.listProcess(page,search);
