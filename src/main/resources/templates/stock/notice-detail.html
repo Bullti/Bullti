@@ -126,10 +126,10 @@
 					<tr>
 						<td>
 							<div class="selectPost">
-								<a href="/members/notice-page"><button>목록</button></a>
+								<a href="/members/notice"><button>목록</button></a>
 								<button type="button" onclick="btnUpdateClicked()">수정</button>
 								
-								<form th:action="|/members/notice-page/${detail.boardNo}|" method="post">
+								<form th:action="|/members/notice/${detail.boardNo}|" method="post">
 									<input type="hidden" name="_method" value="delete" />
 									<button type="submit">삭제</button>
 								</form>
@@ -168,7 +168,7 @@
 
 			</script>
 			
-			<form method="post" th:action="|/members/notice-page/${detail.boardNo}|" id="update-view" style="display: none;">
+			<form method="post" th:action="|/members/notice/${detail.boardNo}|" id="update-view" style="display: none;">
 				
 			<div class="form bn">
 				<h1 class="title"></h1>
