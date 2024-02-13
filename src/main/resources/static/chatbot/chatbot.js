@@ -2,16 +2,15 @@
  * 
  */
 var stompClient=null; 
+var key=new Date().getTime();
 
 $(function(){
 	$("#btn-bot").click(btnBotClicked);
 });
 function btnCloseClicked(){
 	$("#bot-container").hide();
-	//대화창 리셋
 	$("#chat-content").html("");
 	disconnect();
-	
 }
 function btnBotClicked(){
 	//1. 소켓 접속
@@ -47,43 +46,57 @@ function userTag(text){
 	`;
 }
 
-
-
+function botTag(text){
+	var time=formatTime();
+	return `
+	<div class="msg bot flex">
+		<div class="icon">
+			<img src="/img/chatbot/robot-solid.svg">
+		</div>
+		<div class="message">
+			<div class="part">
+				<p>${text}</p>
+			</div>
+			<div class="time">${time}</div>
+		</div>
+	</div>
+	`;
+}
 function showMessage(tag){
 	$("#chat-content").append(tag);
-	//스크롤을 제일 아래로
+	//스크롤이 제일 아래로
 	$("#chat-content").scrollTop($("#chat-content").prop("scrollHeight"));
+
 }
-let key;
+
 function connect(){
 	//var socket=new SockJS("/green-bot")
 	stompClient=Stomp.over(new SockJS("/green-bot"));
 	stompClient.connect({},(frame)=>{
-		key=new Date().getTime();
 		//접속이 완료되면 인사말수신-구독
 		stompClient.subscribe(`/topic/question/${key}`,(answerData)=>{
-			var msg=answerData.body
-			
-			//console.log(msg);
-			
+			//console.log(answerData.body);
+			var message=JSON.parse(answerData.body);
+			var text=message.content;
 			/////////////////////////////
-			showMessage(msg);
+			var tag=botTag(text);
+			/////////////////////////////
+			showMessage(tag);
 		})
 		
 		var data={
 			key: key,
 			name:"그린",
-			content: "인사말"
+			content: "학원에있는영진이전화번호는?."
 		}
 		//인사말 보내줘
 		stompClient.send("/message/bot",{},JSON.stringify(data));
 	});
 }
 function disconnect() {
-    stompClient.disconnect(function(){
-		console.log("Disconnected");	
+	stompClient.disconnect(function(){
+		
 	});
-    
 }
 function checkEnterKey(event){
 	var keyCode=event.keyCode;
@@ -92,25 +105,18 @@ function checkEnterKey(event){
 	}
 }
 
-function btnMsgSendClicked(){
+function btnMsgSendClicked() {
 	var content=$("#question").val().trim();
 	
-	if(content.length <2 ){
-		alert("질문은 2글자 이상이어야 합니다.");
-		return;
+	var data={
+		key,
+		name:"그린",
+		content
 	}
 	
-	var data={
-			key: key,
-			name:"그린",
-			content: content
-		}
-	//인사말 보내줘
-	stompClient.send("/message/bot",{},JSON.stringify(data));
+	stompClient.send("/message/bot",{},JSON.stringify(data))
 	var tag=userTag(content);
+	$("#question").val('');
 	showMessage(tag);
-	$("#question").val("");
+	
 }
-
-
-
