@@ -77,3 +77,44 @@ function updateForm(status) {
     detailViewElement.style.display = !status ? "block" : "none";
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const boardLinks = document.querySelectorAll('.d a');
+    boardLinks.forEach(link => {
+        link.addEventListener('click', event => {
+            event.preventDefault();
+            const boardNo = link.getAttribute('href').split('/').pop();
+            fetch('/members/notice/' + boardNo)
+                .then(response => response.text())
+                .then(data => {
+                     const contentArea = document.querySelector('#content-area');
+					    const notice = JSON.parse(data);
+					    const tableHTML = `
+					        <table>
+					            <thead>
+					                <tr>
+					                    <td class="a">글번호</td>
+					                    <td class="b">작성자</td>
+					                    <td class="c">부서</td>
+					                    <td class="d">제목</td>
+					                    <td class="e">조회수</td>
+					                    <td class="f">작성일</td>
+					                </tr>
+					            </thead>
+					            <tbody>
+					                <tr>
+					                    <td class="a">${notice.boardNo}</td>
+					                    <td class="b">${notice.name}</td>
+					                    <td class="c">${notice.deptName}</td>
+					                    <td class="d">${notice.boardTitle}</td>
+					                    <td class="e">${notice.boardHitcnt}</td>
+					                    <td class="f">${new Date(notice.createdDatetime).toLocaleString()}</td>
+					                </tr>
+					            </tbody>
+					        </table>`;
+					    contentArea.innerHTML = tableHTML;
+                })
+                .catch(error => console.error(error));
+        });
+    });
+});
+
