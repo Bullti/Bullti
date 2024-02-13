@@ -37,11 +37,13 @@ public class NoticeController {
 		
 		return service.getIndividual(auth,model);
 	}
+	
 	//게시글 리스트
-	@GetMapping("/members/notice-page")
-	public String notice_post() {
-		return "stock/notice";
-	}
+	//@GetMapping("/members/notice-page")
+	//public String notice_post() {
+	//	return "stock/notice";
+	//}
+	
 	//게시글 리스트
 	@ResponseBody
 	@GetMapping("/members/notice")
@@ -66,8 +68,10 @@ public class NoticeController {
 	}
 	
 	//상세페이지 조회
-	@GetMapping("members/notice-page/{boardNo}")
+	@GetMapping("members/notice/{boardNo}")
 	public String detail(@PathVariable(name = "boardNo") long boardNo, Model model) {
+		
+		service.getNoticeDetail(boardNo);
 		
 		service.detailProcess(boardNo, model);
 		
@@ -75,22 +79,24 @@ public class NoticeController {
 	}
 	
 	//삭제 처리
-	@DeleteMapping("/members/notice-page/{boardNo}")
+	@DeleteMapping("/members/notice/{boardNo}")
 	public String delete(@PathVariable(name = "boardNo") long boardNo) {
 		
 		service.deleteProcess(boardNo);
 		
-		return "redirect:/members/notice-page";
+		return "redirect:/members/notice";
 		
 	}
 	
 	//수정 처리
-	@PutMapping("/members/notice-page/{boardNo}")
+	@PutMapping("/members/notice/{boardNo}")
 	public String update(NoticeUpdateDTO dto) {
 		
 		service.updateProcess(dto);
 		
-		return "redirect:/members/notice-page/{boardNo}";
+		return "redirect:/members/notice/{boardNo}";
 	}
+	
+	
 	
 }

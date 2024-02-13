@@ -15,7 +15,7 @@
 	<!--아래 사이드 css-->
 	<link rel="stylesheet" href="/css/stock/homeTemp.css">
 	<link rel="stylesheet" href="/css/stock/noticechj.css">
-	<script src="/js/board-fetchAPI.js"></script>
+	
 
 </head>
 
@@ -40,10 +40,9 @@
 				
 				</div>
 				
+					
 <div id="content-area">
-	
-	
-	<!--<table>
+	<table>
 		<thead>
 			<tr>
 				<td class="a">글번호</td>
@@ -62,7 +61,7 @@
 					<td th:text="${dto.name}" class="b">이름</td>
 					<td th:text="${dto.deptName}" class="c">부서</td>
 					<td class="d">
-						<a th:href="|/members/notice-page/${dto.boardNo}|" th:text="${dto.boardTitle}">제목</a>
+						<a th:href="|/members/notice/${dto.boardNo}|" th:text="${dto.boardTitle}">제목</a>
 					</td>
 					<td th:text="${dto.boardHitcnt}" class="e">조회수</td>
 					<td th:text="${#temporals.format(dto.createdDatetime, 'MM월 dd일 a:hh:mm')}" class="g">작성일
@@ -72,9 +71,6 @@
 
 		</tbody>
 	</table>
-	
-	
-	                                                                                                                       
 	<div class="pagging-wrap">
 		<a th:if="${pu.from > 1}" th:href="|/members/notice?page=${1}|">
 			<button>&lt;&lt;</button>
@@ -96,13 +92,26 @@
 		<a class="lastPage" th:href="|/members/notice?page=${pu.tot}|">
 			<button>&gt;&gt;</button>
 		</a>
-	</div>-->
+	</div>
 	
+<script th:inline="javascript">
+	var page =/*[[${param.page}]]*/null;
+	var pageLimit =/*[[${pu.pageLimit}]]*/null; //화면에 page개수
+	if (page == null) page = "1";
+	var idx = (parseInt(page) - 1) % pageLimit; //idx = index //한 화면의 페이지개수
+	//alert(page);
+	//const element = document.getElementsById("pagging");
+	//console.log($(".btn-page").eq(idx));
+	//$(".btn-page").eq(idx).addClass("target");
+	var elements = document.querySelectorAll(".btn-page");
+	elements[idx].classList.add("target");
+	console.log(idx,':',elements[idx] );
+	//eq가 idx와 같다
 
-
+</script>
 
 </div>
-				
+									
 
 				
 			</div>
