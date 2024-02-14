@@ -8,7 +8,9 @@
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 	function changedImg(element) {
-
+		
+		deleteInput();
+		
 		var formData = new FormData();
 		formData.append("img", $(element)[0].files[0]);
 
@@ -36,6 +38,7 @@
 	function deleteImg(element) {
 		if(flag) {
 		flag=false;
+		deleteInput();
 		var hiddenInput = $("<input type='hidden' name='profile'>").val("/img/person.png");
 		$(element).parent().css("background-image", "url('/img/person.png')");
 		$(element).after(hiddenInput);
@@ -56,6 +59,18 @@
 						"/members/pass",
 						"_blank",
 						"toolbar=yes,scrollbars=yes,resizable=yes,top=300,left=500,width=500,height=420")
+	}
+	
+	function deleteInput() {
+		// 모든 input 요소를 가져옵니다.
+		var inputElements = document.querySelectorAll('input');
+		// 반복문을 통해 input 요소를 확인하고 조건을 만족하는 경우 삭제합니다.
+		inputElements.forEach(function(inputElement) {
+		    // input 요소의 name 속성이 'profile'인 경우 삭제합니다.
+		    if (inputElement.name === 'profile') {
+		        inputElement.remove();
+		    }
+		});
 	}
 </script>
 </head>
