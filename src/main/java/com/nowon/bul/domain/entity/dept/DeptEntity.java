@@ -1,4 +1,4 @@
-package com.nowon.bul.department;
+package com.nowon.bul.domain.entity.dept;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.nowon.bul.domain.dto.approval.ApprovalDeptList;
+import com.nowon.bul.domain.dto.dept.DeptListDTO;
 import com.nowon.bul.domain.entity.member.Member;
 
 import jakarta.persistence.Column;
@@ -30,7 +31,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "department")
-public class DeEntity {
+@Entity
+public class DeptEntity {
 
     @Id
     @Column(name = "dept_id")
@@ -39,28 +41,28 @@ public class DeEntity {
     @Column
     private String deptName;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = DeEntity.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = DeptEntity.class)
     @JoinColumn(name = "parent_dept_id")
-    private DeEntity parent;
+    private DeptEntity parent;
     
     @OneToMany(mappedBy = "parent")
-    private List<DeEntity> 	child;
+    private List<DeptEntity> 	child;
     
     @OneToMany(mappedBy = "dept")
     private List<Member> member;
     
     
-    public DeListDTO toListDTO() {
+    public DeptListDTO toListDTO() {
     	
-    	DeListDTO deListdto = null;
+    	DeptListDTO deListdto = null;
     	
     	if(this.parent==null) {
-    		deListdto = DeListDTO.builder()
+    		deListdto = DeptListDTO.builder()
     				.deptId(deptId)
     				.deptName(deptName)
     				.build();
     	}else {
-    		deListdto = DeListDTO.builder()
+    		deListdto = DeptListDTO.builder()
     				.deptId(deptId)
     				.deptName(deptName)
     				.parentId(parent.getDeptId())
@@ -81,7 +83,7 @@ public class DeEntity {
     				.deptId(deptId)
     				.deptName(deptName)
     				.child(child.stream()
-    						.map(DeEntity::toApprovalList)
+    						.map(DeptEntity::toApprovalList)
     						.collect(Collectors.toList()))
     				.build();
     	}else {
@@ -89,7 +91,7 @@ public class DeEntity {
     				.deptId(deptId)
     				.deptName(deptName)
     				.child(child.stream()
-    						.map(DeEntity::toApprovalList)
+    						.map(DeptEntity::toApprovalList)
     						.collect(Collectors.toList()))
     				.parentId(parent.getDeptId())
     				.build();

@@ -1,4 +1,4 @@
-package com.nowon.bul.department;
+package com.nowon.bul.service.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,14 +13,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.nowon.bul.domain.dto.DeptListDTO;
 import com.nowon.bul.domain.dto.approval.ApprovalDeptList;
+import com.nowon.bul.domain.dto.dept.DeptSaveDTO;
+import com.nowon.bul.domain.entity.dept.DeptEntity;
+import com.nowon.bul.domain.entity.dept.DeptRepository;
+import com.nowon.bul.service.DeptService;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-public class DeServiceImpe implements DeService {
+public class DeptProcess implements DeptService {
 	
-	private final DeRepository deRepository;
+	private final DeptRepository deRepository;
 	
 		/* 부서 저장 */
 		/*
@@ -36,8 +40,8 @@ public class DeServiceImpe implements DeService {
 	    public List<Map<String, String>> getOrgChartData() {
 	        List<Map<String, String>> orgChartData = new ArrayList<>();
 	        // 데이터베이스에서 정보를 가져와서 orgChartData에 추가하는 로직
-	        List<DeEntity> departments = deRepository.findAll();
-	        for (DeEntity department : departments) {
+	        List<DeptEntity> departments = deRepository.findAll();
+	        for (DeptEntity department : departments) {
 	        	System.out.println(">>>>>>>>>>"+department.toString());
 	            Map<String, String> node = new HashMap<>();
 	            node.put("name", department.getDeptName());
@@ -63,8 +67,8 @@ public class DeServiceImpe implements DeService {
 
 		@Transactional
 		@Override
-		public void save(DeSaveDTO dto) {
-			DeEntity parent = deRepository.findByDeptName(dto.getParentName()).orElseThrow(); 
+		public void save(DeptSaveDTO dto) {
+			DeptEntity parent = deRepository.findByDeptName(dto.getParentName()).orElseThrow(); 
 			System.out.println(parent.toString());
 			
 			
@@ -76,9 +80,9 @@ public class DeServiceImpe implements DeService {
 		    public List<String> getDepartmentNames() {
 		        // 상위부서 목록을 가져오는 로직을 구현해야 합니다.
 		        // 예시로 DeRepository에서 가져오는 코드를 넣어보겠습니다.
-		        List<DeEntity> departments = deRepository.findAll();
+		        List<DeptEntity> departments = deRepository.findAll();
 		        List<String> departmentNames = new ArrayList<>();
-		        for (DeEntity department : departments) {
+		        for (DeptEntity department : departments) {
 		            departmentNames.add(department.getDeptName());
 		        }
 		        return departmentNames;
@@ -89,7 +93,7 @@ public class DeServiceImpe implements DeService {
 		@Override
 		public List<ApprovalDeptList> getApprovalList() {
 			return deRepository.findAll().stream()
-					.map(DeEntity::toApprovalList)
+					.map(DeptEntity::toApprovalList)
 					.collect(Collectors.toList());
 		}
 		

@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.nowon.bul.department.DeRepository;
 import com.nowon.bul.domain.dto.NoticeDTO;
 import com.nowon.bul.domain.dto.NoticeSaveDTO;
 import com.nowon.bul.domain.dto.NoticeUpdateDTO;
+import com.nowon.bul.domain.entity.dept.DeptRepository;
 import com.nowon.bul.domain.entity.member.MemberRepository;
 import com.nowon.bul.mybatis.mapper.NoticeMapper;
 import com.nowon.bul.service.NoticeService;
@@ -28,7 +28,7 @@ public class NoticeProcess implements NoticeService{
 
 	private final NoticeMapper noticeMapper;
 	private final MemberRepository memberRepository;
-	private final DeRepository deRepository;
+	private final DeptRepository deptRepository;
 	
 	
 	@Override

@@ -18,12 +18,14 @@ import org.springframework.web.multipart.MultipartFile;
 import com.nowon.bul.department.DeService;
 import com.nowon.bul.domain.dto.DeptListDTO;
 import com.nowon.bul.domain.dto.IndividualDTO;
-import com.nowon.bul.domain.dto.MemberListDTO;
-import com.nowon.bul.domain.dto.MemberSaveDTO;
+import com.nowon.bul.domain.dto.member.MemberListDTO;
+import com.nowon.bul.domain.dto.member.MemberSaveDTO;
+import com.nowon.bul.domain.dto.member.MyDTO;
 import com.nowon.bul.domain.entity.member.Member;
 import com.nowon.bul.domain.entity.member.MyUser;
 import com.nowon.bul.security.service.CustomUserDetailsService;
 import com.nowon.bul.service.AwsService;
+import com.nowon.bul.service.DeptService;
 import com.nowon.bul.service.MemberService;
 import com.nowon.bul.utils.jpaPage.PageRequestDTO;
 import com.nowon.bul.utils.jpaPage.PageResultDTO;
@@ -36,7 +38,7 @@ public class UserController {
 
 	private final MemberService memberSerivce;
 	
-	private final DeService deptService;
+	private final DeptService deptService;
 	
 	private final AwsService awsService;
 
@@ -66,7 +68,7 @@ public class UserController {
 	}
 
 	//회원가입 페이지
-	@GetMapping("/members")
+	@GetMapping("/oms/members")
 	public String joinPage(Model model) {
 		List<DeptListDTO> deptList = deptService.getDeptList();
 		model.addAttribute("deptList", deptList);
@@ -74,7 +76,7 @@ public class UserController {
 	}
 
 	//사원 조회 페이지
-	@GetMapping("/members/list")
+	@GetMapping("/oms/members/list")
 	public String listPage(PageRequestDTO pageRequestDTO, Model model) {
 
 		List<String> departmentNames = deptService.getDepartmentNames(); // 상위부서 목록을 가져옴
@@ -82,7 +84,7 @@ public class UserController {
 		PageResultDTO<MemberListDTO, Member> memberList = memberSerivce.getFindAllList(pageRequestDTO);
 		model.addAttribute("result", memberList);
 
-		return "views/members/list";
+		return "/oms/member-list";
 	}
 
 	//회원가입
@@ -120,6 +122,14 @@ public class UserController {
 //	        return false; // user 존재 x
 	    
 	    return true;
+	}
+	
+	//개인정보 수정
+	@PostMapping("/my")
+	public String my(MyDTO dto, Authentication authentication) {
+		MyUser user = (MyUser) authentication.getPrincipal();
+		memberSerivce.update(dto, user.getMemberNo());
+		return "redirect:/my";
 	}
 
 	/******************사원 등록 유효성 검사 로직******************************/
