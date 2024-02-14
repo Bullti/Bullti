@@ -1,20 +1,10 @@
 @charset "UTF-8";
 
-*{padding: 0;margin: 0;}
-li{list-style: none;}
-a{color: #222; text-decoration: none;}
-body{color: #222;}
-.flex{display: flex;}
-.center{justify-content: center;}
-.between{justify-content: space-between;}
-.end{justify-content: end;}
-.col-center{align-items: center;}
-
-article {
-	display: flex!important;
+#chat-bot {
+	position: fixed;
+	right: 5%;
+	bottom: 5%;
 }
-
-
 
 
 #conversation>.wrap>.bot-menu>li>.btn-bot{
@@ -23,7 +13,7 @@ article {
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain; 
-	background-image: url("/img/icon/robot-solid.svg");
+	background-image: url("/img/chatbot/robot-solid.svg");
 }
 
 #conversation>.wrap>.container{
@@ -35,7 +25,7 @@ article {
 	top: 50%;
 	transform: translateY(-50%);
 	right: 150px;
-	z-index: 99;
+	z-index: 999999;
 	display: none;
 }
 #conversation>.wrap>.container>.c-header{
@@ -58,7 +48,7 @@ article {
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain; 
-	background-image: url("/img/icon/help_center.svg");
+	background-image: url("/img/chatbot/help_center.svg");
 	filter: brightness(0) invert(1) grayscale(100%) contrast(100%);
 }
 
@@ -71,7 +61,7 @@ article {
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 50%;
-	background-image: url("/img/icon/close-x-box.svg");
+	background-image: url("/img/chatbot/close-x-box.svg");
 	filter: brightness(0) invert(1) grayscale(100%) contrast(100%);
 }
 #conversation>.wrap>.container>.c-content{
@@ -94,7 +84,7 @@ article {
 	background-repeat: no-repeat;
 	background-position: -5px center;
 	background-size: contain;
-	background-image: url("/img/icon/home.svg");
+	background-image: url("/img/chatbot/home.svg");
 	filter: invert(35%) sepia(15%) saturate(600%) hue-rotate(188deg) brightness(89%) contrast(90%);
 }
 #conversation>.wrap>.container>.c-question>.q-wrap{
@@ -132,19 +122,8 @@ article {
 	background-position: center;
 	background-size: 50%;
 	border-radius: 50%;
-	background-image: url("/img/icon/arrow_upward.svg");
+	background-image: url("/img/chatbot/arrow_upward.svg");
 	filter: brightness(0) invert(1);
-}
-
-
-
-footer{
-	position: absolute;
-	display: flex;
-	width:100%;
-	justify-content: space-between;
-	
-	
 }
 
 
@@ -168,9 +147,6 @@ footer{
 	color: #777;
 	font-size: 12px;
 }
-#chat-content .user{
-	justify-content: flex-end;
-}
 #chat-content .user .time{
 	text-align: right;
 }
@@ -191,4 +167,8 @@ footer{
 	text-align: center;
 	background-color:  rgb(0 255 255 / 5%);
 	border: 1px solid #e5e5e5;
+}
+
+.user {
+	justify-content: flex-end;
 }
