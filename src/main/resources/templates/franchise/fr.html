@@ -14,9 +14,11 @@
 				<h1>매장관리</h1>
 			</div>
 			<div class="search">
-				<div class="name_search">매장 검색:</div>
-				<input class="search-input">
-				<button class="search-button"></button>
+				<form onsubmit="searchClicked(this, event)">
+					<div class="name_search">매장 검색:</div>
+					<input class="search-input">
+					<button type="submit" class="search-button"></button>
+				</form>
 			</div>
 			<table>
 				<thead>
@@ -73,6 +75,29 @@
 				elements[idx].classList.add("target");
 
 				//eq가 idx와 같다
+				function searchClicked(form, event) {
+    event.preventDefault(); // 주석 처리 또는 제거
+    var searchInput = form.querySelector('.search-input');
+    var searchQuery = searchInput.value;
+    filterResults(searchQuery);
+}
+
+				function filterResults(searchQuery) {
+					var allRows = document
+							.querySelectorAll('#dynamic_table tr');
+
+					allRows
+							.forEach(function(row) {
+								var storeName = row
+										.querySelector('td:nth-child(1)').innerText;
+
+								if (storeName.includes(searchQuery)) {
+									row.style.display = 'table-row';
+								} else {
+									row.style.display = 'none';
+								}
+							});
+				}
 			</script>
 		</div>
 	</main>
