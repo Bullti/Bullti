@@ -18,4 +18,5 @@ public class OmsController {
 	public String omsDeptPage() {
 		return "/oms/dept";
 	}
+	
 }
