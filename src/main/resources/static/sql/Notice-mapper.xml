@@ -64,4 +64,10 @@
  		where member_no=#{memberId}
  	</select>
  	
+ 	<update id="increaseHitCount">
+	    update notice
+	    set board_hitcnt = board_hitcnt + 1
+	    where board_no = #{boardNo}
+	</update>
+ 	
 </mapper>
