@@ -1,16 +1,16 @@
 @charset "UTF-8";
 
 header {
-    /*top: 0;
+	/*top: 0;
     left: 280px;
     min-width: calc(100vw - 280px);
     height: 50px;
     background-color: aliceblue;
     z-index: 1;*/
-    top: 0;
-    left: 280px;
-    height: 50px;
-    /*border-bottom: 1px solid #efefef;*/
+	top: 0;
+	left: 280px;
+	height: 50px;
+	/*border-bottom: 1px solid #efefef;*/
 }
 
 .header {
@@ -20,33 +20,44 @@ header {
 	justify-content: space-between;
 	height: 100%;
 }
-.header > .profile {
+.header>.wrap {
 	height: 100%;
 }
-.header > .profile > img {
-    border-radius: 50%;
-    height: 80%;
-    cursor: pointer;
+.header>.wrap > a {
+	color: #222;
+    font-size: 14px;
+    margin-right: 20px;
 }
-.header > .profile > #individual {
+.header>.wrap>.profile {
+	height: 100%;
+}
+
+.header>.wrap>.profile>img {
+	border-radius: 50%;
+	height: 80%;
+	cursor: pointer;
+}
+
+.header>.wrap>.profile>#individual {
 	display: none;
 	position: fixed;
-    top: 50px;
-    right: 30px;
-    border: 1px solid #a9a9a9;
-    padding: 0 10px;
-    border-radius: 10px;
+	top: 50px;
+	right: 30px;
+	border: 1px solid #a9a9a9;
+	padding: 0 10px;
+	border-radius: 10px;
 	box-shadow: 0px 0px 2px 0px;
 	z-index: 5;
 	background-color: #fff;
 }
-.header > .profile > #individual > ul > li {
+
+.header>.wrap>.profile>#individual>ul>li {
 	margin: 12px 0;
-    padding: 0;
-    box-shadow: none;
+	padding: 0;
+	box-shadow: none;
 }
 
-.header > .profile > #individual > ul > li > a {
+.header>.wrap>.profile>#individual>ul>li>a {
 	height: 100%;
 	width: 100%;
 }
