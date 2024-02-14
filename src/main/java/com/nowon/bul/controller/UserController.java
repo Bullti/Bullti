@@ -84,7 +84,7 @@ public class UserController {
 		PageResultDTO<MemberListDTO, Member> memberList = memberSerivce.getFindAllList(pageRequestDTO);
 		model.addAttribute("result", memberList);
 
-		return "views/members/list";
+		return "/oms/member-list";
 	}
 
 	//회원가입
@@ -125,7 +125,7 @@ public class UserController {
 	}
 	
 	//개인정보 수정
-	@PostMapping("my")
+	@PostMapping("/my")
 	public String my(MyDTO dto, Authentication authentication) {
 		MyUser user = (MyUser) authentication.getPrincipal();
 		memberSerivce.update(dto, user.getMemberNo());
