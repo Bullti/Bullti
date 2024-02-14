@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
-
+	th:replace="~{layout/ver2/ver2-layout :: commonLayout(~{this::head},~{this::main}, ~{this::side})}">
 <head>
 <title>Insert title here</title>
 <script src="/js/department.js"></script>
-<link rel="stylesheet" href="/css/approval/homeTemp.css">
-<!-- <link rel="stylesheet" href="/css/department/side.css" /> -->
 <link rel="stylesheet" href="/css/department/DeList.css" />
+<link rel="stylesheet" href="/css/common/ver2/ver2-inner-side.css" />
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
 
@@ -59,10 +57,12 @@
 										0);
 								var managerValue = data.getValue(
 										selectedItem.row, 1); // 매니저 값 가져오기
-										
+
 								let flag = confirm("삭제 하시겠습니까?");
-								if(!flag){alert("취소하셨습니다.")}
-										
+								if (!flag) {
+									alert("취소하셨습니다.")
+								}
+
 								//하위 부서
 								var subordinates = findSubordinates(managerValue);
 								console.log(subordinates);
@@ -86,10 +86,10 @@
 											alert("삭제를 완료하였습니다");
 											location.reload(); //페이지 새로고침
 										},
-										/* error : function(xhr, status, error) {
-											alert(" 하위객체가 있어 삭제가 불가능합니다.");
-											location.reload(); //페이지 새로고침
-										} */
+									/* error : function(xhr, status, error) {
+										alert(" 하위객체가 있어 삭제가 불가능합니다.");
+										location.reload(); //페이지 새로고침
+									} */
 									});
 								}
 							}
@@ -101,14 +101,10 @@
 </head>
 
 <body>
+	<aside th:fragment="side" th:replace="~{oms/oms-side :: side}"></aside>
 	<main class="warp-main">
-		<div th:replace="~{department/sideTemp :: side}"></div>
-		<div style="flex: 1">
-			<th:block th:replace="~{layout/header :: header}"></th:block>
-			<div class="main-area">
-				<div id="chart_div" th:attr="data-org-chart=${orgChartData}"></div>
-
-			</div>
+		<div class="main-area">
+			<div id="chart_div" th:attr="data-org-chart=${orgChartData}"></div>
 		</div>
 	</main>
 </body>

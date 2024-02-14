@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<aside class="side" th:fragment="side">
+	<h1 class="title">조직관리</h1>
+	<!-- <div class="btn center flex">
+		<a class="flex center" href="/approval/write">새 결재 진행</a>
+	</div> -->
+	<div class="tap">
+		<ul>
+			<h2 class="tap-title">부서관리</h2>
+			<li><a href="/oms/depart">부서 등록</a></li>
+			<li><a href="/oms/depart/list">부서 조회/삭제</a></li>
+		</ul>		
+	</div>
+	<div class="tap">
+		<ul>
+			<h2 class="tap-title">사원관리</h2>
+			<li><a href="/oms/members">사원 등록</a></li>
+			<li><a href="/oms/members/list">사원 조회/삭제/수정</a></li>
+		</ul>		
+	</div>
+	<div class="tap">
+		<ul>
+			<h2 class="tap-title">가맹점관리</h2>
+			<li><a href="/fradd">가맹점 등록</a></li>
+			<li><a href="/fr">가맹점 조회/삭제</a></li>
+		</ul>		
+	</div>
+</aside>
+
+</html>
