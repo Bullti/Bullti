@@ -30,7 +30,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "department")
-@Entity
 public class DeEntity {
 
     @Id

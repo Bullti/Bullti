@@ -1,10 +1,11 @@
-package com.nowon.bul.domain.dto;
+package com.nowon.bul.domain.dto.member;
 
 import java.time.LocalDate;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.nowon.bul.department.DeEntity;
+import com.nowon.bul.domain.entity.dept.DeptEntity;
 import com.nowon.bul.domain.entity.member.Member;
 import com.nowon.bul.domain.entity.member.Rank;
 import com.nowon.bul.domain.entity.member.Role;
@@ -30,7 +31,7 @@ public class MemberSaveDTO {
 	private String newName;
 	
 	
-	public Member toEntity(PasswordEncoder passEncoder, String profileUrl, DeEntity dept) {
+	public Member toEntity(PasswordEncoder passEncoder, String profileUrl, DeptEntity dept) {
 		return Member.builder()
 				.id(id)
 				.password(passEncoder.encode(id))

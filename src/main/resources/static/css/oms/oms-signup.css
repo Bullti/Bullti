@@ -1,10 +1,16 @@
 @charset "UTF-8";
-.main {
+.warp-main {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
-
+.content {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 .join_area {
 	width: 400px;
-	margin-top: 80px;
 	padding: 50px 0 160px;
 }
 .join_area > div {

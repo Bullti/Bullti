@@ -1,71 +1,68 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{layout/common-layout :: commonLayout(~{this::head},~{this::main} )}">
+	th:replace="~{layout/ver2/ver2-layout :: commonLayout(~{this::head},~{this::main}, ~{this::side})}">
 <head>
 <link rel="stylesheet" href="/css/members/list.css">
+<link rel="stylesheet" href="/css/common/ver2/ver2-inner-side.css" />
 <script src="/js/department.js"></script>
-<link rel="stylesheet" href="/css/approval/homeTemp.css">
-<!-- <link rel="stylesheet" href="/css/department/side.css" /> -->
 
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <!-- jQuery를 포함하려면 위의 코드를 사용하세요 -->
+<script>
+	$(document).ready(
+			function() {
+				$('#up-depart').change(function() {
+					var selectedDept = $(this).val();
+					filterMembersByDept(selectedDept);
+				});
 
-    <script>
-        $(document).ready(function () {
-            $('#up-depart').change(function () {
-                var selectedDept = $(this).val();
-                filterMembersByDept(selectedDept);
-            });
+				// 선택한 부서에 따라 멤버를 필터링하는 함수
+				function filterMembersByDept(department) {
+					$.ajax({
+						type : 'POST',
+						url : '/members/filterByDepartment', // 실제 엔드포인트에 맞게 URL 변경
+						data : {
+							department : department
+						},
+						success : function(result) {
+							// result가 멤버의 JSON 배열이라고 가정하고, 테이블을 업데이트
+							updateMemberTable(result);
+						},
+						error : function(xhr, status, error) {
+							console.error(error);
+						}
+					});
+				}
 
-            // 선택한 부서에 따라 멤버를 필터링하는 함수
-            function filterMembersByDept(department) {
-                $.ajax({
-                    type: 'POST',
-                    url: '/members/filterByDepartment', // 실제 엔드포인트에 맞게 URL 변경
-                    data: { department: department },
-                    success: function (result) {
-                        // result가 멤버의 JSON 배열이라고 가정하고, 테이블을 업데이트
-                        updateMemberTable(result);
-                    },
-                    error: function (xhr, status, error) {
-                        console.error(error);
-                    }
-                });
-            }
+				// 필터링된 데이터로 멤버 테이블을 업데이트하는 함수
+				function updateMemberTable(filteredMembers) {
+					var tbody = $('#members-table tbody');
+					tbody.empty();
 
-            // 필터링된 데이터로 멤버 테이블을 업데이트하는 함수
-            function updateMemberTable(filteredMembers) {
-                var tbody = $('#members-table tbody');
-                tbody.empty();
-
-                $.each(filteredMembers, function (index, member) {
-                    var row = '<tr>' +
-                        '<td class="a">' + member.no + '</td>' +
-                        '<td class="b">' + member.name + '</td>' +
-                        '<td class="c">' + member.rank + '</td>' +
-                        '<td class="d">' + member.dept + '</td>' +
-                        '<td class="e">' + member.phone + '</td>' +
-                        '<td class="f">' + member.joinCompanyDate + '</td>' +
-                        '<td class="g">' + member.resignationDate + '</td>' +
-                        '</tr>';
-                    tbody.append(row);
-                });
-            }
-        });
-    </script>
+					$.each(filteredMembers, function(index, member) {
+						var row = '<tr>' + '<td class="a">' + member.no
+								+ '</td>' + '<td class="b">' + member.name
+								+ '</td>' + '<td class="c">' + member.rank
+								+ '</td>' + '<td class="d">' + member.dept
+								+ '</td>' + '<td class="e">' + member.phone
+								+ '</td>' + '<td class="f">'
+								+ member.joinCompanyDate + '</td>'
+								+ '<td class="g">' + member.resignationDate
+								+ '</td>' + '</tr>';
+						tbody.append(row);
+					});
+				}
+			});
+</script>
 
 
 </head>
 <body>
+	<aside th:fragment="side" th:replace="~{oms/oms-side :: side}"></aside>
 	<main class="warp-main">
-		<div th:replace="~{department/sideTemp :: side}"></div>
-		<div style="flex: 1">
-			<th:block th:replace="~{layout/header :: header}"></th:block>
-			<div class="main">
-				<div class="title">
-					<h1>사원조회/삭제/수정</h1>
-				</div>
-				<!--<div class="search">
+		<div class="main">
+			<div class="title">
+				<h1>사원조회/삭제/수정</h1>
+			</div>
+			<!--<div class="search">
 					<label for="name">부서명</label> <select name="parentName"
 						id="up-depart" class="custom-select">
 						<option class="option" th:each="name : ${names}" th:text="${name}"></option>
@@ -78,48 +75,45 @@
 					<button class="search-button"></button>
 				</div>-->
 
-				<table>
-					<thead>
-						<tr>
-							<td class="a">사번</td>
-							<td class="b">이름</td>
-							<td class="c">직급</td>
-							<td class="d">부서</td>
-							<td class="e">전화번호</td>
-							<td class="d">입사일</td>
-							<td class="f">퇴사일</td>
+			<table>
+				<thead>
+					<tr>
+						<td class="a">사번</td>
+						<td class="b">이름</td>
+						<td class="c">직급</td>
+						<td class="d">부서</td>
+						<td class="e">전화번호</td>
+						<td class="d">입사일</td>
+						<td class="f">퇴사일</td>
 
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="member : ${result.dtoList}">
-							<td class="a">[[${member.id}]]</td>
-							<td class="b">[[${member.name}]]</td>
-							<td class="c">[[${member.rank.rankName}]]</td>
-							<td class="d">[[${member.deptName}]]</td>
-							<td class="e">[[${member.tel}]]</td>
-							<td class="f">[[${member.joinCompanyDate}]]</td>
-							<td class="g">[[${member.resignationDate}]]</td>
-						</tr>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="member : ${result.dtoList}">
+						<td class="a">[[${member.id}]]</td>
+						<td class="b">[[${member.name}]]</td>
+						<td class="c">[[${member.rank.rankName}]]</td>
+						<td class="d">[[${member.deptName}]]</td>
+						<td class="e">[[${member.tel}]]</td>
+						<td class="f">[[${member.joinCompanyDate}]]</td>
+						<td class="g">[[${member.resignationDate}]]</td>
+					</tr>
 
-					</tbody>
-				</table>
-				<ul class="page-list flex center">
-					<li class="page-item" th:if="${result.prev}">
-						<a class="page-link" th:href="@{/members/list(page=${result.start -1})}"
-							tabindex="-1">[Previous]</a>
-					</li>
+				</tbody>
+			</table>
+			<ul class="page-list flex center">
+				<li class="page-item" th:if="${result.prev}"><a
+					class="page-link"
+					th:href="@{/members/list(page=${result.start -1})}" tabindex="-1">[Previous]</a>
+				</li>
 
-					<li th:each="page:${result.pageList}">
-						<a th:href="@{/members/list(page=${page})}">[ [[${page}]] ]
-						</a>
-					</li>
+				<li th:each="page:${result.pageList}"><a
+					th:href="@{/members/list(page=${page})}">[ [[${page}]] ] </a></li>
 
-					<l1 class="page-item" th:if="${result.next}">
-						<a class="page-link" th:href="@{/members/list(page=${result.end+1})}">[ Next ]</a>
-					</l1>
-				</ul>
-			</div>
+				<l1 class="page-item" th:if="${result.next}"> <a
+					class="page-link" th:href="@{/members/list(page=${result.end+1})}">[
+					Next ]</a> </l1>
+			</ul>
 		</div>
 	</main>
 

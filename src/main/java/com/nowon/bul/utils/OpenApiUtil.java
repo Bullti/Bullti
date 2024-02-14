@@ -1,4 +1,4 @@
-package com.nowon.bul.naverMail.naverapi;
+package com.nowon.bul.utils;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;

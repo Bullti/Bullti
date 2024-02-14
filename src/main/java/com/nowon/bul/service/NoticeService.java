@@ -26,4 +26,6 @@ public interface NoticeService {
 
 	ModelAndView listProcess(int page, String search);
 
+	NoticeDTO getNoticeDetail(long boardNo);
+
 }

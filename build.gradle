@@ -31,7 +31,11 @@ ext {
 
 dependencies {
 	implementation 'com.github.shin285:KOMORAN:3.3.9'
+	//크롤링 JSoup
+	implementation 'org.jsoup:jsoup:1.17.2'
 
+	//한국영화진흥원API
+	implementation files('libs/kobis-opcl-rest-v1.0.jar')
 	implementation 'io.jsonwebtoken:jjwt-api:0.12.3'
   	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.3'
   	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.3'
