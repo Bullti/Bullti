@@ -84,6 +84,8 @@ public class NoticeProcess implements NoticeService{
 			rowCount=0;
 		}
 		
+		page = page + 1;
+		
 		boolean hasResults = (rowCount > 0);
 		
 		System.out.println(">>>>>"+search);
