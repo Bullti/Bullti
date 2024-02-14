@@ -57,12 +57,11 @@
 </head>
 <body>
 	<aside th:fragment="side" th:replace="~{oms/oms-side :: side}"></aside>
-	<main class="warp-main">
-		<div class="main">
-			<div class="title">
-				<h1>사원조회/삭제/수정</h1>
-			</div>
-			<!--<div class="search">
+	<main>
+		<div class="title">
+			<h1>사원조회</h1>
+		</div>
+		<!--<div class="search">
 					<label for="name">부서명</label> <select name="parentName"
 						id="up-depart" class="custom-select">
 						<option class="option" th:each="name : ${names}" th:text="${name}"></option>
@@ -74,47 +73,45 @@
 
 					<button class="search-button"></button>
 				</div>-->
+		<table>
+			<thead>
+				<tr>
+					<td class="a">사번</td>
+					<td class="b">이름</td>
+					<td class="c">직급</td>
+					<td class="d">부서</td>
+					<td class="e">전화번호</td>
+					<td class="d">입사일</td>
+					<td class="f">퇴사일</td>
 
-			<table>
-				<thead>
-					<tr>
-						<td class="a">사번</td>
-						<td class="b">이름</td>
-						<td class="c">직급</td>
-						<td class="d">부서</td>
-						<td class="e">전화번호</td>
-						<td class="d">입사일</td>
-						<td class="f">퇴사일</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="member : ${result.dtoList}">
+					<td class="a">[[${member.id}]]</td>
+					<td class="b">[[${member.name}]]</td>
+					<td class="c">[[${member.rank.rankName}]]</td>
+					<td class="d">[[${member.deptName}]]</td>
+					<td class="e">[[${member.tel}]]</td>
+					<td class="f">[[${member.joinCompanyDate}]]</td>
+					<td class="g">[[${member.resignationDate}]]</td>
+				</tr>
 
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="member : ${result.dtoList}">
-						<td class="a">[[${member.id}]]</td>
-						<td class="b">[[${member.name}]]</td>
-						<td class="c">[[${member.rank.rankName}]]</td>
-						<td class="d">[[${member.deptName}]]</td>
-						<td class="e">[[${member.tel}]]</td>
-						<td class="f">[[${member.joinCompanyDate}]]</td>
-						<td class="g">[[${member.resignationDate}]]</td>
-					</tr>
+			</tbody>
+		</table>
+		<ul class="page-list flex center">
+			<li class="page-item" th:if="${result.prev}"><a
+				class="page-link"
+				th:href="@{/members/list(page=${result.start -1})}" tabindex="-1">[Previous]</a>
+			</li>
 
-				</tbody>
-			</table>
-			<ul class="page-list flex center">
-				<li class="page-item" th:if="${result.prev}"><a
-					class="page-link"
-					th:href="@{/members/list(page=${result.start -1})}" tabindex="-1">[Previous]</a>
-				</li>
+			<li th:each="page:${result.pageList}"><a
+				th:href="@{/members/list(page=${page})}">[ [[${page}]] ] </a></li>
 
-				<li th:each="page:${result.pageList}"><a
-					th:href="@{/members/list(page=${page})}">[ [[${page}]] ] </a></li>
-
-				<l1 class="page-item" th:if="${result.next}"> <a
-					class="page-link" th:href="@{/members/list(page=${result.end+1})}">[
-					Next ]</a> </l1>
-			</ul>
-		</div>
+			<l1 class="page-item" th:if="${result.next}"> <a
+				class="page-link" th:href="@{/members/list(page=${result.end+1})}">[
+				Next ]</a> </l1>
+		</ul>
 	</main>
 
 </body>

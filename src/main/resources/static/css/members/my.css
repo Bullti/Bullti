@@ -1,20 +1,23 @@
 @charset "UTF-8";
-
-.content {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+.main {
+	padding-left: 20px;
 }
+
 .join_area {
 	width: 400px;
+	margin-top: 80px;
 	padding: 50px 0 160px;
 }
 .join_area > div {
 	padding-bottom: 30px;
 }
-.join_area > div > label {
-	display: block;
-	font-weight: bold;
+.row {
+	margin-bottom: 50px;
+}
+
+.row > label {
+	display: flex;
+	width: 200px;
 }
 .join_area > div > input, select {
 	width: 100%;
@@ -27,8 +30,7 @@
 	border-bottom: 1px solid #000;
 }
 
-.join_tilte {
-	text-align: center;
+.tilte {
 	color: #000;
 	font-size: 32px;
 	letter-spacing: -.48px;
@@ -42,21 +44,19 @@
 }
 .join_button {
 	height: 50px;
-    width: 220px;
+    width: 100px;
     border-radius: 10px;
     border: 1px solid #a9a9a9;
-}
-.join_button > span {
-	font-size: 20px;
+    font-size: 20px;
     font-weight: bold;
-    letter-spacing: 8px;
+    cursor: pointer;
 }
-
 .btn-file {
+	position: relative;
 	display: flex !important;
-	width: 100px;
+	width: 100px !important;
 	height: 100px;
-	border: 1px dashed #222;
+	border: 1px solid #a9a9a9;
 	justify-content: center;
 	align-items: center;
 	font-size: 32px;
@@ -64,6 +64,7 @@
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: contain;
+	border-radius: 50%;
 }
 .btn-file img {
 	cursor: pointer;
@@ -71,7 +72,11 @@
     height: 30%;
     opacity: 15%;
 }
-
+.btn-file > .del-btn {
+	position: absolute;
+    right: -80px;
+    bottom: 0px;
+}
 input[type=file] {
 	display: none;
 }
@@ -81,13 +86,4 @@ input[type=file] {
 	color: #3a54e5;
 	margin-left: 10px;
 	cursor: pointer;
-}
-
-.hidden {
-	display: none;
-}
-
-.join_area > div> .danger {
-    font-size: 13px;
-    position: absolute;
 }
