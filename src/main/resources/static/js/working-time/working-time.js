@@ -31,6 +31,7 @@ function updateClock(resultTime) {
 
     if (timeDiff <= 0) {
       timeDiff = 0;
+      clearInterval(intervalId); // interval 중지
       // 시간이 지난 후에는 작업을 중단하거나 새로운 시간을 가져오는 등의 작업을 수행할 수 있습니다.
     }
 
@@ -57,14 +58,23 @@ function updateClock(resultTime) {
   if (resultTime == "") {
     document.getElementById('workingTime').innerText = '근무 중 아님';
     document.getElementById('workCheck').innerText = '출근';
+    return 0;
   } else {
     updateTime();
     document.getElementById('workCheck').innerText = '퇴근';
   }
 
   // 다음 프레임에서 updateTime 함수를 1초마다 호출
-  setInterval(updateTime, 1000);
+  var intervalId = setInterval(updateTime, 1000);
+  return intervalId; // interval ID 반환
 }
+
+// interval ID를 저장하기 위한 변수
+var myIntervalId = updateClock(resultTime);
+
+// 나중에 interval 중지를 위해 myIntervalId를 사용할 수 있습니다.
+// clearInterval(myIntervalId);
+
 
 
 

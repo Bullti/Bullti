@@ -30,6 +30,7 @@ ext {
 }
 
 dependencies {
+	implementation 'com.github.shin285:KOMORAN:3.3.9'
 	//크롤링 JSoup
 	implementation 'org.jsoup:jsoup:1.17.2'
 
