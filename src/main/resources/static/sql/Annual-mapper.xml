@@ -14,6 +14,7 @@
 		select * from annual where approve not between 90 and 99 and member_no = #{memberNo} order by annual_no desc
 	</select>
 	<update id="cancelByNo">
-		update annual set approve = #{approveCode} where member_no=#{memberNo} and annual_no = #{annualNo}
+		update annual set approve = #{approveCode} 
+		where member_no=#{memberNo} and annual_no = #{annualNo}
 	</update>
 </mapper>
