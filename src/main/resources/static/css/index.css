@@ -10,7 +10,6 @@
 }
 
 .wrap2{
-	width: 1400px;
 	height: calc(100vh - 110px);
 	display: flex;
 	justify-content: space-around;
@@ -25,12 +24,12 @@
 }
 
 .wrap4{
-	width: 500px;
+	width: 35%;
 	height: calc(100vh - 110px);
 }
 
 .wrap5{
-	width: 500px;
+	width: 35%;
 	height: calc(100vh - 110px);
 }
 
@@ -162,7 +161,7 @@ button {
 }
 
 .calendar{
-	height: 400px;
+	height: 40%;
 }
 
 .board{
@@ -199,7 +198,7 @@ td {
 }
 
 #calendar{
-	height: 357px;
+	height: 90%;
 	padding: 20px;
 }
 

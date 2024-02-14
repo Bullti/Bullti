@@ -1,4 +1,5 @@
-package com.nowon.bul.index;
+package com.nowon.bul.controller;
+
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -8,17 +9,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.nowon.bul.domain.entity.member.MyUser;
 import com.nowon.bul.mail.MailService;
 import com.nowon.bul.mail.MemberEmail;
+import com.nowon.bul.movie.MovieApiService;
 import com.nowon.bul.service.NoticeService;
 
+import kr.or.kobis.kobisopenapi.consumer.rest.exception.OpenAPIFault;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Controller
-public class indexController {
+public class IndexController {
 
 	private final NoticeService noticeService;
 	private final MailService mailService;
-	
 	
 	@GetMapping("/")
 	public String indexNotice(Authentication authentication, Model model) {
@@ -33,8 +35,13 @@ public class indexController {
 
 		if(memberEmail!=null)mailService.listProcess(memberEmail, mailCount, model);
 
-	
-		
 		return "index";
 	}
+	
+	@GetMapping("/oms")
+	public String organizationalManagementSys() throws OpenAPIFault, Exception {
+		
+		return "/oms/home";
+	}
+	
 }

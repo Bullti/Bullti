@@ -41,6 +41,6 @@ public interface NoticeMapper {
 	
 	String findDeptNameById(long deptId);
 
-
+	void increaseHitCount(long boardNo);
 	
 }

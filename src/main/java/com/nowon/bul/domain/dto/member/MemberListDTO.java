@@ -1,4 +1,4 @@
-package com.nowon.bul.domain.dto;
+package com.nowon.bul.domain.dto.member;
 
 import java.time.LocalDate;
 
