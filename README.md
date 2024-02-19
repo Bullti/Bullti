@@ -31,7 +31,7 @@
 
 - Front : HTML, CSS, JavaScript, jQuery
 - Back-end : SpringBoot
-- API : 영화진흥위원회 오픈API, 공공데이털포털 오픈API
+- API : 공공데이털포털 오픈AP
 - 버전 및 이슈관리 : Github
 - 협업 툴 : Notion, Github, Padlet
 - 서비스 배포 환경 : AMAZON EC2 Linux
