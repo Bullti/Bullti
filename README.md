@@ -19,8 +19,9 @@
 
 <div align="center">
 
-| **김병욱** | **인성빈** | **최현종** | **이예슬** | **최영진** |
+| **김병욱** | **최영진** | **최현종** | **인성빈** | **이예슬** |
 | :------: |  :------: | :------: | :------: | :------: |
+| <img src="https://github.com/Bullti/bullti-order-service/assets/141594307/aa0ad0bb-7137-4f4a-9d3a-485551c56b90" height=150 width=150> <br/> | <img src="https://github.com/Bullti/bullti-order-service/assets/141594307/98bf040a-078c-46dc-b3b1-b2dc1306e591" height=150 width=150> <br/> | <img src="https://github.com/Bullti/bullti-order-service/assets/141594307/3739cd61-3c0f-4c29-9243-bed01adff675" height=150 width=150> <br/> | <img src="https://github.com/Bullti/bullti-order-service/assets/141594307/758ec7fc-ee0d-42c1-a897-e01b84f38216" height=150 width=150> <br/> | <img src="https://github.com/Bullti/bullti-order-service/assets/141594307/3aa3af43-7db0-4888-8f02-4a8380597ff9" height=150 width=150> <br/> |
 
 </div>
 
