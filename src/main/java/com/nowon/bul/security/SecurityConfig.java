@@ -51,9 +51,10 @@ public class SecurityConfig {
 				// token을 사용하는 방식이기 때문에 csrf를 disable합니다.
 				.csrf(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-						.requestMatchers("/css/**", "/img/**", "/js/**", "/sql/**", "/summerNote/**", "/login", "/checkUser")
+						//.requestMatchers("/css/**", "/img/**", "/js/**", "/sql/**", "/summerNote/**", "/login", "/checkUser")
+						.requestMatchers("/**")
 						.permitAll()
-						.requestMatchers("/oms/**").hasRole("OMS")
+						//.requestMatchers("/oms/**").hasRole("OMS")
 						.anyRequest().authenticated())
 //				.sessionManagement(sessionManagement -> sessionManagement
 //						.maximumSessions(1) // 동시에 허용되는 세션 수
