@@ -12,7 +12,7 @@ import java.util.Set;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.nowon.bul.department.DeRepository;
+import com.nowon.bul.domain.entity.dept.DeptRepository;
 import com.nowon.bul.domain.entity.member.MemberRepository;
 
 import kr.co.shineware.nlp.komoran.constant.DEFAULT_MODEL;
@@ -25,7 +25,7 @@ public class KomoranConfig {
 	
 	private String USER_DIC="dic.user";
 	
-	private final DeRepository deRepository; // dept
+	private final DeptRepository deRepository; // dept
 	private final MemberRepository memberRepository;
 	
 	@Bean
