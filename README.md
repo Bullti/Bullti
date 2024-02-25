@@ -1,6 +1,7 @@
 # 불티치킨 프렌차이즈 그룹웨어
 
-사진넣고
+![image](https://github.com/Bullti/Bullti/assets/141596791/00287d5a-1091-47b7-8b35-4a1234dc5b0f)
+
 
 - 배포 URL : https://manjuu.shop
 - Test ID : 
