@@ -28,7 +28,13 @@
 <br>
 
 ## 1. 개발 환경
-
+- java 17
+- spring boot 3.2.1
+- STS 4.20.0
+- gradle 8.5
+- jquery 3.7.1
+- aws s3 3.1.0
+- 
 - Front : HTML, CSS, JavaScript, jQuery
 - Back-end : SpringBoot
 - API : 공공데이털포털 오픈AP
@@ -73,9 +79,9 @@
 ### 김병욱
 
 - **UI**
-    - 페이지 : 가맹점페이지
+    - 공통 페이지 레이아웃, 근태 페이지, 휴가 페이지
 - **기능**
-    - RabbitMQ를 활용한 주문알림, 가맹점 챗봇
+    - 근태관리, 휴가관리, CI/CD, 컨피그 서버 구축
 <br>
     
 ### 최영진
