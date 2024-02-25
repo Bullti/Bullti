@@ -28,7 +28,7 @@
 
 <br>
 
-## 1. 개발 환경
+## 1. 사용기술
 - Front : HTML, CSS, JavaScript, jQuery
 - Back-end : SpringBoot
 - API : 공공데이털포털 오픈AP
