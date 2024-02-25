@@ -3,7 +3,7 @@
 ![image](https://github.com/Bullti/Bullti/assets/141596791/00287d5a-1091-47b7-8b35-4a1234dc5b0f)
 
 
-- 배포 URL : https://manjuu.shop
+- 배포 URL : 
 - Test ID : 
 - Test PW : 
 
