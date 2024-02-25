@@ -28,13 +28,6 @@
 <br>
 
 ## 1. 개발 환경
-- java 17
-- spring boot 3.2.1
-- STS 4.20.0
-- gradle 8.5
-- jquery 3.7.1
-- aws s3 3.1.0
-- 
 - Front : HTML, CSS, JavaScript, jQuery
 - Back-end : SpringBoot
 - API : 공공데이털포털 오픈AP
